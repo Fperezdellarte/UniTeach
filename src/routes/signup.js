@@ -1,12 +1,9 @@
 import React from 'react'
-import Navbar from '../components/navbar';
+import {FormularioSignUp} from '../components/formularioSignUp'
 
 export const Signup = () => {
   return (
-    <div className="home-container">
-      <Navbar/>
-      <div>signup </div>
-    </div>
+      <div className='formularioSignup'> <FormularioSignUp/> </div>
   )
 }
 export default Signup;

@@ -13,12 +13,12 @@ export const Navbar = () => {
   const menuOptions = [
     {
       text: "Home",
-      icon: <HomeIcon />,
+      icon: <HomeIcon/>,
       link: "/"
     },
     {
       text: "Login",
-      icon: <LoginIcon />,
+      icon: <LoginIcon/>,
       link: "/login"
     },
     {

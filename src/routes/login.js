@@ -1,16 +1,12 @@
 import React from 'react'
-import Navbar from '../components/navbar';
 import { FormularioLogin } from '../components/formularioLogin';
 
 
 export const Login = () => {
   return (
-    <div className="home-container">
-    <Navbar/>
-    <div>
+    <div className='formularioLogin'>
       <FormularioLogin/>
-    </div>
-  </div>
+      </div>
   )
 }
 export default Login;

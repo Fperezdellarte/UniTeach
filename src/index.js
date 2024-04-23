@@ -1,39 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.js';
-import {createBrowserRouter, RouterProvider } from "react-router-dom"
-import Login from './routes/login.js';
-import Signup from './routes/signup.js';
-import About from './routes/about.js';
-import HomeLogueado from './routes/homeLogueado.js';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Navbar from './components/navbar';
+import Login from './routes/login';
+import Signup from './routes/signup';
+import About from './routes/about';
+import HomeLogueado from './routes/homeLogueado';
+import LandingPage from './routes/landingPage';
+import './index.css'
+import { AuthProvider } from './auth/authProvider';
+import ProtectedRoute from './routes/protectedRoute';
 
-const router = createBrowserRouter([
-  { 
-    path:"/",
-    element: <App/>
-  },
-  {
-    path:"/login",
-   element:<Login/>
-  },
-  {
-    path:"/signup",
-    element: <Signup/>
-  },
-  { 
-    path:"/about",
-    element: <About/>
-  },
-  {
-    path: "/home",
-        element:<HomeLogueado/>
+const Root = () => {
+  return (
+<BrowserRouter>
+      <Navbar />
+  <AuthProvider>
+    <Routes>
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/home" element={
+        <ProtectedRoute><HomeLogueado /></ProtectedRoute>} />  
+    </Routes>
+  </AuthProvider>
+</BrowserRouter>
+  );
+};
 
-  }
-])
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router}/>
-  </React.StrictMode>
-);
+ReactDOM.render(<Root />, document.getElementById('root'));
