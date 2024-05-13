@@ -10,6 +10,8 @@ import LandingPage from './routes/landingPage';
 import './index.css'
 import { AuthProvider } from './auth/authProvider';
 import ProtectedRoute from './routes/protectedRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Root = () => {
   return (
@@ -21,8 +23,8 @@ const Root = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
-        <Route path="/home" element={
-        <ProtectedRoute><HomeLogueado /></ProtectedRoute>} />  
+        <Route path="/home" element={<HomeLogueado/>}/>
+        
     </Routes>
   </AuthProvider>
 </BrowserRouter>
@@ -30,3 +32,5 @@ const Root = () => {
 };
 
 ReactDOM.render(<Root />, document.getElementById('root'));
+
+//<ProtectedRoute><HomeLogueado /></ProtectedRoute>} />  
