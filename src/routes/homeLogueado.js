@@ -1,8 +1,14 @@
 import React from 'react'
-
+import {NavbarHome} from '../components/navbarHome'
+import proyecto from '../Assest/proyecto.jpg';
+import personas from '../Assest/personas.jpg';
+import pareja from '../Assest/pareja.jpg';
 
 export const homeLogueado = () => {
+
   return (
+    <div>
+    <NavbarHome/>
    
     <div className="container">
     <div className="row">
@@ -54,9 +60,9 @@ export const homeLogueado = () => {
     <div className="card-body">
       <h4 className="card-title mb-4">Mentores Recientes</h4>
       <div className="d-flex justify-content-between">
-        <img src="../imagen/proyecto.jpg" alt="Proyecto" className="img-fluid rounded-circle mentor-img" />
-        <img src="/imagenes/mentor2.jpg" alt="Mentor 2" className="img-fluid rounded-circle mentor-img" />
-        <img src="/imagenes/mentor3.jpg" alt="Mentor 3" className="img-fluid rounded-circle mentor-img" />
+        <img src={proyecto} alt="Proyecto" className="img-fluid rounded-circle mentor-img" />
+        <img src={pareja} alt="Mentor 2" className="img-fluid rounded-circle mentor-img" />
+        <img src={personas} alt="Mentor 3" className="img-fluid rounded-circle mentor-img" />
       </div>
     </div>
   </div>
@@ -64,6 +70,7 @@ export const homeLogueado = () => {
       </div>
       
       </div>
+  </div>
   );
 }
 const blockStyle = {

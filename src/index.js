@@ -10,6 +10,7 @@ import LandingPage from './routes/landingPage';
 import './index.css'
 import { AuthProvider } from './auth/authProvider';
 import ProtectedRoute from './routes/protectedRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const router = createBrowserRouter([

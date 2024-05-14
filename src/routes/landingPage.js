@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button} from 'react-bootstrap'; // Importa el componente Carousel
 import { Link } from 'react-router-dom';
-import Navbar from '../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import '../Estilos/landingPage.css'; // Importa el archivo CSS
 import TestimonialCard from '../components/TestimonialCard'; // Importa el componente TestimonialCard
+import { Navbar} from '../components/navbar';
 
 const LandingPage = () => {
+  
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
@@ -15,6 +16,8 @@ const LandingPage = () => {
   };
 
   return (
+    <div>
+      <Navbar/>
     <div className={`bg-light min-vh-100 py-5 ${darkMode ? "dark" : ""}`}>
       <Container>
         <Button onClick={toggleDarkMode} className="ml-2 btn-lg">
@@ -59,6 +62,7 @@ const LandingPage = () => {
         </Row>
       </Container>
     </div>
+ </div>
   );
 }
 

@@ -108,7 +108,6 @@ export const FormularioSignUp = () => {
     <div>
       <h2>Registro de Usuario</h2>
       <form onSubmit={handleSubmit}>
-      {error && <p>{error}</p>}
 
         <label htmlFor="username">Nombre de usuario:</label><br />
         <input type="text" id="username" name="username" value={Username} onChange={(e) => setUsername(e.target.value)} required /><br />
