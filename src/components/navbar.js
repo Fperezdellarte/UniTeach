@@ -11,6 +11,7 @@ import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List } from '@mui/ma
 export const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuOptions = [
+    
     {
       text: "Home",
       icon: <HomeIcon/>,
