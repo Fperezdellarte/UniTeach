@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/navbar';
 
 const LandingPage = () => {
-return (
+return ( 
+  <div>
+    <Navbar/> 
   <div className='landingPage'>
 
       {/* Sección de Bienvenida (Hero Section) */}
@@ -38,6 +41,7 @@ return (
         </div>
       </section>
     </div>
+   </div> 
   );
 }
 

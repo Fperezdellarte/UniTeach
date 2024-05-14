@@ -1,7 +1,10 @@
 import React from 'react'
+import Navbar from '../components/navbar';
 
 export const About = () => {
   return (
+   <div> 
+      <Navbar/>
     <div className='about'>
       <h1>Acerca de Nosotros</h1>
       <p>Somos Uniteach, una plataforma que conecta a estudiantes universitarios para ofrecer y recibir mentorías académicas.</p>
@@ -18,6 +21,7 @@ export const About = () => {
         </form>
       </section>
     </div>
+  </div>
   );
 }
 export default About;

@@ -1,8 +1,14 @@
 import React from 'react'
+import NavbarHome from '../components/navbarHome';
 
 export const homeLogueado = () => {
   return (
-    <div>homeLogueado</div>
+ <div>   
+   <NavbarHome/>
+    <div>
+      homeLogueado
+    </div>
+  </div>
   )
 }
 

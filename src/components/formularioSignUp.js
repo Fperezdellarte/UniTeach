@@ -3,6 +3,8 @@ import { API_URL } from "../auth/constans";
 import { useNavigate } from "react-router-dom";
 
 export const FormularioSignUp = () => {
+
+  const [error, setError] = useState('');
   // Definir estados para los campos del formulario
   const [Username, setUsername] = useState('');
   const [Password, setPassword] = useState('');
@@ -27,7 +29,7 @@ export const FormularioSignUp = () => {
     try {
 
       // Realizar la solicitud POST al servidor
-      const response = await fetch(`${API_URL}/users`, {
+      const response = await fetch(`${API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -42,7 +44,7 @@ export const FormularioSignUp = () => {
           Mail,
           Phone,
           University
-        }) // Convertir el objeto formData a formato JSON
+        }) 
       });
 
       // Verificar si la solicitud fue exitosa
@@ -52,8 +54,8 @@ export const FormularioSignUp = () => {
         goTo("/login");
         // Aquí puedes hacer algo con la respuesta del servidor, como mostrar un mensaje de éxito
       } else {
-        // Si la solicitud no fue exitosa, mostrar el mensaje de error
-        console.error('Error en la solicitud:', response.statusText);
+        const errorMessage = await response.json();
+        setError(errorMessage.message);
       }
     } catch (error) {
       // Si hay algún error en la solicitud, mostrar el mensaje de error
@@ -65,6 +67,8 @@ export const FormularioSignUp = () => {
     <div>
       <h2>Registro de Usuario</h2>
       <form onSubmit={handleSubmit}>
+      {error && <p>{error}</p>}
+
         <label htmlFor="username">Nombre de usuario:</label><br />
         <input type="text" id="username" name="username" value={Username} onChange={(e) => setUsername(e.target.value)} required /><br />
 
