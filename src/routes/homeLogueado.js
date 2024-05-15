@@ -1,5 +1,6 @@
 import React from 'react'
 import {NavbarHome} from '../components/navbarHome'
+import '../index.css'; 
 import proyecto from '../Assest/proyecto.jpg';
 import personas from '../Assest/personas.jpg';
 import pareja from '../Assest/pareja.jpg';
@@ -54,29 +55,30 @@ export const homeLogueado = () => {
       </div>
     </div>
       <div style={blockStyle}>
-        <h2>Mentores</h2>
+        <h2 className='MentoresRecientes'>Mentores recientes</h2>
         <p><div className="col-md-6">
-  <div className="card bg-light" style={{ paddingRight: '5px' }}>
+  <div className="card-bg-light2">
     <div className="card-body">
-      <h4 className="card-title mb-4">Mentores Recientes</h4>
       <div className="d-flex justify-content-between">
         <img src={proyecto} alt="Proyecto" className="img-fluid rounded-circle mentor-img" />
+
         <img src={pareja} alt="Mentor 2" className="img-fluid rounded-circle mentor-img" />
+       
         <img src={personas} alt="Mentor 3" className="img-fluid rounded-circle mentor-img" />
+  
       </div>
     </div>
   </div>
 </div></p>
       </div>
-      
       </div>
   </div>
   );
 }
 const blockStyle = {
   border: '1px solid #ccc',
-  padding: '20px',
-  margin: '10px',
+  padding: '2em',
+  margin: '2em',
 };
 
 export default homeLogueado;

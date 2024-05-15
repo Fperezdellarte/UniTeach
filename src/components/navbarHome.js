@@ -4,12 +4,14 @@ import Logo from '../Assest/Logo.png';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
 import { HiOutlineMenu } from 'react-icons/hi';
-import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List, Button, Avatar, InputBase } from '@mui/material';
+import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List, Avatar, InputBase, Menu, MenuItem } from '@mui/material';
 import { useAuth } from '../auth/authProvider';
 import { useNavigate } from 'react-router-dom';
+import '../styles/navbarHome.css';
 
 export const NavbarHome = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -22,10 +24,18 @@ export const NavbarHome = () => {
     navigate('/login');
   };
 
+  const handleAvatarClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   const menuOptions = [
     {
       text: "Home",
-      icon: <HomeIcon/>,
+      icon: <HomeIcon />,
       link: "/home"
     },
     {
@@ -36,10 +46,10 @@ export const NavbarHome = () => {
   ];
 
   return (
-    <div className="navbar-home"> {/* Cambia la clase aquí */}
+    <div className="navbar-home">
       <nav>
         <div className="nav-logo-container">
-          <Link to="/"><img src={Logo} alt='' /></Link>
+          <Link to="/"><img src={Logo} alt='Logo' /></Link>
         </div>
         <div className="navbar-links-container">
           {menuOptions.map((option, index) => (
@@ -47,17 +57,17 @@ export const NavbarHome = () => {
           ))}
         </div>
         <div className="navbar-search-container">
-          {/* Aquí puedes agregar el componente de búsqueda */}
           <InputBase placeholder="Buscar..." />
         </div>
         <div className="navbar-user-container">
-          {/* Visualización del nombre de usuario y la foto */}
-          <Avatar className="user-avatar" /> {/* Agrega la clase para el avatar */}
-          <span>{/* Aquí puedes pasar el nombre de usuario */}</span>
-        </div>
-        <div className="navbar-logout-container">
-          {/* Botón de logout */}
-          <Button onClick={handleLogout} variant="outlined">Logout</Button>
+          <Avatar className="user-avatar" onClick={handleAvatarClick} /> {/* Añadir evento onClick */}
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
         </div>
         <div className="navbar-menu-container">
           <HiOutlineMenu onClick={() => setOpenMenu(true)} />

@@ -391,3 +391,34 @@ body {
   text-decoration: none;
   color: #0056b3;
 }
+/* HomeLogueado */
+.container {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1200px;
+  background-color: #f8f9fa;
+}
+.card-title {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.mentor-img {
+  width: 20em;
+  height: 20em;
+  padding: 3em;
+  object-fit: cover;
+}
+
+.mentores-recientes {
+  width: 20em;  /* Ajusta según sea necesario */
+  height: 20em;  /* Ajusta según sea necesario */
+}
+.MentoresRecientes{
+ margin-bottom: 1em;
+}

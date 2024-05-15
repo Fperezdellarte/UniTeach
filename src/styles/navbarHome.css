@@ -1,16 +1,12 @@
 
 /* Estilos para NavbarHome */
 .navbar-home {
-    background-color: #333; /* Cambiar el color de fondo de la barra de navegación */
     color: #fff; /* Cambiar el color del texto */
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
   }
   
   .navbar-home .navbar-logo-container img {
-    width: 100px; /* Ajustar el tamaño del logo según sea necesario */
+    width: 8.5rem;
   }
   
   .navbar-home .navbar-links-container {
@@ -31,6 +27,7 @@
   }
   
   .navbar-home .navbar-search-container input {
+    background-color: #fff;
     border: none;
     width: 200px; /* Ajustar el ancho de la barra de búsqueda */
   }
@@ -41,10 +38,10 @@
   }
   
   .navbar-home .navbar-user-container .user-avatar {
-    width: 40px; /* Ajustar el tamaño del avatar del usuario */
-    height: 40px; /* Ajustar el tamaño del avatar del usuario */
+    width: 2.5em; /* Ajustar el tamaño del avatar del usuario */
+    height: 2.5em; /* Ajustar el tamaño del avatar del usuario */
     border-radius: 50%; /* Hacer el avatar circular */
-    margin-right: 10px; /* Ajustar el espacio entre el avatar y el botón */
+    margin-right: 1em; /* Ajustar el espacio entre el avatar y el botón */
   }
   
   .navbar-home .navbar-logout-container button {
