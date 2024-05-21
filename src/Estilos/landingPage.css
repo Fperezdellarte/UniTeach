@@ -1,7 +1,0 @@
-/* landingPage.css */
-.landing-page {
-  background-image: url('../Assest/jovenes.png '); /* Agrega la imagen de fondo al contenedor específico */
-  background-size: cover; /* Ajusta el tamaño del fondo para cubrir todo el contenedor */
-  background-attachment: fixed; /* Fija la imagen de fondo para que no se desplace con el contenido */
-  min-height: 100vh; /* Asegura que el contenedor cubra toda la altura de la ventana */
-}

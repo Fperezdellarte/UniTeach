@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/navbar';
+import '../styles/about.css'
 import aboutImage1 from '../Assest/Juan.jpg'; // Importa la primera imagen
 import aboutImage2 from '../Assest/Andres.jpg'; // Importa la segunda imagen
 import aboutImage3 from '../Assest/Alvaro.jpg'; // Importa la tercera imagen
@@ -8,6 +9,7 @@ import aboutImage5 from '../Assest/Joaco.jpg';
 import aboutImage6 from '../Assest/Fran.jpg';
 
 export const About = () => {
+ 
   const images = [
     { src: aboutImage1, description: 'Juan Reina, Desarrollador' },
     { src: aboutImage2, description: 'Andres Ramirez, Desarrollador' },
@@ -19,7 +21,7 @@ export const About = () => {
 
   return (
     <div> 
-      <Navbar/>
+    <Navbar/>    
       <div className='about'>
         <div className="image-grid">
           {/* Mapea sobre la matriz de imágenes y renderiza cada una */}

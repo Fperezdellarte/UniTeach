@@ -1,6 +1,6 @@
 import React from 'react'
-import {NavbarHome} from '../components/navbarHome'
-import '../index.css'; 
+import {Navbar} from '../components/navbar'
+import '../styles/homeLogueado.css'; 
 import proyecto from '../Assest/proyecto.jpg';
 import personas from '../Assest/personas.jpg';
 import pareja from '../Assest/pareja.jpg';
@@ -9,7 +9,7 @@ export const homeLogueado = () => {
 
   return (
     <div>
-    <NavbarHome/>
+    <Navbar/>
    
     <div className="container">
     <div className="row">

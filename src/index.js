@@ -7,7 +7,7 @@ import Signup from './routes/signup';
 import About from './routes/about';
 import HomeLogueado from './routes/homeLogueado';
 import LandingPage from './routes/landingPage';
-import './index.css'
+import './styles/index.css';
 import { AuthProvider } from './auth/authProvider';
 import ProtectedRoute from './routes/protectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
