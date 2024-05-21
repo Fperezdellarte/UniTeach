@@ -1,42 +1,112 @@
-/* CSS actualizado con el botón dark */
 
-/* Reset CSS */
+/* Estilos generales */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Reem Kufi", sans-serif !important;
-}
-.dark-mode-button {
-  position: right;
-  padding: 3rem 5rem;
-  background-color: #333; /* Color oscuro */
-  color: #fff;
-  outline: none;
-  border: none;
-  border-radius: 5rem;
-  font-size: 1.1rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
 }
 
+
+/* Resto de los estilos */
 img {
   max-width: 100%;
   height: auto;
 }
-
-body {
-  max-width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
+.custom-title {
+  color: #ffffff; 
+  font-family:'Times New Roman', Times, serif ;
+  margin-top: 70px;
+}
+@keyframes tracking-in-expand-forward-bottom {
+  0% {
+    letter-spacing: -.2em;
+    transform: translateZ(-700px) translateY(100px);
+    opacity: 0;
+  }
+  40% {
+    opacity: .6;
+  }
+  100% {
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
 }
 
-body {
-  background-color: #f6f6f6;
-  scrollbar-width: none;
+/* Aplica la animación a la clase */
+.tracking-in-expand-forward-bottom {
+  animation: tracking-in-expand-forward-bottom 1.4s linear both;
 }
 
+/*Caracteristicas Principales*/
+.descripcion {
+  font-size: 1.2em;
+  color: #f7f7f7;
+}
+
+.features-section li {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #000000;
+}
+.features-section {
+  padding: 40px 0;
+  text-align: center;
+}
+
+
+
+
+@keyframes shadow-drop-center {
+  0% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  100% {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.55);
+  }
+}
+
+
+
+/* Testimonial Card */
+.testimonial-card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px; /* Espacio entre tarjetas */
+}
+
+.testimonial-card {
+  width: 25em;
+  height: 25em;
+  border: 1px solid #69b2fc;
+  background-color: #0995d6;
+  transition: transform 0.3s ease;
+  
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+  animation: scale-up-center 1.0s both;
+}
+
+@keyframes scale-up-center {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+.testimonial-card .card-body {
+  padding: 40px;
+}
+
+
+/* Estilos específicos para otros elementos */
 nav {
   display: flex;
   align-items: center;
@@ -44,8 +114,9 @@ nav {
   min-height: 90px;
   background-color: #004aad;
 }
-.nav-logo-container{
-  width: 8.5rem;
+
+.nav-logo-container {
+  width: 10%;
 }
 
 .navbar-menu-container {
@@ -64,7 +135,7 @@ nav {
 
 .primary-button {
   padding: 0.9rem 1.75rem;
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   outline: none;
   border: none;
   border-radius: 5rem;
@@ -79,7 +150,7 @@ nav {
 }
 
 .primary-button:hover {
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(0, 0, 0);
 }
 
 .navbar-menu-container svg {
@@ -87,9 +158,8 @@ nav {
   cursor: pointer;
 }
 
-
 .dark-mode-button:hover {
-  background-color: #555; /* Color más oscuro al pasar el mouse */
+  background-color: #f0f0f0; /* Color más oscuro al pasar el mouse */
 }
 
 @media (max-width: 1000px) {
@@ -180,7 +250,7 @@ nav {
   }
 }
 
-/* Estilos para los campos del formulario */
+/* Formulario Signup */
 .formularioSignup input[type="text"],
 .formularioSignup input[type="password"],
 .formularioSignup input[type="email"],
@@ -194,22 +264,19 @@ nav {
   box-sizing: border-box;
 }
 
-/* Estilos para el enlace del formulario */
 .formularioSignup a {
   color: #007bff;
 }
 
-/* Estilos para el texto de los elementos de enumeración */
 .formularioSignup select option {
   padding: 10px;
 }
 
-/* Estilos adicionales para centrar el formulario */
 .formularioSignup {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #f9f9f9e7;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -224,11 +291,11 @@ nav {
   cursor: pointer;
 }
 
-/* Estilos para el botón de registrarse al pasar el cursor */
 .formularioSignup button:hover {
   background-color: #dc5800;
 }
 
+/* Formulario Login */
 .formularioLogin {
   width: 300px;
   margin: 0 auto;
@@ -268,16 +335,7 @@ nav {
   background-color: #d65600;
 }
 
-/* Estilos generales */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f8f8f8;
-  scrollbar-width: none;
-}
-
-/* Estilos para la sección de Contacto */
+/* Contact Section */
 .about .contact-section {
   background-color: #ffffff;
   padding: 50px 0;
@@ -316,7 +374,7 @@ body {
   cursor: pointer;
 }
 
-/* Estilos para la página "Acerca de" */
+/* About Page */
 .about {
   max-width: 800px;
   margin: 0 auto;
@@ -350,6 +408,30 @@ body {
   text-decoration: underline;
 }
 
+/* Estilos para la cuadrícula de imágenes */
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.image-item {
+  flex: 0 0 calc(33.33% - 10px); /* Ajusta el ancho de cada imagen según el espacio disponible */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.image-description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Estilos adicionales para el equipo (team-section) */
 .about .team-section {
   display: flex;
   justify-content: center;
@@ -390,35 +472,4 @@ body {
 .about .team-member .social-links a:hover {
   text-decoration: none;
   color: #0056b3;
-}
-/* HomeLogueado */
-.container {
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 1200px;
-  background-color: #f8f9fa;
-}
-.card-title {
-  font-size: 1.5em;
-  color: #333;
-}
-
-.btn {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.mentor-img {
-  width: 20em;
-  height: 20em;
-  padding: 3em;
-  object-fit: cover;
-}
-
-.mentores-recientes {
-  width: 20em;  /* Ajusta según sea necesario */
-  height: 20em;  /* Ajusta según sea necesario */
-}
-.MentoresRecientes{
- margin-bottom: 1em;
 }
