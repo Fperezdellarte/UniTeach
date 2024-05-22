@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { API_URL } from "../auth/constans";
 import { useNavigate } from "react-router-dom";
+import '../styles/formularioSignUp.css';
+
 
 export const FormularioSignUp = () => {
   const [Username, setUsername] = useState('');
@@ -74,7 +76,7 @@ export const FormularioSignUp = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/users`, {
+      const response = await fetch(`${API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -105,9 +107,12 @@ export const FormularioSignUp = () => {
   };
 
   return (
-    <div>
+    <div className='container'>
       <h2>Registro de Usuario</h2>
       <form onSubmit={handleSubmit}>
+<div className="containerSign">
+      
+
         <label htmlFor="username">Nombre de usuario:</label><br />
         <input type="text" id="username" name="username" value={Username} onChange={(e) => setUsername(e.target.value)} required /><br />
         {usernameError && <span style={{ color: 'red' }}>{usernameError}</span>}
@@ -132,7 +137,10 @@ export const FormularioSignUp = () => {
         <input type="text" id="legajo" name="legajo" value={Legajo} onChange={(e) => setLegajo(e.target.value)} required /><br />
         {legajoError && <span style={{ color: 'red' }}>{legajoError}</span>}
         <br/>
-        
+   
+</div>
+<div className="containerSign">
+
         <label htmlFor="userType">Tipo de Usuario:</label><br />
         <select id="userType" name="userType" value={TypeOfUser} onChange={(e) => setUserType(e.target.value)} required>
           <option value="">Elige una opcion</option>
@@ -159,6 +167,8 @@ export const FormularioSignUp = () => {
         </select><br /> <br/>
 
         <button type="submit">Registrarse</button>
+    
+  </div>     
       </form>
     </div>
   );

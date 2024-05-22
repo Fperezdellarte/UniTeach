@@ -1,33 +1,57 @@
 import React, { useState } from 'react';
+import { API_URL } from '../auth/constans';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/authProvider';
 
-export const FormularioLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+export const FormularioLogin = ({ onLoginSuccess }) => {
+  const [Username, setUsername] = useState('');
+  const [Password, setPassword] = useState('');
+  const [errorResponse, setErrorResponse] = useState('');
+  const auth = useAuth();
+  const goTo = useNavigate();
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    // Aquí puedes realizar la lógica de autenticación
-    if (username === 'admin' && password === 'password') {
-      // Aquí iría el código para redireccionar al usuario a la página de inicio
-      console.log('Inicio de sesión exitoso');
-    } else {
-      setError('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+    try {
+      const response = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          Username,
+          Password
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Login successful");
+        setErrorResponse("");
+        onLoginSuccess(); // Llama a la función proporcionada después de un inicio de sesión exitoso
+        goTo("/home");
+      } else {
+        console.log("Something went wrong");
+        const json = await response.json();
+        setErrorResponse(json.body.error);
+      }
+
+    } catch (error) {
+      console.log(error);
     }
-  };
+  }
 
   return (
     <div>
       <h2>Iniciar sesión</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Nombre de usuario:</label>
           <input
             type="text"
             id="username"
-            value={username}
+            value={Username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -36,7 +60,7 @@ export const FormularioLogin = () => {
           <input
             type="password"
             id="password"
-            value={password}
+            value={Password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>

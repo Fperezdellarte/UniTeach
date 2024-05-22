@@ -1,0 +1,67 @@
+
+/* Estilos para NavbarHome */
+.navbar-home {
+    color: #fff; /* Cambiar el color del texto */
+    justify-content: space-between;
+  }
+  
+  .navbar-home .navbar-logo-container img {
+    width: 8.5rem;
+  }
+  
+  .navbar-home .navbar-links-container {
+    display: flex;
+  }
+  
+  .navbar-home .navbar-links-container a {
+    color: #fff; /* Cambiar el color de los enlaces */
+    text-decoration: none;
+    margin-right: 20px; /* Ajustar el espacio entre los enlaces */
+  }
+  
+  .navbar-home .navbar-search-container {
+    background-color: #fff ; /* Cambiar el color de fondo de la barra de búsqueda */
+    padding: 5px 10px;
+    border-radius: 5px;
+
+  }
+  
+  .navbar-home .navbar-search-container input {
+    background-color: #fff;
+    border: none;
+    width: 200px; /* Ajustar el ancho de la barra de búsqueda */
+  }
+  
+  .navbar-home .navbar-user-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-home .navbar-user-container .user-avatar {
+    width: 2.5em; /* Ajustar el tamaño del avatar del usuario */
+    height: 2.5em; /* Ajustar el tamaño del avatar del usuario */
+    border-radius: 50%; /* Hacer el avatar circular */
+    margin-right: 1em; /* Ajustar el espacio entre el avatar y el botón */
+  }
+  
+  .navbar-home .navbar-logout-container button {
+    background-color: transparent; /* Hacer el fondo del botón transparente */
+    border: none; /* Eliminar el borde del botón */
+    color: #fff; /* Cambiar el color del texto del botón */
+    cursor: pointer; /* Cambiar el cursor al pasar por el botón */
+  }
+  
+  .navbar-home .navbar-menu-container {
+    display: none; /* Ocultar el icono del menú en pantallas grandes */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .navbar-home .navbar-menu-container {
+      display: block; /* Mostrar el icono del menú en pantallas pequeñas */
+    }
+  
+    .navbar-home .navbar-links-container {
+      display: none; /* Ocultar los enlaces en pantallas pequeñas */
+    }
+  }
+  
