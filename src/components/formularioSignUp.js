@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { API_URL } from "../auth/constans";
 import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/formularioSignUp.css';
-
 
 export const FormularioSignUp = () => {
   const [Username, setUsername] = useState('');
@@ -22,56 +22,68 @@ export const FormularioSignUp = () => {
   const [legajoError, setLegajoError] = useState('');
   const [phoneError, setPhoneError] = useState('');
 
-  const goTo = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validaciones
-    if (!Username || !Password || !Name || !DNI || !Legajo || !Mail || !University) {
-      alert("Por favor completa todos los campos obligatorios.");
-      return;
-    }
+    let hasError = false;
 
     // Validar nombre de usuario
     const usernameRegex = /^[a-zA-Z0-9]+$/;
     if (!usernameRegex.test(Username)) {
       setUsernameError("El nombre de usuario no puede contener caracteres especiales.");
-      
-      return;
+      hasError = true;
+    } else {
+      setUsernameError('');
     }
 
     // Validar contraseña
     const passwordRegex = /^(?=.*[A-Z]).{8,25}$/;
     if (!passwordRegex.test(Password)) {
       setPasswordError("La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.");
-      
-      return;
+      hasError = true;
+    } else {
+      setPasswordError('');
     }
 
     // Validar nombre
     const nameRegex = /^[a-zA-Z]+$/;
     if (!nameRegex.test(Name)) {
       setNameError("El nombre no puede contener números ni caracteres especiales.");
-      return;
+      hasError = true;
+    } else {
+      setNameError('');
     }
 
     // Validar DNI
     const dniRegex = /^[0-9]{6,8}$/;
     if (!dniRegex.test(DNI)) {
       setDniError("El DNI debe contener solo números y tener entre 6 y 8 dígitos.");
-      return;
+      hasError = true;
+    } else {
+      setDniError('');
     }
 
     // Validar legajo
     const legajoRegex = /^[a-zA-Z0-9]{1,10}$/;
     if (!legajoRegex.test(Legajo)) {
       setLegajoError("El legajo debe contener solo letras y números, con un máximo de 10 dígitos.");
-      return;
+      hasError = true;
+    } else {
+      setLegajoError('');
     }
+
+    // Validar teléfono
     const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(Phone)) {
-      setPhoneError("El Numero debe contener solo números, con 10 dígitos.");
+      setPhoneError("El Número debe contener solo números, con 10 dígitos.");
+      hasError = true;
+    } else {
+      setPhoneError('');
+    }
+
+    if (hasError) {
       return;
     }
 
@@ -97,7 +109,7 @@ export const FormularioSignUp = () => {
       if (response.ok) {
         const responseData = await response.json();
         console.log('Respuesta del servidor:', responseData);
-        goTo("/login");
+        navigate("/login");
       } else {
         console.error('Error en la solicitud:', response.statusText);
       }
@@ -107,68 +119,153 @@ export const FormularioSignUp = () => {
   };
 
   return (
-    <div className='container'>
+    <div className='container mt-5'>
       <h2>Registro de Usuario</h2>
-      <form onSubmit={handleSubmit}>
-<div className="containerSign">
-      
+      <form onSubmit={handleSubmit} className="row g-3">
+        <div className="col-md-6">
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Nombre de usuario:</label>
+            <input 
+              type="text" 
+              className="form-control" 
+              id="username" 
+              value={Username} 
+              onChange={(e) => {
+                setUsername(e.target.value);
+                setUsernameError(''); // Clear error on change
+              }} 
+              required 
+            />
+            {usernameError && <span className="text-danger">{usernameError}</span>}
+          </div>
 
-        <label htmlFor="username">Nombre de usuario:</label><br />
-        <input type="text" id="username" name="username" value={Username} onChange={(e) => setUsername(e.target.value)} required /><br />
-        {usernameError && <span style={{ color: 'red' }}>{usernameError}</span>}
-        <br/>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Contraseña:</label>
+            <input 
+              type="password" 
+              className="form-control" 
+              id="password" 
+              value={Password} 
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPasswordError(''); // Clear error on change
+              }} 
+              required 
+            />
+            {passwordError && <span className="text-danger">{passwordError}</span>}
+          </div>
 
-        <label htmlFor="password">Contraseña:</label><br />
-        <input type="password" id="password" name="password" value={Password} onChange={(e) => setPassword(e.target.value)} required /><br />
-        {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>}
-        <br/>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">Nombre:</label>
+            <input 
+              type="text" 
+              className="form-control" 
+              id="name" 
+              value={Name} 
+              onChange={(e) => {
+                setName(e.target.value);
+                setNameError(''); // Clear error on change
+              }} 
+              required 
+            />
+            {nameError && <span className="text-danger">{nameError}</span>}
+          </div>
 
-        <label htmlFor="name">Nombre:</label><br />
-        <input type="text" id="name" name="name" value={Name} onChange={(e) => setName(e.target.value)} required /><br />
-        {nameError && <span style={{ color: 'red' }}>{nameError}</span>}
-        <br/>
+          <div className="mb-3">
+            <label htmlFor="dni" className="form-label">DNI:</label>
+            <input 
+              type="text" 
+              className="form-control" 
+              id="dni" 
+              value={DNI} 
+              onChange={(e) => {
+                setDni(e.target.value);
+                setDniError(''); // Clear error on change
+              }} 
+              required 
+            />
+            {dniError && <span className="text-danger">{dniError}</span>}
+          </div>
 
-        <label htmlFor="dni">DNI:</label><br />
-        <input type="text" id="dni" name="dni" value={DNI} onChange={(e) => setDni(e.target.value)} required /><br />
-        {dniError && <span style={{ color: 'red' }}>{dniError}</span>}
-        <br/>
+          <div className="mb-3">
+            <label htmlFor="legajo" className="form-label">Legajo:</label>
+            <input 
+              type="text" 
+              className="form-control" 
+              id="legajo" 
+              value={Legajo} 
+              onChange={(e) => {
+                setLegajo(e.target.value);
+                setLegajoError(''); // Clear error on change
+              }} 
+              required 
+            />
+            {legajoError && <span className="text-danger">{legajoError}</span>}
+          </div>
+        </div>
 
-        <label htmlFor="legajo">Legajo:</label><br />
-        <input type="text" id="legajo" name="legajo" value={Legajo} onChange={(e) => setLegajo(e.target.value)} required /><br />
-        {legajoError && <span style={{ color: 'red' }}>{legajoError}</span>}
-        <br/>
-   
-</div>
-<div className="containerSign">
+        <div className="col-md-6">
+          <div className="mb-3">
+            <label htmlFor="userType" className="form-label">Tipo de Usuario:</label>
+            <select 
+              className="form-select" 
+              id="userType" 
+              value={TypeOfUser} 
+              onChange={(e) => setUserType(e.target.value)} 
+              required
+            >
+              <option value="">Elige una opcion</option>
+              <option value="ALUMNO">Alumno</option>
+              <option value="MENTOR">Mentor</option>
+              <option value="AMBOS">Ambos</option>
+            </select>
+          </div>
 
-        <label htmlFor="userType">Tipo de Usuario:</label><br />
-        <select id="userType" name="userType" value={TypeOfUser} onChange={(e) => setUserType(e.target.value)} required>
-          <option value="">Elige una opcion</option>
-          <option value="ALUMNO">Alumno</option>
-          <option value="MENTOR">Mentor</option>
-          <option value="AMBOS">Ambos</option>
-        </select><br /> <br/>
+          <div className="mb-3">
+            <label htmlFor="mail" className="form-label">Correo Electrónico:</label>
+            <input 
+              type="email" 
+              className="form-control" 
+              id="mail" 
+              value={Mail} 
+              onChange={(e) => setMail(e.target.value)} 
+              required 
+            />
+          </div>
 
-        <label htmlFor="mail">Correo Electrónico:</label><br />
-        <input type="email" id="mail" name="mail" value={Mail} onChange={(e) => setMail(e.target.value)} required /><br />
-        <br/>
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label">Teléfono:</label>
+            <input 
+              type="tel" 
+              className="form-control" 
+              id="phone" 
+              value={Phone} 
+              onChange={(e) => {
+                setPhone(e.target.value);
+                setPhoneError(''); // Clear error on change
+              }} 
+            />
+            {phoneError && <span className="text-danger">{phoneError}</span>}
+          </div>
 
-        <label htmlFor="phone">Teléfono:</label><br />
-        <input type="tel" id="phone" name="phone" value={Phone} onChange={(e) => setPhone(e.target.value)} /><br />
-        {phoneError && <span style={{ color: 'red' }}>{phoneError}</span>}
-        <br/>
+          <div className="mb-3">
+            <label htmlFor="university" className="form-label">Universidad:</label>
+            <select 
+              className="form-select" 
+              id="university" 
+              value={University} 
+              onChange={(e) => setUniversity(e.target.value)} 
+              required
+            >
+              <option value="">Elige una opcion</option>
+              <option value="UNT">UNT</option>
+              <option value="UNSTA">UNSTA</option>
+              <option value="UTN">UTN</option>
+            </select>
+          </div>
 
-        <label htmlFor="university">Universidad:</label><br />
-        <select id="university" name="university" value={University} onChange={(e) => setUniversity(e.target.value)} required>
-        <option value="">Elige una opcion</option>
-          <option value="UNT">UNT</option>
-          <option value="UNSTA">UNSTA</option>
-          <option value="UTN">UTN</option>
-        </select><br /> <br/>
-
-        <button type="submit">Registrarse</button>
-    
-  </div>     
+          <button type="submit" className="btn btn-primary mt-4">Registrarse</button>
+        </div>
       </form>
     </div>
   );

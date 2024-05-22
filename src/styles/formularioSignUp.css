@@ -42,13 +42,3 @@
 .formularioSignup button:hover {
   background-color: #dc5800;
 }
-
-.containerSign {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .col-md-6 {
-    width: 48%;
-  }

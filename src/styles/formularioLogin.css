@@ -1,0 +1,40 @@
+/* Formulario Login */
+.formularioLogin {
+    width: 300px;
+    margin: 5rem auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  .formularioLogin h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .formularioLogin input[type="text"],
+  .formularioLogin input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .formularioLogin button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff6600;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .formularioLogin button:hover {
+    background-color: #d65600;
+  }
+  
