@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { API_URL } from '../auth/constans';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth/authProvider';
+//import { useAuth } from '../auth/authProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/formularioLogin.css';
 
