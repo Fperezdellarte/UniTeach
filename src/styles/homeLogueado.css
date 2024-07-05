@@ -1,32 +1,62 @@
 /* HomeLogueado */
 .container {
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 1200px;
-    background-color: #f8f9fa;
-  }
-  .card-title {
-    font-size: 1.5em;
-    color: #333;
-  }
-  
-  .btn {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .mentor-img {
-    width: 20em;
-    height: 20em;
-    padding: 3em;
-    object-fit: cover;
-  }
-  
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1200px;
+}
+
+/* Estilos para el título de las tarjetas */
+.card-title {
+  font-size: 1.5em;
+  color: #fffdfd;
+}
+
+/* Estilos para los botones */
+.btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Estilos para las imágenes de los mentores */
+.mentor-img {
+  width: 20em;
+  height: 20em;
+  padding: 3em;
+  object-fit: cover;
+}
+
+/* Estilos para los contenedores de mentores recientes */
+.mentores-recientes {
+  width: 20em;
+  height: 20em;
+  margin-bottom: 1em;
+}
+
+/* Contenedor para los mentores recientes */
+.MentoresRecientes {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  justify-content: space-between; /* Distribuye el espacio de manera equitativa */
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+/* Ajustes para asegurar que las imágenes tengan el mismo tamaño */
+.mentor-img,
+.mentores-recientes {
+  flex: 1 1 calc(33.333% - 20px); /* Asegura que los elementos ocupen el mismo espacio */
+  box-sizing: border-box; /* Incluye padding y border en el ancho y alto totales */
+}
+
+@media (max-width: 768px) {
+  .mentor-img,
   .mentores-recientes {
-    width: 20em; 
-    height: 20em; 
+    flex: 1 1 calc(50% - 20px); /* Ajusta el tamaño para pantallas más pequeñas */
   }
-  .MentoresRecientes{
-   margin-bottom: 1em;
+}
+
+@media (max-width: 480px) {
+  .mentor-img,
+  .mentores-recientes {
+    flex: 1 1 100%; /* Ajusta el tamaño para pantallas muy pequeñas */
   }
-  
+}

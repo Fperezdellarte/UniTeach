@@ -1,7 +1,5 @@
 /* landingPage.css */
-.opacidad{
-  background-color: rgb(3, 3, 3, 0.5);
-}
+
 .contenedor {
   margin: 20px auto;
   padding: 20px;
@@ -9,13 +7,13 @@
 }
 .card-title {
   font-size: 1.5em;
-  color: #fffbfb;
+  color: #fffafa;
 }
 .landing-page {
-  background-image: url('../Assest/jovenes.png '); 
-  background-size: cover; 
+  background-image: url('../Assest/jovenes.png');
+  background-size: cover;
   background-attachment: fixed;
-  min-height: 259vh; 
+  min-height: 259vh;
 }
 
 /* Aplica la animación a la clase */
@@ -23,26 +21,28 @@
   animation: tracking-in-expand-forward-bottom 1.4s linear both;
 }
 
-/*Caracteristicas Principales*/
+
+/* Estilos para la descripción */
 .descripcion {
   font-size: 1.2em;
-  color: #f7f7f7;
+  color: #ffffff;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
 }
 
+/* Estilos para los elementos de la sección de características */
 .features-section li {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #fff8f8;
-
+  color: #eeeaea;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
 }
+
+/* Estilos para la sección de características */
 .features-section {
   padding: 40px 0;
   text-align: center;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
 }
-
-
-
-
 @keyframes shadow-drop-center {
   0% {
     box-shadow: 0 0 0 0 transparent;
@@ -52,10 +52,9 @@
   }
 }
 
-
-
 /* Testimonial Card */
 .testimonial-card-container {
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -69,7 +68,7 @@
   border: 1px solid #1965b1;
   background-color: #247ea8;
   transition: transform 0.3s ease;
-  margin: 0.7rem;
+  margin: 0.6rem;
   color: white;
 }
 
@@ -91,7 +90,7 @@
 }
 
 .testimonial-card .card-body {
-  padding: 40px;
+  padding: 50px;
 }
 
 

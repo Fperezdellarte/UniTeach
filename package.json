@@ -15,9 +15,11 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.3",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.2",
+    "react-bootstrap": "^2.10.4",
+    "react-datepicker": "^7.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.1.0",
+    "react-popper": "^2.3.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
@@ -31,8 +33,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -53,5 +54,6 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "tailwind.config.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "keywords": []
 }

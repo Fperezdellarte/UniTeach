@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import './App.css'; // Archivo CSS personalizado donde definirás los estilos para el modo oscuro
 
+
+
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
