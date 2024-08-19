@@ -59,31 +59,63 @@
   .table-pagination-button:hover {
     background-color: #0056b3;
   }
-  /* TablaProximaClase.css */
-
-/* TablaProximaClase.css */
-
+ 
 /* Estilo para el botón de acciones */
 .action-button {
-    background-color: #ff8c00; /* Azul */
-    color: #fff;
-    border: none;
-    padding: 6px 12px; /* Ajusta el tamaño del botón */
-    border-radius: 4px; /* Radio de bordes más pequeño */
-    cursor: pointer;
-    font-size: 12px; /* Tamaño de fuente más pequeño */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-block;
-    text-align: center;
+  background-color: #ff6f00; /* Azul */
+  color: #fff;
+  border: none;
+  padding: 6px 12px; /* Ajusta el tamaño del botón */
+  border-radius: 4px; /* Radio de bordes más pequeño */
+  cursor: pointer;
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.action-button:hover {
+  background-color: #b36800; /* Azul más oscuro */
+  transform: scale(1.05);
+}
+
+.action-button:focus {
+  outline: none;
+}
+
+.table-title {
+  background-color: #f8f9fa; /* Fondo gris claro */
+  color: #333; /* Color del texto */
+  padding: 10px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde gris */
+  text-align: center; /* Centrado del texto */
+  font-size: 18px; /* Tamaño de la fuente */
+  margin-bottom: 20px; /* Espaciado inferior */
+}
+.loading-spinner {
+  font-size: 18px;
+  color: #007bff;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.loading-spinner::after {
+  content: ' ';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  border-color: #007bff transparent #007bff transparent;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .action-button:hover {
-    background-color: #b34e00; /* Azul más oscuro */
-    transform: scale(1.05);
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .action-button:focus {
-    outline: none;
-  }
-  
-  
+}

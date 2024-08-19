@@ -33,7 +33,7 @@ export const HomeLogueado = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-8">
             <TablaProximaClase/>
           </div>
         </div>
