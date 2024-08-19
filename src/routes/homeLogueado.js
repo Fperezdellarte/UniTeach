@@ -6,6 +6,7 @@ import '../styles/homeLogueado.css';
 import proyecto from '../Assest/proyecto.jpg';
 import personas from '../Assest/personas.jpg';
 import pareja from '../Assest/pareja.jpg';
+import { TablaProximaClase } from '../components/TablaProximaClase';
 
 export const HomeLogueado = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -23,42 +24,17 @@ export const HomeLogueado = () => {
           <div className="col-md-3">
             <div className="card bg-light">
               <div className="card-body">
-                <h4 className="card-title mb-4">Turnos</h4>
+                <h4 className="card-title mb-4">clases recientes</h4>
                 <div className="card-text">
-                  <p><strong>Algebra:</strong> Lunes y Miércoles: 10:00 - 12:00</p>
-                  <p><strong>Algoritmo:</strong> Martes y Jueves: 14:00 - 16:00</p>
+                  <p><strong>Algebra:</strong> Lunes : 10:00</p>
+                  <p><strong>Algoritmo:</strong> Jueves: 14:00 </p>
                 </div>
                 <button className="btn btn-primary mt-3">Ver más</button>
               </div>
             </div>
           </div>
           <div className="col-md-6">
-            <div className="card bg-light">
-              <div className="card-body">
-                <h4 className="card-title mb-4">Clases Recientes</h4>
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Materia</th>
-                      <th>Hora</th>
-                      <th>Mentor</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Algebra</td>
-                      <td>10:00 - 12:00</td>
-                      <td>Profesor 1</td>
-                    </tr>
-                    <tr>
-                      <td>Algoritmo</td>
-                      <td>14:00 - 16:00</td>
-                      <td>Profesor 2</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <TablaProximaClase/>
           </div>
         </div>
         <div className="row">

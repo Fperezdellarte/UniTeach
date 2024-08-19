@@ -1,0 +1,89 @@
+/* TablaProximaClase.css */
+
+/* Estilo general de la tabla */
+.table-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px;
+    background-color: #fff;
+  }
+  
+  /* Estilo para el encabezado de la tabla */
+  .table-header {
+    background-color: #aeb0b2;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Estilo para las celdas del encabezado */
+  .table-header-cell {
+    padding: 16px;
+    text-align: left;
+  }
+  
+  /* Estilo para las celdas del cuerpo de la tabla */
+  .table-body-cell {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Estilo para las filas del cuerpo de la tabla */
+  .table-body-row {
+    transition: background-color 0.3s;
+  }
+  
+  .table-body-row:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Estilo para la paginación */
+  .table-pagination {
+    background-color: #f8f8f8;
+    padding: 8px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .table-pagination-button {
+    background-color: #adafb0;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 4px;
+  }
+  
+  .table-pagination-button:hover {
+    background-color: #0056b3;
+  }
+  /* TablaProximaClase.css */
+
+/* TablaProximaClase.css */
+
+/* Estilo para el botón de acciones */
+.action-button {
+    background-color: #ff8c00; /* Azul */
+    color: #fff;
+    border: none;
+    padding: 6px 12px; /* Ajusta el tamaño del botón */
+    border-radius: 4px; /* Radio de bordes más pequeño */
+    cursor: pointer;
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .action-button:hover {
+    background-color: #b34e00; /* Azul más oscuro */
+    transform: scale(1.05);
+  }
+  
+  .action-button:focus {
+    outline: none;
+  }
+  
+  

@@ -15,7 +15,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_URL}/login`, {
+      const response = await fetch(`${API_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -27,13 +27,18 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         console.log("Login successful");
         setErrorResponse("");
+        
+        const { token, user } = data;
+
         if (rememberMe) {
-          localStorage.setItem('authData', JSON.stringify({ Username, Password }));
+          localStorage.setItem('authData', JSON.stringify({ Username, token, user }));
         } else {
-          localStorage.removeItem('authData');
+          localStorage.setItem('authData', JSON.stringify({ Username, token }));
         }
+
         onLoginSuccess();
         goTo("/home");
       } else {
