@@ -10,6 +10,7 @@ import HomeLogueado from './routes/homeLogueado';
 import LandingPage from './routes/landingPage';
 import './styles/index.css';
 import { AuthProvider } from './auth/authProvider';
+import { ClassesProvider } from './contexts/classesContext'; // Importa el ClassesProvider
 import ProtectedRoute from './routes/protectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -46,9 +47,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router}>
-        <Navbar />
-      </RouterProvider>
+      <ClassesProvider> {/* Envuelve el RouterProvider con ClassesProvider */}
+        <RouterProvider router={router}>
+          <Navbar />
+        </RouterProvider>
+      </ClassesProvider>
     </AuthProvider>
   </React.StrictMode>
 );

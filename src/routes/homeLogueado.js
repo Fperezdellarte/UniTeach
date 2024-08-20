@@ -7,6 +7,7 @@ import proyecto from '../Assest/proyecto.jpg';
 import personas from '../Assest/personas.jpg';
 import pareja from '../Assest/pareja.jpg';
 import { TablaProximaClase } from '../components/TablaProximaClase';
+import { TablaClasesRecientes } from '../components/TablaClasesRecientes';
 
 
 
@@ -19,17 +20,8 @@ export const HomeLogueado = () => {
       <Navbar/>
       <div className="container">
         <div className="row">
-          <div className="col-md-3">
-            <div className="card bg-light">
-              <div className="card-body">
-                <h4 className="card-title mb-4">clases recientes</h4>
-                <div className="card-text">
-                  <p><strong>Algebra:</strong> Lunes : 10:00</p>
-                  <p><strong>Algoritmo:</strong> Jueves: 14:00 </p>
-                </div>
-                <button className="btn btn-primary mt-3">Ver más</button>
-              </div>
-            </div>
+          <div className="col-md-4">
+            <TablaClasesRecientes/>
           </div>
           <div className="col-md-8">
             <TablaProximaClase/>
