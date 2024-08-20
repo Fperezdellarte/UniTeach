@@ -4,6 +4,8 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { API_URL } from '../auth/constans';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, Snackbar } from '@mui/material';
+import { useAuth } from '../auth/authProvider'; // Importar el hook useAuth
+import { useNavigate } from 'react-router-dom';
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -12,24 +14,6 @@ const formatDate = (isoDate) => {
   const year = String(date.getUTCFullYear()).slice(-2);
   return `${day}-${month}-${year}`;
 };
-
-const storedData = localStorage.getItem('authData');
-let parsedData = null;
-let token = null;
-let userId = null;
-
-if (storedData) {
-  parsedData = JSON.parse(storedData);
-  token = parsedData?.token || '';
-  userId = parsedData?.user?.idUser || null;
-}
-
-if (!parsedData || !userId || !token) {
-  console.error('No se encontraron datos de autenticación.');
-  // Puedes redirigir al usuario a la página de login o mostrar un mensaje de error.
-}
-
-
 
 export const TablaProximaClase = () => {
   const [data, setData] = useState([]);
@@ -40,33 +24,41 @@ export const TablaProximaClase = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   
+  const { isAuthenticated, user, token } = useAuth(); // Usar el contexto de autenticación
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!isAuthenticated || !user || !token) {
+      navigate('/login'); // Redirigir al usuario a la página de login si no está autenticado
+      return;
+    }
+
     const fetchData = async () => {
       try {
         // Obtener las inscripciones del usuario
-        const inscriptionsResponse = await axios.get(`${API_URL}/inscription/myinscriptions/${userId}`, {
+        const inscriptionsResponse = await axios.get(`${API_URL}/inscription/myinscriptions/${user.idUser}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
-  
+
         const inscriptions = inscriptionsResponse.data.inscription;
-  
+
         // Obtener detalles de cada clase
         const classesData = await Promise.all(inscriptions.map(async (inscription) => {
           const classResponse = await axios.get(`${API_URL}/classes/${inscription.Classes_idClasses}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const classData = classResponse.data.class;
-  
+
           const subjectResponse = await axios.get(`${API_URL}/subjects/${classData.Subjects_idSubjects}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const subjectName = subjectResponse.data.subject.Name;
-  
+
           const userResponse = await axios.get(`${API_URL}/users/${classData.Users_idCreator}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const mentorName = userResponse.data.Name;
-  
+
           return {
             idInscription: inscriptions.find(inscription => inscription.Classes_idClasses === classData.idClasses).idInscription,
             Materia: subjectName,
@@ -77,14 +69,14 @@ export const TablaProximaClase = () => {
             idClasses: classData.idClasses
           };
         }));
-  
+
         // Filtrar clases que ya pasaron
         const currentDate = new Date();
         const upcomingClasses = classesData.filter(classItem => {
           const classDate = new Date(classItem.date);
           return classDate >= currentDate;
         });
-  
+
         setData(upcomingClasses);
       } catch (error) {
         setError('No podemos mostrar tus clases');
@@ -93,9 +85,9 @@ export const TablaProximaClase = () => {
         setLoading(false); // Terminar la carga
       }
     };
-  
+
     fetchData();
-  }, []);
+  }, [isAuthenticated, user, token, navigate]);
 
   const handleOpenDialog = (idInscription) => {
     setSelectedId(idInscription);
@@ -126,8 +118,7 @@ export const TablaProximaClase = () => {
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
-  
-  
+
   const columns = [
     {
       name: "Materia",
@@ -165,17 +156,15 @@ export const TablaProximaClase = () => {
         </button>
       ),
       ignoreRowClick: true
-      
     }
   ];
-  
-  
+
   return (
     <div className="table-container">
       <h2 className="table-title">Próximas Clases</h2>
       {loading ? (
         <div className="loading-spinner">Cargando...</div>
-      ) : (
+      ) : isAuthenticated ? (
         <DataTable
           columns={columns}
           data={data}
@@ -212,6 +201,8 @@ export const TablaProximaClase = () => {
             },
           }}
         />
+      ) : (
+        <div>Por favor, inicia sesión para ver tus próximas clases.</div>
       )}
       {error && <div>{error}</div>}
         {/* Dialogo de confirmación */}
@@ -244,5 +235,4 @@ export const TablaProximaClase = () => {
       />
     </div>
   );
-  
 };

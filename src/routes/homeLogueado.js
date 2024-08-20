@@ -8,17 +8,15 @@ import personas from '../Assest/personas.jpg';
 import pareja from '../Assest/pareja.jpg';
 import { TablaProximaClase } from '../components/TablaProximaClase';
 
+
+
 export const HomeLogueado = () => {
   const [selectedDate, setSelectedDate] = useState(null);
-
-  const handleLogout = () => {
-    // Lógica para cerrar sesión
-    console.log('Usuario ha cerrado sesión');
-  }
+ 
 
   return (
     <div>
-      <Navbar onLogout={handleLogout}/>
+      <Navbar/>
       <div className="container">
         <div className="row">
           <div className="col-md-3">
