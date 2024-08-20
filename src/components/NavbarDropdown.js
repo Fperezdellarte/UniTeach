@@ -5,7 +5,7 @@ import { FaChevronDown } from 'react-icons/fa';
 
 const NavbarDropdown = ({ onLogout }) => {
   const dropdownIconStyle = {
-    color: '#eeeaea', // Cambia el color a tu preferencia
+    color: '#fff', // Cambia el color a tu preferencia
   };
 
   return (
@@ -16,7 +16,6 @@ const NavbarDropdown = ({ onLogout }) => {
 
       <Dropdown.Menu>
         <Dropdown.Item href="#/profile">Perfil</Dropdown.Item>
-        <Dropdown.Item href="#/Turnos">Turnos</Dropdown.Item>
         <Dropdown.Item onClick={onLogout}>Cerrar sesión</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

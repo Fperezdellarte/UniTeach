@@ -9,10 +9,13 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
   const [Password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [errorResponse, setErrorResponse] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const goTo = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
+    setErrorResponse(''); // Limpiar el mensaje de error anterior
 
     try {
       const response = await fetch(`${API_URL}/users/login`, {
@@ -29,7 +32,6 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json();
         console.log("Login successful");
-        setErrorResponse("");
         
         const { token, user } = data;
 
@@ -42,13 +44,16 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
         onLoginSuccess();
         goTo("/home");
       } else {
-        console.log("Something went wrong");
+        // Leer el mensaje de error desde la respuesta JSON
         const json = await response.json();
-        setErrorResponse(json.body.error);
+        setErrorResponse(json.message || 'Error desconocido');
       }
 
     } catch (error) {
       console.log(error);
+      setErrorResponse("Error de conexión, por favor intente de nuevo.");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -65,6 +70,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
             className="form-control"
             value={Username}
             onChange={(e) => setUsername(e.target.value)}
+            disabled={isLoading}
           />
         </div>
         <div className="form-group">
@@ -75,6 +81,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
             className="form-control"
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
           />
         </div>
         
@@ -87,6 +94,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
                 id="rememberMe"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
+                disabled={isLoading}
               />
               <label className="form-check-label" htmlFor="rememberMe">
                 Recordarme
@@ -99,7 +107,13 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary">Iniciar sesión</button>
+        <button 
+          type="submit" 
+          className="btn btn-primary" 
+          disabled={isLoading}
+        >
+          {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Iniciar sesión"}
+        </button>
       </form>
     </div>
   );
