@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import DataTable from 'react-data-table-component';
-import { ClassesContext } from '../contexts/classesContext'; // Asegúrate de importar correctamente
+import { ClassesContext } from '../contexts/classesContext';
 import '../styles/TablaClasesRecientes.css';
 
 const formatDate = (isoDate) => {
@@ -24,32 +24,32 @@ export const TablaClasesRecientes = () => {
       name: "Materia",
       selector: row => row.Materia,
       sortable: true,
-      width: '25%' // Ajusta el ancho de la columna según sea necesario
+      width: '25%'
     },
     {
       name: "Fecha y Hora",
       selector: row => formatDateTime(row.date, row.hour),
       sortable: true,
-      width: '45%' // Ajusta el ancho de la columna según sea necesario
+      width: '45%'
     },
     {
       name: "Aula",
       selector: row => row.Place,
       sortable: true,
-      width: '20%' // Ajusta el ancho de la columna según sea necesario
+      width: '20%'
     }
   ];
-  
-    if (loading) {
-      return <div className="loading-spinner">Cargando...</div>;
-    }
-  
+
+  if (loading) {
+    return <div className="loading-spinner">Cargando...</div>;
+  }
+
   if (error) {
-      return <div>{error}</div>;
-    }
-    
-    return (
-        <div className="table-container">
+    return <div>{error}</div>;
+  }
+
+  return (
+    <div className="table-container">
       <h2 className="table-title">Clases Recientes</h2>
       <DataTable
         columns={columns}
@@ -58,7 +58,7 @@ export const TablaClasesRecientes = () => {
         customStyles={{
           rows: {
             style: {
-              padding: '12px', // Restaura el padding para aumentar el tamaño de la tabla
+              padding: '12px',
               borderBottom: '1px solid #ddd',
             },
           },
@@ -68,12 +68,12 @@ export const TablaClasesRecientes = () => {
               textAlign: 'left',
               backgroundColor: '#fff',
               color: '#000',
-              padding: '16px', // Restaura el padding en los encabezados
+              padding: '16px',
             },
           },
           cells: {
             style: {
-              padding: '12px', // Restaura el padding en las celdas
+              padding: '12px',
             },
           },
           pagination: {
@@ -87,6 +87,9 @@ export const TablaClasesRecientes = () => {
           },
         }}
       />
+      <div className="button-container">
+        <button className="blue-button">Ver Más</button>
+      </div>
     </div>
   );
 };

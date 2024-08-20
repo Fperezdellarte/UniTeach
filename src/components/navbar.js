@@ -7,7 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import SignUpIcon from "@mui/icons-material/PersonAdd";
 import { HiOutlineMenu } from 'react-icons/hi';
-import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List, Avatar, InputBase } from '@mui/material';
+import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List, InputBase } from '@mui/material';
 import { useAuth } from '../auth/authProvider';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
@@ -85,7 +85,6 @@ export const Navbar = () => {
         )}
         {auth.isAuthenticated && (
           <div className="navbar-user-container">
-            <Avatar className="user-avatar" />
             <NavbarDropdown onLogout={handleLogout} />
           </div>
         )}

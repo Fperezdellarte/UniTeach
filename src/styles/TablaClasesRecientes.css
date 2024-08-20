@@ -4,17 +4,19 @@
     margin-top: 20px;
   }
   
-  .view-more-button {
+  .blue-button {
     background-color: #007bff;
-    color: #fff;
-    border: none;
+    color: white;
     padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
   }
   
-  .view-more-button:hover {
+  .blue-button:hover {
+    transform: scale(1.05);
     background-color: #0056b3;
   }
   

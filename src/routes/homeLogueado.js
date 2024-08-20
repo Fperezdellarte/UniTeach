@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from '../components/navbar';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/homeLogueado.css'; 
 import proyecto from '../Assest/proyecto.jpg';
 import personas from '../Assest/personas.jpg';
@@ -12,7 +10,6 @@ import { TablaClasesRecientes } from '../components/TablaClasesRecientes';
 
 
 export const HomeLogueado = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
  
 
   return (
@@ -25,21 +22,6 @@ export const HomeLogueado = () => {
           </div>
           <div className="col-md-8">
             <TablaProximaClase/>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3">
-            <div className="card bg-light">
-              <div className="card-body">
-                <h4 className="card-title mb-4">Selecciona una Fecha</h4>
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={(date) => setSelectedDate(date)}
-                  dateFormat="dd/MM/yyyy"
-                  className="form-control"
-                />
-              </div>
-            </div>
           </div>
         </div>
         <div style={blockStyle}>
