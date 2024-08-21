@@ -43,7 +43,8 @@ export const ClassesProvider = ({ children }) => {
           return {
             idInscription: inscriptions.find(inscription => inscription.Classes_idClasses === classData.idClasses).idInscription,
             Materia: subjectName,
-            date: classData.date,
+            date: classData.Date,
+            endDate: classData.endDate,  // Asegúrate de que endDate esté disponible
             hour: classData.hour,
             Place: classData.Place,
             idClasses: classData.idClasses
@@ -51,10 +52,10 @@ export const ClassesProvider = ({ children }) => {
         }));
 
         const currentDate = new Date();
-        const upcomingClasses = classesData.filter(classItem => new Date(classItem.date) >= currentDate);
-        const pastClasses = classesData.filter(classItem => new Date(classItem.date) < currentDate);
+        const upcomingClasses = classesData.filter(classItem => new Date(classItem.endDate) >= currentDate);
+        const pastClasses = classesData.filter(classItem => new Date(classItem.endDate) < currentDate);
 
-        const sortedClasses = pastClasses.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const sortedClasses = pastClasses.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
         const latestThreeClasses = sortedClasses.slice(0, 3);
 
         setClassesData({

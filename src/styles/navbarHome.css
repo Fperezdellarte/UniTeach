@@ -1,4 +1,20 @@
 /* Estilos para NavbarHome */
+.navbar {
+  margin-bottom: 0;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.row.no-gutters {
+  margin: 0;
+}
+
+h2 {
+  margin-top: 0;
+}
+
 .navbar-home {
   display: center;
   justify-content: center; /* Centra el contenido horizontalmente */
@@ -10,6 +26,22 @@
 .nav-logo-container img {
   width: 8.5rem;
 }
+
+.navbar-search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-error {
+  border: 2px solid red;
+}
+
+.navbar-search-container .MuiInputBase-root {
+  padding: 8px;
+}
+
+
+/* Otros estilos */
 
 .navbar-links-container {
   display: flex;
