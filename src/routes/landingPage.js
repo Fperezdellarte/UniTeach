@@ -1,57 +1,69 @@
 import React from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import '../styles/landingPage.css';
-import TestimonialCard from '../components/TestimonialCard'; // Asegúrate de que la ruta es correcta
 import Navbar from '../components/navbar'; // Asegúrate de que la ruta es correcta
+import CarouselComponent from '../components/CarouselComponent'; // Asegúrate de que la ruta es correcta
+import { Card, CardGroup } from 'react-bootstrap';
 
 const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="opacidad">
-      <Navbar/>
-      <div className="contenedor">
-        {/* Sección de Bienvenida (Hero Section) */}
-        <Row className="hero-section justify-content-center text-center mb-5">
-          <Col lg={8}>
-            <h1 className="display-1 custom-title tracking-in-expand-forward-bottom">Bienvenido a Uniteach</h1>
-            <h3 className="descripcion">Encuentra mentores entre tus compañeros de universidad para mejorar tus habilidades académicas</h3>
-            {/* Aquí está el botón */}
-            <Button 
-              as={Link} 
-              to="/signup" 
-              variant="secondary" 
-              size="lg" 
-              className="custom-button shadow-drop-center"
-            > 
-              ¡Comienza Ahora! 
-            </Button>
-          </Col>
-        </Row>
+        <Navbar />
+        <CarouselComponent />
+      <section>
+             {/* Grupo de Tarjetas */}
+        <CardGroup className="uni-teach-card-group">
+          <Card className="shadow-drop-center">
+            <Card.Img
+              variant="top"
+              src="https://www.unsta.edu.ar/wp-content/uploads/2023/08/unsta-campus-yb.png"
+              alt="UNSTA"
+              />
+            <Card.Body>
+              <Card.Title>Conexion</Card.Title>
+              <Card.Text>
+                De esta manera conectamos las Universidades de Tucuman.
+              </Card.Text>
+            </Card.Body>
+          </Card>
 
-        {/* Features Section */}
-        <Row className="features-section mt-5">
-          <Col lg={12}>
-            <h1 className="display-4 text-white">Características Principales</h1>
-            <ul className="list-unstyled features-text">
-              <li>Conecta con mentores expertos en diversas materias.</li>
-              <li>Programa clases según tu disponibilidad.</li>
-              <li>Accede a materiales de estudio y recursos útiles.</li>
-              <li>Recibe retroalimentación personalizada en tus áreas de estudio.</li>
-            </ul>
-          </Col>
-        </Row>
-        {/* Testimonials Section */}
-        <Row className="testimonial-card-container justify-content-center">
-          <h2 className="text-center text-white">Testimonios de Usuarios</h2>
-          <Col xs={12} className="d-flex justify-content-center flex-wrap">
-            <TestimonialCard name="Juan Pérez" quote="Gracias a Uniteach, he mejorado mis habilidades en matemáticas y ahora estoy más confiado para mis exámenes." />
-            <TestimonialCard name="María Gutiérrez" quote="Encontré a un excelente mentor de programación que me ayudó a entender conceptos difíciles de una manera clara y sencilla." />
-            <TestimonialCard name="Carlos Paez" quote="Una de las mejores herramientas para el aprendizaje de manera versátil." />
-          </Col>
-        </Row>
-        </div>
-    </div>
+          <Card className="shadow-drop-center">
+            <Card.Img
+              variant="top"
+              src="https://media.licdn.com/dms/image/C4E1BAQEyl2j7GtRoYg/company-background_10000/0/1593164654141/universidad_nacional_de_tucum_n_cover?e=2147483647&v=beta&t=TVTosgL1vAIqpxNDpy6-AgCfflm6ESs8ZBiyW3g9jrM"
+              alt="UNT"
+              />
+            <Card.Body>
+              <Card.Title>Innovacion</Card.Title>
+              <Card.Text>
+                Una manera simple y rapida de agendar tus clases con tus mentores favoritos.
+              </Card.Text>
+              
+            </Card.Body>
+          </Card>
+
+          <Card className="shadow-drop-center">
+            <Card.Img
+              variant="top"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Fachada_de_la_UTN_-_Facultad_Regional_Tucum%C3%A1n.jpg/1200px-Fachada_de_la_UTN_-_Facultad_Regional_Tucum%C3%A1n.jpg"
+              alt="UTN"
+              />
+            <Card.Body>
+              <Card.Title>Simple</Card.Title>
+              <Card.Text>
+                Tan simple con un solo click tenes al alcance todo el material disponible, para sacarte esa materia funadora.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </CardGroup>
+              </section>
+              <section>
+                <div>
+                    
+                </div>
+              </section>
+
+      </div>
     </div>
   );
 };
