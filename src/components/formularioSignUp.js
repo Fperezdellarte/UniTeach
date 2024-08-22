@@ -30,7 +30,7 @@ export const FormularioSignUp = () => {
     let hasError = false;
 
     // Validar nombre de usuario
-    export const usernameRegex = /^[a-zA-Z0-9]+$/;
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
     if (!usernameRegex.test(Username)) {
       setUsernameError("El nombre de usuario no puede contener caracteres especiales.");
       hasError = true;
@@ -88,7 +88,7 @@ export const FormularioSignUp = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/users/signup`, {
+      const response = await fetch(`${API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
