@@ -6,9 +6,10 @@ import { Card, CardGroup } from 'react-bootstrap';
 
 const LandingPage = () => {
   return (
+    <div>  
+      <Navbar />
     <div className="landing-page">
       <div className="opacidad">
-        <Navbar />
         <CarouselComponent />
       <section>
              {/* Grupo de Tarjetas */}
@@ -64,6 +65,7 @@ const LandingPage = () => {
               </section>
 
       </div>
+    </div>
     </div>
   );
 };

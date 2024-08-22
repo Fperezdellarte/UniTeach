@@ -1,7 +1,6 @@
 /* landingPage.css */
 /* Estilos para Slide 1 */
 .contenedor.slide-1 {
-  background: linear-gradient(#004aad); /* Fondo oscuro */
   padding: 50px 50px;
   text-align: center;
   margin: 10px;
@@ -11,15 +10,20 @@
 
 /* Estilos para Slide 2 */
 .contenedor.slide-2 {
-  background-color: (#004aad); /* Fondo ligeramente más claro */
   padding: 50px 50px;
   text-align: center;
+  margin-bottom: 4rem;
 }
 
 /* Estilo para la sección "Accede a todo el contenido" */
-.contenedor.slide-3 .features-section {
+.contenedor.slide-3 {
+  padding: 50px 50px;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: 4.6rem;
+}
+
+.features-section {
   color: white;
-  background-color: (#004aad); /* Fondo oscuro */
   padding: 50px 50px;
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
@@ -34,7 +38,7 @@
 }
 
 .landing-page {
-  background:linear-gradient(#004aad,transparent);
+  background: linear-gradient(#004aad, transparent);
   font-family: Arial, Helvetica, sans-serif;
   font-style: normal;
   margin: 0;
@@ -95,18 +99,7 @@
   color: #999;
 }
 
-.shadow-drop-center {
-  animation: shadow-drop-center 0.2s linear both;
-}
 
-@keyframes shadow-drop-center {
-  0% {
-    box-shadow: 0 0 0 0 transparent;
-  }
-  100% {
-    box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.55);
-  }
-}
 
 /* Aplica la animación a la clase */
 .tracking-in-expand-forward-bottom {
@@ -118,8 +111,7 @@
   padding: 5px;
   font-size: 1.2rem;
   margin-bottom: 5px;
-  color: #fcfcfc;
-  filter: drop-shadow(4px 6px rgba(0, 0, 0, 0.5));
+  color: #fcfcfc; 
 }
 
 /* Estilos para la sección de características */
@@ -129,14 +121,6 @@
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes shadow-drop-center {
-  0% {
-    box-shadow: 0 0 0 0 transparent;
-  }
-  100% {
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.55);
-  }
-}
 
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {

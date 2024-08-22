@@ -3,6 +3,8 @@ import { API_URL } from '../auth/constans';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/formularioLogin.css';
+import showIcon from '../Assest/show.png';
+import hideIcon from '../Assest/hide.png';
 
 export const FormularioLogin = ({ onLoginSuccess }) => {
   const [Username, setUsername] = useState('');
@@ -10,6 +12,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
   const [rememberMe, setRememberMe] = useState(true);
   const [errorResponse, setErrorResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
   const goTo = useNavigate();
 
   async function handleSubmit(e) {
@@ -32,7 +35,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json();
         console.log("Login successful");
-        
+
         const { token, user } = data;
 
         if (rememberMe) {
@@ -59,64 +62,76 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
 
   return (
     <div className="form-container">
-      <div className='form-box'>
-      <h2>Iniciar sesión</h2>
-      {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Nombre de usuario:</label>
-          <input
-            type="text"
-            id="username"
-            className="form-control"
-            value={Username}
-            onChange={(e) => setUsername(e.target.value)}
-            disabled={isLoading}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            id="password"
-            className="form-control"
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={isLoading}
-          />
-        </div>
-        
-        <div className="row mb-4">
-          <div className="col d-flex justify-content-center">
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="rememberMe"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                disabled={isLoading}
+      <div className='form-box fw-bold'>
+        <h2>Iniciar sesión</h2>
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-3">
+            <label htmlFor="username">Nombre de usuario:</label>
+            <input
+              type="text"
+              id="username"
+              className="form-control"
+              value={Username}
+              onChange={(e) => setUsername(e.target.value)}
+              disabled={isLoading}
+            />
+          </div>
+          <div className="form-group mb-3 position-relative">
+            <label htmlFor="password">Contraseña:</label>
+            <input
+              type={showPassword ? 'text' : 'password'} // Alterna entre text y password
+              id="password"
+              className="form-control"
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className=" show-password fw-bold position-absolute end-0 top-50"
+            >
+              <img
+                src={showPassword ? hideIcon : showIcon}
+                alt={showPassword ? 'Ocultar' : 'Mostrar'}
+                className={showPassword ? 'visible' : 'hidden'}
+                style={{ width: '24px', height: '24px' }}
               />
-              <label className="form-check-label" htmlFor="rememberMe">
-                Recordarme
-              </label>
+            </button>
+          </div>
+
+          <div className="row mb-4">
+            <div className="col d-flex justify-content-center">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="rememberMe"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  disabled={isLoading}
+                />
+                <label className="form-check-label" htmlFor="rememberMe">
+                  Recordarme
+                </label>
+              </div>
+            </div>
+
+            <div className="il">
+              <a href="#!" className="forgot-password-link">Olvidé mi contraseña?</a>
             </div>
           </div>
 
-          <div className="il">
-            <a href="#!" className="forgot-password-link">Olvidé mi contraseña?</a>
-          </div>
-        </div>
-
-        <button 
-          type="submit" 
-          className="btn btn-primary" 
-          disabled={isLoading}
-        >
-          {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Iniciar sesión"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="btn btn-login fw-bold"
+            disabled={isLoading}
+          >
+            {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Iniciar sesión"}
+          </button>
+        </form>
       </div>
     </div>
   );
-}  
+}

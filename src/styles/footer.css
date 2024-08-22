@@ -1,0 +1,71 @@
+footer {
+    border: 1px solid rgb(73, 72, 72);
+    background-color: #f8f9fa; /* Color de fondo suave */
+    color: #000000; /* Color de texto ligeramente oscuro */
+    font-size: 0.905rem; /* Tamaño de fuente reducido */
+    padding: 10px 20px; /* Espaciado reducido */
+    margin-top: 5rem;  
+  }
+  
+  footer .p-4 {
+    padding: 0px !important; /* Reduce el padding de las secciones internas */
+  }
+  
+  footer .section-title {
+    font-size: 1rem; /* Tamaño de título reducido */
+    margin-bottom: 5px; /* Espaciado inferior reducido */
+  }
+  
+  footer .text-center {
+    text-align: center; /* Alineación central */
+  }
+  
+  footer .text-muted {
+    color: #6c757d !important; /* Color de texto atenuado */
+  }
+  
+  footer .me-4 {
+    margin-right:10px !important; /* Reducción de los márgenes laterales */
+  }
+  
+  footer .me-3 {
+    margin-right: 10px !important; /* Reducción de los márgenes de iconos y texto */
+  }
+  
+  footer a.text-reset {
+    color: #6c757d; /* Color de enlaces */
+    text-decoration: none; /* Sin subrayado */
+  }
+  
+  footer a.text-reset:hover {
+    color: #343a40; /* Color de enlace en hover */
+    text-decoration: underline; /* Subrayado en hover */
+  }
+  
+  footer .fab {
+    font-size: 1rem; /* Tamaño de iconos reducido */
+  }
+  
+  footer .container {
+    max-width: 1000px;
+    padding: 0 15px;
+  }
+  
+  footer .row {
+    margin: 0; /* Sin márgenes adicionales */
+  }
+  
+  footer .col-md-3,
+  footer .col-md-2,
+  footer .col-md-4 {
+    padding: auto 0px; /* Espaciado vertical reducido */
+  }
+  
+  /* Sección de Copyright */
+  footer .copyright {
+    padding: 5px 0; /* Espaciado reducido */
+    background-color: #e9ecef; /* Fondo sutil para la sección de copyright */
+    color: #6c757d; /* Texto del copyright */
+    font-size: 0.75rem; /* Tamaño de fuente reducido */
+  }
+  

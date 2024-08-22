@@ -14,6 +14,7 @@ import { AuthProvider } from './auth/authProvider';
 import { ClassesProvider } from './contexts/classesContext'; // Importa el ClassesProvider
 import ProtectedRoute from './routes/protectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from '../src/components/footer';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ root.render(
         <RouterProvider router={router}>
           <Navbar />
         </RouterProvider>
+          <Footer />
       </ClassesProvider>
     </AuthProvider>
 );

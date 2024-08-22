@@ -59,14 +59,14 @@ export const Navbar = () => {
 
   const menuOptions = auth.isAuthenticated
     ? [
-        { text: "Home", icon: <HomeIcon />, link: "/home" },
-        { text: "About", icon: <InfoIcon />, link: "/about" }
+        { text: "Inicio", icon: <HomeIcon />, link: "/home" },
+        { text: "Nosotros", icon: <InfoIcon />, link: "/about" }
       ]
     : [
-        { text: "Home", icon: <HomeIcon />, link: "/" },
-        { text: "Login", icon: <LoginIcon />, link: "/login" },
+        { text: "Inicio", icon: <HomeIcon />, link: "/" },
+        { text: "Inicio sesion", icon: <LoginIcon />, link: "/login" },
         { text: "Registro", icon: <SignUpIcon />, link: "/signup" },
-        { text: "About", icon: <InfoIcon />, link: "/about" }
+        { text: "Nosotros", icon: <InfoIcon />, link: "/about" }
       ];
 
   const handleSearchClick = () => {
