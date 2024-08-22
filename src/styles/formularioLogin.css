@@ -1,28 +1,53 @@
-/* Estilos para el formulario de inicio de sesión */
+/* Estilos para el contenedor principal */
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background-color: #f8f9fa;
+  justify-content: center;
+  height: 60vh;
+  padding: 20px;
+  background: linear-gradient(#004aad, transparent);
 }
 
+/* Estilos para el box del formulario */
+.form-box {
+  box-shadow: 0px 0px 5px 0px rgb(58, 57, 57);
+  opacity: 50px;
+  background: radial-gradient(to right, #000a00);
+  padding: 30px;
+  border-radius: 5px;
+  max-width: 400px;
+  width: 800px;
+}
+
+/* Estilos para el título del formulario */
 .form-container h2 {
+  color: white;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: 100;
+  letter-spacing: 5px ;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+
 }
 
+/* Estilos para el mensaje de error */
 .errorMessage {
   color: red;
   text-align: center;
   margin-bottom: 15px;
 }
 
+/* Estilos para el enlace de "Olvidé mi contraseña" */
 .forgot-password-link {
+  color: black;
   display: block;
   text-align: center;
 }
 
+/* Estilos para el botón de envío */
 .btn-primary {
   width: 100%;
   padding: 10px;

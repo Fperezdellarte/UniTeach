@@ -59,6 +59,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
 
   return (
     <div className="form-container">
+      <div className='form-box'>
       <h2>Iniciar sesión</h2>
       {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
       <form onSubmit={handleSubmit}>
@@ -115,6 +116,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
           {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Iniciar sesión"}
         </button>
       </form>
+      </div>
     </div>
   );
-};
+}  

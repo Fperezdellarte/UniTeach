@@ -1,48 +1,134 @@
 /* landingPage.css */
+/* Estilos para Slide 1 */
+.contenedor.slide-1 {
+  background: linear-gradient(#004aad); /* Fondo oscuro */
+  padding: 50px 50px;
+  text-align: center;
+  margin: 10px;
+  height: auto;
+  width: auto;
+}
 
-.contenedor {
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 1200px;
+/* Estilos para Slide 2 */
+.contenedor.slide-2 {
+  background-color: (#004aad); /* Fondo ligeramente más claro */
+  padding: 50px 50px;
+  text-align: center;
 }
+
+/* Estilo para la sección "Accede a todo el contenido" */
+.contenedor.slide-3 .features-section {
+  color: white;
+  background-color: (#004aad); /* Fondo oscuro */
+  padding: 50px 50px;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Tarjetas */
 .card-title {
+  font-family: sans-serif;
   font-size: 1.5em;
-  color: #fffafa;
+  color: #000000;
+  background-color: #ffffff;
+  margin: 10px;
 }
+
 .landing-page {
-  background-image: url('../Assest/jovenes.png');
-  background-size: cover;
-  background-attachment: fixed;
-  min-height: 259vh;
+  background:linear-gradient(#004aad,transparent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  margin: 0;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  padding: 0px;
+}
+
+.opacidad {
+  width: 100%;
+  position: relative;
+}
+
+/* Grupo de Tarjetas UniTeach */
+.uni-teach-card-group {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espaciado entre las tarjetas */
+  margin-top: 80px;
+  justify-content: center;
+  box-shadow: 5px -10px -3px 1px black;
+}
+
+.uni-teach-card-group .card {
+  background-color: #f8f9fa; /* Color de fondo de las tarjetas */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de elevación */
+  flex: 1 1 300px; /* Ancho flexible para tarjetas, mínimo de 300px */
+  max-width: 100%; /* Evita que las tarjetas crezcan demasiado */
+  margin: 10px;
+}
+
+.uni-teach-card-group .card-img-top {
+  width: 100%; /* Ajusta el tamaño de la imagen al ancho de la tarjeta */
+  height: auto;
+  border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+.uni-teach-card-group .card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.uni-teach-card-group .card-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.uni-teach-card-group .text-muted {
+  font-size: 12px;
+  color: #999;
+}
+
+.shadow-drop-center {
+  animation: shadow-drop-center 0.2s linear both;
+}
+
+@keyframes shadow-drop-center {
+  0% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  100% {
+    box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.55);
+  }
 }
 
 /* Aplica la animación a la clase */
 .tracking-in-expand-forward-bottom {
-  animation: tracking-in-expand-forward-bottom 1.4s linear both;
+  animation: tracking-in-expand-forward-bottom 1.0s linear both;
 }
 
-
-/* Estilos para la descripción */
-.descripcion {
-  font-size: 1.2em;
-  color: #ffffff;
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
-}
-
-/* Estilos para los elementos de la sección de características */
+/* Lista de características */
 .features-section li {
+  padding: 5px;
   font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: #eeeaea;
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
+  margin-bottom: 5px;
+  color: #fcfcfc;
+  filter: drop-shadow(4px 6px rgba(0, 0, 0, 0.5));
 }
 
 /* Estilos para la sección de características */
 .features-section {
-  padding: 40px 0;
+  padding: 30px;
   text-align: center;
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
+
 @keyframes shadow-drop-center {
   0% {
     box-shadow: 0 0 0 0 transparent;
@@ -52,45 +138,14 @@
   }
 }
 
-/* Testimonial Card */
-.testimonial-card-container {
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 50); /* Sombra negra con opacidad del 50% */
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 40px; /* Espacio entre tarjetas */
-
-}
-
-.testimonial-card {
-  width: 25em;
-  height: 25em;
-  border: 1px solid #1965b1;
-  background-color: #247ea8;
-  transition: transform 0.3s ease;
-  margin: 0.6rem;
-  color: white;
-}
-
-.testimonial-card:hover {
-  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
-  animation: scale-up-center 1.0s both;
-}
-
-@keyframes scale-up-center {
-  0% {
-    transform: scale(1);
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 10px;
   }
-  70% {
-    transform: scale(1.03);
-  }
-  100% {
-    transform: scale(1.06);
+
+  .uni-teach-card-group .card {
+    flex: 1 1 100%; /* Las tarjetas ocupan todo el ancho disponible */
+    margin: 5px 0;
   }
 }
-
-.testimonial-card .card-body {
-  padding: 50px;
-}
-
-
