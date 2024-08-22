@@ -7,6 +7,7 @@ import Login from './routes/login';
 import Signup from './routes/signup';
 import About from './routes/about';
 import HomeLogueado from './routes/homeLogueado';
+import Results from './routes/Results';
 import LandingPage from './routes/landingPage';
 import './styles/index.css';
 import { AuthProvider } from './auth/authProvider';
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
     element: <About />
   },
   {
+    path: "/results",
+    element: <Results />
+  },
+  {
     path: "/",
     element: <ProtectedRoute />,
     children: [
@@ -45,7 +50,6 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <AuthProvider>
       <ClassesProvider> {/* Envuelve el RouterProvider con ClassesProvider */}
         <RouterProvider router={router}>
@@ -53,6 +57,5 @@ root.render(
         </RouterProvider>
       </ClassesProvider>
     </AuthProvider>
-  </React.StrictMode>
 );
 

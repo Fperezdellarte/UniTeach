@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List, InputBase, IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { HiOutlineMenu } from 'react-icons/hi';
+import { useAuth } from '../auth/authProvider';
+import axios from 'axios';
 import { API_URL } from '../auth/constans';
+import { useBuscador } from './buscador'; // Importa el hook y el componente de resultados
 import Logo from '../Assest/Logo.png';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import SignUpIcon from "@mui/icons-material/PersonAdd";
-import { HiOutlineMenu } from 'react-icons/hi';
-import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List, InputBase } from '@mui/material';
-import { useAuth } from '../auth/authProvider';
-import { Navigate } from 'react-router-dom';
-import axios from 'axios';
-import NavbarDropdown from './NavbarDropdown'; // Importa tu NavbarDropdown
+import NavbarDropdown from './NavbarDropdown';
 import '../styles/navbarHome.css';
 
 export const Navbar = () => {
   const auth = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
+  const [searchError, setSearchError] = useState(false); // Nuevo estado para el error de búsqueda
+  const { searchTerm, setSearchTerm, error, handleSearch } = useBuscador();
 
   const handleLogout = async () => {
     // Mostrar un mensaje de confirmación
@@ -39,7 +42,7 @@ export const Navbar = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      
       // Eliminar el token y otros datos de usuario del almacenamiento local
       localStorage.removeItem('authData');
 
@@ -66,6 +69,15 @@ export const Navbar = () => {
         { text: "About", icon: <InfoIcon />, link: "/about" }
       ];
 
+  const handleSearchClick = () => {
+    if (searchTerm.trim() === '') {
+      setSearchError(true); // Mostrar error si no hay texto
+    } else {
+      setSearchError(false); // Ocultar error si hay texto
+      handleSearch();
+    }
+  };
+
   return (
     <div className="navbar-home">
       <nav>
@@ -77,16 +89,30 @@ export const Navbar = () => {
             <Link key={index} to={option.link}>{option.text}</Link>
           ))}
         </div>
-        {/* Mostrar la barra de búsqueda solo si el usuario está autenticado */}
+
         {auth.isAuthenticated && (
-          <div className="navbar-search-container">
-            <InputBase placeholder="Buscar..." />
-          </div>
-        )}
-        {auth.isAuthenticated && (
-          <div className="navbar-user-container">
-            <NavbarDropdown onLogout={handleLogout} />
-          </div>
+          <>
+            <div className="navbar-search-container">
+              <InputBase
+                placeholder={searchError ? "Busca Una Materia" : "Buscar materia..."}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()}
+                className={searchError ? "search-error" : ""}
+                sx={{
+                  border: searchError ? '2px solid red' : 'none',
+                  borderRadius: '4px',
+                  padding: '8px',
+                }}
+              />
+              <IconButton onClick={handleSearchClick}>
+                <SearchIcon />
+              </IconButton>
+            </div>
+            <div className="navbar-user-container">
+              <NavbarDropdown onLogout={handleLogout} />
+            </div>
+          </>
         )}
         <div className="navbar-menu-container">
           <HiOutlineMenu onClick={() => setOpenMenu(true)} />
@@ -104,8 +130,10 @@ export const Navbar = () => {
           </Box>
         </Drawer>
       </nav>
+      {error && <p>{error}</p>}
     </div>
   );
 };
 
 export default Navbar;
+

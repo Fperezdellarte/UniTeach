@@ -38,7 +38,7 @@ const NavbarDropdown = ({ onLogout }) => {
   };
 
   return (
-    <Dropdown alignRight>
+    <Dropdown>
       <Dropdown.Toggle as="div" id="dropdown-basic" style={dropdownButtonStyle} className="dropdown-toggle-custom">
         <Avatar alt="User Avatar" src="/path-to-avatar-image.jpg" style={avatarStyle} className="avatar-hover" />
         <FaAngleDown style={dropdownIconStyle} className="icon-hover" />
