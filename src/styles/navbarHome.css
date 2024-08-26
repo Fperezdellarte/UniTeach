@@ -14,6 +14,17 @@
 h2 {
   margin-top: 0;
 }
+.navbar-user-container {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.navbar-user-container .user-name {
+  margin-left: 10px;
+  font-size: 1rem; /* Ajusta el tamaño del texto según necesites */
+  color: #ffffff; /* Color del nombre del usuario */
+}
 
 .navbar-home {
   display: center;

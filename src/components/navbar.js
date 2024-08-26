@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Drawer, ListItem, ListItemIcon, ListItemText, Box, List, InputBase, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { HiOutlineMenu } from 'react-icons/hi';
 import { useAuth } from '../auth/authProvider';
-import axios from 'axios';
-import { API_URL } from '../auth/constans';
-import { useBuscador } from './buscador'; // Importa el hook y el componente de resultados
+import { handleLogout } from '../auth/logout';
+import { useBuscador } from './buscador';
 import Logo from '../Assest/Logo.png';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
@@ -18,45 +17,24 @@ import '../styles/navbarHome.css';
 export const Navbar = () => {
   const auth = useAuth();
   const [openMenu, setOpenMenu] = useState(false);
-  const [searchError, setSearchError] = useState(false); // Nuevo estado para el error de búsqueda
+  const [searchError, setSearchError] = useState(false);
   const { searchTerm, setSearchTerm, error, handleSearch } = useBuscador();
-
-  const handleLogout = async () => {
-    // Mostrar un mensaje de confirmación
-    const confirmLogout = window.confirm('¿Estás seguro de que deseas cerrar sesión?');
-
-    // Si el usuario cancela, no hacer nada
-    if (!confirmLogout) return;
-
-    try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
-
-      if (!authData || !authData.token) {
-        throw new Error('Token no encontrado');
+  const [userName, setUserName] = useState('');
+  const [userImage, setUserImage] = useState('');
+  
+  useEffect(() => {
+    const authData = JSON.parse(localStorage.getItem('authData'));
+    
+    if (authData && authData.user) {
+      if (authData.user.Name) {
+        setUserName(authData.user.Name);
       }
-
-      const token = authData.token;
-
-      await axios.post(`${API_URL}/users/logout`, null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      
-      // Eliminar el token y otros datos de usuario del almacenamiento local
-      localStorage.removeItem('authData');
-
-      // Redirigir al usuario a la página de inicio de sesión
-      <Navigate to="/login" />;
-
-      window.location.reload();
-
-      console.log('Usuario ha cerrado sesión');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
+      if (authData.user.Avatar_URL) {
+        setUserImage(authData.user.Avatar_URL);
+      }
     }
-  };
-
+  }, []);
+  
   const menuOptions = auth.isAuthenticated
     ? [
         { text: "Inicio", icon: <HomeIcon />, link: "/home" },
@@ -71,9 +49,9 @@ export const Navbar = () => {
 
   const handleSearchClick = () => {
     if (searchTerm.trim() === '') {
-      setSearchError(true); // Mostrar error si no hay texto
+      setSearchError(true);
     } else {
-      setSearchError(false); // Ocultar error si hay texto
+      setSearchError(false);
       handleSearch();
     }
   };
@@ -89,7 +67,7 @@ export const Navbar = () => {
             <Link key={index} to={option.link}>{option.text}</Link>
           ))}
         </div>
-
+  
         {auth.isAuthenticated && (
           <>
             <div className="navbar-search-container">
@@ -110,7 +88,7 @@ export const Navbar = () => {
               </IconButton>
             </div>
             <div className="navbar-user-container">
-              <NavbarDropdown onLogout={handleLogout} />
+              <NavbarDropdown onLogout={handleLogout} userName={userName} userImage={userImage} />
             </div>
           </>
         )}
@@ -132,8 +110,11 @@ export const Navbar = () => {
       </nav>
       {error && <p>{error}</p>}
     </div>
-  );
+  );  
 };
 
 export default Navbar;
+
+
+
 

@@ -9,6 +9,7 @@ import HomeLogueado from './routes/homeLogueado';
 import Results from './routes/Results';
 import  PerfilMentor from './routes/perfilMentor';
 import LandingPage from './routes/landingPage';
+import PerfilUsuario from './routes/perfilUsuario';
 import './styles/index.css';
 import { AuthProvider } from './auth/authProvider';
 import { ClassesProvider } from './contexts/classesContext'; // Importa el ClassesProvider
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About />
+  },
+  {
+    path:"/perfil",
+    element: <PerfilUsuario />
   },
   {
     path: "/",

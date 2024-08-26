@@ -5,7 +5,9 @@ import { Navbar } from '../components/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Results.css';
 
+
 const Results = () => {
+
   const location = useLocation();
   const navigate = useNavigate();
   const { results } = location.state || {};
