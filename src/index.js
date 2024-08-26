@@ -35,10 +35,6 @@ const router = createBrowserRouter([
     element: <About />
   },
   {
-    path:"/perfil",
-    element: <PerfilUsuario />
-  },
-  {
     path: "/",
     element: (
       <ProtectedRoute>
@@ -50,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <HomeLogueado />
+      },
+      {
+        path:"/perfil",
+        element: <PerfilUsuario />
       },
       {
         path: "/results",

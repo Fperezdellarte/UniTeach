@@ -3,7 +3,7 @@ import { Navbar } from '../components/navbar';
 import { API_URL } from '../auth/constans';
 import axios from 'axios';
 import { Button, Form, Container, Image } from 'react-bootstrap';
-import '../styles/PerfilUsuario.css'
+import '../styles/PerfilUsuario.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importar Bootstrap
 
 const PerfilUsuario = () => {
@@ -90,9 +90,9 @@ const PerfilUsuario = () => {
     <div>
       <Navbar />
       <Container className="my-4">
-        <h2 className="mb-4">Perfil de Usuario</h2>
-        <Form onSubmit={handleSubmit} className="profile-form">
-          <Form.Group controlId="formName" className="form-group">
+        <h2 className="perfilusuario-h2 mb-4">Perfil de Usuario</h2>
+        <Form onSubmit={handleSubmit} className="perfilusuario-profile-form">
+          <Form.Group controlId="formName" className="perfilusuario-form-group">
             <Form.Control
               type="text"
               name="Name"
@@ -104,7 +104,7 @@ const PerfilUsuario = () => {
             <Form.Label className={formData.Name ? 'filled' : ''}>Nombre</Form.Label>
           </Form.Group>
 
-          <Form.Group controlId="formUsername" className="form-group">
+          <Form.Group controlId="formUsername" className="perfilusuario-form-group">
             <Form.Control
               type="text"
               name="Username"
@@ -116,7 +116,7 @@ const PerfilUsuario = () => {
             <Form.Label className={formData.Username ? 'filled' : ''}>Username</Form.Label>
           </Form.Group>
 
-          <Form.Group controlId="formMail" className="form-group">
+          <Form.Group controlId="formMail" className="perfilusuario-form-group">
             <Form.Control
               type="email"
               name="Mail"
@@ -128,7 +128,7 @@ const PerfilUsuario = () => {
             <Form.Label className={formData.Mail ? 'filled' : ''}>Correo</Form.Label>
           </Form.Group>
 
-          <Form.Group controlId="formPhone" className="form-group">
+          <Form.Group controlId="formPhone" className="perfilusuario-form-group">
             <Form.Control
               type="text"
               name="Phone"
@@ -169,4 +169,4 @@ const PerfilUsuario = () => {
   );
 };
 
-export default PerfilUsuario
+export default PerfilUsuario;
