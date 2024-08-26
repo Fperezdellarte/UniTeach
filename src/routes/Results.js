@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import MentorCard from '../components/mentorCard';
 import { Navbar } from '../components/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,6 +7,7 @@ import '../styles/Results.css';
 
 const Results = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { results } = location.state || {};
   const [filteredResults, setFilteredResults] = useState(results || []);
   const [filters, setFilters] = useState({
@@ -58,6 +59,10 @@ const Results = () => {
     } else if (name === 'sortBy') {
       setFilters(prevFilters => ({ ...prevFilters, sortBy: value }));
     }
+  };
+
+  const handleCardClick = (mentorId) => {
+    navigate(`/perfilMentor/${mentorId}`); // Redirige al perfil del mentor
   };
 
   return (
@@ -131,7 +136,10 @@ const Results = () => {
             <div className="row">
               {filteredResults.map((mentor) => (
                 <div className="col-lg-4 col-md-6 mb-4" key={mentor.idUser}>
-                  <MentorCard mentor={mentor} />
+                  <MentorCard
+                    mentor={mentor}
+                    onClick={() => handleCardClick(mentor.idUser)} // Pasa la función de clic
+                  />
                 </div>
               ))}
             </div>
