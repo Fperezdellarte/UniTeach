@@ -1,0 +1,63 @@
+/* Estilos generales para el formulario de perfil */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em; /* Espacio entre los elementos del formulario */
+  max-width: 30rem; /* Ancho del formulario */
+  margin: auto;
+  padding: 1em; /* Relleno alrededor del formulario */
+  background-color: #f9f9f9; /* Color de fondo claro para el formulario */
+  border-radius: 0.5em; /* Esquinas redondeadas para el formulario */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para el formulario */
+}
+
+h2 {
+  text-align: center; /* Centrar el título */
+  margin-bottom: 1em; /* Espacio debajo del título */
+  font-size: 2.5em; /* Tamaño de fuente del título */
+  font-weight: 700; /* Negrita para el título */
+  color: #333; /* Color oscuro para el título */
+  text-transform: uppercase; /* Convertir el texto a mayúsculas */
+  letter-spacing: 0.1em; /* Espaciado entre letras */
+}
+
+/* Estilos para las etiquetas flotantes */
+.form-group {
+  position: relative; /* Asegurar que la etiqueta se posicione en relación con este contenedor */
+  margin-bottom: 1em; /* Espacio entre grupos de formulario */
+}
+
+.form-group input {
+  font-size: 1em; /* Tamaño de fuente para los campos de entrada */
+  padding: 1em; /* Relleno dentro de los campos de entrada */
+  border: 1px solid #ccc;
+  border-radius: 0.25em;
+  width: 100%; /* Hacer que los campos de entrada ocupen todo el ancho */
+  box-sizing: border-box; /* Incluir relleno y borde en el ancho */
+  position: relative; /* Para posicionar la etiqueta flotante */
+}
+
+.form-group input:focus {
+  outline: none; /* Eliminar el contorno predeterminado */
+  border-color: #007bff; /* Cambiar el color del borde al enfocar */
+}
+
+.form-group label {
+  position: absolute; /* Posicionar la etiqueta absolutamente dentro del form-group */
+  top: 50%; /* Centrar verticalmente en relación con el campo de entrada */
+  left: 1em; /* Posicionar la etiqueta horizontalmente */
+  transform: translateY(-50%); /* Centrar la etiqueta verticalmente */
+  transition: 0.2s ease; /* Transición suave para el movimiento de la etiqueta */
+  font-size: 1em; /* Tamaño de fuente para las etiquetas */
+  color: #333; /* Color de etiqueta por defecto */
+  background-color: #f9f9f9; /* Coincidir con el color de fondo del formulario */
+  padding: 0 0.25em; /* Relleno para asegurar que la etiqueta no se superponga al borde de entrada */
+  pointer-events: none; /* Evitar que la etiqueta bloquee los eventos del campo de entrada */
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  top: -1em; /* Mover la etiqueta por encima del campo de entrada */
+  font-size: 0.75em; /* Tamaño de fuente más pequeño para la etiqueta */
+  color: #007bff; /* Cambio de color para la etiqueta al enfocar */
+}

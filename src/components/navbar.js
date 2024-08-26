@@ -88,11 +88,7 @@ export const Navbar = () => {
               </IconButton>
             </div>
             <div className="navbar-user-container">
-              {userName && (
-                <>
-                  <NavbarDropdown onLogout={handleLogout} userImage={userImage} />
-                </>
-              )}
+              <NavbarDropdown onLogout={handleLogout} userName={userName} userImage={userImage} />
             </div>
           </>
         )}

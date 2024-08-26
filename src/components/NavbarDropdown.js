@@ -3,10 +3,13 @@ import { Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaAngleDown, FaUser, FaSignOutAlt } from 'react-icons/fa'; // Importa los íconos adicionales
 import { Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const NavbarDropdown = ({ onLogout, userImage }) => {
+const NavbarDropdown = ({ onLogout, userName, userImage }) => {
+  const navigate = useNavigate(); // Crea una instancia de navigate
+
   const dropdownButtonStyle = {
-    backgroundColor: 'transparent',
+    color:'transparent',
     border: 'none',
     display: 'flex',
     alignItems: 'center',
@@ -15,7 +18,7 @@ const NavbarDropdown = ({ onLogout, userImage }) => {
   };
 
   const dropdownIconStyle = {
-    color: '#fff',
+    color: '',
     fontSize: '1.5rem',
     marginLeft: '0.1em',
     transition: 'transform 0.2s ease-in-out',
@@ -36,15 +39,20 @@ const NavbarDropdown = ({ onLogout, userImage }) => {
     marginRight: '8px',
   };
 
+  const handleProfileClick = () => {
+    navigate('/perfil'); // Redirige al perfil
+  };
+
   return (
     <Dropdown>
       <Dropdown.Toggle as="div" id="dropdown-basic" style={dropdownButtonStyle} className="dropdown-toggle-custom">
+        <span style={{color:'white', margin:'1em', transition:'transform 0.2 ease-in-out'}}>{userName}</span> 
         <Avatar alt="User Avatar" src={userImage} style={avatarStyle} className="avatar-hover" />
         <FaAngleDown style={dropdownIconStyle} className="icon-hover" />
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-menu-custom">
-        <Dropdown.Item href="#/profile" style={menuItemStyle}>
+        <Dropdown.Item onClick={handleProfileClick} style={menuItemStyle}>
           <FaUser style={iconStyle} /> Perfil
         </Dropdown.Item>
         <Dropdown.Item onClick={onLogout} style={menuItemStyle}>
@@ -56,4 +64,3 @@ const NavbarDropdown = ({ onLogout, userImage }) => {
 };
 
 export default NavbarDropdown;
-
