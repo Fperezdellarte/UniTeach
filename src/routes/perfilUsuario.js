@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Navbar } from '../components/navbar';
 import { API_URL } from '../auth/constans';
 import axios from 'axios';
-import { Button, Form, Container, Image } from 'react-bootstrap';
+import { Button, Form, Container, Image, Spinner, Modal } from 'react-bootstrap';
 import '../styles/PerfilUsuario.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importar Bootstrap
 
@@ -15,6 +15,10 @@ const PerfilUsuario = () => {
     Avatar_URL: '',
     Avatar_File: null,
   });
+
+  const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   useEffect(() => {
     const authData = JSON.parse(localStorage.getItem('authData'));
@@ -41,6 +45,7 @@ const PerfilUsuario = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Inicia la carga
 
     const { Avatar_File, ...rest } = formData;
 
@@ -63,26 +68,27 @@ const PerfilUsuario = () => {
       });
 
       if (response.status === 200) {
-        console.log('Profile updated successfully');
-        
-        // Update localStorage with new user data
+        // Actualización exitosa
         const updatedUser = response.data.user;
         localStorage.setItem('authData', JSON.stringify({ ...authData, user: updatedUser }));
-        
-        // Update formData state with new data
+
         setFormData({
           ...formData,
           ...updatedUser,
         });
-        
-        // Optionally, handle success (e.g., show a message or redirect)
+
+        setModalMessage('Perfil actualizado correctamente');
+        setShowModal(true);
       } else {
-        console.error('Error updating profile');
-        // Optionally, handle error (e.g., show an error message)
+        setModalMessage('Error al actualizar el perfil');
+        setShowModal(true);
       }
     } catch (error) {
       console.error('Network error:', error);
-      // Optionally, handle network error
+      setModalMessage('Error de red al actualizar el perfil');
+      setShowModal(true);
+    } finally {
+      setLoading(false); // Termina la carga
     }
   };
 
@@ -160,11 +166,24 @@ const PerfilUsuario = () => {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Guardar cambios
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? <Spinner animation="border" size="sm" /> : 'Guardar cambios'}
           </Button>
         </Form>
       </Container>
+
+      {/* Modal de confirmación */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Actualización de perfil</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{modalMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
