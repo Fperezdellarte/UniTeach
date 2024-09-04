@@ -16,11 +16,6 @@ const TestimonialCard = ({ name, quote }) => {
 };
 
 const TestimonialSection = () => {
-  const testimonials = [
-    { name: "Juan Pérez", quote: "Gracias a Uniteach, he mejorado mis habilidades en matemáticas y ahora estoy más confiado para mis exámenes." },
-    { name: "María Gutiérrez", quote: "Encontré a un excelente mentor de programación que me ayudó a entender conceptos difíciles de una manera clara y sencilla." },
-    { name: "Carlos Paez", quote: "Una de las mejores herramientas para el aprendizaje de manera versátil." },
-  ];
 
   return (
     <div className="testimonial-section">

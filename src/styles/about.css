@@ -173,55 +173,6 @@ nav {
   color: #0575ee;
 }
 
-/* Testimonial Section */
-.testimonial-section {
-  width: auto; 
-  height: auto;
-  color: #2e2e2e;
-  background:linear-gradient(transparent,#2c8ffa);
-  padding: 30px 40px;
-  border-radius: 30px;
-
-  
-}
-
-.testimonial-section h2 {
-  color: #000000;
-  margin-bottom: 40px;
-}
-
-.testimonial-card {
-  box-shadow: #2c506d 5px 5px 5px 5px;
-  background:linear-gradient(#3392f8,transparent);
-  margin-bottom: 20px;
-  border:#000000 90px 10px 20px 20px;
-}
-
-.testimonial-card .card-body {
-  color: #000000;
-  padding: 20px;
-}
-
-.testimonial-card .card-title {
-  background:linear-gradient(#3392f8,transparent);
-  color: #000000;
-  font-size: 1.5em;
-  margin-bottom:20px;
-}
-
-.testimonial-card .lead {
-  color: #000000;
-  font-size: 1em;
-}
-
-.testimonial-card .card-footer {
-  font-size: bolder;
-  color: #080808;
-  background-color: #d8d5d5;
-  border-top: none;
-  text-align: center;
-}
-
 /* Contact Section */
 .contact-section {
   background-color: #fffcfc;

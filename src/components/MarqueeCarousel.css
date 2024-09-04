@@ -1,0 +1,73 @@
+/* MarqueeCarousel.css */
+
+.marquee-container {
+  position: relative;
+  width: auto;
+  overflow: hidden;
+  height: auto;
+  padding: 60px;
+}
+
+.marquee-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-row:nth-of-type(2) {
+  animation: marquee-reverse 30s linear infinite;
+}
+
+.marquee-card {
+  flex: 30 20 auto;
+  width: auto;
+  margin: 20px 10px;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  background: #fff; /* Cambia el color según tu diseño */
+}
+
+.marquee-card img {
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.marquee-gradient {
+  position: absolute;
+  top: 0;
+  bottom: 30;
+  width: 20%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
+  pointer-events: none;
+}
+
+.marquee-gradient-left {
+  left: 0;
+  transform: rotateY(180deg);
+}
+
+.marquee-gradient-right {
+  right: 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
