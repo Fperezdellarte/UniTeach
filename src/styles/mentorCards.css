@@ -1,0 +1,38 @@
+.mentor-card {
+    background-color: #0451f6d3; /* Azul más oscuro */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 10em; /* Espacio entre tarjetas */
+  }
+  
+  .mentor-card:hover {
+    transform: scale(1.05); /* Animación de agrandamiento */
+  }
+  
+  .mentor-image {
+    width: 12em; /* Ajusta el tamaño de la imagen */
+    height: 12em; /* Mantén la imagen cuadrada para asegurar que sea redonda */
+    object-fit: cover;
+    border-radius: 50%; /* Hace la imagen redonda */
+    border: 0.001em solid #000000; /* Azul más oscuro para el borde */
+    margin-top: 15px; /* Añade espacio superior a la imagen */
+  }
+  
+  .card-body {
+    padding: 1em;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #151515;
+  }
+  

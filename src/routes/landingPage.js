@@ -40,9 +40,10 @@ const LandingPage = () => {
   }, []);
 
   return (
+    <div>  
+      <Navbar />
     <div className="landing-page">
       <div className="opacidad">
-        <Navbar />
         <CarouselComponent />
         <section>
 
@@ -141,6 +142,7 @@ const LandingPage = () => {
         </section>
 
       </div>
+    </div>
     </div>
   );
 };

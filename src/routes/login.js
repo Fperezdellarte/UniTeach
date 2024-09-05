@@ -11,12 +11,20 @@ export const Login = () => {
     const storedAuthData = localStorage.getItem('authData');
     if (storedAuthData) {
       const parsedAuthData = JSON.parse(storedAuthData);
-      auth.setIsAuthenticated(parsedAuthData.isAuthenticated);
+      auth.setIsAuthenticated(!!parsedAuthData.token); // Check if token exists
+      auth.setUser(parsedAuthData.user || null);
+      auth.setToken(parsedAuthData.token || null);
     }
   }, [auth]);
 
   const handleLoginSuccess = () => {
-    localStorage.setItem('authData', JSON.stringify({ isAuthenticated: true }));
+    const storedAuthData = localStorage.getItem('authData');
+    if (storedAuthData) {
+      const parsedAuthData = JSON.parse(storedAuthData);
+      auth.setIsAuthenticated(!!parsedAuthData.token);
+      auth.setUser(parsedAuthData.user || null);
+      auth.setToken(parsedAuthData.token || null);
+    }
   };
 
   if (auth.isAuthenticated) {

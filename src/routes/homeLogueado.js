@@ -1,79 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from '../components/navbar';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/homeLogueado.css'; 
 import proyecto from '../Assest/proyecto.jpg';
 import personas from '../Assest/personas.jpg';
 import pareja from '../Assest/pareja.jpg';
+import { TablaProximaClase } from '../components/TablaProximaClase';
+import { TablaClasesRecientes } from '../components/TablaClasesRecientes';
+
+
 
 export const HomeLogueado = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  const handleLogout = () => {
-    // Lógica para cerrar sesión
-    console.log('Usuario ha cerrado sesión');
-  }
+ 
 
   return (
     <div>
-      <Navbar onLogout={handleLogout}/>
+      <Navbar/>
       <div className="container">
         <div className="row">
-          <div className="col-md-3">
-            <div className="card bg-light">
-              <div className="card-body">
-                <h4 className="card-title mb-4">Turnos</h4>
-                <div className="card-text">
-                  <p><strong>Algebra:</strong> Lunes y Miércoles: 10:00 - 12:00</p>
-                  <p><strong>Algoritmo:</strong> Martes y Jueves: 14:00 - 16:00</p>
-                </div>
-                <button className="btn btn-primary mt-3">Ver más</button>
-              </div>
-            </div>
+          <div className="col-md-4">
+            <TablaClasesRecientes/>
           </div>
-          <div className="col-md-6">
-            <div className="card bg-light">
-              <div className="card-body">
-                <h4 className="card-title mb-4">Clases Recientes</h4>
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Materia</th>
-                      <th>Hora</th>
-                      <th>Mentor</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Algebra</td>
-                      <td>10:00 - 12:00</td>
-                      <td>Profesor 1</td>
-                    </tr>
-                    <tr>
-                      <td>Algoritmo</td>
-                      <td>14:00 - 16:00</td>
-                      <td>Profesor 2</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3">
-            <div className="card bg-light">
-              <div className="card-body">
-                <h4 className="card-title mb-4">Selecciona una Fecha</h4>
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={(date) => setSelectedDate(date)}
-                  dateFormat="dd/MM/yyyy"
-                  className="form-control"
-                />
-              </div>
-            </div>
+          <div className="col-md-8">
+            <TablaProximaClase/>
           </div>
         </div>
         <div style={blockStyle}>

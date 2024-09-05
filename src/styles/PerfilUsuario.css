@@ -1,0 +1,63 @@
+/* Estilos generales para el formulario de perfil */
+.perfilusuario-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 30rem;
+  margin: auto;
+  padding: 1em;
+  background-color: #f9f9f9;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.perfilusuario-h2 {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Estilos para las etiquetas flotantes */
+.perfilusuario-form-group {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.perfilusuario-form-group input {
+  font-size: 1em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.25em;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.perfilusuario-form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.perfilusuario-form-group label {
+  position: absolute;
+  top: 50%;
+  left: 1em;
+  transform: translateY(-50%);
+  transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+  font-size: 1em;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 0 0.25em;
+  pointer-events: none;
+}
+
+.perfilusuario-form-group input:focus + label,
+.perfilusuario-form-group input:not(:placeholder-shown) + label {
+  top: -1em;
+  font-size: 0.75em;
+  color: #007bff;
+}
