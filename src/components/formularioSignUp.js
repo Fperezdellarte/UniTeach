@@ -122,7 +122,7 @@ export const FormularioSignUp = () => {
     <div className='singup'>
       <div className='singup-form'>
       <div className="col-md-10"> 
-      <div className="card p-4 shadow"> 
+      <div className="card p-4 shadow fw-bold"> 
       <div className='container'>
         <h2>Registro de Usuario</h2>
         <form onSubmit={handleSubmit} className="row g-3">

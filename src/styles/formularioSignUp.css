@@ -27,16 +27,16 @@
 
 .formularioSignup button {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: none;
-  border-radius: 4px;
-  background-color: #ff6600;
+  border-radius: 5rem;
+  background-color: #006eff;
   color: white;
   cursor: pointer;
 }
 
 .formularioSignup button:hover {
-  background-color: #dc5800;
+  background-color: #004aad;
 }
 
 .singup{
@@ -51,5 +51,22 @@
   justify-content:center; 
   align-items:center; 
   margin-left: 4vw;
-  
+}
+
+.singup h2 {
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: 100;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.card.p-4.shadow {
+  align-items: center;
+  opacity: 50px;
+  background: radial-gradient(to right, #000000);
+  padding: 30px;
+  margin: 2rem 0 2rem 0;
+  background-color: rgba(255, 255, 255, 0.699);
+  box-shadow: 0 10px 16px  rgba(0, 0, 0, 0.616)
 }
