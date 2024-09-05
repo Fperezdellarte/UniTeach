@@ -1,50 +1,39 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/footer.css';
-
+import '../styles/footer.css'; // Asegúrate de tener el archivo de estilos.
+import githubIcon from '../Assest/icone-github-grise.png';
+import linkedinIcon from '../Assest/icone-linkedin-ronde-grise.png';
 export const Footer = () => {
   return (
     <div>
-    <footer className="text-center text-lg-start bg-body-tertiary text-muted ">
-      <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <div className="me-5 d-none d-lg-block">
-          <span>Encontranos en todas las redes sociales</span>
-        </div>
-        <div>
-          <a href="#" className="me-4 text-reset">
-            <i className="fab fa-linkedin">LinkedIn</i>
+      <footer className="text-center text-lg-start bg-dark text-white">
+      <section className="social-icons d-flex justify-content-center p-4">
+          {/* Icono de LinkedIn */}
+          <a href="https://www.linkedin.com/in/francisco-javier-perez-dell-arte-1a3062238/" className="me-4">
+            <img src={linkedinIcon} alt="LinkedIn" className="social-icon" />
           </a>
-          <a href="#" className="me-4 text-reset">
-            <i className="fab fa-github">GitHub</i>
+          {/* Icono de GitHub */}
+          <a href="https://www.github.com" className="me-4">
+            <img src={githubIcon} alt="GitHub" className="social-icon" />
           </a>
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <div className="container text-center text-md-start mt-5">
-          <div className="row mt-3">
-            <div className="col-md-6 col-lg-6 col-xl-6 mx-auto mb-4 ">
-              <h6 className="text-uppercase fw-bold mb-4 section-title">
-                <i className="fas fa-gem"></i>Uniteach
-              </h6>
-              <p>
-                Un sitio creado por estudiantes para ayudar a estudiantes a encontrar mentores dentro de su misma Universidad.
-              </p>
+        <section>
+          <div className="container mt-3">
+            <div className="row mt-3">
+              <div className="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
+                <h6 className="text-uppercase fw-bold mb-4 text-center">Contáctanos</h6>
+                <p className="fas fa-envelope  text-center"> Uniteach@gmail.com</p>
+                <p className="fas fa-phone  text-center"> +54 381 4431244 | +54 381 2345678</p>
+              </div>
             </div>
-
-            <div className="col-md-6 col-lg-6 col-xl-4 mx-auto mb-md-0 mb-4">
-              <h6 className="text-uppercase fw-bold mb-4 section-title">Contactanos</h6>
-              <p><i className="fas fa-home me-3"></i> Uniteach@gmail.com</p>
-              <p><i className="fas fa-phone me-3"></i> +54 381 4431244     +54 381 2345678</p>
-            </div>  
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="text-center p-4 copyright">
-        © 2024 Copyright: <a className="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-      </div>
-    </footer>
+        <div className="text-center p-4 bg-darker-blue text-white">
+          © 2024 Copyright: <a className="text-reset fw-bold" href="/home">UniTeach</a>
+        </div>
+      </footer>
     </div>
   );
 };
