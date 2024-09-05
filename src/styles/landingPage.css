@@ -133,6 +133,15 @@
   max-width: 100%; /* Evita que las tarjetas crezcan demasiado */
   margin: 10px;
 }
+.uni-teach-card-group {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.uni-teach-card-group.fade-out {
+  opacity: 0;
+}
+
 
 
 

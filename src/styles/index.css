@@ -51,7 +51,9 @@ nav {
 .navbar-links-container a {
   margin-right: 3rem;
   text-decoration: none;
+  display: inline-block;
   color: rgb(255, 255, 255);
+  padding: 10px 8px;
   font-size: 1.1rem;
   font-weight: 600;
 }
