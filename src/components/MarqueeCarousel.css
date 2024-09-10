@@ -13,27 +13,26 @@
   flex-direction: row;
   align-items: center;
   white-space: nowrap;
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .marquee-row:nth-of-type(2) {
-  animation: marquee-reverse 30s linear infinite;
+  animation: marquee-reverse 40s linear infinite;
 }
 
 .marquee-card {
   flex: 30 20 auto;
   width: auto;
-  margin: 20px 10px;
+  margin: 20px 15px;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 20px;
   box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.2);
   text-align: left;
   background: #fff; /* Cambia el color según tu diseño */
 }
 
 .marquee-card img {
-  border-radius: 50%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .marquee-gradient {

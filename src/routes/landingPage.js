@@ -45,56 +45,7 @@ const LandingPage = () => {
     <div className="landing-page">
       <div className="opacidad">
         <CarouselComponent />
-        <section>
-
-          <div className="uni-teach-card-group">
-            {/* Tarjeta UNSTA */}
-            <div className="card shadow-drop-center">
-              <img
-                src="https://www.unsta.edu.ar/wp-content/uploads/2023/08/unsta-campus-yb.png"
-                alt="UNSTA"
-                className="card-img-top"
-              />
-              <div className="card__content">
-                <p className="card__title">Conexión</p>
-                <p className="card__description">
-                  De esta manera conectamos las Universidades de Tucumán.
-                </p>
-              </div>
-            </div>
-
-            {/* Tarjeta UNT */}
-            <div className="card shadow-drop-center">
-              <img
-                src="https://media.licdn.com/dms/image/C4E1BAQEyl2j7GtRoYg/company-background_10000/0/1593164654141/universidad_nacional_de_tucum_n_cover?e=2147483647&v=beta&t=TVTosgL1vAIqpxNDpy6-AgCfflm6ESs8ZBiyW3g9jrM"
-                alt="UNT"
-                className="card-img-top"
-              />
-              <div className="card__content">
-                <p className="card__title">Innovación</p>
-                <p className="card__description">
-                  Una manera simple y rápida de agendar tus clases con tus mentores favoritos.
-                </p>
-              </div>
-            </div>
-
-            {/* Tarjeta UTN */}
-            <div className="card shadow-drop-center">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Fachada_de_la_UTN_-_Facultad_Regional_Tucum%C3%A1n.jpg/1200px-Fachada_de_la_UTN_-_Facultad_Regional_Tucum%C3%A1n.jpg"
-                alt="UTN"
-                className="card-img-top"
-              />
-              <div className="card__content">
-                <p className="card__title">Simple</p>
-                <p className="card__description">
-                  Tan simple como un solo clic, tienes a tu alcance todo el material disponible, para sacarte esa materia fundadora.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
+     
         {/* Sección de Testimonios con Marquee */}
         <MarqueeCarousel />
       

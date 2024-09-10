@@ -8,9 +8,3 @@ body {
 #root {
   flex: 0; /* Asegura que el contenido principal ocupe todo el espacio disponible */
 }
-
-/* Contenido */
-.contenedor {
-  padding: 100px 20px;
-  margin-top: auto;
-}

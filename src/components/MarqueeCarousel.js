@@ -3,11 +3,11 @@ import './MarqueeCarousel.css';
 
 // Datos de ejemplo para las tarjetas
 const reviews = [
-  { img: "https://avatar.vercel.sh/jack", name: "Carlos Perez", username: "@charlyP", body: "Increíble experiencia, el mejor sitio para aprender." },
+  { img: "https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg", name: "Carlos Perez", username: "@charlyP", body: "Increíble experiencia, el mejor sitio para aprender." },
 
   { img: "https://avatar.vercel.sh/jill", name: "Mario Bravo", username: "@maritoBa", body: "Una herramienta valiosa para todos los estudiantes." },
 
-  { img: "https://avatar.vercel.sh/john", name: "Lucas Martinez", username: "@Lucas20", body: "Los mentores son amables y accesibles." },
+  { img: "https://covalto.com/static/78498ccda70933a5f1e3edc3e40d3cbe/34aca/Hero_Mobile_Cuenta_Personas_V1_1_8046e424ea.webp", name: "Lucas Martinez", username: "@Lucas20", body: "Los mentores son amables y accesibles." },
 
   { img: "https://avatar.vercel.sh/jane", name: "Adrian Martinez", username: "@AMartinez", body: "La plataforma me ayudó a mejorar mis habilidades rápidamente." },
 
@@ -15,7 +15,7 @@ const reviews = [
  
   { img: "https://avatar.vercel.sh/james", name: "James", username: "@james", body: "Muy fácil de usar y con muchos recursos disponibles." },
   
-  { img: "https://avatar.vercel.sh/anna", name: "Anna", username: "@anna", body: "Un gran lugar para aprender y crecer en mi carrera." },
+  { img: "https://www.shutterstock.com/image-photo/happy-pretty-gen-z-latin-260nw-2438190523.jpg", name: "Anna", username: "@anna", body: "Un gran lugar para aprender y crecer en mi carrera." },
   
   { img: "https://avatar.vercel.sh/mike", name: "Mike", username: "@mike", body: "Recomiendo esta plataforma a todos mis amigos y colegas." },
   
