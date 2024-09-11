@@ -37,7 +37,7 @@ const PerfilMentor = () => {
       />
       <h2>{mentor.MentorName}</h2>
       <p><strong>Materia:</strong> {mentor.SubjectName}</p>
-      <p><strong>Universidad:</strong> {mentor.MentorUniversity}</p>
+      <p><strong></strong> {mentor.MentorUniversity}</p>
       <p><strong>Rating:</strong> {mentor.Opinion}</p>
       {/* Agrega más detalles según sea necesario */}
     </div>

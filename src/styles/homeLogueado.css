@@ -24,19 +24,16 @@
   object-fit: cover;
 }
 
-/* Estilos para los contenedores de mentores recientes */
-.mentores-recientes {
-  width: 20em;
-  height: 20em;
-  margin-bottom: 1em;
-}
-
 /* Contenedor para los mentores recientes */
 .MentoresRecientes {
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-wrap: wrap; /* Permite que los elementos se envuelvan */
-  justify-content: space-between; /* Distribuye el espacio de manera equitativa */
-  gap: 20px; /* Espacio entre los elementos */
+  text-decoration: underline;
+  font-family: sans-serif;
+  font-weight:lighter;
+  justify-content:center; /* Distribuye el espacio de manera equitativa */
+  gap: 10px; /* Espacio entre los elementos */
 }
 
 /* Ajustes para asegurar que las imágenes tengan el mismo tamaño */
