@@ -16,6 +16,7 @@ import { ClassesProvider } from './contexts/classesContext'; // Importa el Class
 import ProtectedRoute from './routes/protectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../src/components/footer';
+import Clases from '../src/routes/clases'
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/perfilMentor/:id",
         element: <PerfilMentor/>
+      },
+      {
+        path: "/clases",
+        element: <Clases/>
       }
     ]
   }

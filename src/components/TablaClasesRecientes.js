@@ -88,7 +88,7 @@ export const TablaClasesRecientes = () => {
         }}
       />
       <div className="button-container">
-        <button className="blue-button">Ver Más</button>
+      <a className="text-reset fw-bold" href="/clases"><button className="blue-button">Ver Más</button> </a>
       </div>
     </div>
   );
