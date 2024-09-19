@@ -100,7 +100,7 @@ export const TablaProximaClase = () => {
       {loading ? (
         <div className="loading-spinner">Cargando...</div>
       ) : isAuthenticated ? (
-        <DataTable
+        <DataTable className='mb-3'
           columns={columns}
           data={classesData.upcoming}
           noDataComponent="No tienes próximas clases"

@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { ClassesContext } from '../contexts/classesContext';
+import { Modal, Button } from 'react-bootstrap'; 
 import '../styles/TablaClasesRecientes.css';
 
 const formatDate = (isoDate) => {
@@ -18,6 +19,10 @@ const formatDateTime = (date, hour) => {
 
 export const TablaClasesRecientes = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
+  const [showModal, setShowModal] = useState(false); // Estado para manejar el modal
+
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
 
   const columns = [
     {
@@ -47,6 +52,14 @@ export const TablaClasesRecientes = () => {
   if (error) {
     return <div>{error}</div>;
   }
+
+  const handleViewMoreClick = () => {
+    if (classesData.recent.length === 0) {
+      handleShowModal();
+    } else {
+      
+    }
+  };
 
   return (
     <div className="table-container">
@@ -88,8 +101,25 @@ export const TablaClasesRecientes = () => {
         }}
       />
       <div className="button-container">
-      <a className="text-reset fw-bold" href="/clases"><button className="blue-button">Ver Más</button> </a>
+        <button className="blue-button mb-2" onClick={handleViewMoreClick}>Ver Más</button>
       </div>
+
+      {/* Modal */}
+      <Modal className='modal-clases'  show={showModal}
+        onHide={handleCloseModal}
+        animation={true}
+        centered 
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>No hay clases recientes</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Vuelva mas tarde.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
