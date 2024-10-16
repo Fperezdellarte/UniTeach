@@ -55,9 +55,15 @@ export const TablaClasesRecientes = () => {
 
   const handleViewMoreClick = () => {
     if (classesData.recent.length === 0) {
-      handleShowModal();
+      setShowModal(true);
+      // Redirigir a /clases si no se abre el modal
+      setTimeout(() => {
+        if (!showModal) {
+          window.location.href = '/clases';
+        }
+      }, 500); // Espera medio segundo antes de redirigir si el modal no se muestra
     } else {
-      
+      window.location.href = '/clases'; // Redirige directamente si hay clases recientes
     }
   };
 
