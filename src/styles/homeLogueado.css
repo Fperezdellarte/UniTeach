@@ -10,30 +10,27 @@
   color: #fffdfd;
 }
 
-/* Estilos para los botones */
-.btn {
-  background-color: #007bff;
-  color: #fff;
-}
+
 
 /* Estilos para las imágenes de los mentores */
 .mentor-img {
-  width: 20em;
-  height: 20em;
-  padding: 3em;
-  object-fit: cover;
+  width: 18em;
+  height: 18em;
+  padding: 4em;
+  object-fit:scale-down;
 }
 
 /* Contenedor para los mentores recientes */
 .MentoresRecientes {
   background-color: rgb(255, 255, 255);
   display: flex;
+  padding-top: 5%;
+  padding-bottom: 3%;
   flex-wrap: wrap; /* Permite que los elementos se envuelvan */
-  text-decoration: underline;
-  font-family: sans-serif;
-  font-weight:lighter;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight:bolder;
   justify-content:center; /* Distribuye el espacio de manera equitativa */
-  gap: 10px; /* Espacio entre los elementos */
+  gap: 30px; /* Espacio entre los elementos */
 }
 
 /* Ajustes para asegurar que las imágenes tengan el mismo tamaño */

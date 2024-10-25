@@ -45,7 +45,9 @@ const LandingPage = () => {
     <div className="landing-page">
       <div className="opacidad">
         <CarouselComponent />
-     
+     <div>
+   
+     </div>
         {/* Sección de Testimonios con Marquee */}
         <MarqueeCarousel />
       

@@ -9,10 +9,9 @@ import emilia from '../Assest/emilia.jpg';
 import carliito from '../Assest/carliito.jpg';
 import { TablaProximaClase } from '../components/TablaProximaClase';
 import { TablaClasesRecientes } from '../components/TablaClasesRecientes';
-import MentorCard from '../components/mentorCard'; // Asegúrate que la ruta sea correcta
+import MentorCard from '../components/mentorCard';
 
 export const HomeLogueado = () => {
-  // Ejemplo de mentores recientes
   const mentoresRecientes = [
     {
       idUser: 1,
@@ -37,7 +36,8 @@ export const HomeLogueado = () => {
       SubjectName: "Fisica 3",
       MentorUniversity: "Tecnologica de Tucuman",
       profileImageUrl: personas,
-    },{
+    },
+    {
       idUser: 4,
       MentorName: "Gustavo Ibañez",
       Opinion: 5.0,
@@ -91,8 +91,7 @@ export const HomeLogueado = () => {
 }
 
 const blockStyle = {
-  border: '1px solid #ccc',
-  padding: '2em',
+  border: '1px #ccc',
   margin: '2em',
 };
 
