@@ -1,6 +1,6 @@
 :root {
   --primary-color: #007bff;
-  --secondary-color: #296075;
+  --secondary-color: #2fb5eb;
   --text-color: #151515;
   --background-color: #f7f7f7;
 }
@@ -14,6 +14,12 @@
   margin-bottom: 2em;
   box-sizing: border-box;
 }
+
+.mentor-info{
+  text-decoration: none !important;
+}
+
+
 
 .mentor-card:hover {
   transform: scale(1.05);

@@ -48,7 +48,7 @@ const MentorCard = ({ mentor, onClick }) => {
           className="mentor-image"
         />
         <div className="card-body">
-          <MentorInfo mentor={mentor} />
+          <MentorInfo className="mentor-info" mentor= {mentor} />
           <div className="mb-2">{renderStars(mentor.Opinion)}</div>
           <div className="d-flex justify-content-between">
             <button className="btn custom-btn">Contactar</button>
@@ -61,3 +61,5 @@ const MentorCard = ({ mentor, onClick }) => {
 };
 
 export default MentorCard;
+
+
