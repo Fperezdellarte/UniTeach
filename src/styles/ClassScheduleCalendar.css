@@ -1,0 +1,143 @@
+/* Contenedor principal para el calendario */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo general del calendario */
+.react-calendar {
+  width: 100%;
+  max-width: 450px;
+  background: #fff;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los días del calendario */
+.react-calendar__tile {
+  background: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.react-calendar__tile:enabled:hover, 
+.react-calendar__tile:enabled:focus {
+  background: #eaf6ff;
+  border-radius: 8px;
+  color: #007bff;
+}
+
+/* Días resaltados que tienen clases */
+.react-calendar__tile.highlighted {
+  background: #ffeb3b;
+  color: #000;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* Días deshabilitados (sin clases) */
+.react-calendar__tile.disabled {
+  color: #c0c0c0;
+  background: #f0f0f0;
+  pointer-events: none;
+}
+
+/* Día seleccionado */
+.react-calendar__tile--active {
+  background: #007bff;
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Popup flotante para los horarios */
+.schedule-popup {
+  position: absolute;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lista de horarios */
+.schedule-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.schedule-item {
+  padding: 8px;
+  margin: 5px 0;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.schedule-item:hover, 
+.schedule-item.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Botón de inscripción */
+.enroll-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enroll-btn:hover {
+  background-color: #218838;
+}
+
+.enroll-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Botón de cerrar */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #0056b3;
+}
