@@ -35,5 +35,9 @@
     animation: zoomIn 0.15s ease-in-out;
   }
   
+  .no-clases{
+    display: flex;
+    justify-content: center;
+  }
 
   

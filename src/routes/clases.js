@@ -1,73 +1,86 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import '../styles/clases.css'; // Ajusta la ruta según tu estructura de archivos
-import { API_URL } from '../auth/constans';
+import React, { useContext } from 'react';
+import DataTable from 'react-data-table-component';
+import { ClassesContext } from '../contexts/classesContext';
+import '../styles/TablaClasesRecientes.css';
 
-  
 const Clases = () => {
-  const [clases, setClases] = useState([]);
-  const [loading, setLoading] = useState(true); // Para manejar el estado de carga
+  const { classesData, error, loading } = useContext(ClassesContext);
 
-  useEffect(() => {
-    // Obtiene las clases desde la base de datos a través de la API
-    const fetchClasesData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/clases`); // Asegúrate de que la URL sea correcta
-        setClases(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching clases data:", error);
-        setLoading(false); // Termina el estado de carga aunque haya error
-      }
-    };
+  console.log(classesData);
 
-    fetchClasesData();
-  }, []);
+  const columns = [
+    {
+      name: "Materia",
+      selector: row => row.Materia,
+      sortable: true,
+      width: '25%'
+    },
+    {
+      name: "Fecha y Hora",
+      selector: row => row.hour,
+      sortable: true,
+      width: '45%'
+    },
+    {
+      name: "Aula",
+      selector: row => row.Place,
+      sortable: true,
+      width: '20%'
+    }
+  ];
 
   if (loading) {
-    return <p>Cargando clases...</p>; // Muestra un mensaje mientras se cargan los datos
+    return <div className="loading-spinner">Cargando...</div>;
   }
 
-  if (!clases.length) {
-    return <p>No hay clases disponibles.</p>;
+  if (error) {
+    return <div>{error}</div>;
   }
-  const cancelarClase = async (id) => {
-    try {
-      await axios.delete(`${API_URL}/clases/${id}`); // Ajusta la URL según tu API
-      // Actualiza el estado eliminando la clase cancelada
-      setClases(clases.filter(clase => clase.id !== id));
-    } catch (error) {
-      console.error("Error cancelando la clase:", error);
-    }
-  };
-  
+
+  // Verificar si los datos recientes están vacíos
+  if (classesData.recent.length === 0) {
+    return <div>No tienes clases disponibles</div>;
+  }
+
   return (
-    <div>
-      <h1>Listado de Clases</h1>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Nombre del Mentor</th>
-            <th>Materia</th>
-            <th>Fecha y Hora</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clases.map((clase) => (
-            <tr key={clase.id}>
-              <td>{clase.mentorName}</td>
-              <td>{clase.subjectName}</td>
-              <td>{new Date(clase.date).toLocaleDateString()}</td>
-              <td>
-                <button className="btn btn-danger" onClick={() => cancelarClase(clase.id)}>
-                  Cancelar Clase
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="table-container">
+      <h2 className="table-title">Clases</h2>
+      <DataTable
+        columns={columns}
+        data={classesData.recent}
+        noDataComponent="No tienes clases disponibles"
+        customStyles={{
+          rows: {
+            style: {
+              padding: '12px',
+              borderBottom: '1px solid #ddd',
+            },
+          },
+          headCells: {
+            style: {
+              fontWeight: 'bold',
+              textAlign: 'left',
+              backgroundColor: '#fff',
+              color: '#000',
+              padding: '16px',
+            },
+          },
+          cells: {
+            style: {
+              padding: '12px',
+            },
+          },
+          pagination: {
+            style: {
+              backgroundColor: '#f8f8f8',
+              padding: '12px',
+              borderTop: '1px solid #ddd',
+              display: 'flex',
+              justifyContent: 'center',
+            },
+          },
+        }}
+      />
     </div>
   );
 };
