@@ -1,4 +1,3 @@
-// src/components/Buscador.js
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -31,11 +30,10 @@ export const useBuscador = () => {
         },
       });
 
-      // Suponiendo que response.data es un array de mentores directamente
       const mentors = response.data;
+      sessionStorage.setItem('searchTerm', searchTerm);
 
-      // Redirigir a la página de resultados con los datos
-      navigate('/Results', { state: { results: mentors } });
+      navigate('/Results', { state: { results: mentors, } });
     } catch (error) {
       setError('Error al buscar mentores');
     } finally {
