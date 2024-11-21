@@ -71,7 +71,7 @@ export const Navbar = () => {
         {auth.isAuthenticated && (
           <>
             <div className="navbar-search-container">
-              <InputBase
+            <InputBase
                 placeholder={searchError ? "Busca Una Materia" : "Buscar materia..."}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
