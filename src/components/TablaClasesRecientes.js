@@ -105,12 +105,19 @@ export const TablaClasesRecientes = () => {
       )}
 
       <div className="button-container">
-        <Button
-                as={Link}
-                to="/clases"
-                className="blue-button mb-4"
-                onClick={handleViewMoreClick}
-              >Ver mas</Button>
+      {classesData.recent.length === 0 && (
+        <Button className="blue-button mb-4" onClick={handleViewMoreClick}>
+          Ver mas
+        </Button>
+      )}
+      {classesData.recent.length != 0 && (
+        <Button as={Link}
+        to="/clases"
+        className="blue-button mb-4"
+        onClick={handleViewMoreClick}
+      >Ver mas
+        </Button>
+      )}
       </div>
 
       {/* Modal */}

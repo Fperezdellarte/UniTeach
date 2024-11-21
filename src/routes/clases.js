@@ -1,31 +1,51 @@
 import React, { useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import { ClassesContext } from '../contexts/classesContext';
-import '../styles/TablaClasesRecientes.css';
+import '../styles/clases.css';
+import { Navbar } from '../components/navbar';
 
 const Clases = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
 
   console.log(classesData);
+  const handleRateClass = (classData) => {
+  
+    
+  };
 
   const columns = [
     {
       name: "Materia",
       selector: row => row.Materia,
       sortable: true,
-      width: '25%'
+      width: '30%'
     },
     {
       name: "Fecha y Hora",
       selector: row => row.hour,
       sortable: true,
-      width: '45%'
+      width: '35%'
     },
     {
       name: "Aula",
       selector: row => row.Place,
       sortable: true,
       width: '20%'
+    },
+    {
+      name: "Acciones",
+      width: '15%',
+      cell: (row) => (
+        <button 
+          onClick={() => handleRateClass(row)} 
+          className="rate-button"
+        >
+          Calificar
+        </button>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true, 
+      button: true,
     }
   ];
 
@@ -43,8 +63,10 @@ const Clases = () => {
   }
 
   return (
-    <div className="table-container">
-      <h2 className="table-title">Clases</h2>
+    <div className=''>
+      <Navbar/>
+    <div className="table-container container-recientes">
+      <h2 className="table-clases-recientes">Clases Recientes</h2>
       <DataTable
         columns={columns}
         data={classesData.recent}
@@ -59,15 +81,19 @@ const Clases = () => {
           headCells: {
             style: {
               fontWeight: 'bold',
-              textAlign: 'left',
+              textAlign: 'center',
               backgroundColor: '#fff',
-              color: '#000',
-              padding: '16px',
+              color: '#25619c',
+              padding: '20px',
+              fontSize:'x-large',
             },
           },
           cells: {
             style: {
               padding: '12px',
+              fontSize:'large',
+              marginLeft: '3px',
+              fontWeight: 'bold',
             },
           },
           pagination: {
@@ -81,6 +107,7 @@ const Clases = () => {
           },
         }}
       />
+    </div>
     </div>
   );
 };

@@ -1,0 +1,32 @@
+.table-clases-recientes{
+    padding:2rem ;
+    color: #ffffff;  
+    text-align: center; 
+    font-size: 2rem; 
+    background-color: #1b80e6; 
+    margin-top: 0.5rem;
+}
+.container-recientes{
+    margin-top: 3rem;
+    margin-bottom: 12rem;
+    background-color: #1b80e6; 
+
+}
+.rate-button {
+    text-decoration: none;
+    background-color: rgb(255, 230, 0); /* Amarillo */
+    border: none;
+    border-radius: 5%;
+    padding: 1rem;
+    color: black; /* Color inicial del texto */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Incluye animación para el tamaño */
+  }
+  
+  .rate-button:hover {
+    background-color: rgb(200, 170, 0); /* Amarillo más oscuro */
+    color: white; /* Cambia el texto a blanco */
+    transform: scale(1.1); /* Aumenta el tamaño un 10% */
+  }
+  
