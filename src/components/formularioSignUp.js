@@ -118,170 +118,170 @@
       }
     };
 
-    return (
-      <div className='singup'>
-        <div className='singup-form'>
-        <div className="col-md-10"> 
-        <div className="card p-4 shadow"> 
-        <div className='container'>
-          <h2>Registro de Usuario</h2>
-          <form onSubmit={handleSubmit} className="row g-3">
-            <div className="col-md-6">
-              <div className="mb-3">
-                <label htmlFor="username" className="form-label">Nombre de usuario:</label>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  id="username" 
-                  value={Username} 
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                    setUsernameError(''); // Clear error on change
-                  }} 
-                  placeholder="Ej: Juanceto01"
-                  required 
-                />
-                {usernameError && <span className="text-danger">{usernameError}</span>}
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="password" className="form-label">Contraseña:</label>
-                <input 
-                  type="password" 
-                  className="form-control" 
-                  id="password" 
-                  value={Password} 
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setPasswordError(''); // Clear error on change
-                  }} 
-                  placeholder="Min 1 mayus, 8 caracteres y max 25"
-                  required 
-                />
-                {passwordError && <span className="text-danger">{passwordError}</span>}
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">Nombre:</label>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  id="name" 
-                  value={Name} 
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    setNameError(''); // Clear error on change
-                  }} 
-                  placeholder="Ej. Alvaro Reina"
-                  required 
-                />
-                {nameError && <span className="text-danger">{nameError}</span>}
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="dni" className="form-label">DNI:</label>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  id="dni" 
-                  value={DNI} 
-                  onChange={(e) => {
-                    setDni(e.target.value);
-                    setDniError(''); // Clear error on change
-                  }} 
-                  placeholder="Max 8 digitos"
-                  required 
-                />
-                {dniError && <span className="text-danger">{dniError}</span>}
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="legajo" className="form-label">Legajo:</label>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  id="legajo" 
-                  value={Legajo} 
-                  onChange={(e) => {
-                    setLegajo(e.target.value);
-                    setLegajoError(''); // Clear error on change
-                  }} 
-                  placeholder="Max 8 caracteres"
-                  required 
-                />
-                {legajoError && <span className="text-danger">{legajoError}</span>}
-              </div>
+  return (
+    <div className='singup'>
+      <div className='singup-form'>
+      <div className="col-md-10"> 
+      <div className="card p-4 shadow"> 
+      <div className='container'>
+        <h2>Registro de Usuario</h2>
+        <form onSubmit={handleSubmit} className="row g-3">
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">Nombre de usuario:</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="username" 
+                value={Username} 
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setUsernameError(''); // Clear error on change
+                }} 
+                placeholder="Ej: Juanceto01"
+                required 
+              />
+              {usernameError && <span className="text-danger">{usernameError}</span>}
             </div>
 
-            <div className="col-md-6">
-              <div className="mb-3">
-                <label htmlFor="userType" className="form-label">Tipo de Usuario:</label>
-                <select 
-                  className="form-select" 
-                  id="userType" 
-                  value={TypeOfUser} 
-                  onChange={(e) => setUserType(e.target.value)} 
-                  required
-                >
-                  <option value="">Elige una opcion</option>
-                  <option value="ALUMNO">Alumno</option>
-                  <option value="MENTOR">Mentor</option>
-                  <option value="AMBOS">Ambos</option>
-                </select>
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="mail" className="form-label">Correo Electrónico:</label>
-                <input 
-                  type="email" 
-                  className="form-control" 
-                  id="mail" 
-                  value={Mail} 
-                  onChange={(e) => setMail(e.target.value)} 
-                  placeholder="Ej. example@gmail.com"
-                  required 
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="phone" className="form-label">Teléfono:</label>
-                <input 
-                  type="tel" 
-                  className="form-control" 
-                  id="phone" 
-                  value={Phone} 
-                  onChange={(e) => {
-                    setPhone(e.target.value);
-                    setPhoneError(''); // Clear error on change
-                  }} 
-                  placeholder="Ej. 3819877663"
-                />
-                {phoneError && <span className="text-danger">{phoneError}</span>}
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="university" className="form-label">Universidad:</label>
-                <select 
-                  className="form-select" 
-                  id="university" 
-                  value={University} 
-                  onChange={(e) => setUniversity(e.target.value)} 
-                  required
-                >
-                  <option value="">Elige una opcion</option>
-                  <option value="UNT">UNT</option>
-                  <option value="UNSTA">UNSTA</option>
-                  <option value="UTN">UTN</option>
-                </select>
-              </div>
-
-              <button type="submit" className="btn btn-primary mt-4">Registrarse</button>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">Contraseña:</label>
+              <input 
+                type="password" 
+                className="form-control" 
+                id="password" 
+                value={Password} 
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setPasswordError(''); // Clear error on change
+                }} 
+                placeholder="Min 1 mayus, 8 caracteres y max 25"
+                required 
+              />
+              {passwordError && <span className="text-danger">{passwordError}</span>}
             </div>
-          </form>
-        </div>
-        </div>
+
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">Nombre:</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="name" 
+                value={Name} 
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setNameError(''); // Clear error on change
+                }} 
+                placeholder="Ej. Alvaro Reina"
+                required 
+              />
+              {nameError && <span className="text-danger">{nameError}</span>}
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="dni" className="form-label">DNI:</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="dni" 
+                value={DNI} 
+                onChange={(e) => {
+                  setDni(e.target.value);
+                  setDniError(''); // Clear error on change
+                }} 
+                placeholder="Max 8 digitos"
+                required 
+              />
+              {dniError && <span className="text-danger">{dniError}</span>}
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="legajo" className="form-label">Legajo:</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="legajo" 
+                value={Legajo} 
+                onChange={(e) => {
+                  setLegajo(e.target.value);
+                  setLegajoError(''); // Clear error on change
+                }} 
+                placeholder="Max 8 caracteres"
+                required 
+              />
+              {legajoError && <span className="text-danger">{legajoError}</span>}
+            </div>
+          </div>
+
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="userType" className="form-label">Tipo de Usuario:</label>
+              <select 
+                className="form-select" 
+                id="userType" 
+                value={TypeOfUser} 
+                onChange={(e) => setUserType(e.target.value)} 
+                required
+              >
+                <option value="">Elige una opcion</option>
+                <option value="ALUMNO">Alumno</option>
+                <option value="MENTOR">Mentor</option>
+                <option value="AMBOS">Ambos</option>
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="mail" className="form-label">Correo Electrónico:</label>
+              <input 
+                type="email" 
+                className="form-control" 
+                id="mail" 
+                value={Mail} 
+                onChange={(e) => setMail(e.target.value)} 
+                placeholder="Ej. example@gmail.com"
+                required 
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="phone" className="form-label">Teléfono:</label>
+              <input 
+                type="tel" 
+                className="form-control" 
+                id="phone" 
+                value={Phone} 
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                  setPhoneError(''); // Clear error on change
+                }} 
+                placeholder="Ej. 3819877663"
+              />
+              {phoneError && <span className="text-danger">{phoneError}</span>}
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="university" className="form-label">Universidad:</label>
+              <select 
+                className="form-select" 
+                id="university" 
+                value={University} 
+                onChange={(e) => setUniversity(e.target.value)} 
+                required
+              >
+                <option value="">Elige una opcion</option>
+                <option value="UNT">UNT</option>
+                <option value="UNSTA">UNSTA</option>
+                <option value="UTN">UTN</option>
+              </select>
+            </div>
+
+            <button type="submit" className="btn btn-primary mt-4">Registrarse</button>
+          </div>
+        </form>
       </div>
       </div>
-      </div>
-    );
-  };
+    </div>
+    </div>
+    </div>
+  );
+};

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/navbar';
 import { API_URL } from '../auth/constans';
 import axios from 'axios';
-import { Button, Form, Container, Image } from 'react-bootstrap';
+import { Button, Form, Container, Image, Alert, Spinner, Modal, Tabs, Tab } from 'react-bootstrap';
+import { FaUserCircle, FaEnvelope, FaPhone, FaCamera, FaUserEdit, FaLock } from 'react-icons/fa';
 import '../styles/PerfilUsuario.css';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importar Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const PerfilUsuario = () => {
   const [formData, setFormData] = useState({
@@ -15,16 +16,14 @@ const PerfilUsuario = () => {
     Avatar_URL: '',
     Avatar_File: null,
   });
-
-
-  const [nameError, setNameError] = useState('');
-  const [usernameError, setUsernameError] = useState('');
-  const [mailError, setMailError] = useState('');
-  const [phoneError, setPhoneError] = useState('');
+  const [loadingSave, setLoadingSave] = useState(false);
+  const [loadingPasswordReset, setLoadingPasswordReset] = useState(false);
+  const [passwordResetMessage, setPasswordResetMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   useEffect(() => {
     const authData = JSON.parse(localStorage.getItem('authData'));
-
     if (authData && authData.user) {
       setFormData({
         Name: authData.user.Name || '',
@@ -45,182 +44,118 @@ const PerfilUsuario = () => {
     }
   };
 
-  const validateForm = () => {
-    let isValid = true;
-
-    // Validar nombre
-    const nameRegex = /^[a-z A-Z]+$/;
-    if (!nameRegex.test(formData.Name)) {
-      setNameError('El nombre no puede contener números ni caracteres especiales.');
-      isValid = false;
-    } else {
-      setNameError('');
-    }
-
-    // Validar nombre de usuario
-    const usernameRegex = /^[a-zA-Z0-9]+$/;
-    if (!usernameRegex.test(formData.Username)) {
-      setUsernameError('El nombre de usuario no puede contener caracteres especiales.');
-      isValid = false;
-    } else {
-      setUsernameError('');
-    }
-
-    // Validar correo electrónico
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailRegex.test(formData.Mail)) {
-      setMailError('El correo electrónico no es válido.');
-      isValid = false;
-    } else {
-      setMailError('');
-    }
-
-    // Validar teléfono
-    const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(formData.Phone)) {
-      setPhoneError('El número debe contener solo números, con 10 dígitos.');
-      isValid = false;
-    } else {
-      setPhoneError('');
-    }
-
-    return isValid;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
+    setLoadingSave(true);
     const { Avatar_File, ...rest } = formData;
-
     const formDataToSend = new FormData();
     formDataToSend.append('Name', rest.Name);
     formDataToSend.append('Username', rest.Username);
     formDataToSend.append('Mail', rest.Mail);
     formDataToSend.append('Phone', rest.Phone);
     if (Avatar_File) {
-      formDataToSend.append('file', Avatar_File); // Append the file with the key 'file'
+      formDataToSend.append('file', Avatar_File);
     }
 
     try {
       const authData = JSON.parse(localStorage.getItem('authData'));
       const response = await axios.patch(`${API_URL}/users/${authData.user.idUser}`, formDataToSend, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Important for file uploads
-          'Authorization': `Bearer ${authData.token}` // Include token if needed
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${authData.token}`
         }
       });
-
       if (response.status === 200) {
-        console.log('Profile updated successfully');
-        
         const updatedUser = response.data.user;
         localStorage.setItem('authData', JSON.stringify({ ...authData, user: updatedUser }));
-        
         setFormData({
           ...formData,
           ...updatedUser,
         });
-        
+        setModalMessage('Perfil actualizado correctamente');
       } else {
-        console.error('Error updating profile');
+        setModalMessage('Error al actualizar el perfil');
       }
     } catch (error) {
-      console.error('Network error:', error);
+      setModalMessage('Error de red al actualizar el perfil');
+    } finally {
+      setShowModal(true);
+      setLoadingSave(false);
     }
   };
-   
+
+  const handlePasswordReset = async () => {
+    setLoadingPasswordReset(true);
+    try {
+      const authData = JSON.parse(localStorage.getItem('authData'));
+      await axios.post(`${API_URL}/password-reset`, { email: formData.Mail }, {
+        headers: { 'Authorization': `Bearer ${authData.token}` }
+      });
+      setPasswordResetMessage('Hemos enviado un enlace a tu correo para cambiar la contraseña.');
+    } catch (error) {
+      setPasswordResetMessage('Ocurrió un error al enviar el enlace. Inténtalo de nuevo.');
+    } finally {
+      setLoadingPasswordReset(false);
+    }
+  };
 
   return (
     <div>
       <Navbar />
-      <Container className="my-4">
-        <h2 className="perfilusuario-h2 mb-4">Perfil de Usuario</h2>
-        <Form onSubmit={handleSubmit} className="perfilusuario-profile-form">
-          <Form.Group controlId="formName" className="perfilusuario-form-group">
-            <Form.Control
-              type="text"
-              name="Name"
-              value={formData.Name}
-              onChange={handleChange}
-              placeholder=" " // Placeholder vacío para el efecto de etiqueta flotante
-              className={formData.Name ? 'filled' : ''}
-              required
-            />
-            <Form.Label className={formData.Name ? 'filled' : ''}>Nombre</Form.Label>
-            {nameError && <span className="text-danger">{nameError}</span>}
-          </Form.Group>
+      <Container className="perfilusuario-container">
+        <h2 className="perfilusuario-title">Perfil de Usuario</h2>
+        <Tabs defaultActiveKey="profile" id="perfil-tab" className="perfilusuario-tabs">
+          <Tab eventKey="profile" title={<span><FaUserEdit /> Perfil</span>}>
+            <Form onSubmit={handleSubmit} className="perfilusuario-form">
+              <Form.Group controlId="formName" className="perfilusuario-form-group">
+                <Form.Label><FaUserCircle /> Nombre</Form.Label>
+                <Form.Control type="text" name="Name" value={formData.Name} onChange={handleChange} />
+              </Form.Group>
 
-          <Form.Group controlId="formUsername" className="perfilusuario-form-group">
-            <Form.Control
-              type="text"
-              name="Username"
-              value={formData.Username}
-              onChange={handleChange}
-              placeholder=" " // Placeholder vacío para el efecto de etiqueta flotante
-              className={formData.Username ? 'filled' : ''}
-              required
-            />
-            <Form.Label className={formData.Username ? 'filled' : ''}>Username</Form.Label>
-            {usernameError && <span className="text-danger">{usernameError}</span>}
-          </Form.Group>
+              <Form.Group controlId="formUsername" className="perfilusuario-form-group">
+                <Form.Label><FaUserCircle /> Username</Form.Label>
+                <Form.Control type="text" name="Username" value={formData.Username} onChange={handleChange} />
+              </Form.Group>
 
-          <Form.Group controlId="formMail" className="perfilusuario-form-group">
-            <Form.Control
-              type="email"
-              name="Mail"
-              value={formData.Mail}
-              onChange={handleChange}
-              placeholder=" " // Placeholder vacío para el efecto de etiqueta flotante
-              className={formData.Mail ? 'filled' : ''}
-              required
-            />
-            <Form.Label className={formData.Mail ? 'filled' : ''}>Correo</Form.Label>
-            {mailError && <span className="text-danger">{mailError}</span>}
-          </Form.Group>
+              <Form.Group controlId="formMail" className="perfilusuario-form-group">
+                <Form.Label><FaEnvelope /> Correo</Form.Label>
+                <Form.Control type="email" name="Mail" value={formData.Mail} onChange={handleChange} />
+              </Form.Group>
 
-          <Form.Group controlId="formPhone" className="perfilusuario-form-group">
-            <Form.Control
-              type="text"
-              name="Phone"
-              value={formData.Phone}
-              onChange={handleChange}
-              placeholder=" " // Placeholder vacío para el efecto de etiqueta flotante
-              className={formData.Phone ? 'filled' : ''}
-              required
-            />
-            <Form.Label className={formData.Phone ? 'filled' : ''}>Teléfono</Form.Label>
-            {phoneError && <span className="text-danger">{phoneError}</span>}
-          </Form.Group>
+              <Form.Group controlId="formPhone" className="perfilusuario-form-group">
+                <Form.Label><FaPhone /> Teléfono</Form.Label>
+                <Form.Control type="text" name="Phone" value={formData.Phone} onChange={handleChange} />
+              </Form.Group>
 
-          <Form.Group controlId="formAvatar" className="mb-3">
-            <Form.Label>Avatar</Form.Label>
-            {formData.Avatar_URL && (
-              <div className="mb-2">
-                <Image
-                  src={formData.Avatar_URL}
-                  alt="Avatar"
-                  roundedCircle
-                  width={100}
-                  height={100}
-                />
-              </div>
-            )}
-            <Form.Control
-              type="file"
-              name="Avatar_File"
-              onChange={handleChange}
-            />
-          </Form.Group>
+              <Form.Group controlId="formAvatar" className="perfilusuario-avatar-group">
+                <Form.Label><FaCamera /> Avatar</Form.Label>
+                {formData.Avatar_URL && <Image src={formData.Avatar_URL} roundedCircle width={120} height={120} className="perfilusuario-avatar" />}
+                <Form.Control type="file" name="Avatar_File" onChange={handleChange} />
+              </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Guardar cambios
-          </Button>
-        </Form>
+              <Button variant="primary" type="submit" disabled={loadingSave}>
+                {loadingSave ? <Spinner animation="border" size="sm" /> : 'Guardar cambios'}
+              </Button>
+            </Form>
+          </Tab>
+          <Tab eventKey="settings" title={<span><FaLock /> Configuración</span>}>
+            <Button variant="link" onClick={handlePasswordReset} disabled={loadingPasswordReset}>
+              {loadingPasswordReset ? <Spinner animation="border" size="sm" /> : 'Cambiar Contraseña'}
+            </Button>
+            {passwordResetMessage && <Alert variant="info" className="mt-3">{passwordResetMessage}</Alert>}
+          </Tab>
+        </Tabs>
       </Container>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Actualización de perfil</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{modalMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>Cerrar</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

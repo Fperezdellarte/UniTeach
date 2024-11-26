@@ -3,12 +3,13 @@
 .formularioSignup input[type="password"],
 .formularioSignup input[type="email"],
 .formularioSignup input[type="tel"],
+
 .formularioSignup select {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #111111;
+  border-radius: 9px;
   box-sizing: border-box;
 }
 
@@ -21,12 +22,7 @@
 }
 
 .formularioSignup {
-  max-width: 80em;
-  margin: 50px auto;
-  padding: 20px auto ;
-  background-color: #f9f9f9e7;
-  border-radius: 8px;
-  filter: drop-shadow(rgba(0, 0, 0, 0.1));
+  background: linear-gradient(#004aad, transparent);
 }
 
 .formularioSignup button {
@@ -40,5 +36,21 @@
 }
 
 .formularioSignup button:hover {
-  background-color: #dc5800;
+  background-color: #a14101;
+}
+
+.singup{
+  max-width: 80em;
+  padding: auto ;
+  border-radius: 8px;
+  filter: drop-shadow(rgba(0, 0, 0, 0.1));
+}
+
+
+.singup-form{
+  display: flex;
+  justify-content:center; 
+  align-items:center; 
+  margin-left: 23vw;
+
 }

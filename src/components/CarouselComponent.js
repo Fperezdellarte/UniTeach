@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import '../styles/carousel.css';
 
 const CarouselComponent = () => {
   return (
@@ -16,7 +17,7 @@ const CarouselComponent = () => {
                 to="/signup"
                 variant="secondary"
                 size="lg"
-                className="custom-button shadow-drop-center"
+                className="primary-button shadow-drop-center"
               >
                 ¡Comienza Ahora!
               </Button>

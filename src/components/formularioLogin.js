@@ -3,19 +3,25 @@ import { API_URL } from '../auth/constans';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/formularioLogin.css';
+import showIcon from '../Assest/show.png';
+import hideIcon from '../Assest/hide.png';
 
 export const FormularioLogin = ({ onLoginSuccess }) => {
   const [Username, setUsername] = useState('');
   const [Password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [errorResponse, setErrorResponse] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
   const goTo = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
+    setErrorResponse(''); // Limpiar el mensaje de error anterior
 
     try {
-      const response = await fetch(`${API_URL}/login`, {
+      const response = await fetch(`${API_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -27,33 +33,40 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         console.log("Login successful");
-        setErrorResponse("");
+
+        const { token, user } = data;
+
         if (rememberMe) {
-          localStorage.setItem('authData', JSON.stringify({ Username, Password }));
+          localStorage.setItem('authData', JSON.stringify({ Username, token, user }));
         } else {
-          localStorage.removeItem('authData');
+          localStorage.setItem('authData', JSON.stringify({ Username, token }));
         }
+
         onLoginSuccess();
         goTo("/home");
       } else {
-        console.log("Something went wrong");
+        // Leer el mensaje de error desde la respuesta JSON
         const json = await response.json();
-        setErrorResponse(json.body.error);
+        setErrorResponse(json.message || 'Error desconocido');
       }
 
     } catch (error) {
       console.log(error);
+      setErrorResponse("Error de conexión, por favor intente de nuevo.");
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <div className="form-container">
-      <div className="form-box">
+      <div className='form-box fw-bold'>
         <h2>Iniciar sesión</h2>
         {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="username">Nombre de usuario:</label>
             <input
               type="text"
@@ -61,19 +74,33 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
               className="form-control"
               value={Username}
               onChange={(e) => setUsername(e.target.value)}
+              disabled={isLoading}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group mb-3 position-relative">
             <label htmlFor="password">Contraseña:</label>
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'} // Alterna entre text y password
               id="password"
               className="form-control"
               value={Password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className=" show-password fw-bold position-absolute end-0 top-50"
+            >
+              <img
+                src={showPassword ? hideIcon : showIcon}
+                alt={showPassword ? 'Ocultar' : 'Mostrar'}
+                className={showPassword ? 'visible' : 'hidden'}
+                style={{ width: '24px', height: '24px' }}
+              />
+            </button>
           </div>
-  
+
           <div className="row mb-4">
             <div className="col d-flex justify-content-center">
               <div className="form-check">
@@ -83,21 +110,28 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
                   id="rememberMe"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
+                  disabled={isLoading}
                 />
                 <label className="form-check-label" htmlFor="rememberMe">
                   Recordarme
                 </label>
               </div>
             </div>
-  
+
             <div className="il">
               <a href="#!" className="forgot-password-link">Olvidé mi contraseña?</a>
             </div>
           </div>
-  
-          <button type="submit" className="btn btn-primary">Iniciar sesión</button>
+
+          <button
+            type="submit"
+            className="btn btn-login fw-bold"
+            disabled={isLoading}
+          >
+            {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Iniciar sesión"}
+          </button>
         </form>
       </div>
     </div>
   );
-}  
+}

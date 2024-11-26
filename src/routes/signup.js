@@ -14,12 +14,10 @@ export const Signup = () => {
 
   return (
 <div>
-<Navbar/> 
-
+  <Navbar/>    
     <div className='formularioSignup'>
       <FormularioSignUp />
     </div>
-
 </div>
   
   );

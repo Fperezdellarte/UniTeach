@@ -1,70 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/landingPage.css';
 import Navbar from '../components/navbar';
 import CarouselComponent from '../components/CarouselComponent';
-import {Accordion, AccordionBody } from 'react-bootstrap';
+import { Accordion, AccordionBody } from 'react-bootstrap';
 import MarqueeCarousel from '../components/MarqueeCarousel';
 
 const LandingPage = () => {
+  
+  useEffect(() => {
+    // Selecciona el grupo de tarjetas
+    const cardGroup = document.querySelector('.uni-teach-card-group');
+
+    // Crea el Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // El div está en vista, reaparece
+          cardGroup.classList.remove('fade-out');
+        } else {
+          // El div ha salido de vista, se desvanece
+          cardGroup.classList.add('fade-out');
+        }
+      });
+    }, {
+      threshold: 0.1 // Ajusta la cantidad visible para disparar el evento
+    });
+
+    // Observa el contenedor de las tarjetas
+    if (cardGroup) {
+      observer.observe(cardGroup);
+    }
+
+    // Cleanup: Desmonta el observer cuando el componente se desmonte
+    return () => {
+      if (cardGroup) {
+        observer.unobserve(cardGroup);
+      }
+    };
+  }, []);
+
   return (
+    <div>  
+      <Navbar />
     <div className="landing-page">
       <div className="opacidad">
-        <Navbar />
         <CarouselComponent />
-        <section>
-      <section>
-  <div className="uni-teach-card-group">
-    {/* Tarjeta UNSTA */}
-    <div className="card shadow-drop-center">
-      <img
-        src="https://www.unsta.edu.ar/wp-content/uploads/2023/08/unsta-campus-yb.png"
-        alt="UNSTA"
-        className="card-img-top"
-      />
-      <div className="card__content">
-        <p className="card__title">Conexión</p>
-        <p className="card__description">
-          De esta manera conectamos las Universidades de Tucumán.
-        </p>
-      </div>
-    </div>
-
-    {/* Tarjeta UNT */}
-    <div className="card shadow-drop-center">
-      <img
-        src="https://media.licdn.com/dms/image/C4E1BAQEyl2j7GtRoYg/company-background_10000/0/1593164654141/universidad_nacional_de_tucum_n_cover?e=2147483647&v=beta&t=TVTosgL1vAIqpxNDpy6-AgCfflm6ESs8ZBiyW3g9jrM"
-        alt="UNT"
-        className="card-img-top"
-      />
-      <div className="card__content">
-        <p className="card__title">Innovación</p>
-        <p className="card__description">
-          Una manera simple y rápida de agendar tus clases con tus mentores favoritos.
-        </p>
-      </div>
-    </div>
-
-    {/* Tarjeta UTN */}
-    <div className="card shadow-drop-center">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Fachada_de_la_UTN_-_Facultad_Regional_Tucum%C3%A1n.jpg/1200px-Fachada_de_la_UTN_-_Facultad_Regional_Tucum%C3%A1n.jpg"
-        alt="UTN"
-        className="card-img-top"
-      />
-      <div className="card__content">
-        <p className="card__title">Simple</p>
-        <p className="card__description">
-          Tan simple como un solo clic, tienes a tu alcance todo el material disponible, para sacarte esa materia fundadora.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-          {/* Sección de Testimonios con Marquee */}
-          <MarqueeCarousel />
-        </section>
+     <div>
+   
+     </div>
+        {/* Sección de Testimonios con Marquee */}
+        <MarqueeCarousel />
       
         {/* Sección FAQ */}
         <section className="faq-section">
@@ -94,6 +79,7 @@ const LandingPage = () => {
             </Accordion.Item>
           </Accordion>
         </section>
+        
         {/* Formulario de Suscripción */}
         <section className="subscription-section">
           <form className="form">
@@ -108,8 +94,8 @@ const LandingPage = () => {
           </form>
         </section>
 
-
       </div>
+    </div>
     </div>
   );
 };

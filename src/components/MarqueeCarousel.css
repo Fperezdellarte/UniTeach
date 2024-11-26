@@ -13,38 +13,48 @@
   flex-direction: row;
   align-items: center;
   white-space: nowrap;
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .marquee-row:nth-of-type(2) {
-  animation: marquee-reverse 30s linear infinite;
+  animation: marquee-reverse 40s linear infinite;
 }
 
 .marquee-card {
-  flex: 30 20 auto;
-  width: auto;
-  margin: 20px 10px;
+  flex: 0 0 250px; /* Ancho fijo para todas las tarjetas */
+  height: 250px; /* Altura fija para todas las tarjetas */
+  margin: 20px 15px;
   padding: 20px;
-  border-radius: 30px;
-  box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.2);
-  text-align: left;
-  background: #fff; /* Cambia el color según tu diseño */
+  border-radius: 20px;
+  background: linear-gradient(100deg, #ffffff, #f0f0f0); /* Fondo degradado */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(255, 255, 255, 0.5); /* Sombra doble */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s; /* Transición suave */
+}
+
+.marquee-card:hover {
+  transform: translateY(-10px); /* Elevación al hacer hover */
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.15), -15px -15px 30px rgba(255, 255, 255, 0.6); /* Sombra más pronunciada */
 }
 
 .marquee-card img {
+  margin-bottom: 10px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
-  margin-bottom: 15px;
+  object-fit: cover;
+  border: 3px solid #ddd; /* Borde alrededor de la imagen */
 }
 
-.marquee-gradient {
-  position: absolute;
-  top: 0;
-  bottom: 30;
-  width: 20%;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
-  pointer-events: none;
+.marquee-card p {
+  font-size: 14px;
+  color: #333; /* Color del texto */
+  margin-top: 5px;
 }
-
 .marquee-gradient-left {
   left: 0;
   transform: rotateY(180deg);

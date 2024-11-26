@@ -6,7 +6,6 @@ footer {
     padding: 10px 20px; /* Espaciado reducido */
     margin-top: 5rem;  
   }
-  
   footer .p-4 {
     padding: 0px !important; /* Reduce el padding de las secciones internas */
   }
@@ -68,40 +67,14 @@ footer {
     color: #6c757d; /* Texto del copyright */
     font-size: 0.75rem; /* Tamaño de fuente reducido */
   }
-  footer {
-  background-color: #1a1e26; /* Un tono azul oscuro */
-}
-
-footer a {
-  color: #fff;
-  
-}
-
-footer a:hover {
-  color: #00bcd4; /* Color azul claro para los enlaces al pasar el ratón */
-}
-
-footer .text-reset {
-  color: #ffffff;
-}
-
-footer i {
-  font-size: 1.5rem;
-}
-
-footer .copyright {
-  border-top: 1px solid #ffffff;
-  padding-top: 10px;
-}
+  /* Estilos para los íconos de redes sociales */
 .social-icons {
   padding: 20px;
 }
 
-
 .social-icon {
-  width: 30px;
-  height: 30px;
-  margin: 0 15px;
+  width: 40px;
+  height: 40px;
   transition: transform 0.3s ease, filter 0.3s ease; /* Transición suave para la animación */
 }
 
