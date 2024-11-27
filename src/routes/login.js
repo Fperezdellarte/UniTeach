@@ -8,7 +8,7 @@ export const Login = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    const storedAuthData = localStorage.getItem('authData');
+    const storedAuthData = sessionStorage.getItem('authData');
     if (storedAuthData) {
       const parsedAuthData = JSON.parse(storedAuthData);
       auth.setIsAuthenticated(!!parsedAuthData.token); // Check if token exists
@@ -18,7 +18,7 @@ export const Login = () => {
   }, [auth]);
 
   const handleLoginSuccess = () => {
-    const storedAuthData = localStorage.getItem('authData');
+    const storedAuthData = sessionStorage.getItem('authData');
     if (storedAuthData) {
       const parsedAuthData = JSON.parse(storedAuthData);
       auth.setIsAuthenticated(!!parsedAuthData.token);

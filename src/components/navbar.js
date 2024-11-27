@@ -23,7 +23,7 @@ export const Navbar = () => {
   const [userImage, setUserImage] = useState('');
   
   useEffect(() => {
-    const authData = JSON.parse(localStorage.getItem('authData'));
+    const authData = JSON.parse(sessionStorage.getItem('authData'));
     
     if (authData && authData.user) {
       if (authData.user.Name) {

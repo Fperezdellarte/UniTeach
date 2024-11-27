@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../auth/constans';
 import '../styles/TablaProximaClase.css';
+import { ModalProxClases } from './modalProxClases';
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -22,6 +23,9 @@ export const TablaProximaClase = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+ 
   
   const { isAuthenticated, token } = useAuth();
   const navigate = useNavigate();
@@ -96,16 +100,25 @@ export const TablaProximaClase = () => {
 
   return (
     <div className="table-container">
+      <div>
       <h2 className="table-title">Próximas Clases</h2>
       {loading ? (
         <div className="loading-spinner">Cargando...</div>
+
       ) : isAuthenticated ? (
         <DataTable
-          columns={columns}
-          data={classesData.upcoming}
-          noDataComponent="No tienes próximas clases"
-          customStyles={{
-            rows: {
+        columns={columns}
+  data={classesData.upcoming}
+  noDataComponent={classesData.upcoming.length === 0 && (
+    <div>
+      <Button className="blue-button" onClick={() => setShowModal(true)}>
+        Encuentra tu Próxima Clase
+      </Button>
+      {showModal && <ModalProxClases />}
+    </div>
+        )}
+        customStyles={{
+          rows: {
               style: {
                 padding: '12px',
                 borderBottom: '1px solid #ddd',
@@ -135,16 +148,16 @@ export const TablaProximaClase = () => {
               },
             },
           }}
-        />
-      ) : (
-        <div>Por favor, inicia sesión para ver tus próximas clases.</div>
-      )}
+          />
+        ) : (
+          <div>Por favor, inicia sesión para ver tus próximas clases.</div>
+        )}
       {error && <div>{error}</div>}
         {/* Dialogo de confirmación */}
         <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
-      >
+        >
         <DialogTitle>Confirmar Baja</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -160,6 +173,7 @@ export const TablaProximaClase = () => {
           </Button>
         </DialogActions>
       </Dialog>
+        </div>
       
       {/* Snackbar para notificaciones */}
       <Snackbar
