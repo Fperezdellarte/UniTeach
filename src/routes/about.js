@@ -1,7 +1,7 @@
   import React from 'react';
   import Navbar from '../components/navbar';
   import '../styles/about.css';
-  import { Card, Row, Col } from 'react-bootstrap';
+  import { Card, Row, Col, Button } from 'react-bootstrap';
 
   const TestimonialCard = ({ name, quote }) => {
     return (
@@ -12,6 +12,13 @@
         </Card.Body>
       </Card>
     );
+  };
+  const handleFeedbackClick = () => {
+    const recipient = "uniteach@gmail.com";
+    const subject = encodeURIComponent("Comentario sobre uniteach aplicación");
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}`;
+
+    window.open(gmailLink, "_blank");
   };
 
   const TestimonialSection = () => {
@@ -55,12 +62,7 @@
               <div className="contact">
                 <h2 className='text-white'>Contacto</h2>
                 <p className='text-white'>¿Tienes alguna pregunta o comentario? ¡Contáctanos!</p>
-                <form>
-                  <input type="text" placeholder="Nombre" className="form-control mb-2" />
-                  <input type="email" placeholder="Correo Electrónico" className="form-control mb-2" />
-                  <textarea placeholder="Mensaje" className="form-control mb-2"></textarea>
-                  <button className="btn btn-primary">Enviar Mensaje</button>
-                </form>
+                  <Button onClick={handleFeedbackClick} className="blue-button">Enviar Mensaje</Button>
               </div>
             </Col>
           </Row>
