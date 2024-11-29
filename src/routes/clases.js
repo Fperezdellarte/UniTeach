@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_URL } from '../auth/constans';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, Snackbar } from '@mui/material';
 import { useAuth } from '../auth/authProvider';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +18,6 @@ const Clases = () => {
   const [selectedRating, setSelectedRating] = useState(0); // Estado para la calificación
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [selectedId, setSelectedId] = useState(null);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const { isAuthenticated, token } = useAuth();
   const navigate = useNavigate();
@@ -31,38 +26,20 @@ const Clases = () => {
     navigate('/login');
   }
 
-  const handleRatingClick = (rating) => {
-    setSelectedRating(rating); // Establece la calificación seleccionada
-  };
-
-  const handleOpenDialog = (idInscription) => {
-    setSelectedId(idInscription);
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
-  const handleUnsubscribe = async () => {
+  const handleRatingClick = async (star) => {
     try {
-      await axios.delete(`${API_URL}/inscription/${selectedId}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+      await axios.post(`${API_URL}/users/rating/${classesData.mentorId}`, {
+        star,
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`, 
+        },
       });
-      setSnackbarMessage('Se calificó la clase correctamente');
-      setSnackbarOpen(true);
-    } catch (error) {
-      setSnackbarMessage('Error al calificar');
-      setSnackbarOpen(true);
-      console.error('Error al calificar:', error);
-    } finally {
-      setOpenDialog(false);
-    }
+    } catch{};
   };
+  
 
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
+console.log(classesData);
   const columns = [
     {
       name: "Materia",
@@ -83,6 +60,12 @@ const Clases = () => {
       width: '20%',
     },
     {
+      name:"Mentor",
+      selector: row=> row.Mentor,
+      sortable: true,
+      width:'30%'
+    },
+    {
       name: "Acciones",
       width: '15%',
       cell: (row) => (
@@ -90,7 +73,7 @@ const Clases = () => {
           onClick={handleShowModal}
           className="rate-button"
         >
-          Calificar
+          Calificar Mentor
         </button>
       ),
       ignoreRowClick: true,
@@ -177,44 +160,22 @@ const Clases = () => {
                 key={star}
                 icon={faStar}
                 className={`star-icon ${selectedRating >= star ? 'selected' : ''}`}
-                onClick={() => handleRatingClick(star)}
+                onClick={() => {
+                  setSelectedRating(star); // Actualiza el estado de la calificación seleccionada
+                  handleRatingClick(star); // Envía la calificación al servidor
+                }}
               />
             ))}
           </div>
           <button
             className="submit-rating-btn action-buttom"
-            onClick={() => handleOpenDialog}
+            onClick={() => handleCloseModal()}
             disabled={selectedRating === 0} 
           >
             Enviar Calificación
           </button>
         </div>
       </Modal>
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-      >
-        <DialogTitle>Confirmar Calificacion</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            ¿Estás seguro de que deseas dar esa calificación?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={handleUnsubscribe} color="primary">
-            Confirmar
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-        message={snackbarMessage}
-      />
     </div>
   );
 };

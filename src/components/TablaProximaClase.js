@@ -160,8 +160,7 @@ export const TablaProximaClase = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      
-      {/* Snackbar para notificaciones */}
+    
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
