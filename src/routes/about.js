@@ -14,7 +14,7 @@
     );
   };
   const handleFeedbackClick = () => {
-    const recipient = "uniteach@gmail.com";
+    const recipient = "uniteach24@gmail.com";
     const subject = encodeURIComponent("Comentario sobre uniteach aplicación");
     const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}`;
 
