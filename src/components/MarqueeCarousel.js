@@ -1,5 +1,5 @@
 import React from 'react';
-import './MarqueeCarousel.css';
+import '../styles/MarqueeCarousel.css';
 
 // Datos de ejemplo para las tarjetas
 const reviews = [

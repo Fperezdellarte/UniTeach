@@ -38,14 +38,15 @@
   padding: 1em;
 }
 
-.card-title {
+.card-mentor-title {
   font-size: 1.5rem;
-  font-weight: bold;
   color: var(--text-color);
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-decoration: none !important;
+  font-weight: bold;
 }
 
-.card-text {
+.card-mentor-text {
   font-weight: bold;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 1.1rem;

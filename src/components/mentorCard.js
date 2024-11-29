@@ -6,9 +6,9 @@ import '../styles/mentorCards.css';
 
 const MentorInfo = ({ mentor }) => (
   <div>
-    <h3 className="card-title">{mentor.MentorName}</h3>
-    <p className="card-text">Materia: {mentor.SubjectName}</p>
-    <p className="card-text">Universidad: {mentor.MentorUniversity}</p>
+    <h3 className="card-mentor-title">{mentor.MentorName}</h3>
+    <p className="card-mentor-text">Materia: {mentor.SubjectName}</p>
+    <p className="card-mentor-text">Universidad: {mentor.MentorUniversity}</p>
   </div>
 );
 

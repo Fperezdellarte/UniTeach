@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/PerfilMentor.css'; // Ajusta la ruta según tu estructura de archivos
+import '../styles/PerfilMentor.css';
 import { API_URL } from '../auth/constans';
-
+import { Navbar } from '../components/navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import ClassScheduleCalendar from '../components/ClassScheduleCalendar';
+import { useBuscador } from '../components/buscador';
+import CircularProgress from '@mui/material/CircularProgress'; // Importa el spinner
 
 const PerfilMentor = () => {
   const { id } = useParams();
@@ -23,7 +28,7 @@ const PerfilMentor = () => {
   useEffect(() => {
     const fetchMentorData = async () => {
       try {
-        const authData = JSON.parse(localStorage.getItem('authData'));
+        const authData = JSON.parse(sessionStorage.getItem('authData'));
         const token = authData?.token;
         const response = await axios.get(`${API_URL}/users/mentor/${id}`, {
           headers: {
@@ -75,25 +80,74 @@ const PerfilMentor = () => {
   };
 
   if (!mentor) {
-    return <p>Cargando...</p>; // Muestra un mensaje mientras se cargan los datos
+    return (
+      <div>
+        <Navbar/>
+      <div className="loading-container">
+        <CircularProgress />
+      </div>
+      </div>
+    );
   }
 
   return (
     <div>
-      <h1>Perfil del Mentor</h1>
-      <img
-        src={mentor.profileImageUrl || "https://via.placeholder.com/300x300"}
-        alt={`${mentor.MentorName} profile`}
-        className="mentor-image"
-      />
-      <h2>{mentor.MentorName}</h2>
-      <p><strong>Materia:</strong> {mentor.SubjectName}</p>
-      <p><strong>Universidad:</strong> {mentor.MentorUniversity}</p>
-      <p><strong>Rating:</strong> {mentor.Opinion}</p>
-      {/* Agrega más detalles según sea necesario */}
+      <Navbar />
+      <div className="mentor-profile">
+        <div className="profile-container">
+          <div className="profile-info">
+            <img
+              src={mentor.Avatar_URL || "https://via.placeholder.com/300x300"}
+              alt={`${mentor.Name} profile`}
+              className="mentor-image"
+            />
+            <div className="profile-details">
+              <h2>{mentor.Name}</h2>
+              <p>{mentor.University}</p>
+              <h3>Descripción</h3>
+              <div className="description-box">
+                {mentor.Description || "No disponible"}
+              </div>
+              <div className="rating">
+                {renderStars(mentor.Opinion || 0)}
+              </div>
+              <div className="buttons-container">
+                <button className="custom-button" onClick={() => setShowPhone(!showPhone)}>
+                  {showPhone ? "Ocultar Teléfono" : "Contactar para una clase"}
+                </button>
+                <button className="custom-button" onClick={() => setShowCalendar(!showCalendar)}>
+                  {showCalendar ? "Ocultar Horario de Clases" : "Ver calendario de clases"}
+                </button>
+              </div>
+              {showPhone && <p className="phone-number">Teléfono: {mentor.Phone}</p>}
+              {showCalendar && (
+                <div>
+                  <ClassScheduleCalendar
+                    mentorId={id}
+                    searchTerm={searchTerm}
+                    onDateSelect={handleDateSelect}
+                  />
+                  <div className="schedule-details">
+                    {filteredSchedule.length > 0 ? (
+                      <ul>
+                        {filteredSchedule.map((item, index) => (
+                          <li key={index}>
+                            {item.hour} - {new Date(item.Date).toLocaleDateString()}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p></p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default PerfilMentor;
-

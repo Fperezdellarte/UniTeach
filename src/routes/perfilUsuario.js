@@ -23,7 +23,7 @@ const PerfilUsuario = () => {
   const [modalMessage, setModalMessage] = useState('');
 
   useEffect(() => {
-    const authData = JSON.parse(localStorage.getItem('authData'));
+    const authData = JSON.parse(sessionStorage.getItem('authData'));
     if (authData && authData.user) {
       setFormData({
         Name: authData.user.Name || '',
@@ -58,7 +58,7 @@ const PerfilUsuario = () => {
     }
 
     try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
+      const authData = JSON.parse(sessionStorage.getItem('authData'));
       const response = await axios.patch(`${API_URL}/users/${authData.user.idUser}`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -67,7 +67,7 @@ const PerfilUsuario = () => {
       });
       if (response.status === 200) {
         const updatedUser = response.data.user;
-        localStorage.setItem('authData', JSON.stringify({ ...authData, user: updatedUser }));
+        sessionStorage.setItem('authData', JSON.stringify({ ...authData, user: updatedUser }));
         setFormData({
           ...formData,
           ...updatedUser,
@@ -87,7 +87,7 @@ const PerfilUsuario = () => {
   const handlePasswordReset = async () => {
     setLoadingPasswordReset(true);
     try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
+      const authData = JSON.parse(sessionStorage.getItem('authData'));
       await axios.post(`${API_URL}/password-reset`, { email: formData.Mail }, {
         headers: { 'Authorization': `Bearer ${authData.token}` }
       });

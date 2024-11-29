@@ -14,7 +14,7 @@ export const useBuscador = () => {
     setError(null);
 
     try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
+      const authData = JSON.parse(sessionStorage.getItem('authData'));
       const university = authData?.user?.University;
 
       if (!university) {

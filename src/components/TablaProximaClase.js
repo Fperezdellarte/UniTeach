@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../auth/constans';
 import '../styles/TablaProximaClase.css';
+import { Modal} from 'react-bootstrap';
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -22,6 +23,13 @@ export const TablaProximaClase = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+ 
+  const handleModalClick = (subject) => {
+    navigate('/Results', { state: { subjectName: subject } });
+  };
   
   const { isAuthenticated, token } = useAuth();
   const navigate = useNavigate();
@@ -96,16 +104,25 @@ export const TablaProximaClase = () => {
 
   return (
     <div className="table-container">
+      <div>
       <h2 className="table-title">Próximas Clases</h2>
       {loading ? (
         <div className="loading-spinner">Cargando...</div>
+
       ) : isAuthenticated ? (
         <DataTable
-          columns={columns}
-          data={classesData.upcoming}
-          noDataComponent="No tienes próximas clases"
-          customStyles={{
-            rows: {
+        columns={columns}
+  data={classesData.upcoming}
+  noDataComponent={classesData.upcoming.length === 0 && (
+    <div>
+      <button
+        className="blue-button mb-4" onClick={handleShowModal}>
+        Empieza Ahora
+      </button>
+    </div>
+        )}
+        customStyles={{
+          rows: {
               style: {
                 padding: '12px',
                 borderBottom: '1px solid #ddd',
@@ -135,16 +152,16 @@ export const TablaProximaClase = () => {
               },
             },
           }}
-        />
-      ) : (
-        <div>Por favor, inicia sesión para ver tus próximas clases.</div>
-      )}
+          />
+        ) : (
+          <div>Por favor, inicia sesión para ver tus próximas clases.</div>
+        )}
       {error && <div>{error}</div>}
         {/* Dialogo de confirmación */}
         <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
-      >
+        >
         <DialogTitle>Confirmar Baja</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -160,6 +177,7 @@ export const TablaProximaClase = () => {
           </Button>
         </DialogActions>
       </Dialog>
+        </div>
       
       {/* Snackbar para notificaciones */}
       <Snackbar
@@ -168,6 +186,61 @@ export const TablaProximaClase = () => {
         onClose={handleSnackbarClose}
         message={snackbarMessage}
       />
+      
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        dialogClassName="fullscreen-modal"
+        centered
+        backdrop="static"
+        keyboard={false}
+      >
+        <div className="modal-content-custom">
+          <button className="close-modal-btn" onClick={handleCloseModal}>
+            ×
+          </button>
+          <div className="modal-options">
+            <div
+              className="modal-card fade-in delay-1"
+              onClick={() => handleModalClick('Ingeniería')}
+            >
+              <div
+                className="modal-background"
+                style={{
+                  backgroundImage: 'url(https://images.griddo.universitatcarlemany.com/c/cover/q/95/w/828/h/468/p/center/f/avif/el-dibujo-tecnico-y-su-papel-en-la-ingenieria)',
+                }}
+              ></div>
+              <div className="option-text">Facultad de Ingeniería</div>
+            </div>
+
+            <div
+              className="modal-card fade-in delay-2"
+              onClick={() => handleModalClick('Medicina')}
+            >
+              <div
+                className="modal-background"
+                style={{
+                  backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKewYg7Q29s9pqDuj_2_qRmN45zq2uXMHgww&s)',
+                }}
+              ></div>
+              <div className="option-text">Facultad de Medicina</div>
+            </div>
+
+            <div
+              className="modal-card fade-in delay-3"
+              onClick={() => handleModalClick('Psicología')}
+            >
+              <div
+                className="modal-background"
+                style={{
+                  backgroundImage: 'url(https://un.edu.mx/wp-content/uploads/2023/02/Universidad-del-Norte-Perspectivas-laborales-subtitulo-2.png)',
+                }}
+              ></div>
+              <div className="option-text">Facultad de Psicología</div>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

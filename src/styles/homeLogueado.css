@@ -4,108 +4,29 @@
   
 }
 
-/* Estilos para el título de las tarjetas */
-.card-title {
-  font-size: 1.5em;
-  color: #fffdfd;
-}
-
-
-
-/* Estilos para las imágenes de los mentores */
-.mentor-img {
-  width: 18em;
-  height: 18em;
-  padding: 4em;
-  object-fit:scale-down;
-}
-
-/* Contenedor para los mentores recientes */
-.MentoresRecientes {
+.mentores-recientes {
   background-color: rgb(255, 255, 255);
-  display: flex;
   padding-top: 5%;
   padding-bottom: 3%;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  flex-wrap: wrap; 
   font-family:Georgia, 'Times New Roman', Times, serif;
   font-weight:bolder;
-  justify-content:center; /* Distribuye el espacio de manera equitativa */
-  gap: 30px; /* Espacio entre los elementos */
+  gap: 30px; 
 }
 
-/* Ajustes para asegurar que las imágenes tengan el mismo tamaño */
-.mentor-img,
-.mentores-recientes {
-  flex: 1 1 calc(33.333% - 20px); /* Asegura que los elementos ocupen el mismo espacio */
-  box-sizing: border-box; /* Incluye padding y border en el ancho y alto totales */
+.mentor-reciente-card{
+margin-left: 1rem;
 }
 
 @media (max-width: 768px) {
-  .mentor-img,
   .mentores-recientes {
-    flex: 1 1 calc(50% - 20px); /* Ajusta el tamaño para pantallas más pequeñas */
+    flex: 1 1 calc(50% - 20px); 
   }
 }
 
 @media (max-width: 480px) {
-  .mentor-img,
   .mentores-recientes {
     flex: 1 1 100%; /* Ajusta el tamaño para pantallas muy pequeñas */
   }
 }
 
-.modal-section {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2em;
-}
-
-.modal-card {
-  position: relative;
-  width: 30%;
-  height: 200px;
-  overflow: hidden;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.modal-card:hover {
-  transform: scale(1.05);
-}
-
-.modal-background {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  transition: opacity 0.3s ease;
-}
-
-.modal-card:hover .modal-background {
-  opacity: 0.3; /* Oscurece la imagen al hacer hover */
-}
-
-/* Hover text styling */
-.hover-text {
-  position: absolute;
-  top: 50%;
-  left: -100%; /* Comienza desde fuera del modal */
-  transform: translateY(-50%);
-  width: 80%;
-  text-align: center;
-  color: white;
-  font-size: 1.2em;
-  font-weight: bold;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px;
-  border-radius: 8px;
-  opacity: 0;
-  transition: left 0.5s ease, opacity 0.8s ease; /* Transición suave */
-}
-
-.modal-card:hover .hover-text {
-  left: 10%; /* Se mueve hacia el centro del modal */
-  opacity: 1; /* Aparece el texto al hacer hover */
-}
