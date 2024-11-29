@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { ClassesContext } from '../contexts/classesContext';
+import { Modal, Button } from 'react-bootstrap'; 
 import '../styles/TablaClasesRecientes.css';
+import { Link } from 'react-router-dom';
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -18,6 +20,10 @@ const formatDateTime = (date, hour) => {
 
 export const TablaClasesRecientes = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
 
   const columns = [
     {
@@ -48,48 +54,88 @@ export const TablaClasesRecientes = () => {
     return <div>{error}</div>;
   }
 
+  const handleViewMoreClick = () => {
+    if (classesData.recent.length === 0) {
+      setShowModal(true);
+    }
+  };
+
   return (
     <div className="table-container">
       <h2 className="table-title">Clases Recientes</h2>
-      <DataTable
-        columns={columns}
-        data={classesData.recent}
-        noDataComponent="No tienes clases recientes"
-        customStyles={{
-          rows: {
-            style: {
-              padding: '12px',
-              borderBottom: '1px solid #ddd',
+
+      {classesData.recent.length === 0 ? (
+        <div className="no-clases">No hay clases recientes</div>
+      ) : (
+        <DataTable
+          columns={columns}
+          data={classesData.recent}
+          customStyles={{
+            rows: {
+              style: {
+                padding: '12px',
+                borderBottom: '1px solid #ddd',
+              },
             },
-          },
-          headCells: {
-            style: {
-              fontWeight: 'bold',
-              textAlign: 'left',
-              backgroundColor: '#fff',
-              color: '#000',
-              padding: '16px',
+            headCells: {
+              style: {
+                fontWeight: 'bold',
+                textAlign: 'left',
+                backgroundColor: '#fff',
+                color: '#000',
+                padding: '16px',
+              },
             },
-          },
-          cells: {
-            style: {
-              padding: '12px',
+            cells: {
+              style: {
+                padding: '12px',
+              },
             },
-          },
-          pagination: {
-            style: {
-              backgroundColor: '#f8f8f8',
-              padding: '12px',
-              borderTop: '1px solid #ddd',
-              display: 'flex',
-              justifyContent: 'center',
+            pagination: {
+              style: {
+                backgroundColor: '#f8f8f8',
+                padding: '12px',
+                borderTop: '1px solid #ddd',
+                display: 'flex',
+                justifyContent: 'center',
+              },
             },
-          },
-        }}
-      />
+          }}
+        />
+      )}
+
       <div className="button-container">
-        <button className="blue-button">Ver Más</button>
+      {classesData.recent.length === 0 && (
+        <Button className="blue-button mb-4" onClick={handleViewMoreClick}>
+          Ver mas
+        </Button>
+      )}
+      {classesData.recent.length != 0 && (
+        <Button as={Link}
+        to="/clases"
+        className="blue-button mb-4"
+        onClick={handleViewMoreClick}
+      >Ver mas
+        </Button>
+      )}
       </div>
+
+      {/* Modal */}
+      <Modal className='modal-clases' show={showModal}
+        onHide={handleCloseModal}
+        animation={true}
+        centered 
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>No hay clases recientes</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Vuelva más tarde.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

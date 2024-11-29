@@ -87,24 +87,24 @@
         return;
       }
 
-      try {
-        const response = await fetch(`${API_URL}/signup`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            Username,
-            Password,
-            Name,
-            DNI,
-            Legajo,
-            TypeOfUser,
-            Mail,
-            Phone,
-            University
-          })
-        });
+    try {
+      const response = await fetch(`${API_URL}/users/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          Username,
+          Password,
+          Name,
+          DNI,
+          Legajo,
+          TypeOfUser,
+          Mail,
+          Phone,
+          University
+        })
+      });
 
         if (response.ok) {
           const responseData = await response.json();
