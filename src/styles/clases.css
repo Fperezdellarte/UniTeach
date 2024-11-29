@@ -29,4 +29,81 @@
     color: white; /* Cambia el texto a blanco */
     transform: scale(1.1); /* Aumenta el tamaño un 10% */
   }
+  .modal-content-custom {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+  }
+  
+  .close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .close-modal-btn:hover {
+    color: red;
+  }
+  
+  .rate-title {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .stars-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .star-icon {
+    font-size: 40px;
+    color: gray;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+  }
+  
+  .star-icon:hover {
+    transform: scale(1.2);
+    color: gold;
+  }
+  
+  .star-icon.selected {
+    color: gold;
+  }
+  
+  .submit-rating-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #25619c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-rating-btn:hover {
+    background-color: #1b4c7a;
+  }
+  
+  .submit-rating-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+  
   
