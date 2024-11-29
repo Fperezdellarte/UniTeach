@@ -33,14 +33,20 @@ const Clases = () => {
       width: '20%'
     },
     {
+      name:"Mentor",
+      selector: row=> row.Mentor,
+      sortable: true,
+      width:'30%'
+    },
+    {
       name: "Acciones",
       width: '15%',
       cell: (row) => (
         <button 
-          onClick={() => handleRateClass(row)} 
-          className="rate-button"
+        onClick={() => handleRateClass(row)} 
+        className="rate-button"
         >
-          Calificar
+          Calificar Mentor
         </button>
       ),
       ignoreRowClick: true,
