@@ -17,6 +17,8 @@ import ProtectedRoute from './routes/protectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../src/components/footer';
 import Clases from '../src/routes/clases'
+import ResetPassword from './routes/Reset-Password';
+import EmailForm  from './routes/emailForm';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About />
+  },
+  {
+    path: "/reset-password/:token",
+    element:<ResetPassword/>
+  },
+  { 
+    path: "/email-form", 
+    element:<EmailForm />
   },
   {
     path: "/",
