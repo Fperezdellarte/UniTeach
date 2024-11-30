@@ -18,7 +18,7 @@ const formatDateTime = (date, hour) => {
 
 export const TablaClasesRecientes = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
-
+  console.log("Datos recibidos del contexto en tabla clases recientes", classesData);
   const columns = [
     {
       name: "Materia",

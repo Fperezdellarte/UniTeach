@@ -25,7 +25,7 @@ export const TablaProximaClase = () => {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
- 
+  console.log("Datos recibidos del contexto en tabla proximas clases:", classesData);
   
   const { isAuthenticated, token } = useAuth();
   const navigate = useNavigate();
@@ -85,6 +85,11 @@ export const TablaProximaClase = () => {
       sortable: true
     },
     {
+      name: "Mentor",
+      selector: row => row.Mentor|| "Sin Mentor",
+      sortable: true
+    },
+    {
       name: "Acciones",
       cell: row => (
         <button 
@@ -97,6 +102,13 @@ export const TablaProximaClase = () => {
       ignoreRowClick: true
     }
   ];
+  if (loading || !classesData.upcoming.length) {
+    return (
+      <div className="loading-spinner">
+        {loading ? 'Cargando...' : 'No hay próximas clases. Encuentra una nueva clase a continuación.'}
+      </div>
+    );
+  }
 
   return (
     <div className="table-container">
