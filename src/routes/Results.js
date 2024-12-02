@@ -30,12 +30,16 @@ const Results = () => {
 
       // Ordenar los resultados
       const sortedResults = filtered.sort((a, b) => {
-        if (filters.sortBy === 'distance') {
-          return a.distance - b.distance; // Asumiendo que 'distance' es una propiedad de los resultados
-        } else if (filters.sortBy === 'rating') {
-          return b.rating - a.rating; // Asumiendo que 'rating' es una propiedad de los resultados
-        }
+        if (filters.sortBy === 'rating') {
+          // Asegúrate de que la calificación sea un número
+          const ratingA = typeof a.rating === 'number' ? a.rating : 0;
+          const ratingB = typeof b.rating === 'number' ? b.rating : 0;
+          return ratingB - ratingA; // Ordenar por rating de mayor a menor
+        }else if (filters.sortBy === 'distance') {
+          return a.distance - b.distance; // Ordenar por distancia
+        } 
         return 0;
+  
       });
 
       setFilteredResults(sortedResults);

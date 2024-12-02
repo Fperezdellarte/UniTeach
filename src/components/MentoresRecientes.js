@@ -13,7 +13,7 @@ export const Mentores = () => {
     Opinion: clase.mentorInfo?.Opinion || 0,
     SubjectName: clase.Materia,
     MentorUniversity: clase.mentorInfo?.University,
-    profileImageUrl: clase.mentorInfo?.Avatar_URL,
+    Avatar_URL: clase.mentorInfo?.Avatar_URL,
   }));
 
   return (

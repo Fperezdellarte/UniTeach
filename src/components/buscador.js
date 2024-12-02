@@ -31,6 +31,7 @@ export const useBuscador = () => {
       });
 
       const mentors = response.data;
+      console.log(mentors)
       sessionStorage.setItem('searchTerm', searchTerm);
 
       navigate('/Results', { state: { results: mentors, } });

@@ -37,11 +37,7 @@ const MentorCard = ({ mentor }) => {
       stars.push(<FontAwesomeIcon icon={faStarHalfAlt} key="half" className="text-warning" />);
     }
 
-    // Agregar estrellas vacías para completar
-    const emptyStars = maxStars - stars.length;
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(<FontAwesomeIcon icon={faStar} key={`empty-${i}`} className="text-secondary" />);
-    }
+   
 
     return stars;
   };
@@ -55,7 +51,7 @@ const MentorCard = ({ mentor }) => {
     >
       <Link to={`/perfilMentor/${mentor.idUser}`} className="mentor-card-link">
         <img
-          src={mentor.profileImageUrl || "https://via.placeholder.com/400x400"}
+          src={mentor.Avatar_URL || "https://via.placeholder.com/500x500"}
           alt={`${mentor.MentorName} profile`}
           className="mentor-image"
         />
