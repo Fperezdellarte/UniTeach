@@ -15,62 +15,71 @@ const Clases = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
 
   const [showModal, setShowModal] = useState(false);
-  const [selectedRating, setSelectedRating] = useState(0); // Estado para la calificación
+  const [selectedRating, setSelectedRating] = useState(0); 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
-
+  const [isLoading, setIsLoading] = useState(false);
   const { isAuthenticated, token } = useAuth();
   const navigate = useNavigate();
-  
+  const [selectedId, setSelectedId] = useState(null);
+
+
   if (!isAuthenticated) {
     navigate('/login');
   }
 
-  const handleRatingClick = async (star) => {
+  const handleRatingClick = async (star, mentorId) => {
     try {
-      await axios.post(`${API_URL}/users/rating/${classesData.mentorId}`, {
-        star,
+      await axios.post(`${API_URL}/users/rating/${selectedId}`, {
+        "rate": star,
       }, {
         headers: {
           'Authorization': `Bearer ${token}`, 
         },
       });
-    } catch{};
+      console.log(`Calificación enviada: ${star} estrellas para mentor ${selectedId}`);
+    } catch (error) {
+      console.error("Error al enviar la calificación:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   
-
-console.log(classesData);
   const columns = [
     {
       name: "Materia",
       selector: row => row.Materia,
       sortable: true,
-      width: '30%',
+      width: '20%',
     },
     {
       name: "Fecha y Hora",
       selector: row => row.hour,
       sortable: true,
-      width: '35%',
+      width: '25%',
     },
     {
       name: "Aula",
       selector: row => row.Place,
       sortable: true,
-      width: '20%',
+      width: '15%',
     },
     {
       name:"Mentor",
       selector: row=> row.Mentor,
       sortable: true,
-      width:'30%'
+      width:'20%'
     },
     {
       name: "Acciones",
-      width: '15%',
+      width: '20%',
+      sortable: true,
       cell: (row) => (
         <button 
-          onClick={handleShowModal}
+          onClick={() => {
+            setSelectedId(row.mentorId); 
+            handleShowModal(); 
+          }}
           className="rate-button"
         >
           Calificar Mentor
@@ -80,6 +89,7 @@ console.log(classesData);
       allowOverflow: true, 
       button: true,
     }
+    
   ];
 
   if (loading) {
@@ -107,7 +117,7 @@ console.log(classesData);
             rows: {
               style: {
                 padding: '12px',
-                borderBottom: '1px solid #ddd',
+                borderBottom: '1px solid #ddd', // Línea divisoria para todas las filas
               },
             },
             headCells: {
@@ -117,28 +127,26 @@ console.log(classesData);
                 backgroundColor: '#fff',
                 color: '#25619c',
                 padding: '20px',
-                fontSize:'x-large',
+                fontSize: 'x-large',
               },
             },
             cells: {
               style: {
                 padding: '12px',
-                fontSize:'large',
-                marginLeft: '3px',
+                fontSize: 'large',
                 fontWeight: 'bold',
               },
             },
             pagination: {
               style: {
-                backgroundColor: '#f8f8f8',
                 padding: '12px',
-                borderTop: '1px solid #ddd',
                 display: 'flex',
                 justifyContent: 'center',
               },
             },
           }}
         />
+
       </div>
 
       <Modal
@@ -161,18 +169,24 @@ console.log(classesData);
                 icon={faStar}
                 className={`star-icon ${selectedRating >= star ? 'selected' : ''}`}
                 onClick={() => {
-                  setSelectedRating(star); // Actualiza el estado de la calificación seleccionada
-                  handleRatingClick(star); // Envía la calificación al servidor
+                  setSelectedRating(star); 
                 }}
               />
             ))}
           </div>
           <button
             className="submit-rating-btn action-buttom"
-            onClick={() => handleCloseModal()}
-            disabled={selectedRating === 0} 
+            onClick={async () => {
+              try {
+                await handleRatingClick(selectedRating, selectedId);
+                handleCloseModal(); 
+              } catch (error) {
+                console.error("Error al enviar la calificación", error);
+              }
+            }}
+            disabled={selectedRating === 0 || isLoading} 
           >
-            Enviar Calificación
+            {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Enviar Calificación"}
           </button>
         </div>
       </Modal>

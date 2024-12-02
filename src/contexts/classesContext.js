@@ -38,8 +38,8 @@ export const ClassesProvider = ({ children }) => {
           const mentorResponse = await axios.get(`${API_URL}/users/mentor/${classData.Users_idCreator}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
-          const mentorName = mentorResponse.data.Name;
-          const mentorId = mentorResponse.data.idUser;
+          const mentorInfo = mentorResponse.data;
+
 
           const subjectResponse = await axios.get(`${API_URL}/subjects/${classData.Subjects_idSubjects}`, {
             headers: { 'Authorization': `Bearer ${token}` }
@@ -49,13 +49,15 @@ export const ClassesProvider = ({ children }) => {
           return {
             idInscription: inscriptions.find(inscription => inscription.Classes_idClasses === classData.idClasses).idInscription,
             Materia: subjectName,
-            Mentor:mentorName,
-            MentorId: mentorId,
+            Mentor:mentorInfo.Name,
+            mentorId: mentorInfo.idUser,
             date: classData.Date,
-            endDate: classData.endDate,  // Asegúrate de que endDate esté disponible
+            endDate: classData.endDate,  
             hour: classData.hour,
             Place: classData.Place,
-            idClasses: classData.idClasses
+            idClasses: classData.idClasses,
+            mentorOpinion: mentorInfo.Opinion,
+
           };
         }));
 
