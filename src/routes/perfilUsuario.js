@@ -4,7 +4,7 @@ import { API_URL } from '../auth/constans';
 import axios from 'axios';
 import { Button, Form, Container, Image, Alert, Spinner, Modal } from 'react-bootstrap';
 import '../styles/PerfilUsuario.css';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importar Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const PerfilUsuario = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const PerfilUsuario = () => {
   const [modalMessage, setModalMessage] = useState('');
 
   useEffect(() => {
-    const authData = JSON.parse(localStorage.getItem('authData'));
+    const authData = JSON.parse(sessionStorage.getItem('authData'));
 
     if (authData && authData.user) {
       setFormData({
@@ -46,7 +46,7 @@ const PerfilUsuario = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoadingSave(true); // Inicia la carga para Guardar cambios
+    setLoadingSave(true);
 
     const { Avatar_File, ...rest } = formData;
 
@@ -56,28 +56,27 @@ const PerfilUsuario = () => {
     formDataToSend.append('Mail', rest.Mail);
     formDataToSend.append('Phone', rest.Phone);
     if (Avatar_File) {
-      formDataToSend.append('file', Avatar_File); // Agregar el archivo con la clave 'file'
+      formDataToSend.append('file', Avatar_File);
     }
 
     try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
+      const authData = JSON.parse(sessionStorage.getItem('authData'));
       const response = await axios.patch(`${API_URL}/users/${authData.user.idUser}`, formDataToSend, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Importante para subir archivos
-          'Authorization': `Bearer ${authData.token}` // Incluir el token si es necesario
-        }
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${authData.token}`,
+        },
       });
 
       if (response.status === 200) {
-        // Actualización exitosa
         const updatedUser = response.data.user;
-        localStorage.setItem('authData', JSON.stringify({ ...authData, user: updatedUser }));
-        
+        sessionStorage.setItem('authData', JSON.stringify({ ...authData, user: updatedUser }));
+
         setFormData({
           ...formData,
           ...updatedUser,
         });
-        
+
         setModalMessage('Perfil actualizado correctamente');
         setShowModal(true);
       } else {
@@ -89,40 +88,42 @@ const PerfilUsuario = () => {
       setModalMessage('Error de red al actualizar el perfil');
       setShowModal(true);
     } finally {
-      setLoadingSave(false); // Termina la carga para Guardar cambios
+      setLoadingSave(false);
     }
   };
 
   const handlePasswordReset = async () => {
-    setLoadingPasswordReset(true); // Inicia la carga para Cambiar Contraseña
+    setLoadingPasswordReset(true);
     try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
-      await axios.post(`${API_URL}/password-reset`, { email: formData.Mail }, {
+      const authData = JSON.parse(sessionStorage.getItem('authData'));
+      await axios.post(`${API_URL}/users/sendEmail`, { email: formData.Mail }, {
         headers: {
-          'Authorization': `Bearer ${authData.token}`
-        }
+          Authorization: `Bearer ${authData.token}`,
+        },
       });
       setPasswordResetMessage('Hemos enviado un enlace a tu correo para cambiar la contraseña.');
     } catch (error) {
+      console.error('Error enviando el correo:', error);
       setPasswordResetMessage('Ocurrió un error al enviar el enlace. Inténtalo de nuevo.');
     } finally {
-      setLoadingPasswordReset(false); // Termina la carga para Cambiar Contraseña
+      setLoadingPasswordReset(false);
     }
   };
 
   return (
     <div>
-       <Navbar />
+      <Navbar />
       <Container className="my-4">
         <h2 className="perfilusuario-h2 mb-4">Perfil de Usuario</h2>
         <Form onSubmit={handleSubmit} className="perfilusuario-profile-form">
+          {/* Campos del formulario */}
           <Form.Group controlId="formName" className="perfilusuario-form-group">
             <Form.Control
               type="text"
               name="Name"
               value={formData.Name}
               onChange={handleChange}
-              placeholder=" " // Placeholder vacío para el efecto de etiqueta flotante
+              placeholder=" "
               className={formData.Name ? 'filled' : ''}
             />
             <Form.Label className={formData.Name ? 'filled' : ''}>Nombre</Form.Label>
@@ -146,7 +147,7 @@ const PerfilUsuario = () => {
               name="Mail"
               value={formData.Mail}
               onChange={handleChange}
-              placeholder=" " // Placeholder vacío para el efecto de etiqueta flotante
+              placeholder=" "
               className={formData.Mail ? 'filled' : ''}
             />
             <Form.Label className={formData.Mail ? 'filled' : ''}>Correo</Form.Label>
@@ -191,7 +192,7 @@ const PerfilUsuario = () => {
           <Button variant="link" onClick={handlePasswordReset} disabled={loadingPasswordReset}>
             {loadingPasswordReset ? <Spinner animation="border" size="sm" /> : 'Cambiar Contraseña'}
           </Button>
-          
+
           {passwordResetMessage && (
             <Alert variant="info" className="mt-3">
               {passwordResetMessage}
@@ -200,7 +201,6 @@ const PerfilUsuario = () => {
         </Form>
       </Container>
 
-      {/* Modal de confirmación */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Actualización de perfil</Modal.Title>
@@ -217,5 +217,3 @@ const PerfilUsuario = () => {
 };
 
 export default PerfilUsuario;
-
-

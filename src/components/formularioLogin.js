@@ -9,7 +9,7 @@ import hideIcon from '../Assest/hide.png';
 export const FormularioLogin = ({ onLoginSuccess }) => {
   const [Username, setUsername] = useState('');
   const [Password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
   const [errorResponse, setErrorResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
@@ -41,7 +41,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
         if (rememberMe) {
           localStorage.setItem('authData', JSON.stringify({ Username, token, user }));
         } else {
-          localStorage.setItem('authData', JSON.stringify({ Username, token }));
+          localStorage.setItem('authData', JSON.stringify({ Username, token, user }));
         }
 
         onLoginSuccess();
@@ -119,7 +119,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
             </div>
 
             <div className="il">
-              <a href="#!" className="forgot-password-link">Olvidé mi contraseña?</a>
+              <a href="#!" className="forgot-password-link"onClick={() => goTo('/email-form')}>Olvidé mi contraseña?</a>
             </div>
           </div>
 
