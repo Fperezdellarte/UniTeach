@@ -14,15 +14,8 @@ import { useNavigate } from 'react-router-dom';
 const Clases = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
 
-<<<<<<< HEAD
-<<<<<<< develop
-  console.log(classesData);
-  const handleRateClass = (classData) => {
-  
-    
-=======
   const [showModal, setShowModal] = useState(false);
-  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedRating, setSelectedRating] = useState(0); 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,110 +23,52 @@ const Clases = () => {
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(null);
 
+
   if (!isAuthenticated) {
     navigate('/login');
   }
+
   const handleRatingClick = async (star, mentorId) => {
-    console.log(star);
     try {
-      setIsLoading(true);
-      await axios.post(
-        `${API_URL}/users/rating/${mentorId}`, // Usa mentorId en la URL
-        { rate: star },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(`Calificación enviada: ${star} estrellas para mentor ${mentorId}`);
-    } catch (error) {
-      console.error("Error al enviar la calificación:", error);
-    } finally {
-      setIsLoading(false);
-    }
->>>>>>> local
-  };
-=======
-  const [showModal, setShowModal] = useState(false);
-  const [selectedRating, setSelectedRating] = useState(0); // Estado para la calificación
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
-
-  const { isAuthenticated, token } = useAuth();
-  const navigate = useNavigate();
-  
-  if (!isAuthenticated) {
-    navigate('/login');
-  }
-
-  const handleRatingClick = async (star) => {
-    try {
-      await axios.post(`${API_URL}/users/rating/${classesData.mentorId}`, {
-        star,
+      await axios.post(`${API_URL}/users/rating/${selectedId}`, {
+        "rate": star,
       }, {
         headers: {
           'Authorization': `Bearer ${token}`, 
         },
       });
-    } catch{};
+      console.log(`Calificación enviada: ${star} estrellas para mentor ${selectedId}`);
+    } catch (error) {
+      console.error("Error al enviar la calificación:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   
-
-console.log(classesData);
   const columns = [
     {
       name: "Materia",
       selector: row => row.Materia,
       sortable: true,
-<<<<<<< HEAD
-<<<<<<< develop
-      width: '30%'
-=======
       width: '20%',
->>>>>>> local
-=======
-      width: '30%',
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     },
     {
       name: "Fecha y Hora",
       selector: row => row.hour,
       sortable: true,
-<<<<<<< HEAD
-<<<<<<< develop
-      width: '35%'
-=======
       width: '25%',
->>>>>>> local
-=======
-      width: '35%',
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     },
     {
       name: "Aula",
       selector: row => row.Place,
       sortable: true,
-<<<<<<< HEAD
-<<<<<<< develop
-      width: '20%'
-=======
       width: '15%',
-=======
-      width: '20%',
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     },
     {
       name:"Mentor",
       selector: row=> row.Mentor,
       sortable: true,
-<<<<<<< HEAD
-      width:'15%'
->>>>>>> local
-=======
-      width:'30%'
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
+      width:'20%'
     },
     {
       name: "Acciones",
@@ -141,18 +76,10 @@ console.log(classesData);
       sortable: true,
       cell: (row) => (
         <button 
-<<<<<<< HEAD
-<<<<<<< develop
-          onClick={() => handleRateClass(row)} 
-=======
           onClick={() => {
             setSelectedId(row.mentorId); 
             handleShowModal(); 
           }}
->>>>>>> local
-=======
-          onClick={handleShowModal}
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
           className="rate-button"
         >
           Calificar Mentor
@@ -190,7 +117,7 @@ console.log(classesData);
             rows: {
               style: {
                 padding: '12px',
-                borderBottom: '1px solid #ddd',
+                borderBottom: '1px solid #ddd', // Línea divisoria para todas las filas
               },
             },
             headCells: {
@@ -200,33 +127,16 @@ console.log(classesData);
                 backgroundColor: '#fff',
                 color: '#25619c',
                 padding: '20px',
-                fontSize:'x-large',
+                fontSize: 'x-large',
               },
             },
             cells: {
               style: {
                 padding: '12px',
-                fontSize:'large',
-                marginLeft: '3px',
+                fontSize: 'large',
                 fontWeight: 'bold',
               },
             },
-<<<<<<< HEAD
-<<<<<<< develop
-          },
-          pagination: {
-            style: {
-              backgroundColor: '#f8f8f8',
-              padding: '12px',
-              borderTop: '1px solid #ddd',
-              display: 'flex',
-              justifyContent: 'center',
-            },
-          },
-        }}
-      />
-    </div>
-=======
             pagination: {
               style: {
                 padding: '12px',
@@ -234,19 +144,9 @@ console.log(classesData);
                 justifyContent: 'center',
               },
             },
-=======
-            pagination: {
-              style: {
-                backgroundColor: '#f8f8f8',
-                padding: '12px',
-                borderTop: '1px solid #ddd',
-                display: 'flex',
-                justifyContent: 'center',
-              },
-            },
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
           }}
         />
+
       </div>
 
       <Modal
@@ -269,22 +169,16 @@ console.log(classesData);
                 icon={faStar}
                 className={`star-icon ${selectedRating >= star ? 'selected' : ''}`}
                 onClick={() => {
-<<<<<<< HEAD
-                  setSelectedRating(star);
-=======
-                  setSelectedRating(star); // Actualiza el estado de la calificación seleccionada
-                  handleRatingClick(star); // Envía la calificación al servidor
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
+                  setSelectedRating(star); 
                 }}
               />
             ))}
           </div>
           <button
             className="submit-rating-btn action-buttom"
-<<<<<<< HEAD
             onClick={async () => {
               try {
-                await handleRatingClick(selectedRating, selectedId); // Pasa el mentorId
+                await handleRatingClick(selectedRating, selectedId);
                 handleCloseModal(); 
               } catch (error) {
                 console.error("Error al enviar la calificación", error);
@@ -294,19 +188,8 @@ console.log(classesData);
           >
             {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Enviar Calificación"}
           </button>
-
         </div>
       </Modal>
->>>>>>> local
-=======
-            onClick={() => handleCloseModal()}
-            disabled={selectedRating === 0} 
-          >
-            Enviar Calificación
-          </button>
-        </div>
-      </Modal>
->>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     </div>
   );
 };
