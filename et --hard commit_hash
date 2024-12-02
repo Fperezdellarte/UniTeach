@@ -1,0 +1,260 @@
+[33mcommit 0f7542252a86163f4c6f8ab2abd9a6cfb577289d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature-clases[m[33m)[m
+Merge: 1a5241c d448563
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Fri Nov 29 01:07:23 2024 -0300
+
+    error en el merge ignorar
+
+[33mcommit 1a5241cb07de524f0099bb8880cc6ff974b9ab29[m[33m ([m[1;31morigin/feature-clases[m[33m)[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Nov 28 23:42:17 2024 -0300
+
+    Correccion de mail de contactanos
+
+[33mcommit 52f4e6a144d5736782203b67ec52196232f2e767[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Nov 28 01:13:51 2024 -0300
+
+    Nueva seccion contactanos
+
+[33mcommit d448563efefe6822e1874689b556269683f9dd7c[m[33m ([m[1;31morigin/features-home[m[33m)[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Tue Nov 26 23:29:25 2024 -0300
+
+    agregada funciones home
+
+[33mcommit f4d79eaddf2f7b690ded3ba5903d57f4dac9d74a[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Nov 21 17:38:01 2024 -0300
+
+    merge de develop y feacture-clases
+
+[33mcommit f5d82910397cca293b43671f3bb5c4df75b3e32f[m
+Merge: 4525559 f1e5b03
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Nov 21 17:34:54 2024 -0300
+
+    Merge branch 'develop' of https://github.com/AndresDavidRamirez/UniTeach into feature-clases
+
+[33mcommit 4525559efb214ac97de3d186e0589d52b0ce0f1b[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Nov 21 17:33:00 2024 -0300
+
+    css de clases y creacion del boton calificar
+
+[33mcommit 0fe21d1d54090df97626fcb633e4ef9ccba7e52f[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Fri Nov 15 01:12:40 2024 -0300
+
+    agregadas las tablas
+
+[33mcommit 0949469bab929d58eafed4dccde1fb04dc818523[m
+Merge: 230423a f1e5b03
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Fri Nov 15 01:12:07 2024 -0300
+
+    agregada tablas
+
+[33mcommit 3e657b0c374ff621f2ce74f5aebe7a7ed30fcea9[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Wed Nov 13 01:28:24 2024 -0300
+
+    pagina clases funcional
+
+[33mcommit f1e5b0306e43678519ab9648d3fd3af5e68c22fd[m
+Merge: 1fbc9c1 fbdf2c3
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Wed Nov 13 00:45:59 2024 -0300
+
+    agregado perfil mentor
+
+[33mcommit 230423a107cac7380b71eb3a0b18eaafb28a43bd[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Tue Nov 12 20:52:23 2024 -0300
+
+    Modificacion de Cards del home y MODALS
+
+[33mcommit 5565441c317bded98ffe23eea0baa81354503500[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Wed Nov 6 17:20:50 2024 -0300
+
+    Creacion de modals
+
+[33mcommit 8bd4662ce5bb3e69c72f901057a45879adb18dd8[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Fri Oct 25 11:42:01 2024 -0300
+
+    Modificacion Mentores Recientes y etc
+
+[33mcommit 4276a2df5ce27843297bd643e11c5ae2e67827c7[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Wed Oct 16 20:23:24 2024 -0300
+
+    modal cuando no se tiene clases
+
+[33mcommit 82c8da8f660544148f10a790229746f7c4144412[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Sep 19 16:56:46 2024 -0300
+
+    modal para clases
+
+[33mcommit af07539eab401112874b1072081294f4784b5f97[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Sep 19 16:09:58 2024 -0300
+
+    creacion de la pagina clases
+
+[33mcommit 06f60c815bf4e68f0ee1a3416a7a2dd59e51de3e[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Wed Sep 11 20:07:06 2024 -0300
+
+    Creacion cards Mentores
+
+[33mcommit c3dc122553f691eb5820f447b103d5afb8e54dca[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Tue Sep 10 20:06:09 2024 -0300
+
+    Modificacion en el campo registro
+
+[33mcommit 4fb3c2441d069e52ea9a1089b319b56c49e82d59[m
+Merge: 91e21ed 1fbc9c1
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Thu Sep 5 18:11:18 2024 -0300
+
+    Merge branch 'develop' of https://github.com/Fperezdellarte/UniTeach into features-home
+
+[33mcommit 91e21ed94482f4a9a71d56cc6351d95e4f7fd3aa[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Thu Sep 5 18:00:02 2024 -0300
+
+    Animacion para Navbar
+
+[33mcommit 1fbc9c16a4548ce4ed94d4955b42aa7f546d1c68[m[33m ([m[1;32mmain[m[33m)[m
+Merge: 9b45e6e 0310dce
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Sep 5 17:56:42 2024 -0300
+
+    renovacion del footer
+
+[33mcommit 9b45e6e360627c9c163c696e548d031784f395dc[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Sep 5 17:53:07 2024 -0300
+
+    renovacion del footer
+
+[33mcommit beda6f66cdb06bf1dcf8c6ec08edf395a0e91234[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Wed Sep 4 18:52:22 2024 -0300
+
+    Pruebas sobre el Home, agregado de newsletter y cambio en las card
+
+[33mcommit fbdf2c36574b89d5b8cc4dde418deee90bf01d0a[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Thu Aug 29 01:14:46 2024 -0300
+
+    agregada la funcion de inscripcion en clases
+
+[33mcommit 0310dce8a0ee58087be94b99e8338176305a7186[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Wed Aug 28 16:33:49 2024 -0300
+
+    agregado boton de cambio de contraseña y manejo de estado para cambios
+
+[33mcommit aa424b3e09cbbbc3e5ddf9c7ed43652caca9e91b[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Wed Aug 28 16:04:28 2024 -0300
+
+    agregado estado de carga y notificacion de exito
+
+[33mcommit 376188b82d607d52479328c6df1af6a990bfb6f0[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Mon Aug 26 00:45:59 2024 -0300
+
+    arreglo rapido css
+
+[33mcommit 0a17ee421224ee4a0e7c492d7c71835b96f9d9ff[m
+Merge: 7f4cb32 c0630ca
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Mon Aug 26 00:27:56 2024 -0300
+
+    agredado perfil de usuario
+
+[33mcommit 7f4cb32efcb9865e9afe94d4b5bfe3c7dbfc3595[m
+Merge: 4e79bf1 ad3b8bb
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Mon Aug 26 00:14:21 2024 -0300
+
+    agregada la funcion search
+
+[33mcommit ad3b8bb706ecd5c43daecfad3f595f6066f31ffb[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Mon Aug 26 00:04:07 2024 -0300
+
+    agregada la funcion de buscar
+
+[33mcommit c0630caad337bb4e9849f02e4523b41c5d7faa51[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Sun Aug 25 23:36:17 2024 -0300
+
+    agregado perfil de usuario
+
+[33mcommit a5f72c5ab911641117a1d03de04f0649ace113b9[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Thu Aug 22 19:19:09 2024 -0300
+
+    agregado de avatar
+
+[33mcommit 4e79bf1efa0000eaed7969ea82ca48a835cd365a[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Aug 22 19:18:22 2024 -0300
+
+    cambios de estetica en front
+
+[33mcommit 93efd69fdd5f4a403f4bfc9d541f69420b22aec4[m
+Merge: 447f331 f12caeb
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Aug 22 14:08:36 2024 -0300
+
+    Merge branch 'features-home' into develop
+
+[33mcommit 447f331774efeabf81e300504be77e686148dd9d[m
+Merge: 1b24530 c952582
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Aug 22 13:56:26 2024 -0300
+
+    Merge branch 'feature-search'  into develop
+
+[33mcommit 1b245300a08d45e2ab31555ddf6460188f5888f1[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Thu Aug 22 13:54:24 2024 -0300
+
+    union de feature-search a develop
+
+[33mcommit 83bd2734b797b7975e679db88547ddf3a72fc941[m
+Merge: d46c32d 77725fb
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Wed Aug 21 23:27:45 2024 -0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/develop' into develop
+
+[33mcommit d46c32d324a5b0a70723405f3ffe84e9ab45ac53[m
+Author: Fperezdellarte <fperezdellarte@gmail.com>
+Date:   Wed Aug 21 23:24:55 2024 -0300
+
+    pruebas del singup
+
+[33mcommit c952582908706f3fe47176637e7f8d019f152b78[m[33m ([m[1;31morigin/feature-search[m[33m)[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Wed Aug 21 19:25:58 2024 -0300
+
+    agregado buscador y card de mentores
+
+[33mcommit f12caeba60af171ecdc1b3e16942be8bb5ce38bf[m
+Author: Juan Reina <ignacioreina6@gmail.com>
+Date:   Wed Aug 21 18:09:35 2024 -0300
+
+    Cambios en HOME, ABOUT, LOGIN, FOOTER
+
+[33mcommit 77725fb758ae3b84c16053b8f0e65ca4f486e504[m
+Author: Alvaro <alvaro.ybanez16@gmail.com>
+Date:   Tue Aug 20 17:46:

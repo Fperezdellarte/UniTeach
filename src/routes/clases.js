@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { ClassesContext } from '../contexts/classesContext';
 import '../styles/clases.css';
 import { Navbar } from '../components/navbar';
+import { Modal } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { API_URL } from '../auth/constans';
+import { useAuth } from '../auth/authProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Clases = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
 
+<<<<<<< HEAD
 <<<<<<< develop
   console.log(classesData);
   const handleRateClass = (classData) => {
@@ -46,43 +54,86 @@ const Clases = () => {
     }
 >>>>>>> local
   };
+=======
+  const [showModal, setShowModal] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0); // Estado para la calificación
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
 
+  const { isAuthenticated, token } = useAuth();
+  const navigate = useNavigate();
+  
+  if (!isAuthenticated) {
+    navigate('/login');
+  }
+
+  const handleRatingClick = async (star) => {
+    try {
+      await axios.post(`${API_URL}/users/rating/${classesData.mentorId}`, {
+        star,
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`, 
+        },
+      });
+    } catch{};
+  };
+  
+
+console.log(classesData);
   const columns = [
     {
       name: "Materia",
       selector: row => row.Materia,
       sortable: true,
+<<<<<<< HEAD
 <<<<<<< develop
       width: '30%'
 =======
       width: '20%',
 >>>>>>> local
+=======
+      width: '30%',
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     },
     {
       name: "Fecha y Hora",
       selector: row => row.hour,
       sortable: true,
+<<<<<<< HEAD
 <<<<<<< develop
       width: '35%'
 =======
       width: '25%',
 >>>>>>> local
+=======
+      width: '35%',
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     },
     {
       name: "Aula",
       selector: row => row.Place,
       sortable: true,
+<<<<<<< HEAD
 <<<<<<< develop
       width: '20%'
 =======
       width: '15%',
+=======
+      width: '20%',
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     },
     {
       name:"Mentor",
       selector: row=> row.Mentor,
       sortable: true,
+<<<<<<< HEAD
       width:'15%'
 >>>>>>> local
+=======
+      width:'30%'
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     },
     {
       name: "Acciones",
@@ -90,6 +141,7 @@ const Clases = () => {
       sortable: true,
       cell: (row) => (
         <button 
+<<<<<<< HEAD
 <<<<<<< develop
           onClick={() => handleRateClass(row)} 
 =======
@@ -98,9 +150,12 @@ const Clases = () => {
             handleShowModal(); 
           }}
 >>>>>>> local
+=======
+          onClick={handleShowModal}
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
           className="rate-button"
         >
-          Calificar
+          Calificar Mentor
         </button>
       ),
       ignoreRowClick: true,
@@ -118,44 +173,45 @@ const Clases = () => {
     return <div>{error}</div>;
   }
 
-  // Verificar si los datos recientes están vacíos
   if (classesData.recent.length === 0) {
     return <div>No tienes clases disponibles</div>;
   }
 
   return (
-    <div className=''>
-      <Navbar/>
-    <div className="table-container container-recientes">
-      <h2 className="table-clases-recientes">Clases Recientes</h2>
-      <DataTable
-        columns={columns}
-        data={classesData.recent}
-        noDataComponent="No tienes clases disponibles"
-        customStyles={{
-          rows: {
-            style: {
-              padding: '12px',
-              borderBottom: '1px solid #ddd',
+    <div>
+      <Navbar />
+      <div className="table-container container-recientes">
+        <h2 className="table-clases-recientes">Clases Recientes</h2>
+        <DataTable
+          columns={columns}
+          data={classesData.recent}
+          noDataComponent="No tienes clases disponibles"
+          customStyles={{
+            rows: {
+              style: {
+                padding: '12px',
+                borderBottom: '1px solid #ddd',
+              },
             },
-          },
-          headCells: {
-            style: {
-              fontWeight: 'bold',
-              textAlign: 'center',
-              backgroundColor: '#fff',
-              color: '#25619c',
-              padding: '20px',
-              fontSize:'x-large',
+            headCells: {
+              style: {
+                fontWeight: 'bold',
+                textAlign: 'center',
+                backgroundColor: '#fff',
+                color: '#25619c',
+                padding: '20px',
+                fontSize:'x-large',
+              },
             },
-          },
-          cells: {
-            style: {
-              padding: '12px',
-              fontSize:'large',
-              marginLeft: '3px',
-              fontWeight: 'bold',
+            cells: {
+              style: {
+                padding: '12px',
+                fontSize:'large',
+                marginLeft: '3px',
+                fontWeight: 'bold',
+              },
             },
+<<<<<<< HEAD
 <<<<<<< develop
           },
           pagination: {
@@ -178,6 +234,17 @@ const Clases = () => {
                 justifyContent: 'center',
               },
             },
+=======
+            pagination: {
+              style: {
+                backgroundColor: '#f8f8f8',
+                padding: '12px',
+                borderTop: '1px solid #ddd',
+                display: 'flex',
+                justifyContent: 'center',
+              },
+            },
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
           }}
         />
       </div>
@@ -202,13 +269,19 @@ const Clases = () => {
                 icon={faStar}
                 className={`star-icon ${selectedRating >= star ? 'selected' : ''}`}
                 onClick={() => {
+<<<<<<< HEAD
                   setSelectedRating(star);
+=======
+                  setSelectedRating(star); // Actualiza el estado de la calificación seleccionada
+                  handleRatingClick(star); // Envía la calificación al servidor
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
                 }}
               />
             ))}
           </div>
           <button
             className="submit-rating-btn action-buttom"
+<<<<<<< HEAD
             onClick={async () => {
               try {
                 await handleRatingClick(selectedRating, selectedId); // Pasa el mentorId
@@ -225,6 +298,15 @@ const Clases = () => {
         </div>
       </Modal>
 >>>>>>> local
+=======
+            onClick={() => handleCloseModal()}
+            disabled={selectedRating === 0} 
+          >
+            Enviar Calificación
+          </button>
+        </div>
+      </Modal>
+>>>>>>> ec3bf964c1dfbaeeb1c774c0668fb29ac653ad94
     </div>
   );
 };
