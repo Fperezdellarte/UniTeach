@@ -16,10 +16,12 @@ export const ClassesProvider = ({ children }) => {
   const { user, token } = useAuth();
 
   useEffect(() => {
+    console.log("el contexto inicia a pedir datos")
     if (!user || !token) {
       setLoading(false);
       return;
     }
+
 
     const fetchData = async () => {
       setLoading(true);  // Comienza la carga
@@ -35,14 +37,24 @@ export const ClassesProvider = ({ children }) => {
           });
           const classData = classResponse.data.class;
 
+          const mentorResponse = await axios.get(`${API_URL}/users/mentor/${classData.Users_idCreator}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+
+          const mentorInfo = mentorResponse.data
+
           const subjectResponse = await axios.get(`${API_URL}/subjects/${classData.Subjects_idSubjects}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const subjectName = subjectResponse.data.subject.Name;
 
+
+          
           return {
             idInscription: inscriptions.find(inscription => inscription.Classes_idClasses === classData.idClasses).idInscription,
             Materia: subjectName,
+            Mentor: mentorInfo.Name,
+            mentorInfo: mentorInfo,
             date: classData.Date,
             endDate: classData.endDate,  // Asegúrate de que endDate esté disponible
             hour: classData.hour,

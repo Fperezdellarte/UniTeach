@@ -12,7 +12,7 @@ const MentorInfo = ({ mentor }) => (
   </div>
 );
 
-const MentorCard = ({ mentor, onClick }) => {
+const MentorCard = ({ mentor }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseOver = () => {
@@ -25,12 +25,20 @@ const MentorCard = ({ mentor, onClick }) => {
 
   const renderStars = (rating) => {
     const stars = [];
+    const maxStars = 5; // Total de estrellas
+
+    // Agregar estrellas llenas
     for (let i = 0; i < Math.floor(rating); i++) {
-      stars.push(<FontAwesomeIcon icon={faStar} key={i} className="text-warning" />);
+      stars.push(<FontAwesomeIcon icon={faStar} key={`full-${i}`} className="text-warning" />);
     }
+
+    // Agregar media estrella si corresponde
     if (rating % 1 !== 0) {
       stars.push(<FontAwesomeIcon icon={faStarHalfAlt} key="half" className="text-warning" />);
     }
+
+   
+
     return stars;
   };
 
@@ -43,17 +51,14 @@ const MentorCard = ({ mentor, onClick }) => {
     >
       <Link to={`/perfilMentor/${mentor.idUser}`} className="mentor-card-link">
         <img
-          src={mentor.profileImageUrl || "https://via.placeholder.com/300x300"}
+          src={mentor.Avatar_URL || "https://via.placeholder.com/500x500"}
           alt={`${mentor.MentorName} profile`}
           className="mentor-image"
         />
         <div className="card-body">
-          <MentorInfo className="mentor-info" mentor= {mentor} />
-          <div className="mb-2">{renderStars(mentor.Opinion)}</div>
-          <div className="d-flex justify-content-between">
-            <button className="btn custom-btn">Contactar</button>
-            <button className="btn custom-btn">Ver historial</button>
-          </div>
+          <MentorInfo className="mentor-info" mentor={mentor} />
+          <div className="mb-2">{renderStars(mentor.Opinion || 0)}</div>
+          <div className="d-flex justify-content-between"></div>
         </div>
       </Link>
     </div>
