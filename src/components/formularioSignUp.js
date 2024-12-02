@@ -1,51 +1,51 @@
-import React, { useState } from 'react';
-import { API_URL } from "../auth/constans";
-import { useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/formularioSignUp.css';
+  import React, { useState } from 'react';
+  import { API_URL } from "../auth/constans";
+  import { useNavigate } from "react-router-dom";
+  import 'bootstrap/dist/css/bootstrap.min.css';
+  import '../styles/formularioSignUp.css';
 
-export const FormularioSignUp = () => {
-  const [Username, setUsername] = useState('');
-  const [Password, setPassword] = useState('');
-  const [Name, setName] = useState('');
-  const [DNI, setDni] = useState('');
-  const [Legajo, setLegajo] = useState('');
-  const [TypeOfUser, setUserType] = useState('');
-  const [Mail, setMail] = useState('');
-  const [Phone, setPhone] = useState('');
-  const [University, setUniversity] = useState('');
+  export const FormularioSignUp = () => {
+    const [Username, setUsername] = useState('');
+    const [Password, setPassword] = useState('');
+    const [Name, setName] = useState('');
+    const [DNI, setDni] = useState('');
+    const [Legajo, setLegajo] = useState('');
+    const [TypeOfUser, setUserType] = useState('');
+    const [Mail, setMail] = useState('');
+    const [Phone, setPhone] = useState('');
+    const [University, setUniversity] = useState('');
 
-  const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [dniError, setDniError] = useState('');
-  const [legajoError, setLegajoError] = useState('');
-  const [phoneError, setPhoneError] = useState('');
+    const [usernameError, setUsernameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [dniError, setDniError] = useState('');
+    const [legajoError, setLegajoError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    const handleSubmit = async (event) => {
+      event.preventDefault();
 
-    let hasError = false;
+      let hasError = false;
 
-    // Validar nombre de usuario
-    const usernameRegex = /^[a-zA-Z0-9]+$/;
-    if (!usernameRegex.test(Username)) {
-      setUsernameError("El nombre de usuario no puede contener caracteres especiales.");
-      hasError = true;
-    } else {
-      setUsernameError('');
-    }
+      // Validar nombre de usuario
+      const usernameRegex = /^[a-zA-Z0-9]+$/;
+      if (!usernameRegex.test(Username)) {
+        setUsernameError("El nombre de usuario no puede contener caracteres especiales.");
+        hasError = true;
+      } else {
+        setUsernameError('');
+      }
 
-    // Validar contraseña
-    const passwordRegex = /^(?=.*[A-Z]).{8,25}$/;
-    if (!passwordRegex.test(Password)) {
-      setPasswordError("La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.");
-      hasError = true;
-    } else {
-      setPasswordError('');
-    }
+      // Validar contraseña
+      const passwordRegex = /^(?=.*[A-Z]).{8,25}$/;
+      if (!passwordRegex.test(Password)) {
+        setPasswordError("La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.");
+        hasError = true;
+      } else {
+        setPasswordError('');
+      }
 
     // Validar nombre
     const nameRegex = /^[a-z A-Z]+$/;
@@ -56,36 +56,36 @@ export const FormularioSignUp = () => {
       setNameError('');
     }
 
-    // Validar DNI
-    const dniRegex = /^[0-9]{6,8}$/;
-    if (!dniRegex.test(DNI)) {
-      setDniError("El DNI debe contener solo números y tener entre 6 y 8 dígitos.");
-      hasError = true;
-    } else {
-      setDniError('');
-    }
+      // Validar DNI
+      const dniRegex = /^[0-9]{6,8}$/;
+      if (!dniRegex.test(DNI)) {
+        setDniError("El DNI debe contener solo números y tener entre 6 y 8 dígitos.");
+        hasError = true;
+      } else {
+        setDniError('');
+      }
 
-    // Validar legajo
-    const legajoRegex = /^[a-zA-Z0-9]{1,10}$/;
-    if (!legajoRegex.test(Legajo)) {
-      setLegajoError("El legajo debe contener solo letras y números, con un máximo de 10 dígitos.");
-      hasError = true;
-    } else {
-      setLegajoError('');
-    }
+      // Validar legajo
+      const legajoRegex = /^[a-zA-Z0-9]{1,10}$/;
+      if (!legajoRegex.test(Legajo)) {
+        setLegajoError("El legajo debe contener solo letras y números, con un máximo de 10 dígitos.");
+        hasError = true;
+      } else {
+        setLegajoError('');
+      }
 
-    // Validar teléfono
-    const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(Phone)) {
-      setPhoneError("El Número debe contener solo números, con 10 dígitos.");
-      hasError = true;
-    } else {
-      setPhoneError('');
-    }
+      // Validar teléfono
+      const phoneRegex = /^[0-9]{10}$/;
+      if (!phoneRegex.test(Phone)) {
+        setPhoneError("El Número debe contener solo números, con 10 dígitos.");
+        hasError = true;
+      } else {
+        setPhoneError('');
+      }
 
-    if (hasError) {
-      return;
-    }
+      if (hasError) {
+        return;
+      }
 
     try {
       const response = await fetch(`${API_URL}/users/signup`, {
@@ -106,17 +106,17 @@ export const FormularioSignUp = () => {
         })
       });
 
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Respuesta del servidor:', responseData);
-        navigate("/login");
-      } else {
-        console.error('Error en la solicitud:', response.statusText);
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log('Respuesta del servidor:', responseData);
+          navigate("/login");
+        } else {
+          console.error('Error en la solicitud:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al enviar los datos:', error);
       }
-    } catch (error) {
-      console.error('Error al enviar los datos:', error);
-    }
-  };
+    };
 
   return (
     <div className='singup'>

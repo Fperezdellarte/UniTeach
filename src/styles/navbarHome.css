@@ -54,16 +54,28 @@ h2 {
 
 /* Otros estilos */
 
+
 .navbar-links-container {
   display: flex;
   margin-left: 20px; /* Espacio a la izquierda de los enlaces */
 }
 
 .navbar-links-container a {
-  color: #0c0c0c; /* Cambiar el color de los enlaces */
+  color: #000000; /* Cambiar el color de los enlaces */
   text-decoration: none;
-  margin-right: 20px; /* Ajustar el espacio entre los enlaces */
+  margin-right: 2px; /* Ajustar el espacio entre los enlaces */
+  padding-top: 8px;
 }
+
+/* Efecto hover para los enlaces de navegación */
+.navbar-links-container a:hover {
+  text-decoration:underline ;
+  color: #00a2fff6; /* Cambia el color del texto al hacer hover */
+  border-radius: 20px; /* Aplica un borde redondeado al hacer hover */
+  padding: auto; /* Ajusta el padding para dar más espacio */
+  transition: background-color 0.15s, color 0.3s, border-radius 0.24s; /* Añadir una transición suave */
+}
+
 
 .navbar-search-container {
   background-color: #fff; /* Cambiar el color de fondo de la barra de búsqueda */

@@ -7,7 +7,7 @@ export const handleLogout = async () => {
   if (!confirmLogout) return;
 
   try {
-    const authData = JSON.parse(localStorage.getItem('authData'));
+    const authData = JSON.parse(sessionStorage.getItem('authData'));
     if (!authData || !authData.token) {
       throw new Error('Token no encontrado');
     }
@@ -20,7 +20,7 @@ export const handleLogout = async () => {
       },
     });
 
-    localStorage.removeItem('authData');
+    sessionStorage.removeItem('authData');
     window.location.reload();
     <Navigate to ='/login'/>
     console.log('Usuario ha cerrado sesión');

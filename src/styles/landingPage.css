@@ -15,27 +15,15 @@
   margin-bottom: 4rem;
 }
 
-/* Estilo para la sección "Accede a todo el contenido" */
 .contenedor.slide-3 {
   padding: 50px 50px;
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
   margin-bottom: 4.6rem;
 }
 
-.features-section {
-  color: white;
-  padding: 50px 50px;
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
-}
 
-/* Tarjetas */
-.card-title {
-  font-family: sans-serif;
-  font-size: 1.5em;
-  color: #000000;
-  background-color: #ffffff;
-  margin: 10px;
-}
+
+
 
 .landing-page {
   background: linear-gradient(#004aad, transparent);
@@ -55,51 +43,6 @@
   width: 100%;
   position: relative;
 }
-
-/* Grupo de Tarjetas UniTeach */
-.uni-teach-card-group {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Espaciado entre las tarjetas */
-  margin-top: 80px;
-  justify-content: center;
-  box-shadow: 5px -10px -3px 1px black;
-}
-
-.uni-teach-card-group .card {
-  background-color: #f8f9fa; /* Color de fondo de las tarjetas */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de elevación */
-  flex: 1 1 300px; /* Ancho flexible para tarjetas, mínimo de 300px */
-  max-width: 100%; /* Evita que las tarjetas crezcan demasiado */
-  margin: 10px;
-}
-
-.uni-teach-card-group .card-img-top {
-  width: 100%; /* Ajusta el tamaño de la imagen al ancho de la tarjeta */
-  height: auto;
-  border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
-}
-
-.uni-teach-card-group .card-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.uni-teach-card-group .card-text {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
-  margin-bottom: 15px;
-}
-
-.uni-teach-card-group .text-muted {
-  font-size: 12px;
-  color: #999;
-}
-
-
 
 /* Aplica la animación a la clase */
 .tracking-in-expand-forward-bottom {
@@ -121,15 +64,112 @@
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
+.faq-section {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-/* Media Queries para Responsividad */
-@media (max-width: 768px) {
-  .contenedor {
-    padding: 10px;
-  }
+.faq-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-  .uni-teach-card-group .card {
-    flex: 1 1 100%; /* Las tarjetas ocupan todo el ancho disponible */
-    margin: 5px 0;
-  }
+.faq-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.faq-list {
+  text-align: left;
+}
+
+.faq-item {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.faq-item.active {
+  background: #eaeaea;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.faq-answer {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.faq-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+.subscription-section {
+  padding: 30px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.form {
+  background: #d8eaee;
+  display: inline-block;
+  max-width: auto;
+  width: auto;
+  padding: 20px;
+  border-radius: 0px;
+  box-shadow: 0px 50px 50px rgba(0, 0, 0, 0.1);
+}
+
+.form .title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.form .description {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e8de9;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background-color: #a6a6a7b4;
 }

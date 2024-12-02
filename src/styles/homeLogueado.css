@@ -4,58 +4,29 @@
   
 }
 
-/* Estilos para el título de las tarjetas */
-.card-title {
-  font-size: 1.5em;
-  color: #fffdfd;
-}
-
-/* Estilos para los botones */
-.btn {
-  background-color: #007bff;
-  color: #fff;
-}
-
-/* Estilos para las imágenes de los mentores */
-.mentor-img {
-  width: 20em;
-  height: 20em;
-  padding: 3em;
-  object-fit: cover;
-}
-
-/* Estilos para los contenedores de mentores recientes */
 .mentores-recientes {
-  width: 20em;
-  height: 20em;
-  margin-bottom: 1em;
+  background-color: rgb(255, 255, 255);
+  padding-top: 5%;
+  padding-bottom: 3%;
+  flex-wrap: wrap; 
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight:bolder;
+  gap: 30px; 
 }
 
-/* Contenedor para los mentores recientes */
-.MentoresRecientes {
-  display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
-  justify-content: space-between; /* Distribuye el espacio de manera equitativa */
-  gap: 20px; /* Espacio entre los elementos */
-}
-
-/* Ajustes para asegurar que las imágenes tengan el mismo tamaño */
-.mentor-img,
-.mentores-recientes {
-  flex: 1 1 calc(33.333% - 20px); /* Asegura que los elementos ocupen el mismo espacio */
-  box-sizing: border-box; /* Incluye padding y border en el ancho y alto totales */
+.mentor-reciente-card{
+margin-left: 1rem;
 }
 
 @media (max-width: 768px) {
-  .mentor-img,
   .mentores-recientes {
-    flex: 1 1 calc(50% - 20px); /* Ajusta el tamaño para pantallas más pequeñas */
+    flex: 1 1 calc(50% - 20px); 
   }
 }
 
 @media (max-width: 480px) {
-  .mentor-img,
   .mentores-recientes {
     flex: 1 1 100%; /* Ajusta el tamaño para pantallas muy pequeñas */
   }
 }
+

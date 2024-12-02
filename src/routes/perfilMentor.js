@@ -28,7 +28,7 @@ const PerfilMentor = () => {
   useEffect(() => {
     const fetchMentorData = async () => {
       try {
-        const authData = JSON.parse(localStorage.getItem('authData'));
+        const authData = JSON.parse(sessionStorage.getItem('authData'));
         const token = authData?.token;
         const response = await axios.get(`${API_URL}/users/mentor/${id}`, {
           headers: {
@@ -151,4 +151,3 @@ const PerfilMentor = () => {
 };
 
 export default PerfilMentor;
-

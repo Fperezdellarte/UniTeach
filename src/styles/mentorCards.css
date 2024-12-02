@@ -1,38 +1,71 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #2fb5eb;
+  --text-color: #151515;
+  --background-color: #f7f7f7;
+}
+
 .mentor-card {
-    background-color: #0451f6d3; /* Azul más oscuro */
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-bottom: 10em; /* Espacio entre tarjetas */
-  }
-  
-  .mentor-card:hover {
-    transform: scale(1.05); /* Animación de agrandamiento */
-  }
-  
-  .mentor-image {
-    width: 12em; /* Ajusta el tamaño de la imagen */
-    height: 12em; /* Mantén la imagen cuadrada para asegurar que sea redonda */
-    object-fit: cover;
-    border-radius: 50%; /* Hace la imagen redonda */
-    border: 0.001em solid #000000; /* Azul más oscuro para el borde */
-    margin-top: 15px; /* Añade espacio superior a la imagen */
-  }
-  
-  .card-body {
-    padding: 1em;
-  }
-  
-  .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #000000;
-  }
-  
-  .card-text {
-    font-size: 1rem;
-    color: #151515;
-  }
-  
+  background: linear-gradient(transparent, var(--secondary-color));
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2em;
+  box-sizing: border-box;
+}
+
+.mentor-info{
+  text-decoration: none !important;
+}
+
+
+
+.mentor-card:hover {
+  transform: scale(1.05);
+}
+
+.mentor-image {
+  width: 10em;
+  height: 10em;
+  object-fit: cover;
+  border-radius: 40%;
+  border: 0.1em solid var(--secondary-color);
+  margin-top: 18px;
+}
+
+.card-body {
+  padding: 1em;
+}
+
+.card-mentor-title {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-decoration: none !important;
+  font-weight: bold;
+}
+
+.card-mentor-text {
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.custom-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  width: 120px;
+  margin: 0.5em;
+}
+
+.custom-btn:hover {
+  background-color: #ffffff;
+  text-decoration: none;
+}
+
+.custom-btn:focus {
+  outline: none;
+}
