@@ -23,8 +23,8 @@ export const Footer = () => {
             <div className="row mt-3">
               <div className="col-md-12 col-lg-6 col-xl-6 mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4 text-center">Contáctanos</h6>
-                <p className="fas fa-envelope  text-center"> Uniteach@gmail.com</p>
-                <p className="fas fa-phone  text-center"> +54 381 4431244 | +54 381 2345678</p>
+                <p className="fas fa-envelope  text-center"> uniteach24@gmail.com</p>
+                <p className="fas fa-phone  text-center"> +54 381 443-1244 | +54 381 2345-678</p>
               </div>
             </div>
           </div>

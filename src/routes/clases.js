@@ -77,7 +77,7 @@ const Clases = () => {
       cell: (row) => (
         <button 
           onClick={() => {
-            setSelectedId(row.mentorId); 
+            setSelectedId(row.mentorInfo.idUser); 
             handleShowModal(); 
           }}
           className="rate-button"
@@ -157,8 +157,8 @@ const Clases = () => {
         backdrop="static"
         keyboard={false}
       >
-        <div className="modal-content-custom">
-          <button className="close-modal-btn" onClick={handleCloseModal}>
+        <div className="modal-clases-content-custom">
+          <button className="close-modal-clases-btn" onClick={handleCloseModal}>
             ×
           </button>
           <h2 className="rate-title">Califica al mentor</h2>

@@ -89,6 +89,11 @@ export const TablaProximaClase = () => {
       sortable: true
     },
     {
+      name: "Mentor",
+      selector: row => row.Mentor|| "Sin Mentor",
+      sortable: true
+    },
+    {
       name: "Acciones",
       cell: row => (
         <button 
@@ -101,6 +106,8 @@ export const TablaProximaClase = () => {
       ignoreRowClick: true
     }
   ];
+  if (loading || !classesData.upcoming.length) {
+  }
 
   return (
     <div className="table-container">

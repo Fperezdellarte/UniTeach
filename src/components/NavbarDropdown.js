@@ -46,7 +46,7 @@ const NavbarDropdown = ({ onLogout, userName, userImage }) => {
   return (
     <Dropdown>
       <Dropdown.Toggle as="div" id="dropdown-basic" style={dropdownButtonStyle} className="dropdown-toggle-custom">
-        <span style={{color:'white', margin:'1em', transition:'transform 0.2 ease-in-out'}}>{userName}</span> 
+        <span className='fw-bold ' style={{color:'white', margin:'1em', transition:'transform 0.2 ease-in-out'}}>{userName}</span> 
         <Avatar alt="User Avatar" src={userImage} style={avatarStyle} className="avatar-hover" />
         <FaAngleDown style={dropdownIconStyle} className="icon-hover" />
       </Dropdown.Toggle>

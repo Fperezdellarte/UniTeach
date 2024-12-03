@@ -50,8 +50,8 @@
           <Row>
             {/* Columna para "Acerca de Nosotros" */}
             <Col md={6}>
-              <div className='about '>
-                <h1 className='text-white'>Acerca de Nosotros</h1>
+              <div className='about fw-bold'>
+                <h2 className='text-white'>Acerca de Nosotros</h2>
                 <p className='text-white'>Somos Uniteach, una plataforma creada por estudiantes que conecta a otros estudiantes universitarios para ofrecer y recibir mentorías académicas.</p>
                 <p className='text-white'>Nuestra misión es facilitar el intercambio de conocimientos y promover el éxito académico de nuestros usuarios.</p>
               </div>
@@ -59,16 +59,13 @@
 
             {/* Columna para "Contacto" */}
             <Col md={6}>
-              <div className="contact">
+              <div className="contact fw-bold">
                 <h2 className='text-white'>Contacto</h2>
                 <p className='text-white'>¿Tienes alguna pregunta o comentario? ¡Contáctanos!</p>
                   <Button onClick={handleFeedbackClick} className="blue-button">Enviar Mensaje</Button>
               </div>
             </Col>
           </Row>
-
-          {/* Sección de Testimonios */}
-          <TestimonialSection />
         </div>
       </div>
     );

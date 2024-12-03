@@ -27,7 +27,7 @@
   color: white; /* Cambia el texto a blanco */
   transform: scale(1.1); /* Aumenta el tamaño un 10% */
 }
-.modal-content-custom {
+.modal-clases-content-custom {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@
   border-radius: 10px;
 }
 
-.close-modal-btn {
+.close-modal-clases-btn {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -50,7 +50,7 @@
   cursor: pointer;
 }
 
-.close-modal-btn:hover {
+.close-modal-clases-btn:hover {
   color: red;
 }
 
