@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../auth/constans';
+import '../styles/ResetPassword.css';
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const { token } = useParams(); // Recupera el token de la URL
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { token } = useParams();
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
 
@@ -18,25 +21,70 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.post(`${API_URL}/users/reset-password`, { password, token });
-            setMessage('Contraseña restablecida con éxito. Redirigiendo...');
-            setTimeout(() => navigate('/login'), 3000); // Redirige después de 3 segundos
+            await axios.post(`${API_URL}/users/reset-password`, { password, token });
+            setMessage('¡Contraseña restablecida con éxito! Redirigiendo...');
+            setTimeout(() => navigate('/login'), 3000);
         } catch (error) {
-            setMessage('Error al restablecer contraseña: ' + error.response?.data?.message || 'Error desconocido');
+            setMessage('Error: ' + (error.response?.data?.message || 'Desconocido.'));
         }
     };
 
     return (
-        <div>
-            <h1>Restablece tu contraseña</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Nueva contraseña</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                <label>Confirmar contraseña</label>
-                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-                <button type="submit">Enviar</button>
-            </form>
-            {message && <p>{message}</p>}
+        <div className="page-container">
+            <div className="reset-password-card">
+                <h1>Restablecer tu contraseña</h1>
+                <p>Por favor, ingresa tu nueva contraseña para continuar.</p>
+                <form onSubmit={handleSubmit}>
+                    {/* Nueva contraseña */}
+                    <div className="input-group">
+                        <label htmlFor="password">Nueva contraseña</label>
+                        <div className="password-container">
+                            <input
+                                id="password"
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                placeholder="Introduce tu nueva contraseña"
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            className="toggle-password"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? 'Ocultar' : 'Mostrar'}
+                        </button>
+                    </div>
+
+                    {/* Confirmar contraseña */}
+                    <div className="input-group">
+                        <label htmlFor="confirm-password">Confirmar contraseña</label>
+                        <div className="password-container">
+                            <input
+                                id="confirm-password"
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                                placeholder="Confirma tu contraseña"
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            className="toggle-password"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        >
+                            {showConfirmPassword ? 'Ocultar' : 'Mostrar'}
+                        </button>
+                    </div>
+
+                    <button type="submit" className="submit-button">Restablecer contraseña</button>
+                </form>
+                {message && (
+                    <p className={message.includes('éxito') ? 'success' : 'error'}>{message}</p>
+                )}
+            </div>
         </div>
     );
 };
