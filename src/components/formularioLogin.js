@@ -41,7 +41,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
         if (rememberMe) {
           sessionStorage.setItem('authData', JSON.stringify({ Username, token, user }));
         } else {
-          sessionStorage.setItem('authData', JSON.stringify({ Username, token }));
+          sessionStorage.setItem('authData', JSON.stringify({ Username, token, user }));
         }
 
         onLoginSuccess();
