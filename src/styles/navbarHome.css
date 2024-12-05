@@ -3,6 +3,7 @@
   margin-bottom: 0;
 }
 
+
 .container-fluid {
   padding: 0;
 }
@@ -199,4 +200,30 @@ h2 {
   .navbar-user-container {
     display: none; /* Ocultar avatar de usuario en pantallas pequeñas */
   }
+}
+
+
+/* Navigation */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+  background-color: #004aad;
+}
+
+.nav-logo-container {
+  width: 10%;
+}
+
+.navbar-links-container a {
+  margin-right: 3rem;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.navbar-cart-icon {
+  font-size: 1.15rem;
 }

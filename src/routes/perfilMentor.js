@@ -91,7 +91,7 @@ const PerfilMentor = () => {
   }
 
   return (
-    <div>
+    <div className='container-result-mentor'>
       <Navbar />
       <div className="mentor-profile">
         <div className="profile-container">
@@ -121,7 +121,7 @@ const PerfilMentor = () => {
               </div>
               {showPhone && <p className="phone-number">Teléfono: {mentor.Phone}</p>}
               {showCalendar && (
-                <div>
+                <div className='container-calendar'>
                   <ClassScheduleCalendar
                     mentorId={id}
                     searchTerm={searchTerm}

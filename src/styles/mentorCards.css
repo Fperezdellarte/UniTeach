@@ -6,19 +6,19 @@
 }
 
 .mentor-card {
-  background: linear-gradient(transparent, var(--secondary-color));
+  background:linear-gradient(#004aad,transparent);
   border-radius: 8px;
-  overflow: hidden;
   transition: transform 0.3s ease;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2em;
   box-sizing: border-box;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .mentor-info{
   text-decoration: none !important;
 }
-
 
 
 .mentor-card:hover {
@@ -29,9 +29,10 @@
   width: 10em;
   height: 10em;
   object-fit: cover;
-  border-radius: 40%;
+  border-radius: 100% !important;
   border: 0.1em solid var(--secondary-color);
   margin-top: 18px;
+  
 }
 
 .card-body {

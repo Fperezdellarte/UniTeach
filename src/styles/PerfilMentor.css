@@ -1,37 +1,50 @@
-/* Estilos principales del perfil del mentor */
+.loading-container{
+  display: flex;
+  justify-content: center;
+  margin: 15rem;
+}
 .mentor-profile {
   display: flex;
   justify-content: center;
-  padding: 20px;
-  background-color: #d9e7ff; /* Color de fondo claro */
+  padding: 5rem 1rem;
+ 
+}
+
+.container-calendar{
+  margin-top: 1rem;
+}
+
+.container-result-mentor{
+  background:linear-gradient(#004aad,transparent);
 }
 
 .profile-container {
   display: flex;
   max-width: 800px;
   width: 100%;
-  background-color: #ffffff; /* Fondo blanco */
+  background-color: #c9dff175; /* Fondo blanco */
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap; /* Permitir que los elementos se ajusten */
 }
 
 .profile-info {
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap; /* Para permitir que los elementos se reorganicen */
 }
 
 .mentor-image {
-  border-radius: 8px;
   width: 150px;
   height: 150px;
-  object-fit: cover;
 }
 
 .profile-details {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 h2 {
@@ -46,7 +59,7 @@ h3 {
 }
 
 .description-box {
-  background-color: #f8c8c8;
+  background-color: #2394e081;
   padding: 10px;
   border-radius: 5px;
   margin-top: 10px;
@@ -60,6 +73,7 @@ h3 {
   display: flex;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .custom-button {
@@ -83,4 +97,55 @@ h3 {
   margin-top: 20px;
 }
 
-  
+/* Responsive design */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+    align-items: center; /* Centrar elementos */
+  }
+
+  .profile-info {
+    flex-direction: column; /* Colocar los elementos en fila vertical */
+    align-items: center;
+    gap: 15px;
+  }
+
+  .mentor-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-details {
+    align-items: center;
+    text-align: center;
+  }
+
+  .buttons-container {
+    justify-content: center;
+  }
+
+  .loading-container{
+    display: flex;
+    justify-content: center;
+    margin: 10rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .custom-button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  .description-box {
+    font-size: 14px;
+  }
+}

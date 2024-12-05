@@ -4,29 +4,24 @@
   
 }
 
-.mentores-recientes {
+.mentores-recientes-title {
   background-color: rgb(255, 255, 255);
-  padding-top: 5%;
+  padding-top: 2%;
   padding-bottom: 3%;
   flex-wrap: wrap; 
-  font-family:Georgia, 'Times New Roman', Times, serif;
   font-weight:bolder;
   gap: 30px; 
+  display: flex;
+  justify-content: center;
 }
-
-.mentor-reciente-card{
-margin-left: 1rem;
+.mentores-recientes{
+  margin-left: 14rem;
 }
 
 @media (max-width: 768px) {
   .mentores-recientes {
-    flex: 1 1 calc(50% - 20px); 
+    margin-left: 0;
   }
 }
 
-@media (max-width: 480px) {
-  .mentores-recientes {
-    flex: 1 1 100%; /* Ajusta el tamaño para pantallas muy pequeñas */
-  }
-}
 

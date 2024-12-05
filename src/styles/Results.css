@@ -2,14 +2,44 @@
   padding: 0; /* Elimina el padding por defecto */
   margin: 0;  /* Elimina márgenes por defecto */
 }
+.container-results{
+  background:linear-gradient(#004aad,transparent);
+}
 
 .filters {
   padding: 15px;
-  background-color: #f0f0f0;
+  background-color: #258bff46;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.7s ease; 
+  color: white;
+  margin-left: 1rem;
 }
-/* src/styles/Results.css */
+
+.container-mentor-results{
+  margin-left: 2rem;
+}
+.filter-button{
+  margin-left: 9rem;
+  background-color: orange;
+  color: black;
+
+}
+
+.filter-button:hover {
+  transform: scale(1.05);
+  background-color: rgb(187, 122, 1);
+  color: white;
+}
+
+.no-result-text{
+  margin-top: 5rem;
+}
+
+.result-title{
+  margin-top: 3rem;
+  color: white;
+}
 
 .filters h6 {
   margin-bottom: 0.5rem;
@@ -27,10 +57,6 @@
   width: 100%;
 }
 
-
-.mentor-card {
-  max-width: 100%;
-}
 
 @media (min-width: 992px) {
   .mentor-card {

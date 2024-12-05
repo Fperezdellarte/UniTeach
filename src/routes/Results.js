@@ -5,41 +5,37 @@ import { Navbar } from '../components/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Results.css';
 
-
 const Results = () => {
-
   const location = useLocation();
   const navigate = useNavigate();
   const { results } = location.state || {};
   const [filteredResults, setFilteredResults] = useState(results || []);
   const [filters, setFilters] = useState({
-    shift: [], // Para los turnos
-    days: [], // Para los días de la semana
-    sortBy: 'distance' // Para ordenar por "clase más cerca" o "mejor puntuación"
+    shift: [],
+    days: [],
+    sortBy: 'distance',
   });
+  const [showFilters, setShowFilters] = useState(false); // Nuevo estado
 
   useEffect(() => {
     if (results) {
-      const filtered = results.filter(mentor => {
-        // Filtrar por turnos
-        const shiftMatch = filters.shift.length === 0 || filters.shift.includes(mentor.shift);
-        // Filtrar por días de la semana
-        const daysMatch = filters.days.length === 0 || filters.days.includes(mentor.day);
+      const filtered = results.filter((mentor) => {
+        const shiftMatch =
+          filters.shift.length === 0 || filters.shift.includes(mentor.shift);
+        const daysMatch =
+          filters.days.length === 0 || filters.days.includes(mentor.day);
         return shiftMatch && daysMatch;
       });
 
-      // Ordenar los resultados
       const sortedResults = filtered.sort((a, b) => {
         if (filters.sortBy === 'rating') {
-          // Asegúrate de que la calificación sea un número
           const ratingA = typeof a.rating === 'number' ? a.rating : 0;
           const ratingB = typeof b.rating === 'number' ? b.rating : 0;
-          return ratingB - ratingA; // Ordenar por rating de mayor a menor
-        }else if (filters.sortBy === 'distance') {
-          return a.distance - b.distance; // Ordenar por distancia
-        } 
+          return ratingB - ratingA;
+        } else if (filters.sortBy === 'distance') {
+          return a.distance - b.distance;
+        }
         return 0;
-  
       });
 
       setFilteredResults(sortedResults);
@@ -49,108 +45,124 @@ const Results = () => {
   const handleFilterChange = (e) => {
     const { name, value, checked } = e.target;
     if (name === 'shift') {
-      setFilters(prevFilters => {
+      setFilters((prevFilters) => {
         const updatedShifts = checked
           ? [...prevFilters.shift, value]
-          : prevFilters.shift.filter(shift => shift !== value);
+          : prevFilters.shift.filter((shift) => shift !== value);
         return { ...prevFilters, shift: updatedShifts };
       });
     } else if (name === 'day') {
-      setFilters(prevFilters => {
+      setFilters((prevFilters) => {
         const updatedDays = checked
           ? [...prevFilters.days, value]
-          : prevFilters.days.filter(day => day !== value);
+          : prevFilters.days.filter((day) => day !== value);
         return { ...prevFilters, days: updatedDays };
       });
     } else if (name === 'sortBy') {
-      setFilters(prevFilters => ({ ...prevFilters, sortBy: value }));
+      setFilters((prevFilters) => ({ ...prevFilters, sortBy: value }));
     }
   };
 
   const handleCardClick = (mentorId) => {
-    navigate(`/perfilMentor/${mentorId}`); // Redirige al perfil del mentor
+    navigate(`/perfilMentor/${mentorId}`);
   };
 
   return (
-    <div>
+    <div className='container-results'>
       <Navbar />
-      <h2 className="text-center mb-4">Resultados de la búsqueda</h2>
+      <h2 className="text-center result-title">Resultados de la búsqueda</h2>
       <div className="row">
+        {/* Botón para alternar los filtros */}
+        <div className="col-12 mb-3">
+          <button
+            className="blue-button filter-button"
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
+          </button>
+        </div>
         {/* Columna de filtros */}
-        <div className="col-md-3">
-          <div className="filters">
-            <h5>Filtrar por:</h5>
-
-            <div className="mb-3">
-              <h6>Turno:</h6>
-              <div className="form-check">
-                <input
-                  type="checkbox"
-                  id="morning"
-                  name="shift"
-                  value="morning"
-                  onChange={handleFilterChange}
-                />
-                <label htmlFor="morning" className="form-check-label">Mañana</label>
-              </div>
-              <div className="form-check">
-                <input
-                  type="checkbox"
-                  id="afternoon"
-                  name="shift"
-                  value="afternoon"
-                  onChange={handleFilterChange}
-                />
-                <label htmlFor="afternoon" className="form-check-label">Tarde</label>
-              </div>
-            </div>
-
-            <div className="mb-3">
-              <h6>Día:</h6>
-              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
-                <div className="form-check" key={day}>
+        {showFilters && (
+          <div className="col-md-3 container-filter">
+            <div className="filters">
+              <h5>Filtrar por:</h5>
+              <div className="mb-3">
+                <h6>Turno:</h6>
+                <div className="form-check">
                   <input
                     type="checkbox"
-                    id={day}
-                    name="day"
-                    value={day}
+                    id="morning"
+                    name="shift"
+                    value="morning"
                     onChange={handleFilterChange}
                   />
-                  <label htmlFor={day} className="form-check-label">{day}</label>
+                  <label htmlFor="morning" className="form-check-label">
+                    Mañana
+                  </label>
                 </div>
-              ))}
-            </div>
+                <div className="form-check">
+                  <input
+                    type="checkbox"
+                    id="afternoon"
+                    name="shift"
+                    value="afternoon"
+                    onChange={handleFilterChange}
+                  />
+                  <label htmlFor="afternoon" className="form-check-label">
+                    Tarde
+                  </label>
+                </div>
+              </div>
 
-            <div className="mb-3">
-              <label className="form-label">Ordenar por:</label>
-              <select
-                className="form-select"
-                name="sortBy"
-                value={filters.sortBy}
-                onChange={handleFilterChange}
-              >
-                <option value="distance">Clase más cerca</option>
-                <option value="rating">Mejor puntuación</option>
-              </select>
+              <div className="mb-3">
+                <h6>Día:</h6>
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
+                  <div className="form-check" key={day}>
+                    <input
+                      type="checkbox"
+                      id={day}
+                      name="day"
+                      value={day}
+                      onChange={handleFilterChange}
+                    />
+                    <label htmlFor={day} className="form-check-label">
+                      {day}
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Ordenar por:</label>
+                <select
+                  className="form-select"
+                  name="sortBy"
+                  value={filters.sortBy}
+                  onChange={handleFilterChange}
+                >
+                  <option value="distance">Clase más cerca</option>
+                  <option value="rating">Mejor puntuación</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Columna de resultados */}
-        <div className="col-md-9">
+        <div className={`col-md-${showFilters ? '9' : '12'}`}>
           {filteredResults && filteredResults.length > 0 ? (
-            <div className="row">
+            <div className="row container-mentor-results">
               {filteredResults.map((mentor) => (
                 <div className="col-lg-4 col-md-6 mb-4" key={mentor.idUser}>
                   <MentorCard
                     mentor={mentor}
-                    onClick={() => handleCardClick(mentor.idUser)} // Pasa la función de clic
+                    onClick={() => handleCardClick(mentor.idUser)}
                   />
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-center text-muted">No se encontraron mentores.</p>
+            <p className="text-center text-muted no-result-text">No se encontraron mentores.</p>
           )}
         </div>
       </div>
@@ -159,4 +171,3 @@ const Results = () => {
 };
 
 export default Results;
-

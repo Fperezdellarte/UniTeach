@@ -43,6 +43,7 @@ const MentorCard = ({ mentor }) => {
   };
 
   return (
+    <div className="mentor-container">
     <div
       className="mentor-card"
       onMouseOver={handleMouseOver}
@@ -58,10 +59,10 @@ const MentorCard = ({ mentor }) => {
         <div className="card-body">
           <MentorInfo className="mentor-info" mentor={mentor} />
           <div className="mb-2">{renderStars(mentor.Opinion || 0)}</div>
-          <div className="d-flex justify-content-between"></div>
         </div>
       </Link>
     </div>
+</div>
   );
 };
 
