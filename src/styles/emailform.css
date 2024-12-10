@@ -24,7 +24,7 @@
 
 
 /* Form container */
-form {
+.email-form-container {
     width: 100%;
     max-width: 400px;
     background: #fff;
@@ -35,7 +35,7 @@ form {
 }
 
 /* Form label */
-form label {
+.form-send-label {
     font-weight: bold;
     font-size: 0.9rem;
     color: #333;

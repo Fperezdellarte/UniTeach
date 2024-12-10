@@ -9,15 +9,15 @@ export const useBuscador = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSearch = async () => {
+  const handleSearch = async (searchFacultad) => {
     setLoading(true);
     setError(null);
 
     try {
       const authData = JSON.parse(sessionStorage.getItem('authData'));
-      const university = authData?.user?.University;
+      const University = authData?.user?.University;
 
-      if (!university) {
+      if (!University) {
         setError('No se pudo obtener la universidad del usuario.');
         setLoading(false);
         return;
@@ -26,7 +26,8 @@ export const useBuscador = () => {
       const response = await axios.get(`${API_URL}/search/mentors`, {
         params: { 
           subjectName: searchTerm,
-          university,
+          Facultad:searchFacultad || '',
+          University,
         },
       });
 

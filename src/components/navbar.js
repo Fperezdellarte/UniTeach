@@ -52,7 +52,7 @@ export const Navbar = () => {
       setSearchError(true);
     } else {
       setSearchError(false);
-      handleSearch();
+      handleSearch(null);
     }
   };
 

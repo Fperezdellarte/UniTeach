@@ -36,10 +36,10 @@ export const EmailForm = () => {
   return (
     <div className="email-form-container">
       {responseMessage && <Alert variant={responseMessage.includes('Error') ? 'danger' : 'info'}>{responseMessage}</Alert>}
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className='email-send-container'>
       <h2>Recuperar contraseña</h2>
         <Form.Group controlId="email" className="mb-3">
-          <Form.Label>Introduce tu Correo Electrónico</Form.Label>
+          <Form.Label className='form-send-label'>Introduce tu Correo Electrónico</Form.Label>
           <InputGroup>
             <InputGroup.Text>@</InputGroup.Text>
             <FormControl

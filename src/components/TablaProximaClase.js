@@ -8,6 +8,7 @@ import axios from 'axios';
 import { API_URL } from '../auth/constans';
 import '../styles/TablaProximaClase.css';
 import { Modal} from 'react-bootstrap';
+import { useBuscador } from './buscador';
 
 const formatDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -24,11 +25,13 @@ export const TablaProximaClase = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const { searchFacultad, handleSearch } = useBuscador();
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
  
   const handleModalClick = (subject) => {
-    navigate('/Results', { state: { subjectName: subject } });
+    const searchFacultad = subject
+    handleSearch(searchFacultad);
   };
   
   const { isAuthenticated, token } = useAuth();
@@ -222,7 +225,7 @@ export const TablaProximaClase = () => {
 
             <div
               className="modal-card fade-in delay-2"
-              onClick={() => handleModalClick('Medicina')}
+              onClick={() => handleModalClick('Ciencias de la salud')}
             >
               <div
                 className="modal-background"
@@ -235,7 +238,7 @@ export const TablaProximaClase = () => {
 
             <div
               className="modal-card fade-in delay-3"
-              onClick={() => handleModalClick('Psicología')}
+              onClick={() => handleModalClick('Humanidades')}
             >
               <div
                 className="modal-background"
