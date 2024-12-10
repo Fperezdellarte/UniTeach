@@ -4,7 +4,7 @@ footer {
     color: #000000; /* Color de texto ligeramente oscuro */
     font-size: 0.905rem; /* Tamaño de fuente reducido */
     padding: 10px 20px; /* Espaciado reducido */
-    margin-top: 5rem;  
+      
   }
   footer .p-4 {
     padding: 0px !important; /* Reduce el padding de las secciones internas */
