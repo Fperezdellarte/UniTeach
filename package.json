@@ -66,5 +66,13 @@
   "main": "tailwind.config.js",
   "author": "",
   "license": "ISC",
-  "keywords": []
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fperezdellarte/UniTeach.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fperezdellarte/UniTeach/issues"
+  },
+  "homepage": "https://github.com/Fperezdellarte/UniTeach#readme"
 }
