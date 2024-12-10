@@ -32,8 +32,7 @@
     "react-scripts": "^5.0.1",
     "react-transition-group": "^4.4.5",
     "sinon": "^18.0.0",
-    "web-vitals": "^2.1.4",
-    "tailwindcss": "^3.4.3"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -64,7 +63,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^X.X.X"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "tailwind.config.js",
+  "main": "src/index.js",
   "author": "",
   "license": "ISC",
   "keywords": []
