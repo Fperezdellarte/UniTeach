@@ -19,6 +19,7 @@
 .container-mentor-results{
   margin-left: 2rem;
 }
+
 .filter-button{
   margin-left: 9rem;
   background-color: orange;
@@ -61,5 +62,12 @@
 @media (min-width: 992px) {
   .mentor-card {
     max-width: 320px; /* Ajuste de ancho máximo */
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .container-mentor-results{
+    margin: 3rem;
   }
 }

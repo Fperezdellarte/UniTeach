@@ -11,55 +11,34 @@ const Results = () => {
   const { results } = location.state || {};
   const [filteredResults, setFilteredResults] = useState(results || []);
   const [filters, setFilters] = useState({
-    shift: [],
-    days: [],
     sortBy: 'distance',
   });
-  const [showFilters, setShowFilters] = useState(false); // Nuevo estado
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    if (results) {
-      const filtered = results.filter((mentor) => {
-        const shiftMatch =
-          filters.shift.length === 0 || filters.shift.includes(mentor.shift);
-        const daysMatch =
-          filters.days.length === 0 || filters.days.includes(mentor.day);
-        return shiftMatch && daysMatch;
-      });
-
-      const sortedResults = filtered.sort((a, b) => {
+    if (Array.isArray(results)) {
+      const sortedResults = [...results].sort((a, b) => {
         if (filters.sortBy === 'rating') {
           const ratingA = typeof a.rating === 'number' ? a.rating : 0;
           const ratingB = typeof b.rating === 'number' ? b.rating : 0;
-          return ratingB - ratingA;
-        } else if (filters.sortBy === 'distance') {
-          return a.distance - b.distance;
+          return ratingB - ratingA; // Descendente
+        } else if (filters.sortBy === 'alfabeto') {
+          const nameA = a.Name?.toLowerCase() || '';
+          const nameB = b.Name?.toLowerCase() || '';
+          return nameA.localeCompare(nameB);
         }
-        return 0;
+        return 0; // Por defecto
       });
 
-      setFilteredResults(sortedResults);
+      console.log('Orden aplicado:', filters.sortBy, sortedResults);
+      setFilteredResults(sortedResults); // Actualiza estado
     }
   }, [filters, results]);
 
   const handleFilterChange = (e) => {
-    const { name, value, checked } = e.target;
-    if (name === 'shift') {
-      setFilters((prevFilters) => {
-        const updatedShifts = checked
-          ? [...prevFilters.shift, value]
-          : prevFilters.shift.filter((shift) => shift !== value);
-        return { ...prevFilters, shift: updatedShifts };
-      });
-    } else if (name === 'day') {
-      setFilters((prevFilters) => {
-        const updatedDays = checked
-          ? [...prevFilters.days, value]
-          : prevFilters.days.filter((day) => day !== value);
-        return { ...prevFilters, days: updatedDays };
-      });
-    } else if (name === 'sortBy') {
-      setFilters((prevFilters) => ({ ...prevFilters, sortBy: value }));
+    const { name, value } = e.target;
+    if (name === 'sortBy') {
+      setFilters({ sortBy: value });
     }
   };
 
@@ -68,11 +47,10 @@ const Results = () => {
   };
 
   return (
-    <div className='container-results'>
+    <div className="container-results">
       <Navbar />
       <h2 className="text-center result-title">Resultados de la búsqueda</h2>
       <div className="row">
-        {/* Botón para alternar los filtros */}
         <div className="col-12 mb-3">
           <button
             className="blue-button filter-button"
@@ -81,79 +59,30 @@ const Results = () => {
             {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
           </button>
         </div>
-        {/* Columna de filtros */}
         {showFilters && (
           <div className="col-md-3 container-filter">
             <div className="filters">
-              <h5>Filtrar por:</h5>
               <div className="mb-3">
-                <h6>Turno:</h6>
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    id="morning"
-                    name="shift"
-                    value="morning"
-                    onChange={handleFilterChange}
-                  />
-                  <label htmlFor="morning" className="form-check-label">
-                    Mañana
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    id="afternoon"
-                    name="shift"
-                    value="afternoon"
-                    onChange={handleFilterChange}
-                  />
-                  <label htmlFor="afternoon" className="form-check-label">
-                    Tarde
-                  </label>
-                </div>
-              </div>
-
-              <div className="mb-3">
-                <h6>Día:</h6>
-                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-                  <div className="form-check" key={day}>
-                    <input
-                      type="checkbox"
-                      id={day}
-                      name="day"
-                      value={day}
-                      onChange={handleFilterChange}
-                    />
-                    <label htmlFor={day} className="form-check-label">
-                      {day}
-                    </label>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Ordenar por:</label>
+                <label className="form-label">Ordenar:</label>
                 <select
                   className="form-select"
                   name="sortBy"
                   value={filters.sortBy}
                   onChange={handleFilterChange}
                 >
-                  <option value="distance">Clase más cerca</option>
+                  <option value="distance">Por defecto</option>
                   <option value="rating">Mejor puntuación</option>
+                  <option value="alfabeto">Alfabeticamente</option>
                 </select>
               </div>
             </div>
           </div>
         )}
-
-        {/* Columna de resultados */}
-        <div className={`col-md-${showFilters ? '9' : '12'}`}>
+        <div className={`col-md-${showFilters ? '9' : '12'}`} key={filters.sortBy}>
           {filteredResults && filteredResults.length > 0 ? (
             <div className="row container-mentor-results">
               {filteredResults.map((mentor) => (
-                <div className="col-lg-4 col-md-6 mb-4" key={mentor.idUser}>
+                <div className="col-lg-3 col-md-6 mb-4" key={mentor.idUser}>
                   <MentorCard
                     mentor={mentor}
                     onClick={() => handleCardClick(mentor.idUser)}
@@ -162,7 +91,9 @@ const Results = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-muted no-result-text">No se encontraron mentores.</p>
+            <p className="text-center text-muted no-result-text">
+              No se encontraron mentores.
+            </p>
           )}
         </div>
       </div>

@@ -6,7 +6,7 @@
 }
 
 .mentor-card {
-  background:linear-gradient(#004aad,transparent);
+  background:linear-gradient(#004bad0c,transparent);
   border-radius: 8px;
   transition: transform 0.3s ease;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
@@ -17,7 +17,7 @@
 }
 
 .mentor-info{
-  text-decoration: none !important;
+  text-decoration: underline rgba(0, 0, 0, 0) !important;
 }
 
 
@@ -32,7 +32,7 @@
   border-radius: 100% !important;
   border: 0.1em solid var(--secondary-color);
   margin-top: 18px;
-  
+ margin-left: 1.5rem;
 }
 
 .card-body {
@@ -45,13 +45,20 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   text-decoration: none !important;
   font-weight: bold;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  
 }
 
 .card-mentor-text {
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
   font-size: 1.1rem;
   color: var(--text-color);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .custom-btn {
@@ -69,4 +76,18 @@
 
 .custom-btn:focus {
   outline: none;
+}
+
+.empty-star{
+  color: rgba(0, 0, 0, 0.123);
+}
+
+.mentor-card-stars{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+Card-Body{
+  text-decoration: none !important;
 }
