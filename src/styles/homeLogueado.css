@@ -4,24 +4,5 @@
   
 }
 
-.mentores-recientes-title {
-  background-color: rgb(255, 255, 255);
-  padding-top: 2%;
-  padding-bottom: 3%;
-  flex-wrap: wrap; 
-  font-weight:bolder;
-  gap: 30px; 
-  display: flex;
-  justify-content: center;
-}
-.mentores-recientes{
-  margin-left: 14rem;
-}
-
-@media (max-width: 768px) {
-  .mentores-recientes {
-    margin-left: 0;
-  }
-}
 
 

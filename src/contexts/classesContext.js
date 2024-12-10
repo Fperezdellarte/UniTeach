@@ -70,7 +70,7 @@ export const ClassesProvider = ({ children }) => {
         const pastClasses = classesData.filter(classItem => new Date(classItem.endDate) < currentDate);
 
         const sortedClasses = pastClasses.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
-        const latestThreeClasses = sortedClasses.slice(0, 3);
+        const latestThreeClasses = sortedClasses.slice(0, 10);
 
         setClassesData({
           upcoming: upcomingClasses,

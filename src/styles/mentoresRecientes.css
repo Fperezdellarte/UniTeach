@@ -1,0 +1,58 @@
+.mentor-card-wrapper {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.mentores-recientes-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.loading-spinner {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+
+.mentores-recientes-title {
+    background-color: rgb(255, 255, 255);
+    padding-top: 2%;
+    padding-bottom: 3%;
+    font-weight: bolder;
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Ocultar el carrusel en pantallas grandes */
+@media screen and (min-width: 769px) {
+    .carouselContainerMentores {
+      display: none;
+    }
+  }
+  
+  /* Mostrar el carrusel en pantallas pequeñas */
+  @media screen and (max-width: 768px) {
+    .gridContainerMentores {
+      display: none; /* Ocultar la grilla en pantallas pequeñas */
+    }
+  }
+  
+  /* Mostrar la grilla en pantallas grandes */
+  @media screen and (min-width: 769px) {
+    .gridContainerMentores {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Grilla de 3 columnas */
+      gap: 1rem;
+      width: 100%;
+      align-items: center;
+    }
+  }
+  
+  .mentor-card-wrapper {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
