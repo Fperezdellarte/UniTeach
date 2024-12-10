@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API_URL } from '../auth/constans';
 import { Button, Form, Alert, Spinner } from 'react-bootstrap';
 import { InputGroup, FormControl } from 'react-bootstrap'; // Para un input más moderno
+import '../styles/emailform.css';
 
 export const EmailForm = () => {
   const [email, setEmail] = useState('');
@@ -34,11 +35,11 @@ export const EmailForm = () => {
 
   return (
     <div className="email-form-container">
-      <h2>Recuperar contraseña</h2>
       {responseMessage && <Alert variant={responseMessage.includes('Error') ? 'danger' : 'info'}>{responseMessage}</Alert>}
       <Form onSubmit={handleSubmit}>
+      <h2>Recuperar contraseña</h2>
         <Form.Group controlId="email" className="mb-3">
-          <Form.Label>Correo electrónico</Form.Label>
+          <Form.Label>Introduce tu Correo Electrónico</Form.Label>
           <InputGroup>
             <InputGroup.Text>@</InputGroup.Text>
             <FormControl
