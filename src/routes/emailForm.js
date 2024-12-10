@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../auth/constans';
 import { Button, Form, Alert, Spinner } from 'react-bootstrap';
-import { InputGroup, FormControl } from 'react-bootstrap'; // Para un input más moderno
+import { InputGroup, FormControl } from 'react-bootstrap';
 import '../styles/emailform.css';
 
 export const EmailForm = () => {
@@ -34,14 +34,24 @@ export const EmailForm = () => {
   };
 
   return (
-    <div className="email-form-container">
-      {responseMessage && <Alert variant={responseMessage.includes('Error') ? 'danger' : 'info'}>{responseMessage}</Alert>}
-      <Form onSubmit={handleSubmit}>
-      <h2>Recuperar contraseña</h2>
-        <Form.Group controlId="email" className="mb-3">
+    <div className="email-form-unique-container">
+      {responseMessage && (
+        <Alert
+          variant={
+            responseMessage.includes('Error')
+              ? 'email-form-unique-alert-danger'
+              : 'email-form-unique-alert-info'
+          }
+        >
+          {responseMessage}
+        </Alert>
+      )}
+      <Form onSubmit={handleSubmit} className="email-form-unique-form">
+        <h2>Recuperar contraseña</h2>
+        <Form.Group controlId="email" className="email-form-unique-input-group mb-3">
           <Form.Label>Introduce tu Correo Electrónico</Form.Label>
           <InputGroup>
-            <InputGroup.Text>@</InputGroup.Text>
+            <InputGroup.Text className="email-form-unique-input-group-text">@</InputGroup.Text>
             <FormControl
               type="email"
               value={email}
@@ -49,12 +59,17 @@ export const EmailForm = () => {
               placeholder="Ingresa tu correo"
               required
               disabled={isLoading}
-              className="rounded-pill"
+              className="email-form-unique-form-control email-form-unique-rounded-pill"
             />
           </InputGroup>
         </Form.Group>
 
-        <Button type="submit" variant="primary" className="w-100 rounded-pill" disabled={isLoading}>
+        <Button
+          type="submit"
+          variant="primary"
+          className="email-form-unique-button w-100 email-form-unique-rounded-pill"
+          disabled={isLoading}
+        >
           {isLoading ? <Spinner animation="border" size="sm" /> : 'Enviar enlace'}
         </Button>
       </Form>
@@ -62,5 +77,4 @@ export const EmailForm = () => {
   );
 };
 
-
-export default EmailForm
+export default EmailForm;
