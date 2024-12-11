@@ -23,7 +23,6 @@ export const TablaClasesRecientes = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
 
   const columns = [
     {
@@ -110,7 +109,7 @@ export const TablaClasesRecientes = () => {
           Ver mas
         </Button>
       )}
-      {classesData.recent.length != 0 && (
+      {classesData.recent.length !== 0 && (
         <Button as={Link}
         to="/clases"
         className="blue-button mb-4"

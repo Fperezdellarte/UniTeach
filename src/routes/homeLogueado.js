@@ -3,12 +3,9 @@ import { Navbar } from '../components/navbar';
 import '../styles/homeLogueado.css'; 
 import { TablaProximaClase } from '../components/TablaProximaClase';
 import { TablaClasesRecientes } from '../components/TablaClasesRecientes';
-import { useNavigate } from 'react-router-dom';
 import { Mentores } from '../components/MentoresRecientes';
 
 export const HomeLogueado = () => {
-  const navigate = useNavigate();
-
    return (
    
    <div>
