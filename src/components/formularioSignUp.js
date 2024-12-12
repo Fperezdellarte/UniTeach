@@ -119,14 +119,12 @@
     };
 
   return (
-    <div className='singup'>
-      <div className='singup-form'>
-      <div className="col-md-10"> 
-      <div className="card p-4 shadow"> 
-      <div className='container'>
+    <div className='form-singup'>
+      <div className="form-singup-container p-4 shadow"> 
+      <div>
         <h2>Registro de Usuario</h2>
         <form onSubmit={handleSubmit} className="row g-3">
-          <div className="col-md-6">
+          <div className="col-md-4">
             <div className="mb-3">
               <label htmlFor="username" className="form-label">Nombre de usuario:</label>
               <input 
@@ -162,7 +160,7 @@
             </div>
 
             <div className="mb-3">
-              <label htmlFor="name" className="form-label">Nombre:</label>
+              <label htmlFor="name" className="form-label">Nombre Completo:</label>
               <input 
                 type="text" 
                 className="form-control" 
@@ -177,7 +175,8 @@
               />
               {nameError && <span className="text-danger">{nameError}</span>}
             </div>
-
+          </div>
+          <div className="col-md-4">
             <div className="mb-3">
               <label htmlFor="dni" className="form-label">DNI:</label>
               <input 
@@ -211,9 +210,7 @@
               />
               {legajoError && <span className="text-danger">{legajoError}</span>}
             </div>
-          </div>
 
-          <div className="col-md-6">
             <div className="mb-3">
               <label htmlFor="userType" className="form-label">Tipo de Usuario:</label>
               <select 
@@ -229,6 +226,9 @@
                 <option value="AMBOS">Ambos</option>
               </select>
             </div>
+          </div>
+
+          <div className="col-md-4">
 
             <div className="mb-3">
               <label htmlFor="mail" className="form-label">Correo Electrónico:</label>
@@ -242,7 +242,6 @@
                 required 
               />
             </div>
-
             <div className="mb-3">
               <label htmlFor="phone" className="form-label">Teléfono:</label>
               <input 
@@ -274,14 +273,11 @@
                 <option value="UTN">UTN</option>
               </select>
             </div>
-
-            <button type="submit" className="btn btn-primary mt-4">Registrarse</button>
           </div>
+            <button type="submit" className="btn btn-primary mt-4 buttom-singup">Registrarse</button>
         </form>
       </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };

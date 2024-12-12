@@ -34,12 +34,12 @@
   
   /* Mostrar el carrusel en pantallas pequeñas */
   @media screen and (max-width: 768px) {
-    .gridContainerMentores {
+    .carousel-container-mentores{
       display: none; /* Ocultar la grilla en pantallas pequeñas */
     }
   }
   @media screen and (min-width: 769px) {
-    .gridContainerMentores {
+    .grid-container-mentores {
       display: grid;
       grid-template-columns: repeat(3, 1fr); /* Grilla de 3 columnas */
       gap: 1rem;

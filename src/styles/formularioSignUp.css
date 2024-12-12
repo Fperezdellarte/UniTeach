@@ -39,18 +39,18 @@
   background-color: #a14101;
 }
 
-.singup{
-  max-width: 80em;
-  padding: auto ;
-  border-radius: 8px;
+
+.form-singup{
+  margin-bottom: 10rem;
+  border-radius: 20%;
   filter: drop-shadow(rgba(0, 0, 0, 0.1));
-}
-
-
-.singup-form{
   display: flex;
-  justify-content:center; 
-  align-items:center; 
-  margin-left: 23vw;
-
+  justify-content: center;
 }
+
+.form-singup-container{
+  background-color: rgba(255, 255, 255, 0.699);
+  margin-top: 8rem;
+  border-radius: 4%;
+}
+
