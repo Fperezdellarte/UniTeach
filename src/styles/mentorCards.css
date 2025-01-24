@@ -6,7 +6,7 @@
 }
 
 .mentor-card {
-  background:linear-gradient(#004bad0c,transparent);
+  background: linear-gradient(#004bad0c, transparent);
   border-radius: 8px;
   transition: transform 0.3s ease;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
@@ -15,11 +15,6 @@
   justify-content: center !important;
   align-items: center !important;
 }
-
-.mentor-info{
-  text-decoration: underline rgba(0, 0, 0, 0) !important;
-}
-
 
 .mentor-card:hover {
   transform: scale(1.05);
@@ -32,7 +27,7 @@
   border-radius: 100% !important;
   border: 0.1em solid var(--secondary-color);
   margin-top: 18px;
- margin-left: 1.5rem;
+  margin-left: 1.5rem;
 }
 
 .card-body {
@@ -42,23 +37,22 @@
 .card-mentor-title {
   font-size: 1.5rem;
   color: var(--text-color);
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  text-decoration: none !important;
   font-weight: bold;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  
 }
 
 .card-mentor-text {
   font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
   font-size: 1.1rem;
   color: var(--text-color);
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+}
+.mentor-card-link {
+  text-decoration: none;
 }
 
 .custom-btn {
@@ -71,23 +65,18 @@
 
 .custom-btn:hover {
   background-color: #ffffff;
-  text-decoration: none;
 }
 
 .custom-btn:focus {
   outline: none;
 }
 
-.empty-star{
+.empty-star {
   color: rgba(0, 0, 0, 0.123);
 }
 
-.mentor-card-stars{
+.mentor-card-stars {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-}
-
-Card-Body{
-  text-decoration: none !important;
 }
