@@ -17,7 +17,9 @@
   width: 800px;
   margin: 2rem 0 2rem 0;
   background-color: rgba(255, 255, 255, 0.699);
-  box-shadow: 0 10px 16px  rgba(0, 0, 0, 0.616)
+  box-shadow: 0 10px 16px  rgba(0, 0, 0, 0.616);
+  margin-bottom: 15rem;
+  margin-top: 10rem;
 }
 
 /* Estilos para el título del formulario */
@@ -83,3 +85,4 @@
 .show-password img.visible {
   opacity: 0.4;
 }
+

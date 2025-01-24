@@ -34,7 +34,7 @@ export const Mentores = () => {
         <div className="loading-spinner">Cargando...</div>
       ) : (
         <>
-          <Carousel className='carouselContainerMentores'>
+          <Carousel className='carousel-container-mentores'>
             {mentoresRecientes.map((mentor) => (
               <Carousel.Item key={mentor.idUser}>
                 <div className="mentor-card-wrapper">
@@ -43,7 +43,7 @@ export const Mentores = () => {
               </Carousel.Item>
             ))}
           </Carousel>
-          <div className="gridContainerMentores">
+          <div className="grid-container-mentores">
             {mentoresRecientes.map((mentor) => (
               <div key={mentor.idUser} className="mentor-card-wrapper">
                 <MentorCard mentor={mentor} />

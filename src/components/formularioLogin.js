@@ -65,7 +65,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
       <div className='form-box fw-bold'>
         <h2>Iniciar sesión</h2>
         {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-        <form onSubmit={handleSubmit}>
+        <form className="form-login" onSubmit={handleSubmit}>
           <div className="form-group mb-3">
             <label htmlFor="username">Nombre de usuario:</label>
             <input

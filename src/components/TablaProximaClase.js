@@ -25,7 +25,7 @@ export const TablaProximaClase = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const { searchFacultad, handleSearch } = useBuscador();
+  const { handleSearch } = useBuscador();
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
  

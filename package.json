@@ -60,7 +60,7 @@
   "devDependencies": {
     "@testing-library/dom": "^10.3.2",
     "@testing-library/react": "^16.0.0",
-    "tailwindcss": "^3.4.3"
+    "@babel/plugin-proposal-private-property-in-object": "^X.X.X"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "src/index.js",
