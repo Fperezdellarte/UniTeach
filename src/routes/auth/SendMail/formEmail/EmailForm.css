@@ -1,0 +1,124 @@
+/* Heading style */
+.email-form-unique-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #131313;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Form container */
+.email-form-unique-form {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+/* Form label */
+.email-form-unique-form label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Input group */
+.email-form-unique-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.email-form-unique-input-group .email-form-unique-input-group-text {
+    background-color: #0052cc;
+    color: #fff;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    padding: 0.5rem 1rem;
+}
+
+.email-form-unique-input-group .email-form-unique-form-control {
+    border: none;
+    border-radius: 0 10px 10px 0;
+    box-shadow: none;
+    outline: none;
+    padding: 0.5rem;
+}
+
+/* Rounded input fields */
+.email-form-unique-rounded-pill {
+    border-radius: 50px !important;
+}
+
+/* Submit button */
+.email-form-unique-button[type="submit"] {
+    background: #0052cc;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.email-form-unique-button[type="submit"]:hover {
+    background-color: #003d99;
+}
+
+.email-form-unique-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Alert messages */
+.email-form-unique-alert {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    border-radius: 10px;
+    padding: 0.75rem;
+}
+
+.email-form-unique-alert-danger {
+    background: #ffccd5;
+    color: #b2001b;
+}
+
+.email-form-unique-alert-info {
+    background: #d9f7ff;
+    color: #0056b3;
+}
+
+/* Spinner */
+.email-form-unique-spinner-border {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .email-form-unique-container {
+        padding: 1rem;
+    }
+
+    .email-form-unique-form {
+        padding: 1.5rem;
+    }
+
+    .email-form-unique-button[type="submit"] {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .email-form-unique-form {
+        width: 100%;
+    }
+
+    .email-form-unique-container h2 {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,82 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #2fb5eb;
+  --text-color: #151515;
+  --background-color: #f7f7f7;
+}
+
+.mentor-card {
+  background: linear-gradient(#004bad0c, transparent);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.mentor-card:hover {
+  transform: scale(1.05);
+}
+
+.mentor-image {
+  width: 10em;
+  height: 10em;
+  object-fit: cover;
+  border-radius: 100% !important;
+  border: 0.1em solid var(--secondary-color);
+  margin-top: 18px;
+  margin-left: 1.5rem;
+}
+
+.card-body {
+  padding: 1em;
+}
+
+.card-mentor-title {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  font-weight: bold;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.card-mentor-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.mentor-card-link {
+  text-decoration: none;
+}
+
+.custom-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  width: 120px;
+  margin: 0.5em;
+}
+
+.custom-btn:hover {
+  background-color: #ffffff;
+}
+
+.custom-btn:focus {
+  outline: none;
+}
+
+.empty-star {
+  color: rgba(0, 0, 0, 0.123);
+}
+
+.mentor-card-stars {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

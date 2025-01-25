@@ -1,14 +1,14 @@
-import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import { API_URL } from '../auth/constans';
-import { useAuth } from '../auth/authProvider';
+import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
+import { API_URL } from "../auth/constans";
+import { useAuth } from "../auth/authProvider";
 
 export const ClassesContext = createContext();
 
 export const ClassesProvider = ({ children }) => {
   const [classesData, setClassesData] = useState({
     upcoming: [],
-    recent: []
+    recent: [],
   });
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -16,71 +16,90 @@ export const ClassesProvider = ({ children }) => {
   const { user, token } = useAuth();
 
   useEffect(() => {
-    console.log("el contexto inicia a pedir datos")
+    console.log("el contexto inicia a pedir datos");
     if (!user || !token) {
       setLoading(false);
       return;
     }
 
-
     const fetchData = async () => {
-      setLoading(true);  // Comienza la carga
+      setLoading(true); // Comienza la carga
       try {
-        const inscriptionsResponse = await axios.get(`${API_URL}/inscription/myinscriptions/${user.idUser}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const inscriptionsResponse = await axios.get(
+          `${API_URL}/inscription/myinscriptions/${user.idUser}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         const inscriptions = inscriptionsResponse.data.inscription;
 
-        const classesData = await Promise.all(inscriptions.map(async (inscription) => {
-          const classResponse = await axios.get(`${API_URL}/classes/${inscription.Classes_idClasses}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-          });
-          const classData = classResponse.data.class;
+        const classesData = await Promise.all(
+          inscriptions.map(async (inscription) => {
+            const classResponse = await axios.get(
+              `${API_URL}/classes/${inscription.Classes_idClasses}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
+            const classData = classResponse.data.class;
 
-          const mentorResponse = await axios.get(`${API_URL}/users/mentor/${classData.Users_idCreator}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-          });
+            const mentorResponse = await axios.get(
+              `${API_URL}/users/mentor/${classData.Users_idCreator}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
 
-          const mentorInfo = mentorResponse.data
+            const mentorInfo = mentorResponse.data;
 
-          const subjectResponse = await axios.get(`${API_URL}/subjects/${classData.Subjects_idSubjects}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-          });
-          const subjectName = subjectResponse.data.subject.Name;
+            const subjectResponse = await axios.get(
+              `${API_URL}/subjects/${classData.Subjects_idSubjects}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
+            const subjectName = subjectResponse.data.subject.Name;
 
-
-          
-          return {
-            idInscription: inscriptions.find(inscription => inscription.Classes_idClasses === classData.idClasses).idInscription,
-            Materia: subjectName,
-            Mentor: mentorInfo.Name,
-            mentorInfo: mentorInfo,
-            date: classData.Date,
-            endDate: classData.endDate,  
-            hour: classData.hour,
-            Place: classData.Place,
-            idClasses: classData.idClasses,
-            mentorOpinion: mentorInfo.Opinion,
-
-          };
-        }));
+            return {
+              idInscription: inscriptions.find(
+                (inscription) =>
+                  inscription.Classes_idClasses === classData.idClasses
+              ).idInscription,
+              Materia: subjectName,
+              Mentor: mentorInfo.Name,
+              mentorInfo: mentorInfo,
+              date: classData.Date,
+              endDate: classData.endDate,
+              hour: classData.hour,
+              Place: classData.Place,
+              idClasses: classData.idClasses,
+              mentorOpinion: mentorInfo.Opinion,
+            };
+          })
+        );
 
         const currentDate = new Date();
-        const upcomingClasses = classesData.filter(classItem => new Date(classItem.endDate) >= currentDate);
-        const pastClasses = classesData.filter(classItem => new Date(classItem.endDate) < currentDate);
+        const upcomingClasses = classesData.filter(
+          (classItem) => new Date(classItem.endDate) >= currentDate
+        );
+        const pastClasses = classesData.filter(
+          (classItem) => new Date(classItem.endDate) < currentDate
+        );
 
-        const sortedClasses = pastClasses.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
-        const latestThreeClasses = sortedClasses.slice(0, 3);
+        const sortedClasses = pastClasses.sort(
+          (a, b) => new Date(b.endDate) - new Date(a.endDate)
+        );
+        const latestThreeClasses = sortedClasses.slice(0, 10);
 
         setClassesData({
           upcoming: upcomingClasses,
-          recent: latestThreeClasses
+          recent: latestThreeClasses,
         });
       } catch (error) {
-        setError('No podemos mostrar tus clases');
-        console.error('Error fetching data:', error);
+        setError("No podemos mostrar tus clases");
+        console.error("Error fetching data:", error);
       } finally {
-        setLoading(false);  // Termina la carga
+        setLoading(false); // Termina la carga
       }
     };
 
