@@ -1,0 +1,9 @@
+
+body {
+  font-family: sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+#root {
+  flex: 0; 
+}
