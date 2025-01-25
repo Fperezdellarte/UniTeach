@@ -51,74 +51,24 @@ h2 {
   padding: 8px;
 }
 
-
-/* Otros estilos */
-
-
-.navbar-links-container {
-  display: flex;
-  margin-left: 20px; /* Espacio a la izquierda de los enlaces */
-}
-
-.navbar-links-container a {
-  color: #000000; /* Cambiar el color de los enlaces */
+/* Estilo general de los enlaces */
+.navbar-link {
+  color: #ffffff;
   text-decoration: none;
-  margin-right: 2px; /* Ajustar el espacio entre los enlaces */
-  padding-top: 8px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
-/* Efecto hover para los enlaces de navegación */
-.navbar-links-container a:hover {
-  text-decoration:underline ;
-  color: #00a2fff6; /* Cambia el color del texto al hacer hover */
-  border-radius: 20px; /* Aplica un borde redondeado al hacer hover */
-  padding: auto; /* Ajusta el padding para dar más espacio */
-  transition: background-color 0.15s, color 0.3s, border-radius 0.24s; /* Añadir una transición suave */
-}
-
-
-.navbar-search-container {
-  background-color: #fff; /* Cambiar el color de fondo de la barra de búsqueda */
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-left: 20px; /* Espacio a la izquierda del buscador */
-}
-
-.navbar-search-container input {
-  background-color: #fff;
-  border: none;
-  width: 200px; /* Ajustar el ancho de la barra de búsqueda */
-}
-
-.navbar-user-container {
-  display: flex;
-  align-items: center;
-  margin-left: 20px; /* Espacio a la izquierda del avatar */
-}
-/* Aplica el hover al contenedor completo */
-.dropdown-toggle-custom:hover .icon-hover,
-.dropdown-toggle-custom:hover .avatar-hover {
-  transform: scale(1.1); /* Escala tanto el avatar como el icono */
-}
-
-.navbar-user-container .user-avatar {
-  width: 3em; /* Ajustar el tamaño del avatar del usuario */
-  height: 3em; /* Ajustar el tamaño del avatar del usuario */
-  border-radius: 50%; /* Hacer el avatar circular */
-  margin-right: 0.3em; /* Ajustar el espacio entre el avatar y el botón */
-}
-
-.navbar-logout-container button {
-  border: 2px solid #fff;
-  transition: border-color 0.3s ease;
-  &:hover {
-    border-color: #007bff;
-  }
-  
-}
-.navbar-user-container {
-  display: flex;
-  align-items: center;
+/* Efecto hover para los enlaces */
+.navbar-link:hover {
+  background-color: rgba(60, 184, 255, 0.1); /* Fondo azul claro al hacer hover */
+  color: #ffffff; /* Texto azul */
+  box-shadow: 0 4px 12px rgba(89, 194, 255, 0.966); /* Sombra más intensa */
+  transform: translateY(-2px); /* Pequeño efecto de elevación */
 }
 
 

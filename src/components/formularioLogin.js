@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { API_URL } from '../auth/constans';
 import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/formularioLogin.css';
 import showIcon from '../Assest/show.png';
 import hideIcon from '../Assest/hide.png';
@@ -12,126 +11,139 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
   const [rememberMe, setRememberMe] = useState(false);
   const [errorResponse, setErrorResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
+  const [showPassword, setShowPassword] = useState(false);
+  const [capsLockOn, setCapsLockOn] = useState(false);
   const goTo = useNavigate();
+
+  const handleKeyUp = (event) => {
+    setCapsLockOn(event.getModifierState('CapsLock'));
+  };
+
+  const handleKeyDown = (event) => {
+    setCapsLockOn(event.getModifierState('CapsLock'));
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    setErrorResponse(''); // Limpiar el mensaje de error anterior
+    setErrorResponse('');
 
     try {
       const response = await fetch(`${API_URL}/users/login`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           Username,
-          Password
+          Password,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Login successful");
+        console.log('Login successful');
 
         const { token, user } = data;
 
         if (rememberMe) {
-          sessionStorage.setItem('authData', JSON.stringify({ Username, token, user }));
+          sessionStorage.setItem(
+            'authData',
+            JSON.stringify({ Username, token, user })
+          );
         } else {
           sessionStorage.setItem('authData', JSON.stringify({ Username, token }));
         }
 
         onLoginSuccess();
-        goTo("/home");
+        goTo('/home');
       } else {
-        // Leer el mensaje de error desde la respuesta JSON
         const json = await response.json();
         setErrorResponse(json.message || 'Error desconocido');
       }
-
     } catch (error) {
       console.log(error);
-      setErrorResponse("Error de conexión, por favor intente de nuevo.");
+      setErrorResponse('Error de conexión, por favor intente de nuevo.');
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <div className="form-container">
-      <div className='form-box fw-bold'>
-        <h2>Iniciar sesión</h2>
-        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+    <div className="auth-login-container">
+      <div className="auth-login-box">
+        <h2 className="auth-login-title">Iniciar sesión</h2>
+        {!!errorResponse && <div className="auth-error-message">{errorResponse}</div>}
         <form onSubmit={handleSubmit}>
-          <div className="form-group mb-3">
-            <label htmlFor="username">Nombre de usuario:</label>
+          <div className="auth-input-wrapper">
             <input
+              placeholder=" "
+              className="auth-input-field"
               type="text"
-              id="username"
-              className="form-control"
               value={Username}
               onChange={(e) => setUsername(e.target.value)}
               disabled={isLoading}
             />
+            <label className="auth-input-label">Nombre de usuario</label>
           </div>
-          <div className="form-group mb-3 position-relative">
-            <label htmlFor="password">Contraseña:</label>
+
+          <div className="auth-input-wrapper">
             <input
-              type={showPassword ? 'text' : 'password'} // Alterna entre text y password
-              id="password"
-              className="form-control"
+              type={showPassword ? 'text' : 'password'}
+              className="auth-input-field"
+              placeholder=" "
               value={Password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyUp={handleKeyUp}
+              onKeyDown={handleKeyDown}
               disabled={isLoading}
             />
+            <label className="auth-input-label">Contraseña</label>
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className=" show-password fw-bold position-absolute end-0 top-50"
+              className="auth-toggle-password"
             >
               <img
                 src={showPassword ? hideIcon : showIcon}
                 alt={showPassword ? 'Ocultar' : 'Mostrar'}
-                className={showPassword ? 'visible' : 'hidden'}
-                style={{ width: '24px', height: '24px' }}
               />
             </button>
+            {capsLockOn && (
+              <div className="auth-caps-warning">
+                Bloq Mayús está activado
+              </div>
+            )}
           </div>
 
-          <div className="row mb-4">
-            <div className="col d-flex justify-content-center">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="rememberMe"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  disabled={isLoading}
-                />
-                <label className="form-check-label" htmlFor="rememberMe">
-                  Recordarme
-                </label>
-              </div>
-            </div>
-
-            <div className="il">
-              <a href="#!" className="forgot-password-link"onClick={() => goTo('/email-form')}>Olvidé mi contraseña?</a>
-            </div>
+          <div className="auth-extra-options">
+            <label className="auth-remember-container">
+              <input
+                type="checkbox"
+                className="auth-remember-checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              Recordarme
+            </label>
+            <button
+              type="button"
+              className="auth-forgot-link"
+              onClick={() => goTo('/forgot-password')}
+            >
+              ¿Olvidaste tu contraseña?
+            </button>
           </div>
 
           <button
             type="submit"
-            className="btn btn-login fw-bold"
+            className="auth-submit-btn"
             disabled={isLoading}
           >
-            {isLoading ? <span className="spinner-border spinner-border-sm" /> : "Iniciar sesión"}
+            {isLoading ? <span className="spinner-border spinner-border-sm" /> : 'Iniciar sesión'}
           </button>
         </form>
       </div>
     </div>
   );
-}
+};

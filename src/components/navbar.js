@@ -21,10 +21,10 @@ export const Navbar = () => {
   const { searchTerm, setSearchTerm, error, handleSearch } = useBuscador();
   const [userName, setUserName] = useState('');
   const [userImage, setUserImage] = useState('');
-  
+
   useEffect(() => {
     const authData = JSON.parse(sessionStorage.getItem('authData'));
-    
+
     if (authData && authData.user) {
       if (authData.user.Name) {
         setUserName(authData.user.Name);
@@ -34,7 +34,7 @@ export const Navbar = () => {
       }
     }
   }, []);
-  
+
   const menuOptions = auth.isAuthenticated
     ? [
         { text: "Inicio", icon: <HomeIcon />, link: "/home" },
@@ -42,7 +42,7 @@ export const Navbar = () => {
       ]
     : [
         { text: "Inicio", icon: <HomeIcon />, link: "/" },
-        { text: "Inicio sesion", icon: <LoginIcon />, link: "/login" },
+        { text: "Inicio sesión", icon: <LoginIcon />, link: "/login" },
         { text: "Registro", icon: <SignUpIcon />, link: "/signup" },
         { text: "Nosotros", icon: <InfoIcon />, link: "/about" }
       ];
@@ -64,14 +64,16 @@ export const Navbar = () => {
         </div>
         <div className="navbar-links-container">
           {menuOptions.map((option, index) => (
-            <Link key={index} to={option.link}>{option.text}</Link>
+            <Link key={index} to={option.link} className="navbar-link">
+              {option.text}
+            </Link>
           ))}
         </div>
-  
+
         {auth.isAuthenticated && (
           <>
             <div className="navbar-search-container">
-            <InputBase
+              <InputBase
                 placeholder={searchError ? "Busca Una Materia" : "Buscar materia..."}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -96,7 +98,12 @@ export const Navbar = () => {
           <HiOutlineMenu onClick={() => setOpenMenu(true)} />
         </div>
         <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
-          <Box sx={{ width: 250 }} role="presentation" onClick={() => setOpenMenu(false)} onKeyDown={() => setOpenMenu(false)}>
+          <Box
+            sx={{ width: 250 }}
+            role="presentation"
+            onClick={() => setOpenMenu(false)}
+            onKeyDown={() => setOpenMenu(false)}
+          >
             <List>
               {menuOptions.map((item, index) => (
                 <ListItem key={index} disablePadding button component={Link} to={item.link}>
@@ -110,11 +117,7 @@ export const Navbar = () => {
       </nav>
       {error && <p>{error}</p>}
     </div>
-  );  
+  );
 };
 
 export default Navbar;
-
-
-
-

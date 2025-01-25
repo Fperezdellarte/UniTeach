@@ -11,6 +11,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@testing-library/user-event": "^13.5.0",
+    "animate.css": "^4.1.1",
     "axios": "^1.7.3",
     "bootstrap": "^5.3.3",
     "chai": "^4.4.1",
@@ -32,7 +33,9 @@
     "react-scripts": "^5.0.1",
     "react-transition-group": "^4.4.5",
     "sinon": "^18.0.0",
-    "web-vitals": "^2.1.4"
+    "swiper": "^11.2.1",
+    "web-vitals": "^2.1.4",
+    "which": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

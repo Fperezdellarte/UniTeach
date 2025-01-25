@@ -1,91 +1,110 @@
-  import React, { useState } from 'react';
-  import { API_URL } from "../auth/constans";
-  import { useNavigate } from "react-router-dom";
-  import 'bootstrap/dist/css/bootstrap.min.css';
-  import '../styles/formularioSignUp.css';
+import React, { useState, useEffect } from 'react';
+import { API_URL } from "../auth/constans";
+import { useNavigate } from "react-router-dom";
+import '../styles/formularioSignUp.css';
 
-  export const FormularioSignUp = () => {
-    const [Username, setUsername] = useState('');
-    const [Password, setPassword] = useState('');
-    const [Name, setName] = useState('');
-    const [DNI, setDni] = useState('');
-    const [Legajo, setLegajo] = useState('');
-    const [TypeOfUser, setUserType] = useState('');
-    const [Mail, setMail] = useState('');
-    const [Phone, setPhone] = useState('');
-    const [University, setUniversity] = useState('');
+export const FormularioSignUp = () => {
+  const [formData, setFormData] = useState({
+    Username: '',
+    Password: '',
+    Name: '',
+    DNI: '',
+    Legajo: '',
+    TypeOfUser: '',
+    Mail: '',
+    Phone: '',
+    University: ''
+  });
 
-    const [usernameError, setUsernameError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [nameError, setNameError] = useState('');
-    const [dniError, setDniError] = useState('');
-    const [legajoError, setLegajoError] = useState('');
-    const [phoneError, setPhoneError] = useState('');
+  const [errors, setErrors] = useState({
+    Username: '',
+    Password: '',
+    Name: '',
+    DNI: '',
+    Legajo: '',
+    Phone: ''
+  });
 
-    const navigate = useNavigate();
+  const [capsLockOn, setCapsLockOn] = useState(false);
+  const [focusedField, setFocusedField] = useState(null);
+  
+  const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
+  // Detectar Caps Lock
+  useEffect(() => {
+    const handleCapsLock = (event) => {
+      setCapsLockOn(event.getModifierState('CapsLock'));
+    };
 
-      let hasError = false;
+    document.addEventListener('keydown', handleCapsLock);
+    document.addEventListener('keyup', handleCapsLock);
 
-      // Validar nombre de usuario
-      const usernameRegex = /^[a-zA-Z0-9]+$/;
-      if (!usernameRegex.test(Username)) {
-        setUsernameError("El nombre de usuario no puede contener caracteres especiales.");
-        hasError = true;
-      } else {
-        setUsernameError('');
+    return () => {
+      document.removeEventListener('keydown', handleCapsLock);
+      document.removeEventListener('keyup', handleCapsLock);
+    };
+  }, []);
+
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    setErrors(prev => ({ ...prev, [field]: '' }));
+  };
+
+  const handleFocus = (field) => {
+    setFocusedField(field);
+  };
+
+  const handleBlur = () => {
+    setFocusedField(null);
+  };
+
+  const validateField = (field, value) => {
+    const validations = {
+      Username: {
+        regex: /^[a-zA-Z0-9]+$/,
+        message: "El nombre de usuario no puede contener caracteres especiales."
+      },
+      Password: {
+        regex: /^(?=.*[A-Z]).{8,25}$/,
+        message: "La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres."
+      },
+      Name: {
+        regex: /^[a-z A-Z]+$/,
+        message: "El nombre no puede contener números ni caracteres especiales."
+      },
+      DNI: {
+        regex: /^[0-9]{6,8}$/,
+        message: "El DNI debe contener solo números y tener entre 6 y 8 dígitos."
+      },
+      Legajo: {
+        regex: /^[a-zA-Z0-9]{1,10}$/,
+        message: "El legajo debe contener solo letras y números, con un máximo de 10 dígitos."
+      },
+      Phone: {
+        regex: /^[0-9]{10}$/,
+        message: "El Número debe contener solo números, con 10 dígitos."
       }
+    };
 
-      // Validar contraseña
-      const passwordRegex = /^(?=.*[A-Z]).{8,25}$/;
-      if (!passwordRegex.test(Password)) {
-        setPasswordError("La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.");
-        hasError = true;
-      } else {
-        setPasswordError('');
-      }
-
-    // Validar nombre
-    const nameRegex = /^[a-z A-Z]+$/;
-    if (!nameRegex.test(Name)) {
-      setNameError("El nombre no puede contener números ni caracteres especiales.");
-      hasError = true;
-    } else {
-      setNameError('');
+    if (validations[field] && !validations[field].regex.test(value)) {
+      setErrors(prev => ({ ...prev, [field]: validations[field].message }));
+      return false;
     }
+    return true;
+  };
 
-      // Validar DNI
-      const dniRegex = /^[0-9]{6,8}$/;
-      if (!dniRegex.test(DNI)) {
-        setDniError("El DNI debe contener solo números y tener entre 6 y 8 dígitos.");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    let hasError = false;
+
+    // Validar todos los campos
+    Object.keys(formData).forEach(field => {
+      if (!validateField(field, formData[field])) {
         hasError = true;
-      } else {
-        setDniError('');
       }
+    });
 
-      // Validar legajo
-      const legajoRegex = /^[a-zA-Z0-9]{1,10}$/;
-      if (!legajoRegex.test(Legajo)) {
-        setLegajoError("El legajo debe contener solo letras y números, con un máximo de 10 dígitos.");
-        hasError = true;
-      } else {
-        setLegajoError('');
-      }
-
-      // Validar teléfono
-      const phoneRegex = /^[0-9]{10}$/;
-      if (!phoneRegex.test(Phone)) {
-        setPhoneError("El Número debe contener solo números, con 10 dígitos.");
-        hasError = true;
-      } else {
-        setPhoneError('');
-      }
-
-      if (hasError) {
-        return;
-      }
+    if (hasError) return;
 
     try {
       const response = await fetch(`${API_URL}/users/signup`, {
@@ -93,195 +112,102 @@
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          Username,
-          Password,
-          Name,
-          DNI,
-          Legajo,
-          TypeOfUser,
-          Mail,
-          Phone,
-          University
-        })
+        body: JSON.stringify(formData)
       });
 
-        if (response.ok) {
-          const responseData = await response.json();
-          console.log('Respuesta del servidor:', responseData);
-          navigate("/login");
-        } else {
-          console.error('Error en la solicitud:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al enviar los datos:', error);
+      if (response.ok) {
+        console.log('Respuesta del servidor:', await response.json());
+        navigate("/login");
+      } else {
+        console.error('Error en la solicitud:', response.statusText);
       }
-    };
+    } catch (error) {
+      console.error('Error al enviar los datos:', error);
+    }
+  };
+
+  const renderField = (id, label, type = "text", placeholder = "", options = null) => {
+    const value = formData[id];
+    const error = errors[id];
+    const isFocused = focusedField === id;
+
+    return (
+      <div className={`signup-group ${isFocused ? 'focused' : ''} ${error ? 'error' : ''}`}>
+        <label htmlFor={id} className="signup-label">
+          {label}
+          {id === 'Password' && capsLockOn && (
+            <span className="signup-warning">
+              ⚠️ Bloq Mayús activado
+            </span>
+          )}
+        </label>
+        {options ? (
+          <select
+            id={id}
+            className="signup-select"
+            value={value}
+            onChange={(e) => handleChange(id, e.target.value)}
+            onFocus={() => handleFocus(id)}
+            onBlur={handleBlur}
+            required
+          >
+            <option value="">{placeholder || "Elige una opción"}</option>
+            {options.map(([value, label]) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </select>
+        ) : (
+          <div className="signup-input-container">
+            <input
+              type={type}
+              id={id}
+              className="signup-input"
+              value={value}
+              onChange={(e) => handleChange(id, e.target.value)}
+              onFocus={() => handleFocus(id)}
+              onBlur={handleBlur}
+              placeholder={placeholder}
+              required
+            />
+            <div className="signup-focus-effect"></div>
+          </div>
+        )}
+        {error && <span className="signup-error-message">{error}</span>}
+      </div>
+    );
+  };
 
   return (
-    <div className='singup'>
-      <div className='singup-form'>
-      <div className="col-md-10"> 
-      <div className="card p-4 shadow"> 
-      <div className='container'>
-        <h2>Registro de Usuario</h2>
-        <form onSubmit={handleSubmit} className="row g-3">
-          <div className="col-md-6">
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">Nombre de usuario:</label>
-              <input 
-                type="text" 
-                className="form-control" 
-                id="username" 
-                value={Username} 
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                  setUsernameError(''); // Clear error on change
-                }} 
-                placeholder="Ej: Juanceto01"
-                required 
-              />
-              {usernameError && <span className="text-danger">{usernameError}</span>}
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">Contraseña:</label>
-              <input 
-                type="password" 
-                className="form-control" 
-                id="password" 
-                value={Password} 
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError(''); // Clear error on change
-                }} 
-                placeholder="Min 1 mayus, 8 caracteres y max 25"
-                required 
-              />
-              {passwordError && <span className="text-danger">{passwordError}</span>}
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="name" className="form-label">Nombre:</label>
-              <input 
-                type="text" 
-                className="form-control" 
-                id="name" 
-                value={Name} 
-                onChange={(e) => {
-                  setName(e.target.value);
-                  setNameError(''); // Clear error on change
-                }} 
-                placeholder="Ej. Alvaro Reina"
-                required 
-              />
-              {nameError && <span className="text-danger">{nameError}</span>}
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="dni" className="form-label">DNI:</label>
-              <input 
-                type="text" 
-                className="form-control" 
-                id="dni" 
-                value={DNI} 
-                onChange={(e) => {
-                  setDni(e.target.value);
-                  setDniError(''); // Clear error on change
-                }} 
-                placeholder="Max 8 digitos"
-                required 
-              />
-              {dniError && <span className="text-danger">{dniError}</span>}
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="legajo" className="form-label">Legajo:</label>
-              <input 
-                type="text" 
-                className="form-control" 
-                id="legajo" 
-                value={Legajo} 
-                onChange={(e) => {
-                  setLegajo(e.target.value);
-                  setLegajoError(''); // Clear error on change
-                }} 
-                placeholder="Max 8 caracteres"
-                required 
-              />
-              {legajoError && <span className="text-danger">{legajoError}</span>}
-            </div>
+    <div className="signup-container">
+      <div className="signup-card">
+        <h1 className="signup-title">Registro de Usuario</h1>
+        <form onSubmit={handleSubmit} className="signup-form">
+          <div className="signup-column">
+            {renderField("Username", "Nombre de usuario", "text", "Ej: Juanceto01")}
+            {renderField("Password", "Contraseña", "password", "Mín. 8 caracteres, 1 mayúscula")}
+            {renderField("Name", "Nombre", "text", "Ej: Alvaro Reina")}
+            {renderField("Mail", "Correo Electrónico", "email", "ejemplo@gmail.com")}
+            {renderField("Phone", "Teléfono", "tel", "Ej: 3819877663")}
           </div>
-
-          <div className="col-md-6">
-            <div className="mb-3">
-              <label htmlFor="userType" className="form-label">Tipo de Usuario:</label>
-              <select 
-                className="form-select" 
-                id="userType" 
-                value={TypeOfUser} 
-                onChange={(e) => setUserType(e.target.value)} 
-                required
-              >
-                <option value="">Elige una opcion</option>
-                <option value="ALUMNO">Alumno</option>
-                <option value="MENTOR">Mentor</option>
-                <option value="AMBOS">Ambos</option>
-              </select>
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="mail" className="form-label">Correo Electrónico:</label>
-              <input 
-                type="email" 
-                className="form-control" 
-                id="mail" 
-                value={Mail} 
-                onChange={(e) => setMail(e.target.value)} 
-                placeholder="Ej. example@gmail.com"
-                required 
-              />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="phone" className="form-label">Teléfono:</label>
-              <input 
-                type="tel" 
-                className="form-control" 
-                id="phone" 
-                value={Phone} 
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                  setPhoneError(''); // Clear error on change
-                }} 
-                placeholder="Ej. 3819877663"
-              />
-              {phoneError && <span className="text-danger">{phoneError}</span>}
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="university" className="form-label">Universidad:</label>
-              <select 
-                className="form-select" 
-                id="university" 
-                value={University} 
-                onChange={(e) => setUniversity(e.target.value)} 
-                required
-              >
-                <option value="">Elige una opcion</option>
-                <option value="UNT">UNT</option>
-                <option value="UNSTA">UNSTA</option>
-                <option value="UTN">UTN</option>
-              </select>
-            </div>
-
-            <button type="submit" className="btn btn-primary mt-4">Registrarse</button>
+          <div className="signup-column">
+            {renderField("TypeOfUser", "Tipo de Usuario", "select", "Elige una opción", [
+              ["ALUMNO", "Alumno"],
+              ["MENTOR", "Mentor"],
+              ["AMBOS", "Ambos"]
+            ])}
+            {renderField("University", "Universidad", "select", "Elige una opción", [
+              ["UNT", "UNT"],
+              ["UNSTA", "UNSTA"],
+              ["UTN", "UTN"]
+            ])}
+            {renderField("DNI", "DNI", "text", "Máx. 8 dígitos")}
+            {renderField("Legajo", "Legajo", "text", "Máx. 8 caracteres")}
           </div>
+          <button type="submit" className="signup-button">
+            Registrarse
+          </button>
         </form>
       </div>
-      </div>
-    </div>
-    </div>
     </div>
   );
 };
