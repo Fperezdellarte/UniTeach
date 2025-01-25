@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ClassesContext } from "../../../../contexts/classesContext";
 import { MuiTableContainer } from "../../../../components/table/tableContainer";
-import { InfoModal } from "../../../../components/modal/infoModal";
+import { InfoModal } from "../../../../components/modal/tablaClasesRecientes/infoModal";
 import { ClasesRecientesColumns } from "./ClasesRecientesColumns";
 import { Button } from "@mui/material";
 import { styled } from "@mui/system";

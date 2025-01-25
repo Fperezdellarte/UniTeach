@@ -26,16 +26,27 @@ const NavbarMain = () => {
     : [...menuItems.common, ...menuItems.auth];
 
   return (
-    <AppBar position="sticky" color="default" elevation={1}>
+    <AppBar position="sticky" color="transparent" elevation={10}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           {/* Logo */}
           <Link to={isAuthenticated ? "/app/home" : "/"}>
-            <img src={Logo} alt="Logo" className="nav-logo" />
+            <img
+              src={Logo}
+              alt="Logo"
+              className="nav-logo"
+              style={{ width: "70px" }}
+            />
           </Link>
 
           {/* Sección Central - Desktop */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              gap: 2,
+              justifyItems: "center",
+            }}
+          >
             {currentMenuItems.map((navItem) => (
               <Button
                 key={navItem.text}
@@ -57,10 +68,10 @@ const NavbarMain = () => {
           {/* Sección derecha - Solo para autenticados */}
           <div className="navbar-actions">
             {isAuthenticated && (
-              <>
+              <div style={{ display: "flex" }}>
                 <SearchBar />
                 <UserDropdown />
-              </>
+              </div>
             )}
 
             {/* Menú hamburguesa siempre visible */}

@@ -1,4 +1,5 @@
 import { Modal } from "react-bootstrap";
+import "./FacultyModal.css";
 
 export const FacultyModal = ({ show, onHide, handleFacultySelect }) => {
   const faculties = [

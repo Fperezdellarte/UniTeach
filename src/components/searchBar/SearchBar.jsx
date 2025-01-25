@@ -7,15 +7,17 @@ export const SearchBar = () => {
     useBuscador();
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && searchTerm) {
       handleSearch();
+    } else {
+      return error;
     }
   };
 
   return (
     <div className="navbar-search-container">
       <InputBase
-        placeholder={error ? "Busca Una Materia" : "Buscar materia..."}
+        placeholder={error ? error : "Buscar materia..."}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyPress}
@@ -25,10 +27,13 @@ export const SearchBar = () => {
           padding: "8px",
         }}
       />
-      {loading && <CircularProgress size={20} sx={{ ml: 1 }} />}
-      <IconButton onClick={() => handleSearch()}>
-        <SearchIcon />
-      </IconButton>
+      {loading ? (
+        <CircularProgress size={20} sx={{ ml: 1 }} />
+      ) : (
+        <IconButton onClick={() => handleSearch()}>
+          <SearchIcon />
+        </IconButton>
+      )}
     </div>
   );
 };

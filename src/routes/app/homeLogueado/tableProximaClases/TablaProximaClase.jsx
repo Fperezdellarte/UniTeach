@@ -6,7 +6,7 @@ import { useBuscador } from "../../../../hooks/useBuscador";
 import { API_URL } from "../../../../auth/constans";
 import { Snackbar, Button } from "@mui/material";
 import { ConfirmDialog } from "../../../../components/confirmDialog/confirmDialog";
-import { FacultyModal } from "../../../../components/modal/FacultyModal";
+import { FacultyModal } from "../../../../components/modal/tablaProximaClases/FacultyModal";
 import { ProximaClasesColumns } from "./ProximaClasesColumns";
 import { MuiTableContainer } from "../../../../components/table/tableContainer";
 
