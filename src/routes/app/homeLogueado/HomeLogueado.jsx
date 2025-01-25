@@ -1,5 +1,5 @@
 import React from "react";
-import "./homeLogueado.css";
+import "./HomeLogueado.css";
 import { TablaProximaClase } from "./tableProximaClases/TablaProximaClase";
 import { TablaClasesRecientes } from "./tableClasesRecientes/TablaClasesRecientes";
 import { Mentores } from "./mentoresRecientes/MentoresRecientes";
@@ -29,5 +29,3 @@ const blockStyle = {
   border: "1px #ccc",
   margin: "2em",
 };
-
-export default HomeLogueado;

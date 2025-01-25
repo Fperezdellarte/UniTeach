@@ -12,7 +12,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { useAuth } from "../../auth/authProvider";
 import Logo from "../../Assest/Logo.png";
 import { MobileMenu } from "./mobileMenu";
-import { SearchBar } from "./searchBar";
+import { SearchBar } from "../searchBar/SearchBar";
 import UserDropdown from "./UserDropdown";
 import { menuItems } from "../../config/navbarConfig";
 import IconMapper from "./IconMapper";

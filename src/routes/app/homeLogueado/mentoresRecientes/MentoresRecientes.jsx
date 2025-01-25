@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import MentorCard from "../../results/mentorCard/mentorCard";
+import { MentorCard } from "../../../../components/card/mentorCard";
 import { ClassesContext } from "../../../../contexts/classesContext";
 import "./mentoresRecientes.css";
 import { Carousel } from "react-bootstrap";

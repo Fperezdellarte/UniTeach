@@ -12,7 +12,7 @@ const MentorInfo = ({ mentor }) => (
   </div>
 );
 
-const MentorCard = ({ mentor }) => {
+export const MentorCard = ({ mentor }) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -88,5 +88,3 @@ const MentorCard = ({ mentor }) => {
     </div>
   );
 };
-
-export default MentorCard;
