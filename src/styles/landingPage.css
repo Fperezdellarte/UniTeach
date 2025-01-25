@@ -21,14 +21,10 @@
   margin-bottom: 4.6rem;
 }
 
-
-
-
-
 .landing-page {
   background: linear-gradient(#004aad, transparent);
-  font-family: Arial, Helvetica, sans-serif;
-  font-style: normal;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-style:initial;
   margin: 0;
   height: auto;
   width: 100%;
@@ -125,19 +121,20 @@
 }
 
 .subscription-section {
+  
   padding: 30px 20px;
   text-align: center;
   margin-top: 50px;
 }
 
 .form {
-  background: #d8eaee;
+  color: #1e3c72;
   display: inline-block;
   max-width: auto;
   width: auto;
   padding: 20px;
   border-radius: 0px;
-  box-shadow: 0px 50px 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.295);
 }
 
 .form .title {
@@ -173,3 +170,4 @@
 .form button:hover {
   background-color: #a6a6a7b4;
 }
+

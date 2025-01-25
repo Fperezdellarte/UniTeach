@@ -2,8 +2,6 @@
 .custom-title {
   margin: 3rem 0 3rem 0;
   color: #f0f0f0;
-  font-family: 'Times New Roman', Times, serif;
-
   filter: drop-shadow(2px 4px 6px black);
   animation: tracking-in-expand-forward-bottom 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
@@ -17,12 +15,14 @@
     cursor: pointer;
     font-weight: 600;
     transition: 0.2s;
-    color: #000000;
     margin: 0 0 4rem 0;
+    background-color: rgba(82, 160, 248, 0.8); /* Fondo claro para los botones */
+
   }
   
   .primary-button:hover {
-    background-color: #000000;
+    background-color: rgba(0, 119, 255, 0.8); /* Fondo claro para los botones */
+
   }
   @keyframes tracking-in-expand-forward-bottom {
     0% {
