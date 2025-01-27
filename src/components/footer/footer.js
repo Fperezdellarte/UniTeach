@@ -42,7 +42,7 @@ export const Footer = () => {
 
         <div className="text-center p-4 bg-darker-blue text-white">
           © 2024 Copyright:{" "}
-          <a className="text-reset fw-bold" href="/home">
+          <a className="text-reset fw-bold" href="/">
             UniTeach
           </a>
         </div>

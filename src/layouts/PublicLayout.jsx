@@ -4,11 +4,13 @@ import Footer from "../components/footer/footer";
 
 const PublicLayout = () => (
   <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-    <NavbarMain />
+    <nav style={{ margin: 0, padding: 0 }}>
+      <NavbarMain />
+    </nav>
     <main className="flex-1">
       <Outlet />
     </main>
-    <footer className="container-fluid">
+    <footer style={{ margin: 0, padding: 0 }}>
       <Footer />
     </footer>
   </div>

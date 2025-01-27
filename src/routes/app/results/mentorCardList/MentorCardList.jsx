@@ -1,16 +1,15 @@
 import React from "react";
-import { MentorCard } from "../../../../components/card/mentorCard";
+import { MentorCard } from "../../../../components/card/MentorCard";
 
 export const MentorCardsList = ({ mentors, onCardClick }) => {
   return (
-    <div className="row container-mentor-results">
+    <div className="container-mentor-results">
       {mentors.map((mentor) => (
-        <div className="col-lg-3 col-md-6 mb-4" key={mentor.idUser}>
-          <MentorCard
-            mentor={mentor}
-            onClick={() => onCardClick(mentor.idUser)}
-          />
-        </div>
+        <MentorCard
+          key={mentor.idUser}
+          mentor={mentor}
+          onClick={() => onCardClick(mentor.idUser)}
+        />
       ))}
     </div>
   );

@@ -1,73 +1,35 @@
-.container-fluid {
-  padding: 0; /* Elimina el padding por defecto */
-  margin: 0;  /* Elimina márgenes por defecto */
-}
 .container-results{
-  background:linear-gradient(#004aad,transparent);
-}
-
-.filters {
-  padding: 15px;
-  background-color: #258bff46;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.7s ease; 
-  color: white;
-  margin-left: 1rem;
-}
-
-.container-mentor-results{
-  margin-left: 2rem;
-}
-
-.filter-button{
-  margin-left: 9rem;
-  background-color: orange;
-  color: black;
-
-}
-
-.filter-button:hover {
-  transform: scale(1.05);
-  background-color: rgb(187, 122, 1);
-  color: white;
-}
-
-.no-result-text{
-  margin-top: 5rem;
+ margin: 0;
+ width: 100%;
+ height: 100%;;
+ padding-top: 20px;
 }
 
 .result-title{
-  margin-top: 3rem;
-  color: white;
+    width: fit-content;
+    justify-self: center;
+    font-weight: 500;
+}
+.button-filter{
+  width: fit-content;
+    margin-left: 10px;
+}
+.container-card{
+padding: 30px;
 }
 
-.filters h6 {
-  margin-bottom: 0.5rem;
+.container-mentor-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    
 }
-
-.form-check {
-  margin-bottom: 0.5rem;
-}
-
-.form-check-label {
-  margin-left: 0.5rem;
-}
-
-.form-select {
-  width: 100%;
-}
-
-
-@media (min-width: 992px) {
-  .mentor-card {
-    max-width: 320px; /* Ajuste de ancho máximo */
-  }
-  
-}
-
 @media (max-width: 768px) {
-  .container-mentor-results{
-    margin: 3rem;
-  }
+    .container-mentor-results {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
 }

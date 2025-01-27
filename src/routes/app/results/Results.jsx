@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FilterForm } from "./filterForm/FormFilter";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { MentorCardsList } from "./mentorCardList/MentorCardList";
 import "./Results.css";
+import { Button } from "@mui/material";
 
 export const Results = () => {
   const location = useLocation();
@@ -11,7 +13,6 @@ export const Results = () => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
 
-  // Carga inicial de resultados
   useEffect(() => {
     if (location.state?.results) {
       setResults(location.state.results);
@@ -27,31 +28,30 @@ export const Results = () => {
 
   return (
     <div className="container-results">
-      <h2 className="text-center result-title">Resultados de la búsqueda</h2>
-      <div className="row">
-        <div className="col-12 mb-3">
-          <button
-            className="blue-button filter-button"
-            onClick={() => setShowFilters(!showFilters)}
-          >
-            {showFilters ? "Ocultar Filtros" : "Mostrar Filtros"}
-          </button>
-        </div>
-
+      <h2 className="result-title">Resultados de la búsqueda</h2>
+      <div className="button-filter">
+        <Button
+          className="result-filter-button"
+          variant="outlined"
+          startIcon={<FilterAltIcon />}
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          {showFilters ? "Ocultar Filtros" : "Mostrar Filtros"}
+        </Button>
+      </div>
+      <div className="container-card">
         {showFilters && (
           <FilterForm results={results} onFiltered={setFilteredResults} />
         )}
 
-        <div className={`col-md-${showFilters ? "9" : "12"}`}>
+        <div className="result-card-filter">
           {filteredResults.length > 0 ? (
             <MentorCardsList
               mentors={filteredResults}
               onCardClick={handleCardClick}
             />
           ) : (
-            <p className="text-center text-muted no-result-text">
-              No se encontraron mentores.
-            </p>
+            <p className="result-p-empty">No se encontraron mentores.</p>
           )}
         </div>
       </div>
