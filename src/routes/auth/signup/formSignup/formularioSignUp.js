@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { API_URL } from "../../../../auth/constans";
 import { useNavigate } from "react-router-dom";
 import "./formularioSignUp.css";
+import { registerUser } from "../../../../service/authService";
+import { CircularProgress } from "@mui/material";
 
-export const FormularioSignUp = () => {
+export const FormularioSignUp = ({ setShowAlert }) => {
   const [capsLockOn, setCapsLockOn] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     Username: "",
     Password: "",
@@ -31,7 +32,9 @@ export const FormularioSignUp = () => {
 
   useEffect(() => {
     const handleCapsLock = (event) => {
-      setCapsLockOn(event.getModifierState("CapsLock"));
+      if (event instanceof KeyboardEvent) {
+        setCapsLockOn(event.getModifierState("CapsLock"));
+      }
     };
 
     document.addEventListener("keydown", handleCapsLock);
@@ -42,7 +45,6 @@ export const FormularioSignUp = () => {
       document.removeEventListener("keyup", handleCapsLock);
     };
   }, []);
-
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
@@ -100,7 +102,6 @@ export const FormularioSignUp = () => {
     event.preventDefault();
     let hasError = false;
 
-    // Validar todos los campos
     Object.keys(formData).forEach((field) => {
       if (!validateField(field, formData[field])) {
         hasError = true;
@@ -108,25 +109,17 @@ export const FormularioSignUp = () => {
     });
 
     if (hasError) return;
-
+    setLoading(true);
     try {
-      const response = await fetch(`${API_URL}/users/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        console.log("Respuesta del servidor:", await response.json());
-        navigate("/login");
-      } else {
-        console.error("Error en la solicitud:", response.statusText);
-      }
+      await registerUser(formData);
+      setShowAlert(true);
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 3000);
     } catch (error) {
-      console.error("Error al enviar los datos:", error);
+      setErrors(error.errors);
     }
+    setLoading(false);
   };
 
   const renderField = (
@@ -243,8 +236,12 @@ export const FormularioSignUp = () => {
             {renderField("DNI", "DNI", "text", "Máx. 8 dígitos")}
             {renderField("Legajo", "Legajo", "text", "Máx. 8 caracteres")}
           </div>
-          <button type="submit" className="signup-button">
-            Registrarse
+          <button type="submit" className="signup-button" disabled={loading}>
+            {loading ? (
+              <CircularProgress size="20px" color="inherit" />
+            ) : (
+              "Registrarse"
+            )}
           </button>
         </form>
       </div>

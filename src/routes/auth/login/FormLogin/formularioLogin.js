@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { API_URL } from "../../../../auth/constans";
 import { useNavigate } from "react-router-dom";
 import "./formularioLogin.css";
+import { loginUser } from "../../../../service/authService";
 import showIcon from "../../../../Assest/show.png";
 import hideIcon from "../../../../Assest/hide.png";
 
@@ -22,43 +22,25 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
   const handleKeyDown = (event) => {
     setCapsLockOn(event.getModifierState("CapsLock"));
   };
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorResponse("");
 
     try {
-      const response = await fetch(`${API_URL}/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ Username, Password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Error de autenticación");
-      }
-
+      const data = await loginUser({ Username, Password });
       console.log("Login successful");
       onLoginSuccess({
         token: data.token,
         user: data.user,
-        storageType: rememberMe ? "local" : "session",
       });
-
       goTo("/app/home");
     } catch (error) {
-      console.error("Login error:", error);
-      setErrorResponse(
-        error.message || "Error de conexión, por favor intente de nuevo."
-      );
+      setErrorResponse(error.message);
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="auth-login-container">

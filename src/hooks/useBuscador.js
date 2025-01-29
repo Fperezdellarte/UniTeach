@@ -29,13 +29,34 @@ export const useBuscador = () => {
           University,
         },
       });
+      const responseOtherUniversity = await axios.get(
+        `${API_URL}/search/mentors`,
+        {
+          params: {
+            subjectName: searchTerm,
+            Facultad: searchFacultad,
+            University: "UTN",
+          },
+        }
+      );
+      console.log(responseOtherUniversity);
 
       if (response.data.length === 0) {
         setError("No se encontraron resultados");
         return;
       }
 
-      navigate("/app/results", { state: { results: response.data } });
+      if (responseOtherUniversity.data.length === 0) {
+        setError("No se encontraron resultados");
+        return;
+      }
+
+      navigate("/app/results", {
+        state: {
+          results: response.data,
+          otherResults: responseOtherUniversity.data,
+        },
+      });
     } catch (error) {
       setError(error.response?.data?.message || "Error al buscar mentores");
     } finally {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FilterForm } from "./filterForm/FormFilter";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -10,6 +10,7 @@ export const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [results, setResults] = useState([]);
+  const [otherResults, setOtherResults] = useState(null);
   const [filteredResults, setFilteredResults] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -17,6 +18,7 @@ export const Results = () => {
     if (location.state?.results) {
       setResults(location.state.results);
       setFilteredResults(location.state.results);
+      setOtherResults(location.state.otherResults);
     } else {
       navigate("/app/home");
     }
@@ -48,6 +50,19 @@ export const Results = () => {
           {filteredResults.length > 0 ? (
             <MentorCardsList
               mentors={filteredResults}
+              onCardClick={handleCardClick}
+            />
+          ) : (
+            <p className="result-p-empty">No se encontraron mentores.</p>
+          )}
+        </div>
+      </div>
+      <div>
+        <h3>Mentores de otras Universidades:</h3>
+        <div className="result-card-filter">
+          {otherResults?.length > 0 ? (
+            <MentorCardsList
+              mentors={otherResults}
               onCardClick={handleCardClick}
             />
           ) : (
