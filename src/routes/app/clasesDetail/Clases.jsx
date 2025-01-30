@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { ClassesContext } from "../../../contexts/classesContext";
 import { TableClases } from "./tableClasesDetail/TableClases";
 import { RatingModal } from "./ratingModal/RatingModal";
-import "./Clases.css";
+import "./clases.css";
 
 export const Clases = () => {
   const { classesData, error, loading } = useContext(ClassesContext);

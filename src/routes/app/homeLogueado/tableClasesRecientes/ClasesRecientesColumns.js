@@ -9,10 +9,11 @@ export const ClasesRecientesColumns = [
   {
     title: "Fecha y Hora",
     render: (row) => formatDate(row.date, row.hour),
+    
   },
   {
     title: "Aula",
     field: "Place",
-    headerStyle: { width: "20%" },
+    headerStyle: { width: "30%" },
   },
 ];
