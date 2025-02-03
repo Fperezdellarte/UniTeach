@@ -3,8 +3,8 @@ import { Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { API_URL } from "../../../../auth/constans";
-import { useAuth } from "../../../../auth/authProvider";
+import { API_URL } from "../../../../config/constans";
+import { useAuth } from "../../../../contexts/authContext";
 
 export const RatingModal = ({ show, onClose, mentorId }) => {
   const [selectedRating, setSelectedRating] = useState(0);

@@ -1,7 +1,8 @@
 import React from "react";
 import { FormularioLogin } from "./FormLogin/formularioLogin";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../../auth/authProvider";
+import { useAuth } from "../../../contexts/authContext";
+import LoadingSpinner from "../../../components/loading/LoadingSpinner";
 
 const Login = () => {
   const { isAuthenticated, loading, handleLogin } = useAuth();
@@ -13,7 +14,7 @@ const Login = () => {
     });
   };
 
-  if (loading) return null;
+  if (loading) return <LoadingSpinner />;
   if (isAuthenticated) return <Navigate to="/app/home" replace />;
 
   return (

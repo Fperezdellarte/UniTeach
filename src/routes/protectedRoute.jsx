@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../auth/authProvider";
+import { useAuth } from "../contexts/authContext";
 import LoadingSpinner from "../components/loading/LoadingSpinner";
 
 const ProtectedRoute = ({ children }) => {
@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) return <LoadingSpinner fullPage />;
 
-  return isAuthenticated ? children : <Navigate to="auth/login" replace />;
+  return isAuthenticated ? children : <Navigate to="/auth/login" replace />;
 };
 
 export default ProtectedRoute;

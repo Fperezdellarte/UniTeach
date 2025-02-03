@@ -2,7 +2,7 @@ import React from "react";
 import { Carousel, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./carousel.css";
-import { useAuth } from "../../../auth/authProvider";
+import { useAuth } from "../../../contexts/authContext";
 
 const CarouselComponent = () => {
   const auth = useAuth();

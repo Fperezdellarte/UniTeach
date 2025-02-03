@@ -117,7 +117,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
         navigate("/auth/login");
       }, 3000);
     } catch (error) {
-      setErrors(error.errors);
+      setErrors(error.errors || {});
     }
     setLoading(false);
   };

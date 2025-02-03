@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../auth/authProvider";
+import { useAuth } from "../../contexts/authContext";
 import {
   Button,
   Dialog,
@@ -13,14 +13,14 @@ import {
 const LogoutButton = () => {
   const navigate = useNavigate();
   const { handleLogout } = useAuth();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleConfirmLogout = () => {
+  const handleConfirmLogout = async () => {
     try {
-      handleLogout();
+      await handleLogout();
       navigate("/auth/login");
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
@@ -31,9 +31,9 @@ const LogoutButton = () => {
 
   return (
     <>
-      <Button variant="contained" color="error" onClick={handleClickOpen}>
+      <div variant="contained" color="error" onClick={handleClickOpen}>
         Cerrar sesión
-      </Button>
+      </div>
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Confirmar cierre de sesión</DialogTitle>

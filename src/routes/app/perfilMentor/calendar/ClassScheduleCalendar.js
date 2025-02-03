@@ -5,8 +5,8 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { API_URL } from "../../../../auth/constans";
-import { useAuth } from "../../../../auth/authProvider";
+import { API_URL } from "../../../../config/constans";
+import { useAuth } from "../../../../contexts/authContext";
 import "./ClassScheduleCalendar.css";
 
 const ClassScheduleCalendar = ({ mentorId, searchTerm }) => {

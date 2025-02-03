@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { API_URL } from "../../../../auth/constans";
-import axios from "axios";
+import { usuarioService } from "../../../../service/usuarioService";
+import { useAuth } from "../../../../contexts/authContext";
 import {
   Button,
-  Form,
-  Container,
-  Image,
+  TextField,
   Alert,
-  Spinner,
-  Modal,
-  Tabs,
-  Tab,
-} from "react-bootstrap";
-import {
-  FaUserCircle,
-  FaEnvelope,
-  FaPhone,
-  FaCamera,
-  FaUserEdit,
-  FaLock,
-} from "react-icons/fa";
-import "./FormPerfilUsuario.css";
+  CircularProgress,
+  Box,
+  useMediaQuery,
+  useTheme,
+  Typography,
+  Avatar,
+} from "@mui/material";
+import BadgeIcon from "@mui/icons-material/Badge";
+import EmailIcon from "@mui/icons-material/Email";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
+import { ModalConfirmacion } from "../modalConfirmacion/ModalConfirmacion";
 
 export const FormPerfilUsuario = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { user, token, setUser } = useAuth();
   const [formData, setFormData] = useState({
     Name: "",
     Username: "",
@@ -31,6 +31,7 @@ export const FormPerfilUsuario = () => {
     Avatar_URL: "",
     Avatar_File: null,
   });
+  const [errors, setErrors] = useState({});
   const [loadingSave, setLoadingSave] = useState(false);
   const [loadingPasswordReset, setLoadingPasswordReset] = useState(false);
   const [passwordResetMessage, setPasswordResetMessage] = useState("");
@@ -38,249 +39,230 @@ export const FormPerfilUsuario = () => {
   const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
-    const authData = JSON.parse(sessionStorage.getItem("authData"));
-    if (authData && authData.user) {
+    if (user) {
       setFormData({
-        Name: authData.user.Name || "",
-        Username: authData.user.Username || "",
-        Mail: authData.user.Mail || "",
-        Phone: authData.user.Phone || "",
-        Avatar_URL: authData.user.Avatar_URL || "",
+        Name: user.Name || "",
+        Username: user.Username || "",
+        Mail: user.Mail || "",
+        Phone: user.Phone || "",
+        Avatar_URL: user.Avatar_URL || "",
+        Avatar_File: null,
       });
     }
-  }, []);
+  }, [user]);
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!formData.Name.trim()) {
+      newErrors.Name = "El nombre es requerido";
+    } else if (!/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/.test(formData.Name)) {
+      newErrors.Name = "El nombre solo puede contener letras, espacios y la ñ";
+    }
+
+    if (!formData.Username.trim()) {
+      newErrors.Username = "El username es requerido";
+    } else if (/\s/.test(formData.Username) || /[ñÑ]/.test(formData.Username)) {
+      newErrors.Username =
+        "El username no debe contener espacios ni la letra ñ";
+    }
+
+    if (!formData.Mail.trim()) {
+      newErrors.Mail = "El correo es requerido";
+    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.Mail)) {
+      newErrors.Mail = "El correo no es válido";
+    }
+
+    if (formData.Phone.trim()) {
+      if (!/^\d{10}$/.test(formData.Phone)) {
+        newErrors.Phone = "El teléfono debe tener exactamente 10 dígitos";
+      }
+    }
+
+    return newErrors;
+  };
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
+    let newValue = value;
     if (type === "file") {
-      setFormData({ ...formData, Avatar_File: files[0] });
+      newValue = files[0];
+      setFormData({ ...formData, Avatar_File: newValue });
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData({ ...formData, [name]: newValue });
+    }
+    if (errors[name]) {
+      setErrors((prev) => {
+        const { [name]: removed, ...rest } = prev;
+        return rest;
+      });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoadingSave(true);
-    const { Avatar_File, ...rest } = formData;
-    const formDataToSend = new FormData();
-    formDataToSend.append("Name", rest.Name);
-    formDataToSend.append("Username", rest.Username);
-    formDataToSend.append("Mail", rest.Mail);
-    formDataToSend.append("Phone", rest.Phone);
-    if (Avatar_File) {
-      formDataToSend.append("file", Avatar_File);
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
+    setErrors({});
+    setLoadingSave(true);
 
     try {
-      const authData = JSON.parse(sessionStorage.getItem("authData"));
-      const response = await axios.patch(
-        `${API_URL}/users/${authData.user.idUser}`,
-        formDataToSend,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${authData.token}`,
-          },
-        }
+      const updatedUser = await usuarioService.actualizarPerfil(
+        user.idUser,
+        token,
+        formData
       );
-      if (response.status === 200) {
-        const updatedUser = response.data.user;
-        sessionStorage.setItem(
-          "authData",
-          JSON.stringify({ ...authData, user: updatedUser })
-        );
-        setFormData({
-          ...formData,
-          ...updatedUser,
-        });
-        setModalMessage("Perfil actualizado correctamente");
-      } else {
-        setModalMessage("Error al actualizar el perfil");
-      }
+      setUser(updatedUser);
+      setFormData((prev) => ({ ...prev, ...updatedUser }));
+      setModalMessage("Perfil actualizado correctamente");
     } catch (error) {
-      setModalMessage("Error de red al actualizar el perfil");
+      setModalMessage(error.message);
     } finally {
-      setShowModal(true);
       setLoadingSave(false);
+      setShowModal(true);
     }
   };
 
   const handlePasswordReset = async () => {
     setLoadingPasswordReset(true);
     try {
-      const authData = JSON.parse(sessionStorage.getItem("authData"));
-      await axios.post(
-        `${API_URL}/users/sendEmail`,
-        { email: formData.Mail },
-        {
-          headers: {
-            Authorization: `Bearer ${authData.token}`,
-          },
-        }
-      );
-      setPasswordResetMessage(
-        "Hemos enviado un enlace a tu correo para cambiar la contraseña."
-      );
+      await usuarioService.solicitarCambioPassword(token, formData.Mail);
+      setPasswordResetMessage("Hemos enviado un enlace a tu correo...");
     } catch (error) {
-      console.error("Error enviando el correo:", error);
-      setPasswordResetMessage(
-        "Ocurrió un error al enviar el enlace. Inténtalo de nuevo."
-      );
+      setPasswordResetMessage(error.message);
     } finally {
       setLoadingPasswordReset(false);
     }
   };
 
   return (
-    <div>
-      <Container className="perfilusuario-container">
-        <h2 className="perfilusuario-title">Perfil de Usuario</h2>
-        <Tabs
-          defaultActiveKey="profile"
-          id="perfil-tab"
-          className="perfilusuario-tabs"
-        >
-          <Tab
-            eventKey="profile"
-            title={
-              <span>
-                <FaUserEdit /> Perfil
-              </span>
-            }
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        width: "100%",
+        alignItems: "center",
+      }}
+    >
+      <Typography variant="h6">Perfil de Usuario</Typography>
+
+      <TextField
+        label="Nombre"
+        name="Name"
+        sx={{ width: isMobile ? "100%" : "60%" }}
+        value={formData.Name}
+        onChange={handleChange}
+        error={!!errors.Name}
+        helperText={errors.Name}
+        InputProps={{
+          startAdornment: <BadgeIcon style={{ marginRight: 8 }} />,
+        }}
+      />
+
+      <TextField
+        label="Username"
+        name="Username"
+        sx={{ width: isMobile ? "100%" : "60%" }}
+        value={formData.Username}
+        onChange={handleChange}
+        error={!!errors.Username}
+        helperText={errors.Username}
+        InputProps={{
+          startAdornment: <AccountCircleIcon style={{ marginRight: 8 }} />,
+        }}
+      />
+
+      <TextField
+        label="Correo"
+        name="Mail"
+        type="email"
+        sx={{ width: isMobile ? "100%" : "60%" }}
+        value={formData.Mail}
+        onChange={handleChange}
+        error={!!errors.Mail}
+        helperText={errors.Mail}
+        InputProps={{
+          startAdornment: <EmailIcon style={{ marginRight: 8 }} />,
+        }}
+      />
+
+      <TextField
+        label="Teléfono"
+        name="Phone"
+        sx={{ width: isMobile ? "100%" : "60%" }}
+        value={formData.Phone}
+        onChange={handleChange}
+        error={!!errors.Phone}
+        helperText={errors.Phone}
+        InputProps={{
+          startAdornment: <PhoneAndroidIcon style={{ marginRight: 8 }} />,
+        }}
+      />
+
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        {formData.Avatar_URL && (
+          <Avatar
+            alt="Avatar"
+            src={formData.Avatar_URL}
+            sx={{ width: 120, height: 120 }}
+          />
+        )}
+        <label htmlFor="avatar-file">
+          <input
+            style={{ display: "none" }}
+            id="avatar-file"
+            name="Avatar_File"
+            type="file"
+            onChange={handleChange}
+          />
+          <Button
+            variant="outlined"
+            component="span"
+            startIcon={<CameraAltOutlinedIcon />}
           >
-            <Form onSubmit={handleSubmit} className="perfilusuario-form">
-              <Form.Group
-                controlId="formName"
-                className="perfilusuario-form-group"
-              >
-                <Form.Label>
-                  <FaUserCircle /> Nombre
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="Name"
-                  value={formData.Name}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group
-                controlId="formUsername"
-                className="perfilusuario-form-group"
-              >
-                <Form.Label>
-                  <FaUserCircle /> Username
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="Username"
-                  value={formData.Username}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group
-                controlId="formMail"
-                className="perfilusuario-form-group"
-              >
-                <Form.Label>
-                  <FaEnvelope /> Correo
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  name="Mail"
-                  value={formData.Mail}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group
-                controlId="formPhone"
-                className="perfilusuario-form-group"
-              >
-                <Form.Label>
-                  <FaPhone /> Teléfono
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="Phone"
-                  value={formData.Phone}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group
-                controlId="formAvatar"
-                className="perfilusuario-avatar-group"
-              >
-                <Form.Label>
-                  <FaCamera /> Avatar
-                </Form.Label>
-                {formData.Avatar_URL && (
-                  <Image
-                    src={formData.Avatar_URL}
-                    roundedCircle
-                    width={120}
-                    height={120}
-                    className="perfilusuario-avatar"
-                  />
-                )}
-                <Form.Control
-                  type="file"
-                  name="Avatar_File"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Button variant="primary" type="submit" disabled={loadingSave}>
-                {loadingSave ? (
-                  <Spinner animation="border" size="sm" />
-                ) : (
-                  "Guardar cambios"
-                )}
-              </Button>
-            </Form>
-          </Tab>
-          <Tab
-            eventKey="settings"
-            title={
-              <span>
-                <FaLock /> Configuración
-              </span>
-            }
-          >
-            <Button
-              variant="link"
-              onClick={handlePasswordReset}
-              disabled={loadingPasswordReset}
-            >
-              {loadingPasswordReset ? (
-                <Spinner animation="border" size="sm" />
-              ) : (
-                "Cambiar Contraseña"
-              )}
-            </Button>
-            {passwordResetMessage && (
-              <Alert variant="info" className="mt-3">
-                {passwordResetMessage}
-              </Alert>
-            )}
-          </Tab>
-        </Tabs>
-      </Container>
-
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Actualización de perfil</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{modalMessage}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Cerrar
+            Cambiar Avatar
           </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+        </label>
+      </Box>
+
+      <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={loadingSave}
+        >
+          {loadingSave ? <CircularProgress size={24} /> : "Guardar cambios"}
+        </Button>
+        <Button
+          variant="text"
+          onClick={handlePasswordReset}
+          disabled={loadingPasswordReset}
+        >
+          {loadingPasswordReset ? (
+            <CircularProgress size={24} />
+          ) : (
+            "Cambiar Contraseña"
+          )}
+        </Button>
+      </Box>
+
+      {passwordResetMessage && (
+        <Alert severity="info">{passwordResetMessage}</Alert>
+      )}
+
+      <ModalConfirmacion
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        title="Actualización de perfil"
+        message={modalMessage}
+      />
+    </Box>
   );
 };

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { API_URL } from "../../../../auth/constans";
+import { passwordService } from "../../../../service/usuarioService";
 import "./FormResetPassword.css";
 
 export const FormResetPassword = () => {
@@ -21,11 +20,11 @@ export const FormResetPassword = () => {
     }
 
     try {
-      await axios.post(`${API_URL}/users/reset-password`, { password, token });
+      await passwordService.resetPassword({ password, token });
       setMessage("¡Contraseña restablecida con éxito! Redirigiendo...");
       setTimeout(() => navigate("/login"), 3000);
     } catch (error) {
-      setMessage("Error: " + (error.response?.data?.message || "Desconocido."));
+      setMessage(error.message);
     }
   };
 

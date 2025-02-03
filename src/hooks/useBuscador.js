@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../auth/constans";
+import { API_URL } from "../config/constans";
 
 export const useBuscador = () => {
   const [searchTerm, setSearchTerm] = useState("");

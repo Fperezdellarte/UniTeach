@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { ClassesContext } from "../../../../contexts/classesContext";
-import { useAuth } from "../../../../auth/authProvider";
+import { useAuth } from "../../../../contexts/authContext";
 import axios from "axios";
 import { useBuscador } from "../../../../hooks/useBuscador";
-import { API_URL } from "../../../../auth/constans";
+import { API_URL } from "../../../../config/constans";
 import { Snackbar, Button } from "@mui/material";
 import { ConfirmDialog } from "../../../../components/confirmDialog/confirmDialog";
 import { FacultyModal } from "../../../../components/modal/tablaProximaClases/FacultyModal";

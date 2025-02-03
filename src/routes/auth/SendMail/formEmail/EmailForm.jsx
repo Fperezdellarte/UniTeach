@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { API_URL } from "../../../../auth/constans";
+import { passwordService } from "../../../../service/usuarioService";
 import {
   Button,
   Form,
@@ -22,24 +21,12 @@ export const EmailForm = () => {
     setResponseMessage("");
 
     try {
-      const response = await axios.post(`${API_URL}/users/sendEmail`, {
-        email,
-      });
-
-      if (response.status === 200) {
-        setResponseMessage(
-          "El enlace para restablecer tu contraseña ha sido enviado a tu correo."
-        );
-      } else {
-        setResponseMessage(
-          "Error al enviar el correo. Verifica el email e inténtalo de nuevo."
-        );
-      }
-    } catch (error) {
-      console.error("Error de red:", error);
+      await passwordService.sendResetEmail(email);
       setResponseMessage(
-        "Hubo un error de red. Por favor, intenta nuevamente."
+        "El enlace para restablecer tu contraseña ha sido enviado a tu correo."
       );
+    } catch (error) {
+      setResponseMessage(error.message);
     } finally {
       setIsLoading(false);
     }

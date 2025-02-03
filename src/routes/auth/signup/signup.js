@@ -11,6 +11,7 @@ export const Signup = () => {
         <Alert
           icon={<CheckCircleOutline fontSize="inherit" />}
           severity="success"
+          sx={{ position: "fixed", zIndex: "100000" }}
           onClose={() => setShowAlert(false)}
         >
           Registro completado con éxito. Serás redirigido en unos segundos...

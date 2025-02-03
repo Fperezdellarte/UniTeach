@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./PerfilMentor.css";
-import { API_URL } from "../../../auth/constans";
+import { API_URL } from "../../../config/constans";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import ClassScheduleCalendar from "./calendar/ClassScheduleCalendar";

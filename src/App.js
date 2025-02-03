@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import { routerConfig } from "./config/routes";
-import { useAuth } from "./auth/authProvider";
+import { useAuth } from "./contexts/authContext";
 
 function App() {
   const { loading } = useAuth();

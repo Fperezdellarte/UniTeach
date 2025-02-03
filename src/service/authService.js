@@ -1,4 +1,4 @@
-import { API_URL } from "../auth/constans";
+import { API_URL } from "../config/constans";
 import axios from "axios";
 
 export const loginUser = async (credentials) => {
@@ -17,20 +17,35 @@ export const registerUser = async (userData) => {
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || "Error en el registro";
+    const errorObj = new Error(errorMessage);
 
-    const errorObject = {};
+    errorObj.errors = {};
+
     if (errorMessage.includes("DNI")) {
-      errorObject.DNI = "Ya hay un usuario con ese DNI";
+      errorObj.errors.DNI = "Ya hay un usuario con ese DNI";
     }
     if (errorMessage.includes("Legajo")) {
-      errorObject.Legajo = "Ya hay un usuario con ese legajo";
+      errorObj.errors.Legajo = "Ya hay un usuario con ese legajo";
     }
     if (errorMessage.includes("Mail")) {
-      errorObject.Mail = "Ya hay una cuenta con ese mail";
+      errorObj.errors.Mail = "Ya hay una cuenta con ese mail";
     }
     if (errorMessage.includes("Username")) {
-      errorObject.Username = "Este usuario ya esta en uso";
+      errorObj.errors.Username = "Este usuario ya esta en uso";
     }
-    throw { errors: errorObject, message: errorMessage };
+
+    throw errorObj;
+  }
+};
+
+export const handleLogout = async (token) => {
+  try {
+    await axios.post(`${API_URL}/users/logout`, null, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return true;
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+    return false;
   }
 };

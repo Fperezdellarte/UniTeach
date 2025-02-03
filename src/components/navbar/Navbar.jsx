@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { HiOutlineMenu } from "react-icons/hi";
-import { useAuth } from "../../auth/authProvider";
+import { useAuth } from "../../contexts/authContext";
 import Logo from "../../Assest/Logo.png";
 import { MobileMenu } from "./mobileMenu";
 import { SearchBar } from "../searchBar/SearchBar";

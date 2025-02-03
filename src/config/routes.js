@@ -24,6 +24,7 @@ export const routerConfig = createBrowserRouter(
       children: [
         { index: true, element: <LandingPage /> },
         { path: "about", element: <About /> },
+        { path: "auth/email-form", element: <SendMail /> },
         //rutas para los usuarios no logueados
         {
           element: <GuestOnlyRoute />,
@@ -31,7 +32,6 @@ export const routerConfig = createBrowserRouter(
             { path: "auth/login", element: <Login /> },
             { path: "auth/signup", element: <Signup /> },
             { path: "auth/reset-password/:token", element: <ResetPassword /> },
-            { path: "auth/email-form", element: <SendMail /> },
           ],
         },
       ],

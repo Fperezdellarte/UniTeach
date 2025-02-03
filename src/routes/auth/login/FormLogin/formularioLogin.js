@@ -102,7 +102,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
             <button
               type="button"
               className="auth-forgot-link"
-              onClick={() => goTo("/forgot-password")}
+              onClick={() => goTo("/auth/email-form")}
             >
               ¿Olvidaste tu contraseña?
             </button>

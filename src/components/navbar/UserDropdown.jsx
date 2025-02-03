@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Avatar, Menu, MenuItem, IconButton } from "@mui/material";
-import { useAuth } from "../../auth/authProvider";
+import { useAuth } from "../../contexts/authContext";
 import LogoutButton from "../button/LogoutButton";
 import { useNavigate } from "react-router-dom";
 
