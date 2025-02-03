@@ -37,9 +37,9 @@ export const TablaClasesRecientes = () => {
           </Button>
         }
         customStyles={{
-          table: { maxWidth: 1200, maxWidth: {xs: "360px"} },
-          title: { color: "#1a237e", fontSize: "1.5rem", margin: "20px 0px"},
-          header: {backgroundColor: "#3498db", color: "white" },
+          table: { maxWidth: 1200, maxWidth: { xs: "360px" } },
+          title: { color: "#1a237e", fontSize: "1.5rem", margin: "20px 0px" },
+          header: { backgroundColor: "#3498db", color: "white" },
         }}
       />
 
