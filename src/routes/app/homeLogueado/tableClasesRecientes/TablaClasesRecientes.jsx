@@ -4,7 +4,7 @@ import { MuiTableContainer } from "../../../../components/table/tableContainer";
 import { InfoModal } from "../../../../components/modal/tablaClasesRecientes/infoModal";
 import { ClasesRecientesColumns } from "./ClasesRecientesColumns";
 import { Button } from "@mui/material";
-import { styled } from "@mui/system";
+import { fontSize, fontWeight, margin, maxWidth, styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -32,14 +32,14 @@ export const TablaClasesRecientes = () => {
         loading={loading}
         error={error}
         emptyMessage={
-          <StyledButton variant="contained" onClick={handleViewMore}>
+          <Button variant="contained" onClick={handleViewMore}>
             Ver clases disponibles
-          </StyledButton>
+          </Button>
         }
         customStyles={{
-          table: { maxWidth: 1200 },
-          title: { color: "#1a237e" },
-          header: { backgroundColor: "#e8eaf6" },
+          table: { maxWidth: 1200, maxWidth: { xs: "360px" } },
+          title: { color: "#1a237e", fontSize: "1.5rem", margin: "20px 0px" },
+          header: { backgroundColor: "#3498db", color: "white" },
         }}
       />
 
@@ -49,7 +49,7 @@ export const TablaClasesRecientes = () => {
             component={Link}
             to="/app/clases"
             variant="outlined"
-            color="primary"
+            backgroundColor="primary"
           >
             Ver más
           </Button>

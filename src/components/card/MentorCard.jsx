@@ -9,7 +9,6 @@ import {
   Chip,
   CardActionArea,
 } from "@mui/material";
-import "./MentorCards.css";
 
 export const MentorCard = ({ mentor }) => {
   const navigate = useNavigate();

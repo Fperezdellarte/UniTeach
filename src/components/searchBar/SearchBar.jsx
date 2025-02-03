@@ -1,6 +1,8 @@
 import { InputBase, IconButton, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useBuscador } from "../../hooks/useBuscador";
+import { text } from "@fortawesome/fontawesome-svg-core";
+import { color } from "framer-motion";
 
 export const SearchBar = () => {
   const { searchTerm, setSearchTerm, error, handleSearch, loading } =
@@ -22,18 +24,20 @@ export const SearchBar = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyPress}
         sx={{
+          backgroundColor: "white",
           border: error ? "2px solid red" : "none",
-          borderRadius: "4px",
+          borderRadius: "10px",
+          height:"39.5px",
           padding: "8px",
         }}
+        endIcon={loading ? (
+          <CircularProgress size={20} sx={{ ml: 1 }} />
+        ) : (
+            <SearchIcon style={{color:"black"}} />
+         
+        )}
       />
-      {loading ? (
-        <CircularProgress size={20} sx={{ ml: 1 }} />
-      ) : (
-        <IconButton onClick={() => handleSearch()}>
-          <SearchIcon />
-        </IconButton>
-      )}
+      
     </div>
   );
 };

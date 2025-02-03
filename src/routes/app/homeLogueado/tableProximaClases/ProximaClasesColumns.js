@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, dividerClasses } from "@mui/material";
 
 export const ProximaClasesColumns = (handleAction) => [
   {
@@ -22,6 +22,13 @@ export const ProximaClasesColumns = (handleAction) => [
     title: "Mentor",
     field: "Mentor",
     render: (row) => row.Mentor || "Sin Mentor",
+  }, {
+    title: "Meet",
+    render: (row) => (               
+    <button
+    >📆
+    </button>),
+ 
   },
   {
     title: "Acciones",
@@ -31,7 +38,7 @@ export const ProximaClasesColumns = (handleAction) => [
         color="error"
         onClick={() => handleAction(row.idInscription)}
       >
-        Darse de baja
+        Eliminar
       </Button>
     ),
   },
