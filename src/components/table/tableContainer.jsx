@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -10,6 +10,7 @@ import {
   Skeleton,
   Typography,
   Box,
+  TablePagination,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -39,6 +40,15 @@ export const MuiTableContainer = ({
   emptyMessage = "No hay datos disponibles",
   customStyles = {},
 }) => {
+  // Estado para la paginación
+  const [page, setPage] = useState(0);
+  const rowsPerPage = 5;
+
+  // Manejar el cambio de página
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   const renderContent = () => {
     if (loading) {
       return Array(5)
@@ -74,7 +84,10 @@ export const MuiTableContainer = ({
       );
     }
 
-    return data.map((row, index) => (
+    // Aplicar paginación: mostrar solo los elementos de la página actual
+    const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+    return paginatedData.map((row, index) => (
       <TableRow key={index} hover>
         {columns.map((column) => (
           <TableBodyCell key={column.key || column.field} sx={column.cellStyle}>
@@ -109,6 +122,16 @@ export const MuiTableContainer = ({
           </TableHead>
           <TableBody>{renderContent()}</TableBody>
         </Table>
+
+        {/* Componente de paginación */}
+        <TablePagination
+          rowsPerPageOptions={[5]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+        />
       </StyledTableContainer>
     </Box>
   );

@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { yellow } from "@mui/material/colors";
-export const ClasesDetailsColumns = (handleRate) => [
+export const ClasesDetailsColumns = (handleRate,disabled) => [
   {
     title: "Materia",
     field: "Materia",
@@ -34,6 +34,7 @@ export const ClasesDetailsColumns = (handleRate) => [
         variant="contained"
         sx={{ bgcolor: yellow[600], color: "white" }}
         onClick={() => handleRate(row.mentorInfo.idUser)}
+        disabled={disabled}
       >
         Calificar
       </Button>

@@ -8,12 +8,13 @@ export const Clases = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   const handleRateClick = (mentorId) => {
     setSelectedId(mentorId);
     setShowModal(true);
+    setDisabled(true);
   };
-  console.log(classesData);
   return (
     <div>
       <TableClases

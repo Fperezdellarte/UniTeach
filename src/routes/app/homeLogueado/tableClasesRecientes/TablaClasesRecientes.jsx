@@ -32,9 +32,9 @@ export const TablaClasesRecientes = () => {
         loading={loading}
         error={error}
         emptyMessage={
-          <StyledButton variant="contained" onClick={handleViewMore}>
+          <Button variant="contained" onClick={handleViewMore}>
             Ver clases disponibles
-          </StyledButton>
+          </Button>
         }
         customStyles={{
           table: { maxWidth: 1200, maxWidth: {xs: "360px"} },
