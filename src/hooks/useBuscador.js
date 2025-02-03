@@ -41,16 +41,13 @@ export const useBuscador = () => {
       );
       console.log(responseOtherUniversity);
 
-      if (response.data.length === 0) {
+      if (
+        response.data.length === 0 &&
+        responseOtherUniversity.data.length === 0
+      ) {
         setError("No se encontraron resultados");
         return;
       }
-
-      if (responseOtherUniversity.data.length === 0) {
-        setError("No se encontraron resultados");
-        return;
-      }
-
       navigate("/app/results", {
         state: {
           results: response.data,
