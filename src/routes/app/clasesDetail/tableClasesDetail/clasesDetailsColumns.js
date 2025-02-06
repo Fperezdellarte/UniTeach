@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { yellow } from "@mui/material/colors";
-export const ClasesDetailsColumns = (handleRate,disabled) => [
+export const ClasesDetailsColumns = (onRateClick, disabled) => [
   {
     title: "Materia",
     field: "Materia",
@@ -29,16 +29,20 @@ export const ClasesDetailsColumns = (handleRate,disabled) => [
   },
   {
     title: "Acciones",
-    render: (row) => (
-      <Button
-        variant="contained"
-        sx={{ bgcolor: yellow[600], color: "white" }}
-        onClick={() => handleRate(row.mentorInfo.idUser)}
-        disabled={disabled}
-      >
-        Calificar
-      </Button>
-    ),
+    render: (row) => {
+      const alreadyRated = row.ratingMentor !== null;
+
+      return (
+        <Button
+          variant="contained"
+          sx={{ bgcolor: alreadyRated ? "gray" : yellow, color: "white" }}
+          onClick={() => onRateClick(row.mentorId)}
+          disabled={alreadyRated}
+        >
+          {alreadyRated ? "Ya calificaste" : "Calificar"}
+        </Button>
+      );
+    },
     width: "10%",
   },
 ];

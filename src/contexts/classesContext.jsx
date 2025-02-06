@@ -1,5 +1,9 @@
-// classesContext.jsx
-import React, { createContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useReducer,
+} from "react";
 import { useAuth } from "./authContext";
 import { fetchUserClasses } from "../service/clasessService";
 import { classesReducer } from "../store/classesReducer";
@@ -17,44 +21,43 @@ const initialState = {
 
 export const ClassesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(classesReducer, initialState);
-  const { user, token } = useAuth();
+  const { token } = useAuth();
 
+  const fetchClassesData = useCallback(async () => {
+    if (!token) {
+      dispatch({ type: "FETCH_ERROR", payload: "User not authenticated" });
+      return;
+    }
+
+    try {
+      dispatch({ type: "FETCH_START" });
+
+      const allClasses = await fetchUserClasses(token);
+      const currentDate = new Date();
+
+      const upcoming = allClasses.filter(
+        (c) => new Date(c.endDate) >= currentDate
+      );
+
+      const recent = allClasses
+        .filter((c) => new Date(c.endDate) < currentDate)
+        .sort((a, b) => new Date(b.endDate) - new Date(a.endDate))
+        .slice(0, 10);
+
+      dispatch({
+        type: "FETCH_SUCCESS",
+        payload: { upcoming, recent },
+      });
+    } catch (error) {
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: error.message || "Error al cargar las clases",
+      });
+    }
+  }, [token, dispatch]);
   useEffect(() => {
-    const fetchClassesData = async () => {
-      if (!user?.idUser || !token) {
-        dispatch({ type: "FETCH_ERROR", payload: "User not authenticated" });
-        return;
-      }
-
-      try {
-        dispatch({ type: "FETCH_START" });
-
-        const allClasses = await fetchUserClasses(user.idUser, token);
-        const currentDate = new Date();
-
-        const upcoming = allClasses.filter(
-          (c) => new Date(c.endDate) >= currentDate
-        );
-
-        const recent = allClasses
-          .filter((c) => new Date(c.endDate) < currentDate)
-          .sort((a, b) => new Date(b.endDate) - new Date(a.endDate))
-          .slice(0, 10);
-
-        dispatch({
-          type: "FETCH_SUCCESS",
-          payload: { upcoming, recent },
-        });
-      } catch (error) {
-        dispatch({
-          type: "FETCH_ERROR",
-          payload: error.message || "Error al cargar las clases",
-        });
-      }
-    };
-
     fetchClassesData();
-  }, [user?.idUser, token]);
+  }, [fetchClassesData, token]);
 
   return (
     <ClassesContext.Provider
@@ -62,6 +65,7 @@ export const ClassesProvider = ({ children }) => {
         classesData: state.classesData,
         error: state.error,
         loading: state.loading,
+        fetchClassesData,
       }}
     >
       {children}

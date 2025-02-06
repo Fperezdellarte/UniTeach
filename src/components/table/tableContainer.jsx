@@ -15,7 +15,6 @@ import {
 import { styled } from "@mui/material/styles";
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
-  margin: theme.spacing(2),
   borderRadius: "8px",
   boxShadow: theme.shadows[2],
 }));
@@ -85,7 +84,10 @@ export const MuiTableContainer = ({
     }
 
     // Aplicar paginación: mostrar solo los elementos de la página actual
-    const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    const paginatedData = data.slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    );
 
     return paginatedData.map((row, index) => (
       <TableRow key={index} hover>

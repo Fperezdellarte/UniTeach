@@ -1,10 +1,10 @@
 import axios from "axios";
 import { API_URL } from "../config/constans";
 
-export const fetchUserClasses = async (userId, token) => {
+export const fetchUserClasses = async (token) => {
   try {
     const inscriptionsResponse = await axios.get(
-      `${API_URL}/inscription/myinscriptions/${userId}`,
+      `${API_URL}/inscription/myinscriptions`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
@@ -16,32 +16,18 @@ export const fetchUserClasses = async (userId, token) => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const classData = classResponse.data;
-        const [mentorInfo, subjectInfo] = await Promise.all([
-          axios.get(
-            `${API_URL}/users/mentor/${classData.class.Users_idCreator}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          ),
-          axios.get(
-            `${API_URL}/subjects/${classData.class.Subjects_idSubjects}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          ),
-        ]);
-
         return {
           idInscription: inscription.idInscription,
-          Materia: subjectInfo.data.subject.Name,
-          Mentor: mentorInfo.data.Name,
-          mentorInfo: mentorInfo.data,
+          Materia: classData.class.subjectName,
+          Mentor: classData.class.creatorName,
+          mentorId: classData.class.Users_idCreator,
+          ratingMentor: classData.class.userRating,
+          commentMentor: classData.class.userComment,
           date: classData.class.Date,
           endDate: classData.class.endDate,
           hour: classData.class.hour,
           Place: classData.class.Place,
           idClasses: classData.class.idClasses,
-          mentorOpinion: mentorInfo.data.Opinion,
         };
       })
     );
@@ -50,6 +36,18 @@ export const fetchUserClasses = async (userId, token) => {
   } catch (error) {
     throw new Error(
       error.response?.data?.message || "Error fetching classes data"
+    );
+  }
+};
+
+export const deleteIncripsion = async (idInscription, token) => {
+  try {
+    await axios.delete(`${API_URL}/inscription/${idInscription}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Error deleting inscriptions"
     );
   }
 };
