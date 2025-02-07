@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { ClassesContext } from "../../../../contexts/classesContext";
-import { useBuscador } from "../../../../hooks/useBuscador";
+import { useBuscador } from "../../../../contexts/searchContext";
 import { Snackbar, Button } from "@mui/material";
 import { ConfirmDialog } from "../../../../components/confirmDialog/confirmDialog";
 import { FacultyModal } from "../../../../components/modal/tablaProximaClases/FacultyModal";

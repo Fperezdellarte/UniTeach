@@ -11,7 +11,6 @@ export const Clases = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   const handleRateClick = (mentorId) => {
-    console.log("Rating clicked:", mentorId);
     setSelectedId(mentorId);
     setShowModal(true);
   };

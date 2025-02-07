@@ -1,43 +1,68 @@
 import { InputBase, IconButton, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useBuscador } from "../../hooks/useBuscador";
-import { text } from "@fortawesome/fontawesome-svg-core";
-import { color } from "framer-motion";
+import { useBuscador } from "../../contexts/searchContext";
+import { useAuth } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 export const SearchBar = () => {
-  const { searchTerm, setSearchTerm, error, handleSearch, loading } =
-    useBuscador();
+  const { searchTerm, error, handleSearch, loading, dispatch } = useBuscador();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && searchTerm) {
-      handleSearch();
-    } else {
-      return error;
-    }
-  };
+  const handleKeyPress = useCallback(
+    (e) => {
+      if (e.key === "Enter" && searchTerm) {
+        handleSearch(searchTerm, "", user?.University);
+        navigate("/app/results");
+      }
+    },
+    [searchTerm, handleSearch, user, navigate]
+  );
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (searchTerm) {
+        handleSearch(searchTerm, "", user?.University);
+        navigate("/app/results");
+      }
+    },
+    [searchTerm, handleSearch, user, navigate]
+  );
+  const handleChange = useCallback(
+    (e) => {
+      dispatch({ type: "SET_SEARCH_TERM", payload: e.target.value });
+    },
+    [dispatch]
+  );
 
   return (
-    <div className="navbar-search-container">
-      <InputBase
-        placeholder={error ? error : "Buscar materia..."}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyDown={handleKeyPress}
-        sx={{
-          backgroundColor: "white",
-          border: error ? "2px solid red" : "none",
-          borderRadius: "10px",
-          height:"39.5px",
-          padding: "8px",
-        }}
-        endIcon={loading ? (
-          <CircularProgress size={20} sx={{ ml: 1 }} />
-        ) : (
-            <SearchIcon style={{color:"black"}} />
-         
-        )}
-      />
-      
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className="navbar-search-container">
+        <InputBase
+          placeholder={error ? error : "Buscar materia..."}
+          value={searchTerm}
+          onChange={handleChange}
+          onKeyDown={handleKeyPress}
+          sx={{
+            backgroundColor: "white",
+            border: error ? "2px solid red" : "none",
+            borderRadius: "10px",
+            height: "39.5px",
+            padding: "8px",
+          }}
+          endAdornment={
+            loading ? (
+              <CircularProgress size={20} sx={{ ml: 1 }} />
+            ) : (
+              <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+                <SearchIcon style={{ color: "black" }} />
+              </IconButton>
+            )
+          }
+        />
+      </div>
+    </form>
   );
 };

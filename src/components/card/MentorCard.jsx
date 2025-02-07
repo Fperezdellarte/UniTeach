@@ -49,7 +49,7 @@ export const MentorCard = ({ mentor }) => {
           color="primary"
           className="chipUniversity"
           sx={{
-            zIndex: "100",
+            zIndex: 10,
             position: "absolute",
             top: "50px",
             width: "60px",
@@ -60,7 +60,7 @@ export const MentorCard = ({ mentor }) => {
               paddingLeft: "2px",
             },
           }}
-          label={mentor.University}
+          label={mentor.MentorUniversity}
         ></Chip>
         <CardMedia
           component="img"
@@ -74,11 +74,11 @@ export const MentorCard = ({ mentor }) => {
             margin: "auto",
           }}
           image={mentor.Avatar_URL || "https://via.placeholder.com/500x500"}
-          alt={`${mentor.Name} profile`}
+          alt={`${mentor.MentorName} profile`}
         />
         <CardContent style={{ textAlign: "center" }}>
           <Typography gutterBottom variant="h5" component="div">
-            {mentor.Name}
+            {mentor.MentorName}
           </Typography>
 
           <Typography variant="body1" color="text.secondary">

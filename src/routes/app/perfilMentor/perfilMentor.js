@@ -6,7 +6,7 @@ import { API_URL } from "../../../config/constans";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import ClassScheduleCalendar from "./calendar/ClassScheduleCalendar";
-import { useBuscador } from "../../../hooks/useBuscador";
+import { useBuscador } from "../../../contexts/searchContext";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const PerfilMentor = () => {

@@ -18,17 +18,38 @@ export const Mentores = () => {
     const fetchMentores = async () => {
       try {
         if (classesData?.recent?.length > 0) {
+          const subjectMap = {};
+          classesData.recent.forEach((clase) => {
+            subjectMap[clase.mentorId] = clase.Materia;
+          });
           const mentorIds = classesData.recent
             .slice(0, 3)
             .map((clase) => clase.mentorId);
+
           const mentoresData = await Promise.all(
             mentorIds.map((id) => mentorService.fetchMentor(id, token))
           );
+          const adaptedMentores = mentoresData.map((mentor) => {
+            if (!mentor) {
+              console.error("fetchMentores: mentor es null o undefined");
+              return {};
+            }
 
-          setMentores(mentoresData);
+            return {
+              idUser: mentor.idUser,
+              MentorName: mentor.Name,
+              MentorUniversity: mentor.University,
+              Avatar_URL: mentor.Avatar_URL,
+              SubjectName: subjectMap[mentor.idUser] || "Materia Desconocida",
+              Opinion: mentor.Opinion,
+            };
+          });
+
+          setMentores(adaptedMentores);
         }
         setLoadingMentores(false);
       } catch (err) {
+        console.error("Error en fetchMentores:", err);
         setError(err.message);
         setLoadingMentores(false);
       }

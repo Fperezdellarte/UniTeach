@@ -34,7 +34,7 @@ export const HomeLogueado = () => {
           style={{
             backgroundColor: "white",
             padding: "15px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
             borderRadius: "10px",
             flexGrow: 1,
             width: isMobile ? "410px" : isMedium ? "600px" : "",
@@ -48,7 +48,7 @@ export const HomeLogueado = () => {
             padding: "15px",
             flexGrow: 1,
             maxWidth: "450px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
             borderRadius: "10px",
             width: isMobile ? "100%" : "",
           }}
@@ -60,7 +60,7 @@ export const HomeLogueado = () => {
         style={{
           backgroundColor: "white",
           padding: "20px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
           borderRadius: "10px",
         }}
       >

@@ -39,7 +39,6 @@ const ClassScheduleCalendar = ({ mentorId, searchTerm }) => {
     };
 
     if (searchTerm) {
-      console.log(searchTerm);
       fetchSchedule();
     }
   }, [mentorId, searchTerm]);

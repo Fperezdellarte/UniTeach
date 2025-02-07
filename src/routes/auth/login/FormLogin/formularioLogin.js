@@ -29,7 +29,6 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
 
     try {
       const data = await loginUser({ Username, Password });
-      console.log("Login successful");
       onLoginSuccess({
         token: data.token,
         user: data.user,
