@@ -60,6 +60,14 @@ background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.38);
         height: fit-content;
         display: flex;
-        gap: 20px;
-        justify-content: space-between;
+        flex-direction: column;
+        align-content: center;
+        align-items: flex-start
+}
+
+.perfil-mentor-info-contanto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }

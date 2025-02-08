@@ -8,11 +8,14 @@ import LOGO from "../../../Assest/unsta.jpg";
 import LoadingSpinner from "../../../components/loading/LoadingSpinner";
 import { CarrouselOpiniones } from "./carruselOpiniones/CarrouselOpiniones";
 import { Button } from "react-bootstrap";
+import { ModalClases } from "./modalClases/ModalClases";
 export const PerfilMentor = () => {
   const { idMentor } = useParams();
   const { token } = useAuth();
   const [mentor, setMentor] = useState(null);
-  const [clases, setClases] = useState([]);
+  const [showInfo, setShowInfo] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [clases, setClases] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -64,6 +67,14 @@ export const PerfilMentor = () => {
   if (!mentor) {
     return <Typography>No se encontró el mentor.</Typography>;
   }
+  const handleOpenModal = () => {
+    //Función para abrir el modal
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    //Función para cerrar el modal.
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -81,7 +92,7 @@ export const PerfilMentor = () => {
                 justifyContent: "center",
               }}
             >
-              <h2>{mentor.Username}</h2>
+              <h2>{mentor.Name}</h2>
               <h6
                 style={{
                   maxWidth: "350px",
@@ -112,11 +123,39 @@ export const PerfilMentor = () => {
             <Typography variant="h6" gutterBottom>
               Sede: Campus YB
             </Typography>
-            <img src={LOGO} alt="Sede" style={{ width: "300px" }} />
+            <img
+              src={LOGO}
+              alt="Sede"
+              style={{ width: "300px", borderRadius: "10px" }}
+            />
           </div>
           <div className="perfil-mentor-buttons">
-            <Button sx={{ margin: "20px" }}>Ver clases disponibles</Button>
-            <Button sx={{ margin: "20px" }}>Contactar</Button>
+            <div className="perfil-mentor-info-contanto">
+              <Button onClick={handleOpenModal}>Ver Clases Disponibles</Button>
+              <Button
+                onClick={() => {
+                  setShowInfo((showInfo) => !showInfo);
+                }}
+              >
+                Contactar
+              </Button>
+            </div>
+            {showInfo && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "20px",
+                }}
+              >
+                <Typography variant="subtitle1" component="p">
+                  <strong>Correo:</strong> {mentor.Mail}
+                </Typography>
+                <Typography variant="subtitle1" component="p" sx={{ mt: 1 }}>
+                  <strong>Teléfono:</strong> {mentor.Phone}
+                </Typography>
+              </div>
+            )}
           </div>
         </div>
         <div className="perfil-mentor-opiniones-clases">
@@ -139,6 +178,11 @@ export const PerfilMentor = () => {
           </div>
         </div>
       </div>
+      <ModalClases
+        open={showModal}
+        onClose={handleCloseModal}
+        clases={clases?.activeClasses}
+      />
     </>
   );
 };
