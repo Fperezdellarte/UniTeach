@@ -12,7 +12,6 @@ const useFilter = (initialResults, initialOtherResults) => {
     initialOtherResults || []
   );
 
-  // useCallback para parseClassDetails
   const parseClassDetails = useCallback((details) => {
     if (!details) {
       return [];

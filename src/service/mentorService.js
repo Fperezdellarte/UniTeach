@@ -35,4 +35,21 @@ export const mentorService = {
       );
     }
   },
+  fetchClasses: async (idMentor, token) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/classes/mentorclass/${idMentor}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(
+        error.response?.data?.message || "Error al obtener las clases"
+      );
+    }
+  },
 };

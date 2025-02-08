@@ -11,7 +11,7 @@ import { ResetPassword } from "../routes/auth/resetPassword/ResetPassword";
 import { SendMail } from "../routes/auth/SendMail/SendMail";
 import { HomeLogueado } from "../routes/app/homeLogueado/HomeLogueado";
 import { Results } from "../routes/app/results/Results";
-import PerfilMentor from "../routes/app/perfilMentor/perfilMentor";
+import { PerfilMentor } from "../routes/app/perfilMentor/PerfilMentor";
 import { PerfilUsuario } from "../routes/app/perfilUsuario/PerfilUsuario";
 import NotFound from "../routes/404/404";
 import GuestOnlyRoute from "../routes/GuestOnlyRoute";
@@ -61,7 +61,7 @@ export const routerConfig = createBrowserRouter(
           element: <Results />,
         },
         {
-          path: "perfilMentor/:id",
+          path: "perfilMentor/:idMentor",
           element: <PerfilMentor />,
         },
         {

@@ -40,12 +40,6 @@ export const DrawerFormFilter = ({
     <div>
       <Button
         className="result-filter-button"
-        sx={{
-          position: "fixed",
-          top: "140px",
-          zIndex: 100,
-          right: "20px",
-        }}
         variant="outlined"
         startIcon={<FilterAltIcon />}
         onClick={toggleDrawer(true)}
