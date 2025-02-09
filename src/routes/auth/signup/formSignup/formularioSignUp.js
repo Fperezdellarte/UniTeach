@@ -27,7 +27,6 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     Name: "",
     DNI: "",
     Legajo: "",
-    Phone: "",
   });
 
   useEffect(() => {
@@ -45,6 +44,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
       document.removeEventListener("keyup", handleCapsLock);
     };
   }, []);
+
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
@@ -62,8 +62,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     const validations = {
       Username: {
         regex: /^[a-zA-Z0-9]+$/,
-        message:
-          "El nombre de usuario no puede contener caracteres especiales.",
+        message: "El nombre de usuario no puede contener caracteres especiales.",
       },
       Password: {
         regex: /^(?=.*[A-Z]).{8,25}$/,
@@ -71,25 +70,26 @@ export const FormularioSignUp = ({ setShowAlert }) => {
           "La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.",
       },
       Name: {
-        regex: /^[a-z A-Z]+$/,
-        message:
-          "El nombre no puede contener números ni caracteres especiales.",
+        regex: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/,
+        message: "El nombre solo puede contener letras y espacios.",
       },
       DNI: {
         regex: /^[0-9]{6,8}$/,
-        message:
-          "El DNI debe contener solo números y tener entre 6 y 8 dígitos.",
+        message: "El DNI debe contener solo números y tener entre 6 y 8 dígitos.",
       },
       Legajo: {
         regex: /^[a-zA-Z0-9]{1,10}$/,
         message:
-          "El legajo debe contener solo letras y números, con un máximo de 10 dígitos.",
+          "El legajo debe contener solo letras y números, con un máximo de 10 caracteres.",
       },
       Phone: {
         regex: /^[0-9]{10}$/,
-        message: "El Número debe contener solo números, con 10 dígitos.",
+        message: "El número debe contener solo números, con 10 dígitos.",
       },
     };
+
+    // Ignorar validación si es opcional y está vacío
+    if (field === "Phone" && value.trim() === "") return true;
 
     if (validations[field] && !validations[field].regex.test(value)) {
       setErrors((prev) => ({ ...prev, [field]: validations[field].message }));
@@ -141,7 +141,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
       >
         <label htmlFor={id} className="signup-label">
           {label}
-          {id === "Password" && capsLockOn && (
+          {id === "Password" && capsLockOn && focusedField === "Password" && (
             <span className="signup-warning">⚠️ Bloq Mayús activado</span>
           )}
         </label>
@@ -173,7 +173,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
               onFocus={() => handleFocus(id)}
               onBlur={handleBlur}
               placeholder={placeholder}
-              required
+              required={id !== "Phone"}
             />
             <div className="signup-focus-effect"></div>
           </div>
