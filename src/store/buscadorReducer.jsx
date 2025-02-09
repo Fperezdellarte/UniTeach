@@ -18,6 +18,9 @@ export const buscadorReducer = (state, action) => {
     case "SET_SEARCH_TERM":
       return { ...state, searchTerm: action.payload };
 
+    case "SET_SEARCH_FACULTAD":
+      return { ...state, searchFacultad: action.payload };
+
     default:
       return state;
   }

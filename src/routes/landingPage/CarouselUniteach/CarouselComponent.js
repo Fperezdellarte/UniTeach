@@ -27,11 +27,11 @@ const CarouselComponent = () => {
               </h1>
               <Button
                 onClick={handleButtonClick}
-                variant="secondary"
+                variant="primary"
                 size="lg"
                 className="primary-button shadow-drop-center"
               >
-                {auth.isAuthenticated ? "Ir al Dashboard" : "¡Comienza Ahora!"}
+                {auth.isAuthenticated ? "Ir al Mi Tablero" : "¡Comienza Ahora!"}
               </Button>
             </Col>
           </Row>

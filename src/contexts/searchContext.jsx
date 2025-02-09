@@ -8,6 +8,7 @@ const BuscadorContext = createContext();
 
 const initialState = {
   searchTerm: "",
+  searchFacultad: "",
   results: [],
   otherResults: [],
   loading: false,
@@ -21,9 +22,22 @@ export const SearchProvider = ({ children }) => {
   const handleSearch = async (searchTerm, facultad) => {
     dispatch({ type: "SET_LOADING", payload: true });
     dispatch({ type: "SET_SEARCH_TERM", payload: searchTerm });
+    if (facultad) {
+      dispatch({ type: "SET_SEARCH_FACULTAD", payload: facultad });
+    }
 
     try {
       const userUniversity = user?.University || null;
+
+      if (facultad !== "") {
+        const results = await buscadorService.fetchMentors(
+          (searchTerm = null),
+          facultad,
+          user?.University
+        );
+        dispatch({ type: "SET_RESULTS", payload: { results } });
+        return;
+      }
 
       const results = await buscadorService.fetchMentors(
         searchTerm,

@@ -1,9 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ClassesContext } from "../../../../contexts/classesContext";
-import { useBuscador } from "../../../../contexts/searchContext";
-import { Snackbar, Button } from "@mui/material";
+import { Snackbar } from "@mui/material";
 import { ConfirmDialog } from "../../../../components/confirmDialog/confirmDialog";
-import { FacultyModal } from "../../../../components/modal/tablaProximaClases/FacultyModal";
 import { ProximaClasesColumns } from "./ProximaClasesColumns";
 import { MuiTableContainer } from "../../../../components/table/tableContainer";
 import { deleteIncripsion } from "../../../../service/clasessService";
@@ -16,10 +14,8 @@ export const TablaProximaClase = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
 
-  const { handleSearch } = useBuscador();
   const { token } = useAuth();
 
   const handleOpenDialog = (idInscription) => {
@@ -48,14 +44,9 @@ export const TablaProximaClase = () => {
       setLoadingDelete(false);
     }
   };
-  const handleModalClick = (subject) => {
-    handleSearch(subject);
-  };
-
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
-
   return (
     <div className="table-container">
       <MuiTableContainer
@@ -64,15 +55,7 @@ export const TablaProximaClase = () => {
         data={classesData.upcoming}
         loading={loading}
         error={error}
-        emptyMessage={
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => setShowModal(true)}
-          >
-            Empieza Ahora
-          </Button>
-        }
+        emptyMessage={"No tienes clases próximas"}
         customStyles={{
           container: { width: "100%" },
           title: {
@@ -93,13 +76,6 @@ export const TablaProximaClase = () => {
         title="Confirmar Baja"
         message="¿Estás seguro de que deseas darte de baja de esta clase?"
       />
-
-      <FacultyModal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        handleFacultySelect={handleModalClick}
-      />
-
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
