@@ -25,9 +25,9 @@ export const ProximaClasesColumns = (handleAction) => [
   }, {
     title: "Meet",
     render: (row) => (               
-    <button
+    <Button
     >📆
-    </button>),
+    </Button>),
  
   },
   {
