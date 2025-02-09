@@ -1,18 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ClassesContext } from "../../../../contexts/classesContext";
 import { MuiTableContainer } from "../../../../components/table/tableContainer";
-import { InfoModal } from "../../../../components/modal/tablaClasesRecientes/infoModal";
 import { ClasesRecientesColumns } from "./ClasesRecientesColumns";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const TablaClasesRecientes = () => {
   const { classesData, error, loading } = useContext(ClassesContext);
-  const [showModal, setShowModal] = useState(false);
-
-  const handleViewMore = () => {
-    if (!classesData.recent?.length) setShowModal(true);
-  };
 
   return (
     <div className="table-container">
@@ -22,11 +16,7 @@ export const TablaClasesRecientes = () => {
         data={classesData.recent}
         loading={loading}
         error={error}
-        emptyMessage={
-          <Button variant="contained" onClick={handleViewMore}>
-            Ver clases disponibles
-          </Button>
-        }
+        emptyMessage={"No tienes clases anteriores"}
         customStyles={{
           container: {
             maxWidth: "100%",
@@ -53,13 +43,6 @@ export const TablaClasesRecientes = () => {
           </Button>
         </div>
       )}
-
-      <InfoModal
-        show={showModal}
-        title="No hay clases recientes"
-        message="Consulta nuestro catálogo para nuevas disponibilidades"
-        onClose={() => setShowModal(false)}
-      />
     </div>
   );
 };

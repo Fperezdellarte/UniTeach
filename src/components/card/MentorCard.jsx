@@ -52,6 +52,7 @@ export const MentorCard = ({ mentor }) => {
             zIndex: 10,
             position: "absolute",
             top: "50px",
+            right: "210px",
             width: "60px",
             fontWeight: "600",
             borderRadius: "0px",

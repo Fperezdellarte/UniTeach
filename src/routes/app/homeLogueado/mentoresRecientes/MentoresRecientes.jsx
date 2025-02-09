@@ -23,7 +23,7 @@ export const Mentores = () => {
             subjectMap[clase.mentorId] = clase.Materia;
           });
           const mentorIds = classesData.recent
-            .slice(0, 3)
+            .slice(0, 4)
             .map((clase) => clase.mentorId);
 
           const mentoresData = await Promise.all(
@@ -59,54 +59,68 @@ export const Mentores = () => {
       fetchMentores();
     }
   }, [classesData, token, loading]);
+  console.log(classesData);
 
+  if (loading || loadingMentores) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "15px",
+          padding: "20px",
+        }}
+      >
+        <Skeleton
+          variant="rectangular"
+          width={300}
+          height={200}
+          animation="wave"
+        />
+        <Skeleton
+          variant="rectangular"
+          width={300}
+          height={200}
+          animation="wave"
+        />
+        <Skeleton
+          variant="rectangular"
+          width={300}
+          height={200}
+          animation="wave"
+        />
+      </div>
+    );
+  }
+  if (error) {
+    return <div>No se pudo obtener los mentores</div>;
+  }
+
+  if (!classesData?.recent || classesData.recent.length === 0) {
+    return null;
+  }
   return (
-    <div>
+    <div className="mentores-recientes-container-overflow">
       <h2 className="mentores-recientes-title">Mentores recientes</h2>
-      {loadingMentores || loading ? (
-        <div style={{ display: "flex", gap: "20px" }}>
-          <Skeleton
-            variant="rectangular"
-            width={300}
-            height={200}
-            animation="wave"
-          />
-          <Skeleton
-            variant="rectangular"
-            width={300}
-            height={200}
-            animation="wave"
-          />
-          <Skeleton
-            variant="rectangular"
-            width={300}
-            height={200}
-            animation="wave"
-          />
-        </div>
-      ) : error ? (
-        <div>No se pudo obtener los mentores</div>
-      ) : (
-        <>
-          <Carousel className="carousel-container-mentores">
-            {mentores.map((mentor) => (
-              <Carousel.Item key={mentor.idUser}>
-                <div className="mentor-card-wrapper">
-                  <MentorCard mentor={mentor} />
-                </div>
-              </Carousel.Item>
-            ))}
-          </Carousel>
-
-          <div className="grid-container-mentores">
-            {mentores.map((mentor) => (
-              <div key={mentor.idUser} className="mentor-card-wrapper">
+      <>
+        <Carousel className="carousel-container-mentores">
+          {mentores.map((mentor) => (
+            <Carousel.Item key={mentor.idUser}>
+              <div className="mentor-card-wrapper">
                 <MentorCard mentor={mentor} />
               </div>
-            ))}
-          </div>
-        </>
-      )}
+            </Carousel.Item>
+          ))}
+        </Carousel>
+
+        <div className="grid-container-mentores">
+          {mentores.map((mentor) => (
+            <div key={mentor.idUser} className="mentor-card-wrapper">
+              <MentorCard mentor={mentor} />
+            </div>
+          ))}
+        </div>
+      </>
     </div>
   );
 };

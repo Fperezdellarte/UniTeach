@@ -1,7 +1,27 @@
 import { Modal } from "react-bootstrap";
 import "./FacultyModal.css";
+import { useBuscador } from "../../../contexts/searchContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/authContext";
+import { Alert, AlertTitle } from "@mui/material";
 
-export const FacultyModal = ({ show, onHide, handleFacultySelect }) => {
+export const FacultyModal = ({ show, onHide }) => {
+  const { user } = useAuth();
+  const { handleSearch } = useBuscador();
+  const Navigate = useNavigate();
+  const handleModalClick = (facultad) => {
+    try {
+      handleSearch("", facultad, user?.University);
+      onHide();
+      Navigate("/app/results");
+    } catch (error) {
+      onHide();
+      <Alert color="danger" variant="outlined">
+        <AlertTitle>Error</AlertTitle>
+        {error.message}
+      </Alert>;
+    }
+  };
   const faculties = [
     {
       name: "Ingeniería",
@@ -41,7 +61,7 @@ export const FacultyModal = ({ show, onHide, handleFacultySelect }) => {
             <div
               key={faculty.name}
               className={`modal-card fade-in delay-${index + 1}`}
-              onClick={() => handleFacultySelect(faculty.name)}
+              onClick={() => handleModalClick(faculty.name)}
             >
               <div
                 className="modal-background"
