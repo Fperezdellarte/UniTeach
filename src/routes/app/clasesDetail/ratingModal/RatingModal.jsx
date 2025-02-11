@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import Rating from "@mui/material/Rating";
 import { useAuth } from "../../../../contexts/authContext";
 import { mentorService } from "../../../../service/mentorService";
 
@@ -22,7 +21,7 @@ export const RatingModal = ({ show, onClose, mentorId, fetchClassesData }) => {
       console.error("Error al enviar la calificación:", error);
     } finally {
       setIsLoading(false);
-      selectedRating(0);
+      setSelectedRating(0);
       setComment("");
     }
   };
@@ -41,27 +40,47 @@ export const RatingModal = ({ show, onClose, mentorId, fetchClassesData }) => {
           ×
         </button>
         <h2 className="rate-title">Califica al mentor</h2>
+
         <div className="stars-container">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <FontAwesomeIcon
-              key={star}
-              icon={faStar}
-              className={`star-icon ${
-                selectedRating >= star ? "selected" : ""
-              }`}
-              onClick={() => setSelectedRating(star)}
-            />
-          ))}
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Comentarios"
-            className="coment-input"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+          <Rating
+            name="mentor-rating"
+            value={selectedRating}
+            onChange={(event, newValue) => setSelectedRating(newValue)}
+            precision={0.5}
+            style={{ fontSize: "3rem" }}
           />
         </div>
+
+        <div>
+        <input
+          type="text"
+          placeholder="Comentarios"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "10px 15px",
+            fontSize: "16px",
+            borderRadius: "8px",
+            border: "2px solid #ccc",
+            outline: "none",
+            transition: "all 0.3s ease-in-out",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            backgroundColor: "#fff",
+            color: "#333",
+          }}
+          onFocus={(e) => {
+            e.target.style.border = "2px solid #007bff";
+            e.target.style.transform = "scale(1.05)";
+            e.target.style.boxShadow = "0 6px 15px rgba(0, 123, 255, 0.3)";
+          }}
+          onBlur={(e) => {
+            e.target.style.border = "2px solid #ccc";
+            e.target.style.transform = "scale(1)";
+            e.target.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.1)";
+          }}/>
+      </div>
+
         <button
           className="submit-rating-btn action-buttom"
           onClick={handleRatingClick}
