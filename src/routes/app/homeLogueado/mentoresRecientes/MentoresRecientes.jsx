@@ -59,7 +59,6 @@ export const Mentores = () => {
       fetchMentores();
     }
   }, [classesData, token, loading]);
-  console.log(classesData);
 
   if (loading || loadingMentores) {
     return (

@@ -51,7 +51,6 @@ export const PerfilMentor = () => {
       </Typography>
     </Box>
   );
-  console.log(mentor, clases);
   if (loading) {
     return (
       <div>

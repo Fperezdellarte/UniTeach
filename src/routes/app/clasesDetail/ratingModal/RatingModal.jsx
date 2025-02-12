@@ -22,7 +22,7 @@ export const RatingModal = ({ show, onClose, mentorId, fetchClassesData }) => {
       console.error("Error al enviar la calificación:", error);
     } finally {
       setIsLoading(false);
-      selectedRating(0);
+      setSelectedRating(0);
       setComment("");
     }
   };
