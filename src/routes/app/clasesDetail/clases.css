@@ -1,5 +1,10 @@
 .table-clases-recientes{
-margin: "20px 100px 20px 40px"
+  padding:2rem ;
+  color: #ffffff;  
+  text-align: center; 
+  font-size: 2rem; 
+  background-color: #1b80e6; 
+  margin-top: 0.5rem;
 }
 .container-recientes{
   margin-top: 3rem;

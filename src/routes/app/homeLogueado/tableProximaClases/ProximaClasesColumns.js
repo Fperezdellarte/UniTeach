@@ -28,23 +28,8 @@ export const ProximaClasesColumns = (handleAction) => [
     render: (row) => {
       console.log("Datos de la clase:", row);
 
-      if (!row.date) {
-        console.error("Fecha inválida:", row.date);
-        return <span>Error en la fecha</span>;
-      }
-
-      // Convertir row.date a objeto Date
       let dateObj = new Date(row.date);
-
-      if (isNaN(dateObj.getTime())) {
-        console.error("Fecha inválida después de conversión:", row.date);
-        return <span>Error en la fecha</span>;
-      }
-
-      // Formatear solo la fecha en YYYYMMDD
       const formattedDate = dateObj.toISOString().split("T")[0].replace(/-/g, "");
-
-      // Crear URL de Google Calendar sin hora
       const googleCalendarURL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
         row.Materia
       )}&dates=${formattedDate}/${formattedDate}&details=Clase de ${encodeURIComponent(

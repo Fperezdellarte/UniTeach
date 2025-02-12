@@ -3,15 +3,19 @@ import { useNavigate } from "react-router-dom";
 import "./formularioSignUp.css";
 import { registerUser } from "../../../../service/authService";
 import { CircularProgress } from "@mui/material";
+import { useCareers } from "../../../../hooks/useCareers";
 
 export const FormularioSignUp = ({ setShowAlert }) => {
   const [capsLockOn, setCapsLockOn] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { careers, loading: loadingCareers, error: errorCareers } = useCareers();
+
   const [formData, setFormData] = useState({
     Username: "",
     Password: "",
+    ConfirmPassword: "",
     Name: "",
     DNI: "",
     Legajo: "",
@@ -19,11 +23,13 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     Mail: "",
     Phone: "",
     University: "",
+    Career: "",
   });
 
   const [errors, setErrors] = useState({
     Username: "",
     Password: "",
+    ConfirmPassword: "",
     Name: "",
     DNI: "",
     Legajo: "",
@@ -45,6 +51,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
       document.removeEventListener("keyup", handleCapsLock);
     };
   }, []);
+
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
@@ -62,28 +69,26 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     const validations = {
       Username: {
         regex: /^[a-zA-Z0-9]+$/,
-        message:
-          "El nombre de usuario no puede contener caracteres especiales.",
+        message: "El nombre de usuario no puede contener caracteres especiales.",
       },
       Password: {
         regex: /^(?=.*[A-Z]).{8,25}$/,
-        message:
-          "La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.",
+        message: "La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.",
+      },
+      ConfirmPassword: {
+        message: "Las contraseñas no coinciden.",
       },
       Name: {
         regex: /^[a-z A-Z]+$/,
-        message:
-          "El nombre no puede contener números ni caracteres especiales.",
+        message: "El nombre no puede contener números ni caracteres especiales.",
       },
       DNI: {
         regex: /^[0-9]{6,8}$/,
-        message:
-          "El DNI debe contener solo números y tener entre 6 y 8 dígitos.",
+        message: "El DNI debe contener solo números y tener entre 6 y 8 dígitos.",
       },
       Legajo: {
         regex: /^[a-zA-Z0-9]{1,10}$/,
-        message:
-          "El legajo debe contener solo letras y números, con un máximo de 10 dígitos.",
+        message: "El legajo debe contener solo letras y números, con un máximo de 10 dígitos.",
       },
       Phone: {
         regex: /^[0-9]{10}$/,
@@ -122,23 +127,13 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     setLoading(false);
   };
 
-  const renderField = (
-    id,
-    label,
-    type = "text",
-    placeholder = "",
-    options = null
-  ) => {
+  const renderField = (id, label, type = "text", placeholder = "", options = null) => {
     const value = formData[id];
     const error = errors[id];
     const isFocused = focusedField === id;
 
     return (
-      <div
-        className={`signup-group ${isFocused ? "focused" : ""} ${
-          error ? "error" : ""
-        }`}
-      >
+      <div className={`signup-group ${isFocused ? "focused" : ""} ${error ? "error" : ""}`}>
         <label htmlFor={id} className="signup-label">
           {label}
           {id === "Password" && capsLockOn && (
@@ -189,50 +184,41 @@ export const FormularioSignUp = ({ setShowAlert }) => {
         <h1 className="signup-title">Registro de Usuario</h1>
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="signup-column">
-            {renderField(
-              "Username",
-              "Nombre de usuario",
-              "text",
-              "Ej: Juanceto01"
-            )}
-            {renderField(
-              "Password",
-              "Contraseña",
-              "password",
-              "Mín. 8 caracteres, 1 mayúscula"
-            )}
+            {renderField("Username", "Nombre de usuario", "text", "Ej: Juanceto01")}
+            {renderField("Password", "Contraseña", "password", "Mín. 8 caracteres, 1 mayúscula")}
+            {renderField("ConfirmPassword", "Confirmar Contraseña", "password", "Repite tu contraseña")}
             {renderField("Name", "Nombre", "text", "Ej: Alvaro Reina")}
-            {renderField(
-              "Mail",
-              "Correo Electrónico",
-              "email",
-              "ejemplo@gmail.com"
-            )}
+            {renderField("Mail", "Correo Electrónico", "email", "ejemplo@gmail.com")}
             {renderField("Phone", "Teléfono", "tel", "Ej: 3819877663")}
           </div>
           <div className="signup-column">
-            {renderField(
-              "TypeOfUser",
-              "Tipo de Usuario",
-              "select",
-              "Elige una opción",
-              [
-                ["ALUMNO", "Alumno"],
-                ["MENTOR", "Mentor"],
-                ["AMBOS", "Ambos"],
-              ]
-            )}
-            {renderField(
-              "University",
-              "Universidad",
-              "select",
-              "Elige una opción",
-              [
-                ["UNT", "UNT"],
-                ["UNSTA", "UNSTA"],
-                ["UTN", "UTN"],
-              ]
-            )}
+          {
+            loadingCareers ? (
+              <p>Cargando carreras...</p>
+            ) : errorCareers ? (
+              <p>Error al cargar carreras</p>
+            ) : Array.isArray(careers) && careers.length > 0 ? (
+              renderField(
+                "Career",
+                "Carrera",
+                "select",
+                "Elige una opción",
+                careers.map((career) => [career.id.toString(), career.nombre])
+              )
+            ) : (
+              <p>No hay carreras disponibles</p>
+            )
+          }
+            {renderField("University", "Universidad", "select", "Elige una opción", [
+              ["UNT", "UNT"],
+              ["UNSTA", "UNSTA"],
+              ["UTN", "UTN"],
+            ])}
+            {renderField("TypeOfUser", "Tipo de Usuario", "select", "Elige una opción", [
+              ["ALUMNO", "Alumno"],
+              ["MENTOR", "Mentor"],
+              ["AMBOS", "Ambos"],
+            ])}
             {renderField("DNI", "DNI", "text", "Máx. 8 dígitos")}
             {renderField("Legajo", "Legajo", "text", "Máx. 8 caracteres")}
           </div>
