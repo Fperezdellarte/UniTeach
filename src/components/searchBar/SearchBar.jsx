@@ -1,7 +1,9 @@
 import { InputBase, IconButton, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useBuscador } from "../../hooks/useBuscador";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
+import { useCallback } from "react";
+import {useBuscador} from "../../contexts/searchContext";
 
 export const SearchBar = () => {
   const { searchTerm, error, handleSearch, loading, dispatch } = useBuscador();
@@ -41,7 +43,7 @@ export const SearchBar = () => {
         <InputBase
           placeholder={error ? error : "Buscar materia"}
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleChange}
           onKeyDown={handleKeyPress}
           sx={{
             backgroundColor: "rgba(255, 255, 255, 0.8)", // Fondo translúcido
