@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
-import calendar from "../../../../Assest/Calendar.PNG";
+import Calendar from "../../../../Assest/Calendar.PNG";
+import { formatDate } from "../../../../utils/formatDate";
 
 export const ProximaClasesColumns = (handleAction) => [
   {
@@ -9,7 +10,7 @@ export const ProximaClasesColumns = (handleAction) => [
   },
   {
     title: "Fecha",
-    field: "date",
+render: (row) => formatDate(row.date),
   },
   {
     title: "Hora",
@@ -24,10 +25,8 @@ export const ProximaClasesColumns = (handleAction) => [
     render: (row) => row.Mentor || "Sin Mentor",
   },
   {
-    title: "Meet",
+    title: "Agenda",
     render: (row) => {
-      console.log("Datos de la clase:", row);
-
       let dateObj = new Date(row.date);
       const formattedDate = dateObj.toISOString().split("T")[0].replace(/-/g, "");
       const googleCalendarURL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
@@ -38,7 +37,7 @@ export const ProximaClasesColumns = (handleAction) => [
 
       return (
         <Button onClick={() => window.open(googleCalendarURL, "_blank")}>
-          <img src={calendar} alt="Calendario" width="20px" height="20px" />
+          <img src={Calendar} alt="Calendario" width="20px" height="20px" />
         </Button>
       );
     },

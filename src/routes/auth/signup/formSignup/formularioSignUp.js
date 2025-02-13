@@ -4,7 +4,6 @@ import "./formularioSignUp.css";
 import { registerUser } from "../../../../service/authService";
 import { CircularProgress } from "@mui/material";
 import { useCareers } from "../../../../hooks/useCareers";
-
 export const FormularioSignUp = ({ setShowAlert }) => {
   const [capsLockOn, setCapsLockOn] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
@@ -55,6 +54,9 @@ export const FormularioSignUp = ({ setShowAlert }) => {
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
+    if (field === "Password" && value !== formData.ConfirmPassword) {
+      setErrors((prev) => ({ ...prev, ConfirmPassword: "Las contraseñas no coinciden." }));
+    }
   };
 
   const handleFocus = (field) => {
@@ -76,6 +78,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
         message: "La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.",
       },
       ConfirmPassword: {
+        regex: new RegExp(`^${formData.Password}$`),
         message: "Las contraseñas no coinciden.",
       },
       Name: {
@@ -95,13 +98,14 @@ export const FormularioSignUp = ({ setShowAlert }) => {
         message: "El Número debe contener solo números, con 10 dígitos.",
       },
     };
-
-    if (validations[field] && !validations[field].regex.test(value)) {
+  
+    if (validations[field] && validations[field].regex && !validations[field].regex.test(value)) {
       setErrors((prev) => ({ ...prev, [field]: validations[field].message }));
       return false;
     }
     return true;
   };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();

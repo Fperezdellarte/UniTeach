@@ -34,6 +34,7 @@ export const RatingModal = ({ show, onClose, mentorId, fetchClassesData }) => {
       centered
       backdrop="static"
       keyboard={false}
+      style={{backdropFilter: "blur(5px)"}}
     >
       <div className="modal-clases-content-custom">
         <button className="close-modal-clases-btn" onClick={onClose}>
@@ -47,12 +48,12 @@ export const RatingModal = ({ show, onClose, mentorId, fetchClassesData }) => {
             value={selectedRating}
             onChange={(event, newValue) => setSelectedRating(newValue)}
             precision={0.5}
-            style={{ fontSize: "3rem" }}
+            style={{ fontSize: "3rem", }}
           />
         </div>
 
         <div>
-        <input
+        <textarea
           type="text"
           placeholder="Comentarios"
           value={comment}
@@ -68,6 +69,8 @@ export const RatingModal = ({ show, onClose, mentorId, fetchClassesData }) => {
             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
             backgroundColor: "#fff",
             color: "#333",
+            maxWidth: "100%",
+            flexWrap: "wrap",
           }}
           onFocus={(e) => {
             e.target.style.border = "2px solid #007bff";
