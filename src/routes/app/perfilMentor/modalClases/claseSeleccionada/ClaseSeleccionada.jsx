@@ -5,6 +5,8 @@ import {
   Button,
   Alert,
   CircularProgress,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
@@ -15,6 +17,8 @@ import { useAuth } from "../../../../../contexts/authContext";
 dayjs.extend(customParseFormat);
 
 export const ClaseSeleccionada = ({ clase, onInscripcionExitosa }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -67,6 +71,7 @@ export const ClaseSeleccionada = ({ clase, onInscripcionExitosa }) => {
           p: 2,
           mt: 2,
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           justifyContent: "space-between",
           alignItems: "center",
         }}
