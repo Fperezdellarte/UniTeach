@@ -32,7 +32,6 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     Name: "",
     DNI: "",
     Legajo: "",
-    Phone: "",
   });
 
   useEffect(() => {
@@ -82,8 +81,8 @@ export const FormularioSignUp = ({ setShowAlert }) => {
         message: "Las contraseñas no coinciden.",
       },
       Name: {
-        regex: /^[a-z A-Z]+$/,
-        message: "El nombre no puede contener números ni caracteres especiales.",
+        regex: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/,
+        message: "El nombre solo puede contener letras y espacios.",
       },
       DNI: {
         regex: /^[0-9]{6,8}$/,
@@ -91,15 +90,19 @@ export const FormularioSignUp = ({ setShowAlert }) => {
       },
       Legajo: {
         regex: /^[a-zA-Z0-9]{1,10}$/,
-        message: "El legajo debe contener solo letras y números, con un máximo de 10 dígitos.",
+        message:
+          "El legajo debe contener solo letras y números, con un máximo de 10 caracteres.",
       },
       Phone: {
         regex: /^[0-9]{10}$/,
-        message: "El Número debe contener solo números, con 10 dígitos.",
+        message: "El número debe contener solo números, con 10 dígitos.",
       },
     };
-  
-    if (validations[field] && validations[field].regex && !validations[field].regex.test(value)) {
+
+    // Ignorar validación si es opcional y está vacío
+    if (field === "Phone" && value.trim() === "") return true;
+
+    if (validations[field] && !validations[field].regex.test(value)) {
       setErrors((prev) => ({ ...prev, [field]: validations[field].message }));
       return false;
     }
@@ -140,7 +143,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
       <div className={`signup-group ${isFocused ? "focused" : ""} ${error ? "error" : ""}`}>
         <label htmlFor={id} className="signup-label">
           {label}
-          {id === "Password" && capsLockOn && (
+          {id === "Password" && capsLockOn && focusedField === "Password" && (
             <span className="signup-warning">⚠️ Bloq Mayús activado</span>
           )}
         </label>
@@ -172,7 +175,7 @@ export const FormularioSignUp = ({ setShowAlert }) => {
               onFocus={() => handleFocus(id)}
               onBlur={handleBlur}
               placeholder={placeholder}
-              required
+              required={id !== "Phone"}
             />
             <div className="signup-focus-effect"></div>
           </div>

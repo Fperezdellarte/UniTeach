@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PersonIcon from "@mui/icons-material/Person";
+import {FormCuentaUsuario} from "./formCuentaUsuario/FormCuentaUsuario";
 
 export const PerfilUsuario = () => {
   const [tab, setTab] = useState("settings");
@@ -71,7 +72,7 @@ export const PerfilUsuario = () => {
           }}
         >
           {tab === "settings" && <FormPerfilUsuario />}
-          {tab === "profile" && <div>Contenido de Cuenta</div>}
+          {tab === "profile" && <FormCuentaUsuario/>}
         </Box>
       </Box>
     </Container>

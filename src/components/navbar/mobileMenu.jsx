@@ -12,15 +12,15 @@ import {
   Button,
   Switch,
   Slide,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { keyframes } from "@emotion/react";
-import { Link } from "react-router-dom";
-import IconMapper from "./IconMapper"; // Importación faltante
+import { Link, useNavigate } from "react-router-dom";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { useAuth } from "../../contexts/authContext"; // Asegurar que la ruta sea correcta
+import { useAuth } from "../../contexts/authContext";
 import { SearchBar } from "../searchBar/SearchBar";
 
-// Componentes estilizados (deben estar definidos antes de su uso)
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
   "& .MuiBackdrop-root": {
     backdropFilter: "blur(8px)",
@@ -41,6 +41,17 @@ const UserSection = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   gap: theme.spacing(1),
+}));
+
+const LogoutButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  background: "rgba(255, 255, 255, 0.2)",
+  color: "white",
+  transition: "transform 0.2s ease-in-out, background 0.3s",
+  "&:hover": {
+    background: "rgba(255, 0, 0, 0.7)",
+    transform: "scale(1.05)",
+  },
 }));
 
 const ThemeToggle = styled(Box)(({ theme }) => ({
@@ -81,17 +92,37 @@ export const MobileMenu = ({
   onClose,
   menuItems,
   darkMode,
-  onDarkModeToggle,
-  userProfile = {
-    name: "Usuario",
-    email: "usuario@ejemplo.com",
-    avatar: null,
-  },
+  onDarkModeToggle
+  
 }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, handleLogout,user } = useAuth();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+console.log(user)
+
+  const RecommendationSection = styled(Box)(({ theme }) => ({
+    padding: theme.spacing(2),
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    margin: theme.spacing(2),
+    borderRadius: theme.shape.borderRadius,
+  }));
+
+  const RecommendationItem = styled(Box)(({ theme }) => ({
+    padding: theme.spacing(1.5),
+    marginBottom: theme.spacing(1),
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: theme.shape.borderRadius,
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+      transform: 'translateX(5px)',
+    },
+  }));
 
   return (
-    <StyledDrawer
+    <StyledDrawer sx={{display:"flex",flexDirection:"column",alignItems:"center"}}
       anchor="right"
       open={open}
       onClose={onClose}
@@ -111,19 +142,29 @@ export const MobileMenu = ({
               border: "2px solid",
               borderColor: "rgba(255, 255, 255, 0.2)",
             }}
-            src={userProfile.avatar}
+            src={user.Avatar_URL}
           >
-            {userProfile.name.charAt(0)}
           </Avatar>
+            {user.Name}
           <Typography variant="subtitle1" sx={{ color: "white" }}>
-            {userProfile.name}
+            {user.Username}
           </Typography>
           <Typography
             variant="body2"
             sx={{ color: "rgba(255, 255, 255, 0.7)" }}
           >
-            {userProfile.email}
+            {""}
           </Typography>
+          <LogoutButton
+            variant="contained"
+            onClick={() => {
+              handleLogout();
+              onClose();
+              navigate("/");
+            }}
+          >
+            Cerrar sesión
+          </LogoutButton>
         </UserSection>
       ) : (
         <Box sx={{ p: 2, textAlign: "center" }}>
@@ -131,69 +172,64 @@ export const MobileMenu = ({
             ¡Bienvenido!
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                onClose();
+                navigate("/auth/login");
+              }}
+            >
               Iniciar sesión
             </Button>
-            <Button variant="outlined" color="white">
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => {
+                onClose();
+                navigate("/auth/signup");
+              }}
+            >
               Registrarse
             </Button>
           </Box>
         </Box>
       )}
+      
       <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.1)" }} />
-      <SearchBar />
+      {isAuthenticated && <div style={{width: "80%",marginLeft:"30px"}}> 
+        <SearchBar />      
+        </div> 
+        }
 
-      <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.1)" }} />
-      <List>
-        {menuItems.map((item, index) => (
-          <AnimatedListItem
-            key={index}
-            button
-            component={Link}
-            to={item.link}
-            onClick={onClose}
-            delay={index * 50}
-          >
-            <ListItemIcon sx={{ color: "white" }}>
-              <IconMapper name={item.icon} />
-            </ListItemIcon>
-            <ListItemText
-              primary={item.text}
-              primaryTypographyProps={{
-                fontWeight: 500,
-                variant: "body1",
-              }}
-            />
-          </AnimatedListItem>
-        ))}
-      </List>
 
       <Divider sx={{ mt: "auto", borderColor: "rgba(7, 7, 7, 0.04)" }} />
-
-      <ThemeToggle>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <DarkModeIcon sx={{ color: "white" }} />
-          <Typography variant="body2" sx={{ color: "white" }}>
-            Modo oscuro
-          </Typography>
-        </Box>
-        <Switch
-          checked={darkMode}
-          onChange={onDarkModeToggle}
-          color="primary"
-          sx={{
-            "& .MuiSwitch-switchBase.Mui-checked": {
-              color: "#fff",
-              "&:hover": {
-                backgroundColor: "rgba(7, 6, 6, 0.1)",
-              },
-            },
-            "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-              backgroundColor: "8796A5#",
-            },
-          }}
-        />
-      </ThemeToggle>
+      
+      {/* Theme Toggle - Only visible on mobile */}
+      {isMobile && (
+        <ThemeToggle>
+          <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <DarkModeIcon sx={{ color: "white" }} />
+              <Typography variant="body2" sx={{ color: "white" }}>
+                Modo oscuro
+              </Typography>
+            </Box>
+            <Switch
+              checked={darkMode}
+              onChange={onDarkModeToggle}
+              sx={{
+                '& .MuiSwitch-switchBase.Mui-checked': {
+                  color: '#fff',
+                },
+                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                  backgroundColor: '#fff',
+                },
+              }}
+            />
+          </Box>
+        </ThemeToggle>
+      )}
     </StyledDrawer>
   );
 };

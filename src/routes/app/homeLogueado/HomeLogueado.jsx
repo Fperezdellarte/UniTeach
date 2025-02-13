@@ -26,7 +26,14 @@ export const HomeLogueado = () => {
     return <LoadingSpinner />;
   }
   return (
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+    <Container maxWidth="md"
+    sx={{
+      minHeight: "auto", // Ocupa toda la altura de la pantalla
+      display: "flex",
+      justifyContent: "center", // Centra horizontalmente
+      alignItems: "center", // Centra verticalmente
+      padding: "20px", // Evita que toque los bordes
+    }}>
       {" "}
       {isNewUser ? (
         <HomeNewUser />
