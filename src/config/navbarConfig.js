@@ -8,8 +8,8 @@ export const menuItems = {
     { text: "Registro", icon: "SignUpIcon", link: "/auth/signup" },
   ],
   private: [
-    { text: "Dashboard", icon: "DashboardIcon", link: "/app/home" },
-    { text: "Perfil", icon: "PersonIcon", link: "/app/perfil" },
+    { text: "Mi Tablero", icon: "DashboardIcon", link: "/app/home" },
+    // { text: "Perfil", icon: "PersonIcon", link: "/app/perfil" },
   ],
 };
 

@@ -2,31 +2,28 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import { API_URL } from "../../../../config/constans";
 import { useAuth } from "../../../../contexts/authContext";
+import { mentorService } from "../../../../service/mentorService";
 
-export const RatingModal = ({ show, onClose, mentorId }) => {
+export const RatingModal = ({ show, onClose, mentorId, fetchClassesData }) => {
   const [selectedRating, setSelectedRating] = useState(0);
+  const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useAuth();
 
-  const handleRatingClick = async (star) => {
+  const handleRatingClick = async () => {
+    if (!selectedRating) return;
     try {
       setIsLoading(true);
-      await axios.post(
-        `${API_URL}/users/rating/${mentorId}`,
-        { rate: star },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      console.log(
-        `Calificación enviada: ${star} estrellas para mentor ${mentorId}`
-      );
+      await mentorService.rateMentor(mentorId, selectedRating, comment, token);
+      await fetchClassesData();
       onClose();
     } catch (error) {
       console.error("Error al enviar la calificación:", error);
     } finally {
       setIsLoading(false);
+      selectedRating(0);
+      setComment("");
     }
   };
 
@@ -56,9 +53,18 @@ export const RatingModal = ({ show, onClose, mentorId }) => {
             />
           ))}
         </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Comentarios"
+            className="coment-input"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </div>
         <button
           className="submit-rating-btn action-buttom"
-          onClick={() => handleRatingClick(selectedRating)}
+          onClick={handleRatingClick}
           disabled={selectedRating === 0 || isLoading}
         >
           {isLoading ? (

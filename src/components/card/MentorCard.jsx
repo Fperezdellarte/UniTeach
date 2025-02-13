@@ -49,9 +49,10 @@ export const MentorCard = ({ mentor }) => {
           color="primary"
           className="chipUniversity"
           sx={{
-            zIndex: "100",
+            zIndex: 10,
             position: "absolute",
             top: "50px",
+            right: "210px",
             width: "60px",
             fontWeight: "600",
             borderRadius: "0px",

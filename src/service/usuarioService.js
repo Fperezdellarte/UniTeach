@@ -47,6 +47,26 @@ export const usuarioService = {
       );
     }
   },
+  inscriptionClass: async (idClass, token) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/inscription`,
+        {
+          idClass,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(
+        error.response?.data?.message || "Error al inscribirse a la clase"
+      );
+    }
+  },
 };
 
 export const passwordService = {

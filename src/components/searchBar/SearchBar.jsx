@@ -4,16 +4,36 @@ import { useBuscador } from "../../hooks/useBuscador";
 
 
 export const SearchBar = () => {
-  const { searchTerm, setSearchTerm, error, handleSearch, loading } =
-    useBuscador();
+  const { searchTerm, error, handleSearch, loading, dispatch } = useBuscador();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && searchTerm) {
-      handleSearch();
-    } else {
-      return error;
-    }
-  };
+  const handleKeyPress = useCallback(
+    (e) => {
+      if (e.key === "Enter" && searchTerm) {
+        handleSearch(searchTerm, "", user?.University);
+        navigate("/app/results");
+      }
+    },
+    [searchTerm, handleSearch, user, navigate]
+  );
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (searchTerm) {
+        handleSearch(searchTerm, "", user?.University);
+        navigate("/app/results");
+      }
+    },
+    [searchTerm, handleSearch, user, navigate]
+  );
+  const handleChange = useCallback(
+    (e) => {
+      dispatch({ type: "SET_SEARCH_TERM", payload: e.target.value });
+    },
+    [dispatch]
+  );
 
   return (
     <div className="navbar-search-container">

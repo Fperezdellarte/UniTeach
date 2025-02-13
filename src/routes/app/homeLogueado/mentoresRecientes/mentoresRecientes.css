@@ -1,57 +1,38 @@
-.mentor-card-wrapper {
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+.mentores-recientes-container-overflow {
+  overflow: auto;
+  scrollbar-width: none;
+  text-align: center;
+  /* -ms-overflow-style: none; */
 }
 
-.mentores-recientes-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.loading-spinner {
-    text-align: center;
-    font-size: 18px;
-    color: #555555;
-}
-
-.mentores-recientes-title {
-    background-color: rgb(255, 255, 255);
-    padding-top: 2%;
-    padding-bottom: 3%;
-    font-weight: bolder;
-    gap: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-/* Ocultar el carrusel en pantallas grandes */
-@media screen and (min-width: 769px) {
-    .carouselContainerMentores {
-      display: none;
-    }
-  }
-  
+/* WebKit (Chrome, Safari) */
+/* .mentores-recientes-container-overflow::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+} */
+.mentores-recientes-title{
+  width: auto;
+  color: #2c3e50;
+      font-size: 1.5rem;
+      padding-top: 15px;
+      margin: 0px;
+      font-weight: bold;
+} 
   /* Mostrar el carrusel en pantallas pequeñas */
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 687px) {
     .carousel-container-mentores{
       display: none; /* Ocultar la grilla en pantallas pequeñas */
     }
   }
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 687px) {
     .grid-container-mentores {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Grilla de 3 columnas */
-      gap: 1rem;
-      width: 100%;
-      align-items: center;
-      display: none;
+        display: none;
     }
   }
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 687px) {
     .grid-container-mentores {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Grilla de 3 columnas */
+      grid-template-columns: repeat(4, 1fr); 
       gap: 1rem;
       width: 100%;
       align-items: center;

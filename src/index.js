@@ -5,12 +5,15 @@ import { ClassesProvider } from "./contexts/classesContext";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { SearchProvider } from "./contexts/searchContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
     <ClassesProvider>
-      <App />
+      <SearchProvider>
+        <App />
+      </SearchProvider>
     </ClassesProvider>
   </AuthProvider>
 );
