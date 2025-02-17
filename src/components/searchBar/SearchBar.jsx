@@ -43,7 +43,6 @@ export const SearchBar = () => {
         <InputBase
           placeholder={error ? error : "Buscar materia"}
           value={searchTerm}
-          onClick={handleSubmit}
           onChange={handleChange}
           onKeyDown={handleKeyPress}
           sx={{
@@ -75,6 +74,7 @@ export const SearchBar = () => {
                   cursor: "pointer",
                   transition: "color 0.2s",
                 }}
+                onClick={handleSubmit}
                 onMouseEnter={(e) => (e.target.style.color = "#007bff")}
                 onMouseLeave={(e) => (e.target.style.color = "black")}
               />
