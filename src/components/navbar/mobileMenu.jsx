@@ -1,9 +1,5 @@
 import {
   Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Avatar,
   Box,
   Divider,
@@ -15,8 +11,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { keyframes } from "@emotion/react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useAuth } from "../../contexts/authContext";
 import { SearchBar } from "../searchBar/SearchBar";
@@ -64,65 +59,15 @@ const ThemeToggle = styled(Box)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-const slideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const AnimatedListItem = styled(ListItem)(({ theme, delay }) => ({
-  borderRadius: "8px",
-  margin: theme.spacing(0, 1),
-  animation: `${slideIn} 0.3s ease-out ${delay}ms both`,
-  transition: "all 0.2s ease",
-  "&:hover": {
-    backgroundColor: "rgba(255, 255, 255, 0.15) !important",
-    transform: "translateY(-2px)",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-  },
-}));
-
-export const MobileMenu = ({
-  open,
-  onClose,
-  menuItems,
-  darkMode,
-  onDarkModeToggle
-  
-}) => {
-  const { isAuthenticated, handleLogout,user } = useAuth();
+export const MobileMenu = ({ open, onClose, darkMode, onDarkModeToggle }) => {
+  const { isAuthenticated, handleLogout, user } = useAuth();
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-console.log(user)
-
-  const RecommendationSection = styled(Box)(({ theme }) => ({
-    padding: theme.spacing(2),
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    margin: theme.spacing(2),
-    borderRadius: theme.shape.borderRadius,
-  }));
-
-  const RecommendationItem = styled(Box)(({ theme }) => ({
-    padding: theme.spacing(1.5),
-    marginBottom: theme.spacing(1),
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: theme.shape.borderRadius,
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-    '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-      transform: 'translateX(5px)',
-    },
-  }));
 
   return (
-    <StyledDrawer sx={{display:"flex",flexDirection:"column",alignItems:"center"}}
+    <StyledDrawer
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       anchor="right"
       open={open}
       onClose={onClose}
@@ -143,9 +88,8 @@ console.log(user)
               borderColor: "rgba(255, 255, 255, 0.2)",
             }}
             src={user.Avatar_URL}
-          >
-          </Avatar>
-            {user.Name}
+          ></Avatar>
+          {user.Name}
           <Typography variant="subtitle1" sx={{ color: "white" }}>
             {user.Username}
           </Typography>
@@ -195,21 +139,28 @@ console.log(user)
           </Box>
         </Box>
       )}
-      
-      <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.1)" }} />
-      {isAuthenticated && <div style={{width: "80%",marginLeft:"30px"}}> 
-        <SearchBar />      
-        </div> 
-        }
 
+      <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.1)" }} />
+      {isAuthenticated && (
+        <div style={{ width: "80%", marginLeft: "30px" }}>
+          <SearchBar />
+        </div>
+      )}
 
       <Divider sx={{ mt: "auto", borderColor: "rgba(7, 7, 7, 0.04)" }} />
-      
+
       {/* Theme Toggle - Only visible on mobile */}
       {isMobile && (
         <ThemeToggle>
-          <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <DarkModeIcon sx={{ color: "white" }} />
               <Typography variant="body2" sx={{ color: "white" }}>
                 Modo oscuro
@@ -219,11 +170,11 @@ console.log(user)
               checked={darkMode}
               onChange={onDarkModeToggle}
               sx={{
-                '& .MuiSwitch-switchBase.Mui-checked': {
-                  color: '#fff',
+                "& .MuiSwitch-switchBase.Mui-checked": {
+                  color: "#fff",
                 },
-                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                  backgroundColor: '#fff',
+                "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                  backgroundColor: "#fff",
                 },
               }}
             />
