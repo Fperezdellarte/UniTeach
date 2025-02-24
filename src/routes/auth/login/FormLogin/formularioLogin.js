@@ -10,9 +10,11 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
   const [Password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errorResponse, setErrorResponse] = useState("");
+  const [inputErrors, setInputErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockOn, setCapsLockOn] = useState(false);
+  const [shake, setShake] = useState(false);
   const goTo = useNavigate();
 
   const handleKeyUp = (event) => {
@@ -22,8 +24,26 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
   const handleKeyDown = (event) => {
     setCapsLockOn(event.getModifierState("CapsLock"));
   };
+
+  const validateInputs = () => {
+    const errors = {};
+    if (!Username.trim()) errors.Username = "El nombre de usuario es obligatorio.";
+    if (!Password.trim()) errors.Password = "La contraseña es obligatoria.";
+    setInputErrors(errors);
+
+    // Si hay errores, activa la animación de shake
+    if (Object.keys(errors).length > 0) {
+      setShake(true);
+      setTimeout(() => setShake(false), 300); // Quita la clase después de la animación
+    }
+
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateInputs()) return;
+
     setIsLoading(true);
     setErrorResponse("");
 
@@ -43,7 +63,7 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
 
   return (
     <div className="auth-login-container">
-      <div className="auth-login-box">
+      <div className={`auth-login-box ${shake ? "shake" : ""}`}>
         <h2 className="auth-login-title">Iniciar sesión</h2>
         {!!errorResponse && (
           <div className="auth-error-message">{errorResponse}</div>
@@ -52,19 +72,22 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
           <div className="auth-input-wrapper">
             <input
               placeholder=" "
-              className="auth-input-field"
+              className={`auth-input-field ${inputErrors.Username ? "input-error" : ""}`}
               type="text"
               value={Username}
               onChange={(e) => setUsername(e.target.value)}
               disabled={isLoading}
             />
             <label className="auth-input-label">Nombre de usuario</label>
+            {inputErrors.Username && (
+              <div className="error-message">{inputErrors.Username}</div>
+            )}
           </div>
 
           <div className="auth-input-wrapper">
             <input
               type={showPassword ? "text" : "password"}
-              className="auth-input-field"
+              className={`auth-input-field ${inputErrors.Password ? "input-error" : ""}`}
               placeholder=" "
               value={Password}
               onChange={(e) => setPassword(e.target.value)}
@@ -85,6 +108,9 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
             </button>
             {capsLockOn && (
               <div className="auth-caps-warning">Bloq Mayús está activado</div>
+            )}
+            {inputErrors.Password && (
+              <div className="error-message">{inputErrors.Password}</div>
             )}
           </div>
 

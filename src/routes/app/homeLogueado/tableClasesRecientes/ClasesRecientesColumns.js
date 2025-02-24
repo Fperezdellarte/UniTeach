@@ -4,12 +4,11 @@ export const ClasesRecientesColumns = [
   {
     title: "Materia",
     field: "Materia",
-    cellStyle: { fontWeight: 500 },
+    cellStyle: { fontWeight: 700 },
   },
   {
     title: "Fecha y Hora",
     render: (row) => formatDate(row.date, row.hour),
-    
   },
   {
     title: "Aula",

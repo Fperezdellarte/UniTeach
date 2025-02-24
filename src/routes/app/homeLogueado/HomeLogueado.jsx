@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useTheme, useMediaQuery, Box, Container } from "@mui/material";
+import { useTheme, useMediaQuery, Box } from "@mui/material";
 import { TablaProximaClase } from "./tableProximaClases/TablaProximaClase";
 import { TablaClasesRecientes } from "./tableClasesRecientes/TablaClasesRecientes";
 import { Mentores } from "./mentoresRecientes/MentoresRecientes";
@@ -26,7 +26,16 @@ export const HomeLogueado = () => {
     return <LoadingSpinner />;
   }
   return (
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        width: "100dv",
+        justifyContent: "center",
+        alignItems: "center", // Centra verticalmente
+        padding: "20px", // Evita que toque los bordes
+      }}
+    >
       {" "}
       {isNewUser ? (
         <HomeNewUser />
@@ -37,6 +46,8 @@ export const HomeLogueado = () => {
             minHeight: "100vh",
             flexDirection: "column",
             alignItems: "center",
+            width: "100%",
+            justifyContent: "center",
             gap: "20px",
             flexWrap: "wrap",
           }}
@@ -59,7 +70,7 @@ export const HomeLogueado = () => {
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
                 borderRadius: "10px",
                 flexGrow: 1,
-                maxWidth: isMobile ? "100%" : "calc(100% - 10% - 20px)",
+                maxWidth: isMobile ? "100%" : "calc(100% - 30% - 20px)",
                 boxSizing: "border-box",
               }}
             >
@@ -95,6 +106,6 @@ export const HomeLogueado = () => {
           </Box>
         </Box>
       )}
-    </Container>
+    </div>
   );
 };
