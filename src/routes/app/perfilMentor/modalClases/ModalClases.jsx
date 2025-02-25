@@ -8,7 +8,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "80%",
+  width: "xs" ? "95%" : "80%",
   maxWidth: 800,
   bgcolor: "background.paper",
   border: "2px solid #000",
@@ -18,7 +18,6 @@ const style = {
 };
 
 export const ModalClases = ({ open, onClose, clases }) => {
-  //Recibe open, onClose, y las clases
   return (
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>

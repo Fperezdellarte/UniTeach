@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Typography, CircularProgress } from "@mui/material";
+import React, { useMemo, useState } from "react";
+import { Typography } from "@mui/material";
 import { DateCalendar, PickersDay } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -20,43 +20,48 @@ export const CalendarioClases = ({ clases, onClose }) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [selectedClass, setSelectedClass] = useState(null);
 
-  if (!clases) {
-    return <Typography>No hay clases disponibles.</Typography>;
-  }
+  const fechasConClase = useMemo(
+    () =>
+      clases?.map((clase) => dayjs(clase.Date).startOf("day").toString()) || [],
+    [clases]
+  );
 
   const hasClassOnDate = (date) => {
-    return clases.some((clase) => {
-      try {
-        const claseDate = dayjs(clase.Date);
-        if (!claseDate.isValid()) {
-          console.error("hasClassOnDate: claseDate inválida:", clase.Date);
-          return false;
-        }
-        return claseDate.isSame(date, "day");
-      } catch (error) {
-        console.error("Error en hasClassOnDate:", clase.Date, error);
-        return false;
-      }
-    });
+    return fechasConClase.some(
+      (fecha) => fecha === date.startOf("day").toString()
+    );
   };
 
-  const renderWeekPickerDay = (date, _, pickersDayProps) => {
-    const hasClass = hasClassOnDate(date);
+  const minDate = dayjs();
+  const maxDate = useMemo(() => {
+    if (!clases || clases.length === 0) {
+      return dayjs();
+    }
+
+    let lastDate = dayjs(clases[0].Date);
+    for (let i = 1; i < clases.length; i++) {
+      const currentDate = dayjs(clases[i].Date);
+      if (currentDate.isAfter(lastDate)) {
+        lastDate = currentDate;
+      }
+    }
+    return lastDate;
+  }, [clases]);
+
+  const CustomPickersDay = (pickersDayProps) => {
+    const hasClass = hasClassOnDate(pickersDayProps.day);
+
+    const isDisabled = !hasClass;
 
     return (
       <PickersDay
         {...pickersDayProps}
-        onClick={() => handleDateChange(date)}
+        disabled={isDisabled}
         sx={{
           ...(hasClass && {
-            backgroundColor: "primary.main",
-            color: "primary.contrastText",
-            "&:hover": {
-              backgroundColor: "primary.dark",
-            },
-            "&.Mui-selected": {
-              backgroundColor: "primary.dark",
-            },
+            backgroundColor: "#7e80a5",
+            color: "white",
+            "&:hover, &.Mui-selected": { backgroundColor: "#7e80a5" },
           }),
           borderRadius: "50%",
         }}
@@ -72,26 +77,20 @@ export const CalendarioClases = ({ clases, onClose }) => {
     setSelectedClass(classForDate || null);
   };
 
+  if (!clases || clases.length === 0)
+    return <Typography>No hay clases disponibles.</Typography>;
+
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
         <DateCalendar
           value={selectedDate}
           onChange={handleDateChange}
-          loading={false}
-          renderLoading={() => <CircularProgress />}
-          slots={{
-            day: PickersDay,
-          }}
-          slotProps={{
-            day: {
-              renderDay: renderWeekPickerDay,
-            },
-          }}
+          slots={{ day: CustomPickersDay }}
+          minDate={minDate}
+          maxDate={maxDate}
         />
       </LocalizationProvider>
-
-      {/*  Renderiza el nuevo componente */}
       {selectedClass && (
         <ClaseSeleccionada clase={selectedClass} onClose={onClose} />
       )}

@@ -1,84 +1,113 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { passwordService } from "../../../../service/usuarioService";
-import {
-  Button,
-  Form,
-  Alert,
-  Spinner,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
+import Modal from "react-modal";
+import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import "./EmailForm.css";
+import { useNavigate } from "react-router-dom";
+
+Modal.setAppElement('#root');
 
 export const EmailForm = () => {
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
+    const Navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({
+        title: "",
+        message: "",
+        type: "success"
+    });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setResponseMessage("");
-
-    try {
-      await passwordService.sendResetEmail(email);
-      setResponseMessage(
-        "El enlace para restablecer tu contraseña ha sido enviado a tu correo."
-      );
-    } catch (error) {
-      setResponseMessage(error.message);
-    } finally {
-      setIsLoading(false);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        
+        try {
+            await passwordService.sendResetEmail(email);
+            setEmail("");
+            setModalContent({
+                title: "Correo enviado",
+                message: "Hemos enviado un enlace de recuperación a tu correo electrónico.",
+                type: "success"
+            });
+            setModalIsOpen(true);
+        } catch (error) {
+            setModalContent({
+                title: "Error",
+                message: error.message || "Ocurrió un error al enviar el correo.",
+                type: "error"
+            });
+            setModalIsOpen(true);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    const handelModalClose = () => { 
+       Navigate("/auth/login");
+        setModalIsOpen(false);
     }
-  };
+    return (
+        <div className="email-form-container">
+            <Form onSubmit={handleSubmit} className="email-form-wrapper">
+                <h2 className="email-form-title">Recuperar contraseña</h2>
+                <p className="email-form-subtitle">
+                    Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+                </p>
 
-  return (
-    <div>
-      {responseMessage && (
-        <Alert
-          variant={
-            responseMessage.includes("Error")
-              ? "email-form-unique-alert-danger"
-              : "email-form-unique-alert-info"
-          }
-        ></Alert>
-      )}
-      <Form onSubmit={handleSubmit} className="email-form-unique-form">
-        <h2>Recuperar contraseña</h2>
-        <Form.Group
-          controlId="email"
-          className="email-form-unique-input-group mb-3"
-        >
-          <Form.Label>Introduce tu Correo Electrónico</Form.Label>
-          <InputGroup>
-            <InputGroup.Text className="email-form-unique-input-group-text">
-              @
-            </InputGroup.Text>
-            <FormControl
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Ingresa tu correo"
-              required
-              disabled={isLoading}
-              className="email-form-unique-form-control email-form-unique-rounded-pill"
-            />
-          </InputGroup>
-        </Form.Group>
+                <div className="email-form-input-group">
+                    <label className="email-form-label">Correo electrónico</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="tucorreo@ejemplo.com"
+                        required
+                        disabled={isLoading}
+                        className="email-form-input"
+                    />
+                </div>
 
-        <Button
-          type="submit"
-          variant="primary"
-          className="email-form-unique-button w-100 email-form-unique-rounded-pill"
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Spinner animation="border" size="sm" />
-          ) : (
-            "Enviar enlace"
-          )}
-        </Button>
-      </Form>
-    </div>
-  );
+                <button
+                    type="submit"
+                    className="email-form-button"
+                    disabled={isLoading}
+                >
+                    {isLoading ? (
+                        <Spinner
+                            animation="border"
+                            size="sm"
+                            className="loading-spinner"
+                        />
+                    ) : (
+                        "Enviar enlace de recuperación"
+                    )}
+                </button>
+            </Form>
+
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={() => setModalIsOpen(false)}
+                className="email-form-modal"
+                overlayClassName="email-form-modal-overlay"
+                closeTimeoutMS={300}
+            >
+                <div className="modal-icon">
+                    {modalContent.type === "success" ? (
+                        <FiCheckCircle className="modal-icon-success" />
+                    ) : (
+                        <FiAlertCircle className="modal-icon-error" />
+                    )}
+                </div>
+                <h3 className="modal-title">{modalContent.title}</h3>
+                <p className="modal-message">{modalContent.message}</p>
+                <button
+                    className="modal-close-button"
+                    onClick={handelModalClose}
+                >
+                    Cerrar
+                </button>
+            </Modal>
+        </div>
+    );
 };

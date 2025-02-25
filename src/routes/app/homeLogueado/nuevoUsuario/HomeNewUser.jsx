@@ -43,7 +43,7 @@ export const HomeNewUser = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <Box
+    <Box 
       sx={{
         minHeight: "100%",
         width: "100%",
