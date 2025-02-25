@@ -81,9 +81,8 @@ export const FormularioSignUp = ({ setShowAlert }) => {
         message: "Las contraseñas no coinciden.",
       },
       Name: {
-        regex: /^[a-z A-Z]+$/,
-        message:
-          "El nombre no puede contener números ni caracteres especiales.",
+        regex: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/,
+        message: "El nombre solo puede contener letras y espacios.",
       },
       DNI: {
         regex: /^[0-9]{6,8}$/,
@@ -92,13 +91,16 @@ export const FormularioSignUp = ({ setShowAlert }) => {
       Legajo: {
         regex: /^[a-zA-Z0-9]{1,10}$/,
         message:
-          "El legajo debe contener solo letras y números, con un máximo de 10 dígitos.",
+          "El legajo debe contener solo letras y números, con un máximo de 10 caracteres.",
       },
       Phone: {
         regex: /^[0-9]{10}$/,
         message: "El número debe contener solo números, con 10 dígitos.",
       },
     };
+
+    // Ignorar validación si es opcional y está vacío
+    if (field === "Phone" && value.trim() === "") return true;
 
     if (validations[field] && !validations[field].regex.test(value)) {
       setErrors((prev) => ({ ...prev, [field]: validations[field].message }));

@@ -51,12 +51,6 @@ export const PerfilUsuario = () => {
             value="settings"
             label="Cuenta"
           />
-          <Tab
-            icon={<PersonIcon />}
-            iconPosition="start"
-            value="profile"
-            label="Perfil"
-          />
         </Tabs>
         <Box
           sx={{
@@ -72,7 +66,6 @@ export const PerfilUsuario = () => {
           }}
         >
           {tab === "settings" && <FormPerfilUsuario />}
-          {tab === "profile" && <FormCuentaUsuario/>}
         </Box>
       </Box>
     </Container>
