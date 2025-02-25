@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { passwordService } from "../../../../service/usuarioService";
 import { Box, Typography, TextField, Button, IconButton, Paper } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Spinner } from "react-bootstrap";
 
 export const FormResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -12,6 +13,7 @@ export const FormResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,12 +23,14 @@ export const FormResetPassword = () => {
     }
 
     try {
+      setLoading(true);
       await passwordService.resetPassword({ password, token });
       setMessage("¡Contraseña restablecida con éxito! Redirigiendo...");
-      setTimeout(() => navigate("/login"), 3000);
+      setTimeout(() => navigate("/auth/login"), 3000);
     } catch (error) {
       setMessage(error.message);
-    }
+
+    } finally{setLoading(false);}
   };
 
   return (
@@ -88,8 +92,14 @@ export const FormResetPassword = () => {
             }}
             required
           />
-          <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, background: "linear-gradient(135deg, #1e3c72, #2a5298)", color: "#fff", fontWeight: "600", transition: "all 0.3s ease", '&:hover': { transform: "translateY(-2px)", boxShadow: "0 6px 20px rgba(30, 60, 114, 0.4)" } }}>
-            Restablecer contraseña
+          <Button type="submit" variant="contained" fullWidth sx={{ mt: 2,borderRadius:"10px", background: "linear-gradient(135deg, #1e3c72, #2a5298)", color: "#fff", fontWeight: "600", padding: 1.7, transition: "all 0.3s ease", '&:hover': { transform: "translateY(-2px)", boxShadow: "0 6px 20px rgba(30, 60, 114, 0.4)" } }}
+          >
+            {loading ? (
+            <Spinner animation="border" size="sm" />
+          ) : (
+            "Restablecer contraseña"
+          )}
+  
           </Button>
         </form>
         {message && (
