@@ -9,8 +9,6 @@ import {
   useTheme,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-import PersonIcon from "@mui/icons-material/Person";
-import {FormCuentaUsuario} from "./formCuentaUsuario/FormCuentaUsuario";
 
 export const PerfilUsuario = () => {
   const [tab, setTab] = useState("settings");

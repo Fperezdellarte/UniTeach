@@ -9,7 +9,7 @@ export const usuarioService = {
     formDataToSend.append("Mail", formData.Mail);
     formDataToSend.append("Phone", formData.Phone);
     if (formData.Avatar_File) {
-      formDataToSend.append("file", formData.Avatar_File);
+      formDataToSend.append("Avatar_URL", formData.Avatar_File);
     }
 
     try {
