@@ -7,7 +7,6 @@
 }
 
 .perfil-mentor-avatar-nombre{
-    background-color: white;
     border-radius: 20px;
     margin: 20px;
     padding: 20px;
@@ -18,7 +17,6 @@
 }
 
 .perfil-mentor-info-descripcion{
-background-color: white;
     border-radius: 20px;
     margin: 20px;
     padding: 20px;
@@ -33,7 +31,6 @@ background-color: white;
     flex-direction: column;
 }
 .perfil-mentor-clases{
-    background-color: white;
         border-radius: 20px;
         margin: 20px;
         padding: 20px;
@@ -48,7 +45,6 @@ background-color: white;
     max-width: 100%;
 }
 .perfil-mentor-sede{
-    background-color: white;
         border-radius: 20px;
         margin: 20px;
         padding: 20px;
@@ -56,7 +52,6 @@ background-color: white;
         height: fit-content;
 }
 .perfil-mentor-buttons{
-    background-color: white;
         border-radius: 20px;
         margin: 20px;
         padding: 20px;

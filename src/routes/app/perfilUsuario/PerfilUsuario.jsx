@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { FormPerfilUsuario } from "./formPerfilUsuario/FormPerfilUsuario";
-import {
-  Container,
-  Tab,
-  Tabs,
-  Box,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Container, Tab, Tabs, Box, useMediaQuery } from "@mui/material";
+import { useTheme } from "../../../contexts/themeContext";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 export const PerfilUsuario = () => {
   const [tab, setTab] = useState("settings");
-  const theme = useTheme();
+  const { theme } = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleChange = (event, newValue) => {
@@ -61,6 +55,7 @@ export const PerfilUsuario = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: theme.palette.background.paper,
           }}
         >
           {tab === "settings" && <FormPerfilUsuario />}

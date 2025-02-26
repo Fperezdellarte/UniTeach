@@ -4,8 +4,9 @@ import { ClassesContext } from "../../../../contexts/classesContext";
 import "./mentoresRecientes.css";
 import { Carousel } from "react-bootstrap";
 import { mentorService } from "../../../../service/mentorService";
-import { useAuth } from "../../../../contexts/authContext"; // Importar useAuth
+import { useAuth } from "../../../../contexts/authContext";
 import { Skeleton } from "@mui/material";
+import { useTheme } from "../../../../contexts/themeContext";
 
 export const Mentores = () => {
   const { classesData, loading } = useContext(ClassesContext);
@@ -13,6 +14,7 @@ export const Mentores = () => {
   const [mentores, setMentores] = useState([]);
   const [loadingMentores, setLoadingMentores] = useState(true);
   const [error, setError] = useState(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchMentores = async () => {
@@ -100,7 +102,15 @@ export const Mentores = () => {
   }
   return (
     <div className="mentores-recientes-container-overflow">
-      <h2 className="mentores-recientes-title">Mentores recientes</h2>
+      <h2
+        className="mentores-recientes-title"
+        style={{
+          color: theme.palette.mode === "dark" ? "#ffffff" : "#2c3e50",
+          transition: "color 0.3s ease",
+        }}
+      >
+        Mentores recientes
+      </h2>
       <>
         <Carousel className="carousel-container-mentores">
           {mentores.map((mentor) => (

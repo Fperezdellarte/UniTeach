@@ -6,6 +6,7 @@ import { ProximaClasesColumns } from "./ProximaClasesColumns";
 import { MuiTableContainer } from "../../../../components/table/tableContainer";
 import { deleteIncripsion } from "../../../../service/clasessService";
 import { useAuth } from "../../../../contexts/authContext";
+import { useTheme } from "../../../../contexts/themeContext";
 
 export const TablaProximaClase = () => {
   const { classesData, loading, error, fetchClassesData } =
@@ -15,15 +16,15 @@ export const TablaProximaClase = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [loadingDelete, setLoadingDelete] = useState(false);
-
+  const { theme } = useTheme();
   const { token } = useAuth();
 
+  const titleColor = theme.palette.mode === "dark" ? "#ffffff" : "#2c3e50";
   const handleOpenDialog = (idInscription) => {
     setSelectedId(idInscription);
     setOpenDialog(true);
   };
   const columns = ProximaClasesColumns(handleOpenDialog);
-
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
@@ -59,10 +60,11 @@ export const TablaProximaClase = () => {
         customStyles={{
           container: { width: "100%" },
           title: {
-            color: "#2c3e50",
+            color: titleColor,
             fontSize: "1.5rem",
-            margin: " 0px",
+            margin: "0px",
             fontWeight: "bold",
+            transition: "color 0.3s ease",
           },
           header: { backgroundColor: "#3498db", color: "white" },
         }}

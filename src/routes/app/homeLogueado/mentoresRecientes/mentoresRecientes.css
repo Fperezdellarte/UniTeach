@@ -2,26 +2,19 @@
   overflow: auto;
   scrollbar-width: none;
   text-align: center;
-  /* -ms-overflow-style: none; */
 }
 
-/* WebKit (Chrome, Safari) */
-/* .mentores-recientes-container-overflow::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-} */
 .mentores-recientes-title{
   width: auto;
-  color: #2c3e50;
       font-size: 1.5rem;
       padding-top: 15px;
       margin: 0px;
       font-weight: bold;
 } 
-  /* Mostrar el carrusel en pantallas pequeñas */
+
   @media screen and (min-width: 687px) {
     .carousel-container-mentores{
-      display: none; /* Ocultar la grilla en pantallas pequeñas */
+      display: none; 
     }
   }
   @media screen and (max-width: 687px) {

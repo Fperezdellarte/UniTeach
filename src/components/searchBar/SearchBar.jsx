@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 import { useCallback } from "react";
 import { useBuscador } from "../../contexts/searchContext";
+import { useTheme } from "../../contexts/themeContext";
 
 export const SearchBar = () => {
   const { searchTerm, error, handleSearch, loading, dispatch } = useBuscador();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { theme } = useTheme();
 
   const handleKeyPress = useCallback(
     (e) => {
@@ -30,6 +32,7 @@ export const SearchBar = () => {
     },
     [searchTerm, handleSearch, user, navigate]
   );
+
   const handleChange = useCallback(
     (e) => {
       dispatch({ type: "SET_SEARCH_TERM", payload: e.target.value });
@@ -46,37 +49,64 @@ export const SearchBar = () => {
           onChange={handleChange}
           onKeyDown={handleKeyPress}
           sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            backgroundColor:
+              theme.palette.mode === "dark"
+                ? "rgba(0, 0, 0, 0.51)"
+                : "rgba(255, 255, 255, 0.8)",
+            color: theme.palette.text.primary,
             backdropFilter: "blur(10px)",
-            border: error ? "2px solid red" : "2px solid transparent",
+            border: error
+              ? `2px solid ${theme.palette.error.main}`
+              : "2px solid transparent",
             borderRadius: "25px",
             height: "50px",
             width: "100%",
             maxWidth: "500px",
             padding: "0 20px",
             margin: "10px auto",
-            transition: "all 0.3s ease-in-out",
+            transition: theme.transitions.create(["all"], {
+              duration: theme.transitions.duration.short,
+            }),
             boxShadow: error
-              ? "0px 0px 12px rgba(255, 0, 0, 0.6)"
+              ? `0px 0px 12px ${theme.palette.error.main}`
+              : theme.palette.mode === "dark"
+              ? "0px 4px 12px rgba(0, 0, 0, 0.4)"
               : "0px 4px 12px rgba(0, 0, 0, 0.2)",
             "&:focus-within": {
-              boxShadow: "0px 4px 16px rgba(0, 123, 255, 0.5)",
-              border: "2px solid #007bff",
+              boxShadow: `0px 4px 16px ${theme.palette.primary.main}40`,
+              border: `2px solid ${theme.palette.primary.main}`,
+            },
+            "& .MuiInputBase-input": {
+              "&::placeholder": {
+                color: error
+                  ? theme.palette.error.main
+                  : theme.palette.text.secondary,
+                opacity: 1,
+              },
             },
           }}
           endAdornment={
             loading ? (
-              <CircularProgress size={20} sx={{ ml: 1 }} />
+              <CircularProgress
+                size={20}
+                sx={{
+                  ml: 1,
+                  color: theme.palette.mode === "dark" ? "#fff" : "#000",
+                }}
+              />
             ) : (
               <SearchIcon
-                style={{
-                  color: "black",
+                sx={{
+                  color: theme.palette.text.secondary,
                   cursor: "pointer",
-                  transition: "color 0.2s",
+                  transition: theme.transitions.create(["color"], {
+                    duration: theme.transitions.duration.short,
+                  }),
+                  "&:hover": {
+                    color: theme.palette.primary.main,
+                  },
                 }}
                 onClick={handleSubmit}
-                onMouseEnter={(e) => (e.target.style.color = "#007bff")}
-                onMouseLeave={(e) => (e.target.style.color = "black")}
               />
             )
           }

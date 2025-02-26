@@ -4,12 +4,10 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f7ff;
   padding: 1rem;
 }
 
 .signup-card {
-  background-color: rgba(255, 255, 255, 0.95);
   padding: 2.5rem;
   border-radius: 1rem;
   box-shadow:  0 8px 32px rgba(0, 0, 0, 0.2),
@@ -79,7 +77,6 @@
   border-radius: 0.5rem;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background-color: white;
 }
 
 .signup-input:focus,

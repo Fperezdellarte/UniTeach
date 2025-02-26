@@ -7,6 +7,7 @@ import "./PerfilMentor.css";
 import LOGO from "../../../Assest/unsta.jpg";
 import LoadingSpinner from "../../../components/loading/LoadingSpinner";
 import { CarrouselOpiniones } from "./carruselOpiniones/CarrouselOpiniones";
+import { useTheme } from "../../../contexts/themeContext";
 import { Button } from "react-bootstrap";
 import { ModalClases } from "./modalClases/ModalClases";
 export const PerfilMentor = () => {
@@ -18,6 +19,7 @@ export const PerfilMentor = () => {
   const [clases, setClases] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchMentorData = async () => {
@@ -79,7 +81,11 @@ export const PerfilMentor = () => {
     <>
       <div className="Container-PerfilMentores">
         <div className="perfil-mentor-nombre-descripcion">
-          <div maxWidth="md" className="perfil-mentor-avatar-nombre">
+          <div
+            maxWidth="md"
+            className="perfil-mentor-avatar-nombre"
+            style={{ backgroundColor: theme.palette.background.paper }}
+          >
             <Avatar
               src={mentor.Avatar_URL}
               sx={{ height: 170, width: 170, margin: "5px" }}
@@ -104,7 +110,10 @@ export const PerfilMentor = () => {
               <h5>{mentor.University}</h5>
             </div>
           </div>
-          <div className="perfil-mentor-info-descripcion">
+          <div
+            className="perfil-mentor-info-descripcion"
+            style={{ backgroundColor: theme.palette.background.paper }}
+          >
             <Typography
               variant="h4"
               gutterBottom
@@ -118,7 +127,10 @@ export const PerfilMentor = () => {
           </div>
         </div>
         <div className="perfil-mentor-buttons-sede">
-          <div className="perfil-mentor-sede">
+          <div
+            className="perfil-mentor-sede"
+            style={{ backgroundColor: theme.palette.background.paper }}
+          >
             <Typography variant="h6" gutterBottom>
               Sede: Campus YB
             </Typography>
@@ -128,7 +140,10 @@ export const PerfilMentor = () => {
               style={{ width: "300px", borderRadius: "10px" }}
             />
           </div>
-          <div className="perfil-mentor-buttons">
+          <div
+            className="perfil-mentor-buttons"
+            style={{ backgroundColor: theme.palette.background.paper }}
+          >
             <div className="perfil-mentor-info-contanto">
               <Button onClick={handleOpenModal}>Ver Clases Disponibles</Button>
               <Button
@@ -161,7 +176,10 @@ export const PerfilMentor = () => {
           <div className="perfil-mentor-opiniones">
             <CarrouselOpiniones opiniones={mentor.Rating} />
           </div>
-          <div className="perfil-mentor-clases">
+          <div
+            className="perfil-mentor-clases"
+            style={{ backgroundColor: theme.palette.background.paper }}
+          >
             <Typography variant="h7" gutterBottom>
               Clases Finalizadas:
             </Typography>

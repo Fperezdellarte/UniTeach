@@ -14,15 +14,12 @@
         align-items: center;
         justify-content: center;
         min-height: 80vh;
-        background: linear-gradient(180deg, #ededed, #6c7075);
-        color: #fff;
         font-family: 'Arial', sans-serif;
         padding: 1.5rem;
         text-align: center;
     }
 
 .email-form-wrapper {
-    background: rgba(255, 255, 255, 0.95);
     width: 100%;
     max-width: 440px;
     padding: 2.5rem;
@@ -38,7 +35,7 @@
 }
 
 .email-form-title {
-    color: #1a1a1a;
+    color: #1e3a8a;
     font-size: 1.75rem;
     font-weight: 600;
     text-align: center;
@@ -125,7 +122,6 @@
     transform: translate(-50%, -50%);
     max-width: 400px;
     width: 90%;
-    background: white;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
@@ -139,7 +135,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgb(0, 0, 0);
     z-index: 999;
 }
 

@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import "./landingPage.css";
 import CarouselComponent from "./CarouselUniteach/CarouselComponent";
 import MarqueeCarousel from "./marqueeCarousel/MarqueeCarousel";
-
+import { useTheme } from "../../contexts/themeContext";
 const LandingPage = () => {
+  const { darkMode } = useTheme();
   useEffect(() => {
     const cardGroup = document.querySelector(".uni-teach-card-group");
     const observer = new IntersectionObserver(
@@ -44,9 +45,12 @@ const LandingPage = () => {
 
         {/* Formulario de Suscripción */}
         <section className="subscription-section">
-          <form className="form">
+          <form className="form" style={{ color: darkMode ? "#6ea8eb" : "" }}>
             <span className="title">Suscríbete a nuestro newsletter.</span>
-            <p className="description">
+            <p
+              className="description"
+              style={{ color: darkMode ? "#fff" : "" }}
+            >
               Mantente al día con nuestras últimas actualizaciones, noticias.
             </p>
             <div>
@@ -55,6 +59,10 @@ const LandingPage = () => {
                 type="email"
                 name="email"
                 id="email-address"
+                style={{
+                  backgroundColor: darkMode ? "#494b4d" : "",
+                  color: darkMode ? "#fff" : "",
+                }}
               />
               <button type="submit">Suscribirse</button>
             </div>

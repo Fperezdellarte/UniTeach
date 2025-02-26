@@ -3,12 +3,12 @@ import NavbarMain from "../components/navbar/Navbar";
 import Footer from "../components/footer/footer";
 
 const PublicLayout = () => (
-  <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", backgroundColor:"white" }}>
-     <NavbarMain />
+  <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <NavbarMain />
     <main className="flex-1">
       <Outlet />
     </main>
-      <Footer />
+    <Footer />
   </div>
 );
 

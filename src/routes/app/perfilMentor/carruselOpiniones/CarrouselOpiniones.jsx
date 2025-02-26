@@ -7,12 +7,12 @@ import {
   Box,
   Rating,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { useTheme } from "../../../../contexts/themeContext";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
 export const CarrouselOpiniones = ({ opiniones }) => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const intervalRef = useRef(null);
 
@@ -55,12 +55,12 @@ export const CarrouselOpiniones = ({ opiniones }) => {
     return (
       <div
         style={{
-          backgroundColor: "white",
           borderRadius: "20px",
           margin: "20px",
           padding: "20px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
           display: "flex",
+          backgroundColor: theme.palette.background.paper,
         }}
       >
         No hay opiniones disponibles.
@@ -76,7 +76,6 @@ export const CarrouselOpiniones = ({ opiniones }) => {
         maxWidth: 400,
         flexGrow: 1,
         mx: "auto",
-        backgroundColor: "white",
         borderRadius: "20px",
         margin: "20px",
         padding: "20px",
@@ -84,6 +83,7 @@ export const CarrouselOpiniones = ({ opiniones }) => {
         display: "flex",
         flexDirection: "column",
         Width: "350px",
+        backgroundColor: theme.palette.background.paper,
       }}
     >
       <Paper
@@ -94,7 +94,7 @@ export const CarrouselOpiniones = ({ opiniones }) => {
           alignItems: "center",
           height: 50,
           pl: 2,
-          bgcolor: "background.default",
+          bgcolor: "background.paper",
         }}
       >
         <Typography variant="h6">{currentOpinion.studentName}</Typography>
@@ -106,7 +106,7 @@ export const CarrouselOpiniones = ({ opiniones }) => {
           flexDirection: "column",
           justifyContent: "space-between",
           p: 2,
-          bgcolor: "background.default",
+          bgcolor: "background.paper",
         }}
       >
         <Box>
@@ -125,7 +125,12 @@ export const CarrouselOpiniones = ({ opiniones }) => {
           steps={opiniones.length}
           position="static"
           activeStep={activeIndex}
-          sx={{ maxWidth: 400, minWidth: 300, flexGrow: 1 }}
+          sx={{
+            maxWidth: 400,
+            minWidth: 300,
+            flexGrow: 1,
+            backgroundColor: theme.palette.background.paper,
+          }}
           nextButton={
             <IconButton
               size="small"

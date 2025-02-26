@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { MentorCardsList } from "./mentorCardList/MentorCardList";
 import "./Results.css";
 import { DrawerFormFilter } from "./filterForm/DrawerFormFilter";
+import { useTheme } from "../../../contexts/themeContext";
 import { useBuscador } from "../../../contexts/searchContext";
 import { CircularProgress, Typography } from "@mui/material";
 
 export const Results = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
   const { results, otherResults, loading, error } = useBuscador();
   const [filteredResults, setFilteredResults] = useState([]);
   const [filteredOtherResults, setFilteredOtherResults] = useState([]);
@@ -51,7 +53,10 @@ export const Results = () => {
   }
 
   return (
-    <div className="container-results">
+    <div
+      className="container-results"
+      style={{ backgroundColor: theme.palette.background.paper }}
+    >
       <h2 className="result-title">Resultados de la búsqueda</h2>
       <div className="button-filter">
         <DrawerFormFilter

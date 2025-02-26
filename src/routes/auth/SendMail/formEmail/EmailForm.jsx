@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import "./EmailForm.css";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../../../../contexts/themeContext";
 
 Modal.setAppElement("#root");
 
@@ -13,6 +14,7 @@ export const EmailForm = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { darkMode, theme } = useTheme();
   const [modalContent, setModalContent] = useState({
     title: "",
     message: "",
@@ -50,15 +52,41 @@ export const EmailForm = () => {
   };
   return (
     <div className="email-form-container">
-      <Form onSubmit={handleSubmit} className="email-form-wrapper">
-        <h2 className="email-form-title">Recuperar contraseña</h2>
-        <p className="email-form-subtitle">
+      <Form
+        onSubmit={handleSubmit}
+        className="email-form-wrapper"
+        style={{
+          background: theme.palette.background.paper,
+          color: darkMode ? theme.palette.text.primary : "",
+        }}
+      >
+        <h2
+          className="email-form-title"
+          style={{
+            color: darkMode ? theme.palette.text.primary : "",
+          }}
+        >
+          Recuperar contraseña
+        </h2>
+        <p
+          className="email-form-subtitle"
+          style={{
+            color: darkMode ? theme.palette.text.primary : "",
+          }}
+        >
           Ingresa tu correo electrónico y te enviaremos un enlace para
           restablecer tu contraseña.
         </p>
 
         <div className="email-form-input-group">
-          <label className="email-form-label">Correo electrónico</label>
+          <label
+            className="email-form-label"
+            style={{
+              color: darkMode ? theme.palette.text.primary : "",
+            }}
+          >
+            Correo electrónico
+          </label>
           <input
             type="email"
             value={email}
@@ -67,6 +95,10 @@ export const EmailForm = () => {
             required
             disabled={isLoading}
             className="email-form-input"
+            style={{
+              background: theme.palette.background.paper,
+              color: darkMode ? theme.palette.text.primary : "",
+            }}
           />
         </div>
 
@@ -89,6 +121,9 @@ export const EmailForm = () => {
         className="email-form-modal"
         overlayClassName="email-form-modal-overlay"
         closeTimeoutMS={300}
+        style={{
+          backgroundColor: theme.palette.background.paper,
+        }}
       >
         <div className="modal-icon">
           {modalContent.type === "success" ? (

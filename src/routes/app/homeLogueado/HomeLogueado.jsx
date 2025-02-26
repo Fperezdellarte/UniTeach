@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { useTheme, useMediaQuery, Box } from "@mui/material";
+import { useMediaQuery, Box } from "@mui/material";
+import { useTheme } from "../../../contexts/themeContext";
 import { TablaProximaClase } from "./tableProximaClases/TablaProximaClase";
 import { TablaClasesRecientes } from "./tableClasesRecientes/TablaClasesRecientes";
 import { Mentores } from "./mentoresRecientes/MentoresRecientes";
@@ -8,7 +9,7 @@ import LoadingSpinner from "../../../components/loading/LoadingSpinner";
 import { HomeNewUser } from "./nuevoUsuario/HomeNewUser";
 
 export const HomeLogueado = () => {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isMedium = useMediaQuery(theme.breakpoints.down("md"));
   const { classesData, loading, error } = useContext(ClassesContext);
@@ -65,10 +66,10 @@ export const HomeLogueado = () => {
           >
             <Box
               sx={{
-                backgroundColor: "white",
                 padding: "15px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
                 borderRadius: "10px",
+                backgroundColor: theme.palette.background.paper,
                 flexGrow: 1,
                 maxWidth: isMobile ? "100%" : "calc(100% - 30% - 20px)",
                 boxSizing: "border-box",
@@ -78,12 +79,12 @@ export const HomeLogueado = () => {
             </Box>
             <Box
               sx={{
-                backgroundColor: "white",
                 padding: "15px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
                 borderRadius: "10px",
                 width: isMobile ? "100%" : isMedium ? "100%" : "450px",
                 maxWidth: "100%",
+                backgroundColor: theme.palette.background.paper,
                 flexShrink: 0,
                 boxSizing: "border-box",
               }}
@@ -93,12 +94,12 @@ export const HomeLogueado = () => {
           </div>
           <Box
             sx={{
-              backgroundColor: "white",
               display: "flex",
               boxSizing: "border-box",
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.38)",
               borderRadius: "10px",
               width: "100%",
+              backgroundColor: theme.palette.background.paper,
               justifyContent: "center",
             }}
           >

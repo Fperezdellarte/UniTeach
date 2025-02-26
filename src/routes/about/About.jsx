@@ -1,5 +1,6 @@
 import "./about.css";
 import React, { useState } from "react";
+import { useTheme } from "../../contexts/themeContext";
 
 export const About = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +9,7 @@ export const About = () => {
     phone: "",
     message: "",
   });
-
+  const { darkMode, theme } = useTheme();
   const handleFeedbackClick = () => {
     const recipient = "uniteach24@gmail.com";
     const subject = encodeURIComponent("Comentario sobre Uniteach");
@@ -39,22 +40,44 @@ export const About = () => {
               >
                 <path
                   d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v2h-2zm0 4h2v6h-2z"
-                  fill="currentColor"
+                  fill={theme.palette.primary.main}
                 />
               </svg>
             </span>
-            <h2>Acerca de Nosotros</h2>
+            <h2 style={{ color: darkMode ? theme.palette.text.primary : "" }}>
+              Acerca de Nosotros
+            </h2>
           </div>
-          <div className="glass-card">
-            <p className="featured-text">
-              Somos <span className="highlight">Uniteach</span>
+          <div
+            className="glass-card"
+            style={{ background: theme.palette.background.paper }}
+          >
+            <p
+              className="featured-text"
+              style={{ color: darkMode ? theme.palette.text.primary : "" }}
+            >
+              Somos{" "}
+              <span
+                className="highlight"
+                style={{ color: darkMode ? theme.palette.text.primary : "" }}
+              >
+                Uniteach
+              </span>
             </p>
-            <p className="description">
+            <p
+              className="description"
+              style={{ color: darkMode ? theme.palette.text.primary : "" }}
+            >
               Una plataforma innovadora creada por estudiantes para estudiantes,
               facilitando conexiones significativas en el ámbito académico.
             </p>
-            <div className="mission-box">
-              <h3>Nuestra Misión</h3>
+            <div
+              className="mission-box"
+              style={{ color: darkMode ? theme.palette.text.primary : "" }}
+            >
+              <h3 style={{ color: darkMode ? theme.palette.text.primary : "" }}>
+                Nuestra Misión
+              </h3>
               <p>
                 Empoderar a los estudiantes con herramientas y conexiones que
                 revolucionen el aprendizaje colaborativo y la resolución de
@@ -77,14 +100,22 @@ export const About = () => {
               >
                 <path
                   d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"
-                  fill="currentColor"
+                  fill={theme.palette.primary.main}
                 />
               </svg>
             </span>
-            <h2>Contacto</h2>
+            <h2 style={{ color: darkMode ? theme.palette.text.primary : "" }}>
+              Contacto
+            </h2>
           </div>
-          <div className="glass-card">
-            <p className="contact-intro">
+          <div
+            className="glass-card"
+            style={{ background: theme.palette.background.paper }}
+          >
+            <p
+              className="contact-intro"
+              style={{ color: darkMode ? theme.palette.text.primary : "" }}
+            >
               ¿Tienes alguna pregunta o comentario?
             </p>
             <form className="modern-form">

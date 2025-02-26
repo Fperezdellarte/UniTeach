@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { passwordService } from "../../../../service/usuarioService";
-import { Box, Typography, TextField, Button, IconButton, Paper } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  IconButton,
+  Paper,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Spinner } from "react-bootstrap";
+import { useTheme } from "../../../../contexts/themeContext";
 
 export const FormResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -14,6 +22,7 @@ export const FormResetPassword = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { darkMode, theme } = useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,12 +38,19 @@ export const FormResetPassword = () => {
       setTimeout(() => navigate("/auth/login"), 3000);
     } catch (error) {
       setMessage(error.message);
-
-    } finally{setLoading(false);}
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="center" minHeight="75vh" sx={{ backgroundColor: "#f0f7ff", p: 2 }}>
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="75vh"
+      sx={{ p: 2 }}
+    >
       <Paper
         elevation={8}
         sx={{
@@ -45,16 +61,26 @@ export const FormResetPassword = () => {
           textAlign: "center",
           backdropFilter: "blur(10px)",
           transition: "transform 0.3s ease, box-shadow 0.3s ease",
-          '&:hover': {
+          "&:hover": {
             transform: "translateY(-5px)",
-            boxShadow: "0 12px 40px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.15)"
-          }
+            boxShadow:
+              "0 12px 40px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.15)",
+          },
         }}
       >
-        <Typography variant="h5" fontWeight="bold" color="#1e3c72" gutterBottom>
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          color={darkMode ? theme.palette.text.primary : "#1e3c72"}
+          gutterBottom
+        >
           Restablecer tu contraseña
         </Typography>
-        <Typography variant="body1" color="#333" gutterBottom>
+        <Typography
+          variant="body1"
+          color={darkMode ? theme.palette.text.primary : "#333"}
+          gutterBottom
+        >
           Por favor, ingresa tu nueva contraseña para continuar.
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -71,7 +97,7 @@ export const FormResetPassword = () => {
                 <IconButton onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
-              )
+              ),
             }}
             required
           />
@@ -85,25 +111,44 @@ export const FormResetPassword = () => {
             variant="outlined"
             InputProps={{
               endAdornment: (
-                <IconButton onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                <IconButton
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
                   {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
-              )
+              ),
             }}
             required
           />
-          <Button type="submit" variant="contained" fullWidth sx={{ mt: 2,borderRadius:"10px", background: "linear-gradient(135deg, #1e3c72, #2a5298)", color: "#fff", fontWeight: "600", padding: 1.7, transition: "all 0.3s ease", '&:hover': { transform: "translateY(-2px)", boxShadow: "0 6px 20px rgba(30, 60, 114, 0.4)" } }}
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{
+              mt: 2,
+              borderRadius: "10px",
+              background: "linear-gradient(135deg, #1e3c72, #2a5298)",
+              color: "#fff",
+              fontWeight: "600",
+              padding: 1.7,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                transform: "translateY(-2px)",
+                boxShadow: "0 6px 20px rgba(30, 60, 114, 0.4)",
+              },
+            }}
           >
             {loading ? (
-            <Spinner animation="border" size="sm" />
-          ) : (
-            "Restablecer contraseña"
-          )}
-  
+              <Spinner animation="border" size="sm" />
+            ) : (
+              "Restablecer contraseña"
+            )}
           </Button>
         </form>
         {message && (
-          <Typography sx={{ mt: 2, color: message.includes("éxito") ? "green" : "red" }}>
+          <Typography
+            sx={{ mt: 2, color: message.includes("éxito") ? "green" : "red" }}
+          >
             {message}
           </Typography>
         )}

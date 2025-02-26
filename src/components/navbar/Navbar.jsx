@@ -7,7 +7,6 @@ import {
   IconButton,
   Box,
   Button,
-  Switch,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -19,8 +18,7 @@ import { SearchBar } from "../searchBar/SearchBar";
 import UserDropdown from "./UserDropdown";
 import { menuItems } from "../../config/navbarConfig";
 import IconMapper from "./IconMapper";
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { SwitchTheme } from "./SwitchTheme";
 
 const NavbarMain = ({ onToggleTheme }) => {
   const theme = useTheme();
@@ -119,7 +117,6 @@ const NavbarMain = ({ onToggleTheme }) => {
               marginLeft: "auto",
             }}
           >
-           
             {isAuthenticated && (
               <>
                 {isMobile ? (
@@ -134,7 +131,7 @@ const NavbarMain = ({ onToggleTheme }) => {
                 )}
               </>
             )}
-            
+
             <IconButton
               color="inherit"
               onClick={() => setOpenMenu(true)}
@@ -146,30 +143,16 @@ const NavbarMain = ({ onToggleTheme }) => {
               <HiOutlineMenu />
             </IconButton>
           </Box>
-           {/* Theme Switch - Only visible on desktop */}
-           <Box
-              sx={{
-                display: { xs: "none", md: "flex" },
-                alignItems: "center",
-                mr: 1,
-              }}
-            >
-              <LightModeIcon sx={{ color: "white", fontSize: 20 }} />
-              <Switch
-                checked={isDarkMode}
-                onChange={handleThemeChange}
-                sx={{
-                  '& .MuiSwitch-switchBase.Mui-checked': {
-                    color: '#fff',
-                  },
-                  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                    backgroundColor: '#fff',
-                  },
-                }}
-              />
-              <DarkModeIcon sx={{ color: "white", fontSize: 20 }} />
-            </Box>
-
+          {/* Theme Switch - Only visible on desktop */}
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+              mr: 1,
+            }}
+          >
+            <SwitchTheme />
+          </Box>
         </Toolbar>
       </Container>
 

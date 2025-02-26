@@ -4,13 +4,18 @@ import "./formularioSignUp.css";
 import { registerUser } from "../../../../service/authService";
 import { CircularProgress } from "@mui/material";
 import { useCareers } from "../../../../hooks/useCareers";
+import { useTheme } from "../../../../contexts/themeContext";
 export const FormularioSignUp = ({ setShowAlert }) => {
   const [capsLockOn, setCapsLockOn] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { careers, loading: loadingCareers, error: errorCareers } = useCareers();
-
+  const {
+    careers,
+    loading: loadingCareers,
+    error: errorCareers,
+  } = useCareers();
+  const { darkMode, theme } = useTheme();
   const [formData, setFormData] = useState({
     Username: "",
     Password: "",
@@ -54,7 +59,10 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
     if (field === "Password" && value !== formData.ConfirmPassword) {
-      setErrors((prev) => ({ ...prev, ConfirmPassword: "Las contraseñas no coinciden." }));
+      setErrors((prev) => ({
+        ...prev,
+        ConfirmPassword: "Las contraseñas no coinciden.",
+      }));
     }
   };
 
@@ -70,11 +78,13 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     const validations = {
       Username: {
         regex: /^[a-zA-Z0-9]+$/,
-        message: "El nombre de usuario no puede contener caracteres especiales.",
+        message:
+          "El nombre de usuario no puede contener caracteres especiales.",
       },
       Password: {
         regex: /^(?=.*[A-Z]).{8,25}$/,
-        message: "La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.",
+        message:
+          "La contraseña debe contener al menos una letra mayúscula y tener entre 8 y 25 caracteres.",
       },
       ConfirmPassword: {
         regex: new RegExp(`^${formData.Password}$`),
@@ -86,7 +96,8 @@ export const FormularioSignUp = ({ setShowAlert }) => {
       },
       DNI: {
         regex: /^[0-9]{6,8}$/,
-        message: "El DNI debe contener solo números y tener entre 6 y 8 dígitos.",
+        message:
+          "El DNI debe contener solo números y tener entre 6 y 8 dígitos.",
       },
       Legajo: {
         regex: /^[a-zA-Z0-9]{1,10}$/,
@@ -108,7 +119,6 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     }
     return true;
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -134,14 +144,31 @@ export const FormularioSignUp = ({ setShowAlert }) => {
     setLoading(false);
   };
 
-  const renderField = (id, label, type = "text", placeholder = "", options = null) => {
+  const renderField = (
+    id,
+    label,
+    type = "text",
+    placeholder = "",
+    options = null
+  ) => {
     const value = formData[id];
     const error = errors[id];
     const isFocused = focusedField === id;
 
     return (
-      <div className={`signup-group ${isFocused ? "focused" : ""} ${error ? "error" : ""}`}>
-        <label htmlFor={id} className="signup-label">
+      <div
+        className={`signup-group ${isFocused ? "focused" : ""} ${
+          error ? "error" : ""
+        }`}
+      >
+        <label
+          htmlFor={id}
+          className="signup-label"
+          style={{
+            backgroundColor: darkMode ? theme.palette.background.paper : "",
+            color: darkMode ? theme.palette.text.primary : "",
+          }}
+        >
           {label}
           {id === "Password" && capsLockOn && focusedField === "Password" && (
             <span className="signup-warning">⚠️ Bloq Mayús activado</span>
@@ -156,6 +183,10 @@ export const FormularioSignUp = ({ setShowAlert }) => {
             onFocus={() => handleFocus(id)}
             onBlur={handleBlur}
             required
+            style={{
+              backgroundColor: darkMode ? theme.palette.background.paper : "",
+              color: darkMode ? theme.palette.text.primary : "",
+            }}
           >
             <option value="">{placeholder || "Elige una opción"}</option>
             {options.map(([value, label]) => (
@@ -176,6 +207,10 @@ export const FormularioSignUp = ({ setShowAlert }) => {
               onBlur={handleBlur}
               placeholder={placeholder}
               required={id !== "Phone"}
+              style={{
+                backgroundColor: darkMode ? theme.palette.background.paper : "",
+                color: darkMode ? theme.palette.text.primary : "",
+              }}
             />
             <div className="signup-focus-effect"></div>
           </div>
@@ -187,20 +222,47 @@ export const FormularioSignUp = ({ setShowAlert }) => {
 
   return (
     <div className="signup-container">
-      <div className="signup-card">
-        <h1 className="signup-title">Registro de Usuario</h1>
+      <div
+        className="signup-card"
+        style={{ backgroundColor: theme.palette.background.paper }}
+      >
+        <h1
+          className="signup-title"
+          style={{ color: darkMode ? theme.palette.text.primary : "" }}
+        >
+          Registro de Usuario
+        </h1>
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="signup-column">
-            {renderField("Username", "Nombre de usuario", "text", "Ej: Juanceto01")}
-            {renderField("Password", "Contraseña", "password", "Mín. 8 caracteres, 1 mayúscula")}
-            {renderField("ConfirmPassword", "Confirmar Contraseña", "password", "Repite tu contraseña")}
+            {renderField(
+              "Username",
+              "Nombre de usuario",
+              "text",
+              "Ej: Juanceto01"
+            )}
+            {renderField(
+              "Password",
+              "Contraseña",
+              "password",
+              "Mín. 8 caracteres, 1 mayúscula"
+            )}
+            {renderField(
+              "ConfirmPassword",
+              "Confirmar Contraseña",
+              "password",
+              "Repite tu contraseña"
+            )}
             {renderField("Name", "Nombre", "text", "Ej: Alvaro Reina")}
-            {renderField("Mail", "Correo Electrónico", "email", "ejemplo@gmail.com")}
+            {renderField(
+              "Mail",
+              "Correo Electrónico",
+              "email",
+              "ejemplo@gmail.com"
+            )}
             {renderField("Phone", "Teléfono", "tel", "Ej: 3819877663")}
           </div>
           <div className="signup-column">
-          {
-            loadingCareers ? (
+            {loadingCareers ? (
               <p>Cargando carreras...</p>
             ) : errorCareers ? (
               <p>Error al cargar carreras</p>
@@ -214,18 +276,29 @@ export const FormularioSignUp = ({ setShowAlert }) => {
               )
             ) : (
               <p>No hay carreras disponibles</p>
-            )
-          }
-            {renderField("University", "Universidad", "select", "Elige una opción", [
-              ["UNT", "UNT"],
-              ["UNSTA", "UNSTA"],
-              ["UTN", "UTN"],
-            ])}
-            {renderField("TypeOfUser", "Tipo de Usuario", "select", "Elige una opción", [
-              ["ALUMNO", "Alumno"],
-              ["MENTOR", "Mentor"],
-              ["AMBOS", "Ambos"],
-            ])}
+            )}
+            {renderField(
+              "University",
+              "Universidad",
+              "select",
+              "Elige una opción",
+              [
+                ["UNT", "UNT"],
+                ["UNSTA", "UNSTA"],
+                ["UTN", "UTN"],
+              ]
+            )}
+            {renderField(
+              "TypeOfUser",
+              "Tipo de Usuario",
+              "select",
+              "Elige una opción",
+              [
+                ["ALUMNO", "Alumno"],
+                ["MENTOR", "Mentor"],
+                ["AMBOS", "Ambos"],
+              ]
+            )}
             {renderField("DNI", "DNI", "text", "Máx. 8 dígitos")}
             {renderField("Legajo", "Legajo", "text", "Máx. 8 caracteres")}
           </div>

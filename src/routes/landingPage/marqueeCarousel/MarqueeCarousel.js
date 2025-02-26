@@ -1,5 +1,6 @@
 import React from "react";
 import "./MarqueeCarousel.css";
+import { useTheme } from "../../../contexts/themeContext";
 
 const reviews = [
   {
@@ -74,11 +75,17 @@ const reviews = [
 ];
 
 const ReviewCard = ({ img, name, username, body }) => {
+  const { darkMode } = useTheme();
   return (
-    <div className="marquee-card">
+    <div
+      className="marquee-card"
+      style={{
+        background: darkMode ? "#333" : "",
+      }}
+    >
       <img src={img} alt={name} width="80" height="80" />
       <h4>{name}</h4>
-      <p>{body}</p>
+      <p style={{ color: darkMode ? "#fff" : "" }}>{body}</p>
     </div>
   );
 };

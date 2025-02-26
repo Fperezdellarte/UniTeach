@@ -5,10 +5,10 @@
   justify-content: center;
   min-height: 75vh;
   padding: 20px;
-  color: #ffffff;
+
   box-sizing: border-box;
   background-size: 400% 400%;
-  background-color: #f0f7ff;
+
   animation: loginGradientBG 15s ease infinite;
 }
 

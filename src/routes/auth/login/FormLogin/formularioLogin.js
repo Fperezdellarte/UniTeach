@@ -4,6 +4,7 @@ import "./formularioLogin.css";
 import { loginUser } from "../../../../service/authService";
 import showIcon from "../../../../Assest/show.png";
 import hideIcon from "../../../../Assest/hide.png";
+import { useTheme } from "../../../../contexts/themeContext";
 
 export const FormularioLogin = ({ onLoginSuccess }) => {
   const [Username, setUsername] = useState("");
@@ -16,7 +17,12 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
   const [capsLockOn, setCapsLockOn] = useState(false);
   const [shake, setShake] = useState(false);
   const goTo = useNavigate();
-
+  const { darkMode, theme } = useTheme();
+  /**
+   * Event handler for the keyup event. It checks if the Caps Lock key is
+   * pressed and updates the state accordingly.
+   * @param {KeyboardEvent} event The keyboard event.
+   */
   const handleKeyUp = (event) => {
     setCapsLockOn(event.getModifierState("CapsLock"));
   };
@@ -27,7 +33,8 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
 
   const validateInputs = () => {
     const errors = {};
-    if (!Username.trim()) errors.Username = "El nombre de usuario es obligatorio.";
+    if (!Username.trim())
+      errors.Username = "El nombre de usuario es obligatorio.";
     if (!Password.trim()) errors.Password = "La contraseña es obligatoria.";
     setInputErrors(errors);
 
@@ -63,8 +70,16 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
 
   return (
     <div className="auth-login-container">
-      <div className={`auth-login-box ${shake ? "shake" : ""}`}>
-        <h2 className="auth-login-title">Iniciar sesión</h2>
+      <div
+        className={`auth-login-box ${shake ? "shake" : ""}`}
+        style={{ backgroundColor: theme.palette.background.paper }}
+      >
+        <h2
+          className="auth-login-title"
+          style={{ color: darkMode ? theme.palette.text.primary : "" }}
+        >
+          Iniciar sesión
+        </h2>
         {!!errorResponse && (
           <div className="auth-error-message">{errorResponse}</div>
         )}
@@ -72,13 +87,27 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
           <div className="auth-input-wrapper">
             <input
               placeholder=" "
-              className={`auth-input-field ${inputErrors.Username ? "input-error" : ""}`}
+              className={`auth-input-field ${
+                inputErrors.Username ? "input-error" : ""
+              }`}
               type="text"
               value={Username}
               onChange={(e) => setUsername(e.target.value)}
               disabled={isLoading}
+              style={{
+                background: theme.palette.background.paper,
+                color: darkMode ? theme.palette.text.primary : "",
+              }}
             />
-            <label className="auth-input-label">Nombre de usuario</label>
+            <label
+              className="auth-input-label"
+              style={{
+                background: theme.palette.background.paper,
+                color: darkMode ? theme.palette.text.primary : "",
+              }}
+            >
+              Nombre de usuario
+            </label>
             {inputErrors.Username && (
               <div className="error-message">{inputErrors.Username}</div>
             )}
@@ -87,15 +116,29 @@ export const FormularioLogin = ({ onLoginSuccess }) => {
           <div className="auth-input-wrapper">
             <input
               type={showPassword ? "text" : "password"}
-              className={`auth-input-field ${inputErrors.Password ? "input-error" : ""}`}
+              className={`auth-input-field ${
+                inputErrors.Password ? "input-error" : ""
+              }`}
               placeholder=" "
               value={Password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyUp={handleKeyUp}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
+              style={{
+                background: theme.palette.background.paper,
+                color: darkMode ? theme.palette.text.primary : "",
+              }}
             />
-            <label className="auth-input-label">Contraseña</label>
+            <label
+              className="auth-input-label"
+              style={{
+                background: theme.palette.background.paper,
+                color: darkMode ? theme.palette.text.primary : "",
+              }}
+            >
+              Contraseña
+            </label>
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
