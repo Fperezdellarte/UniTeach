@@ -6,7 +6,6 @@ import {
   Typography,
   styled,
   Button,
-  Switch,
   Slide,
   useTheme,
   useMediaQuery,
