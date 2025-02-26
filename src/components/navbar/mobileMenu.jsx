@@ -11,10 +11,12 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useAuth } from "../../contexts/authContext";
 import { SearchBar } from "../searchBar/SearchBar";
+import { SwitchTheme } from "./SwitchTheme";
+import IconMapper from "./IconMapper";
 
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
   "& .MuiBackdrop-root": {
@@ -58,13 +60,21 @@ const ThemeToggle = styled(Box)(({ theme }) => ({
   margin: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
 }));
-
-export const MobileMenu = ({ open, onClose, darkMode, onDarkModeToggle }) => {
+export const MobileMenu = ({
+  open,
+  onClose,
+  darkMode,
+  onDarkModeToggle,
+  menuItems,
+}) => {
   const { isAuthenticated, handleLogout, user } = useAuth();
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const filteredMenuItems = menuItems.filter(
+    (item) => item.text !== "Iniciar sesión" && item.text !== "Registro"
+  );
   return (
     <StyledDrawer
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -146,10 +156,39 @@ export const MobileMenu = ({ open, onClose, darkMode, onDarkModeToggle }) => {
           <SearchBar />
         </div>
       )}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {filteredMenuItems.map((navItem) => (
+          <Button
+            key={navItem.text}
+            component={Link}
+            to={navItem.link}
+            startIcon={<IconMapper name={navItem.icon} />}
+            sx={{
+              color: "white",
+              textTransform: "none",
+              fontSize: "15px",
+              fontWeight: "500",
+              padding: "8px 16px",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.14)",
+              },
+              "& .MuiButton-startIcon": {
+                color: "white",
+                marginRight: "5px",
+                "& svg": {
+                  fontSize: "29.5px",
+                },
+              },
+            }}
+          >
+            {navItem.text}
+          </Button>
+        ))}
+      </div>
 
       <Divider sx={{ mt: "auto", borderColor: "rgba(7, 7, 7, 0.04)" }} />
 
-      {/* Theme Toggle - Only visible on mobile */}
       {isMobile && (
         <ThemeToggle>
           <Box
@@ -160,24 +199,7 @@ export const MobileMenu = ({ open, onClose, darkMode, onDarkModeToggle }) => {
               justifyContent: "space-between",
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <DarkModeIcon sx={{ color: "white" }} />
-              <Typography variant="body2" sx={{ color: "white" }}>
-                Modo oscuro
-              </Typography>
-            </Box>
-            <Switch
-              checked={darkMode}
-              onChange={onDarkModeToggle}
-              sx={{
-                "& .MuiSwitch-switchBase.Mui-checked": {
-                  color: "#fff",
-                },
-                "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                  backgroundColor: "#fff",
-                },
-              }}
-            />
+            <SwitchTheme />
           </Box>
         </ThemeToggle>
       )}

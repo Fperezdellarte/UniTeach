@@ -30,7 +30,6 @@
   width: 100%;
   text-align: center;
   box-sizing: border-box;
-  backdrop-filter: blur(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

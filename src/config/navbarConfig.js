@@ -9,7 +9,7 @@ export const menuItems = {
   ],
   private: [
     { text: "Mi Tablero", icon: "DashboardIcon", link: "/app/home" },
-    // { text: "Perfil", icon: "PersonIcon", link: "/app/perfil" },
+    { text: "Perfil", icon: "PersonIcon", link: "/app/perfil" },
   ],
 };
 

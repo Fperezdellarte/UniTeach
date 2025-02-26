@@ -27,9 +27,13 @@ const NavbarMain = ({ onToggleTheme }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const { isAuthenticated } = useAuth();
 
-  const currentMenuItems = isAuthenticated
+  const allMenuItems = isAuthenticated
     ? [...menuItems.common, ...menuItems.private]
     : [...menuItems.common, ...menuItems.auth];
+
+  let currentMenuItems = isMobile
+    ? allMenuItems
+    : allMenuItems.filter((item) => item.text !== "Perfil");
 
   const handleThemeChange = (event) => {
     setIsDarkMode(event.target.checked);
@@ -117,18 +121,10 @@ const NavbarMain = ({ onToggleTheme }) => {
               marginLeft: "auto",
             }}
           >
-            {isAuthenticated && (
+            {isAuthenticated && !isMobile && (
               <>
-                {isMobile ? (
-                  ""
-                ) : (
-                  <>
-                    <SearchBar />
-                    <UserDropdown
-                      sx={{ display: { xs: "none", md: "flex" } }}
-                    />
-                  </>
-                )}
+                <SearchBar />
+                <UserDropdown sx={{ display: { xs: "none", md: "flex" } }} />
               </>
             )}
 
@@ -143,6 +139,7 @@ const NavbarMain = ({ onToggleTheme }) => {
               <HiOutlineMenu />
             </IconButton>
           </Box>
+
           {/* Theme Switch - Only visible on desktop */}
           <Box
             sx={{
