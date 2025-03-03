@@ -41,7 +41,7 @@ export const Footer = () => {
         </section>
 
         <div className="text-center p-4 bg-darker-blue text-white">
-          © 2024 Copyright:{" "}
+          © 2025 Copyright:{" "}
           <a className="text-reset fw-bold" href="/">
             UniTeach
           </a>
