@@ -56,14 +56,19 @@ export const ClaseSeleccionada = ({ clase, onInscripcionExitosa }) => {
       setLoading(false);
     }
   };
-
+  const handleNavigation = () => {
+    window.location.href = "/app/home";
+  };
   return (
     <>
       {error && <Alert severity="error">{error}</Alert>}
       {success && (
-        <Alert severity="success">
-          Te has inscrito a la clase exitosamente!
-        </Alert>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Alert severity="success">
+            Te has inscrito a la clase exitosamente!
+          </Alert>
+          <Button onClick={handleNavigation}>Ir Mi Tablero</Button>
+        </div>
       )}
       <Paper
         elevation={3}
