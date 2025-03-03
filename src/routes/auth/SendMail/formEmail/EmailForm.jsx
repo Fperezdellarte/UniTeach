@@ -132,7 +132,14 @@ export const EmailForm = () => {
             <FiAlertCircle className="modal-icon-error" />
           )}
         </div>
-        <h3 className="modal-title">{modalContent.title}</h3>
+        <h3
+          className="modal-title"
+          style={{
+            color: "white",
+          }}
+        >
+          {modalContent.title}
+        </h3>
         <p className="modal-message">{modalContent.message}</p>
         <button className="modal-close-button" onClick={handelModalClose}>
           Cerrar

@@ -22,7 +22,8 @@ export const CalendarioClases = ({ clases, onClose }) => {
 
   const fechasConClase = useMemo(
     () =>
-      clases?.map((clase) => dayjs(clase.Date).startOf("day").toString()) || [],
+      clases?.map((clase) => dayjs(clase.endDate).startOf("day").toString()) ||
+      [],
     [clases]
   );
 
@@ -38,9 +39,9 @@ export const CalendarioClases = ({ clases, onClose }) => {
       return dayjs();
     }
 
-    let lastDate = dayjs(clases[0].Date);
+    let lastDate = dayjs(clases[0].endDate);
     for (let i = 1; i < clases.length; i++) {
-      const currentDate = dayjs(clases[i].Date);
+      const currentDate = dayjs(clases[i].endDate);
       if (currentDate.isAfter(lastDate)) {
         lastDate = currentDate;
       }
@@ -72,7 +73,7 @@ export const CalendarioClases = ({ clases, onClose }) => {
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     const classForDate = clases.find((clase) =>
-      newDate.isSame(dayjs(clase.Date), "day")
+      newDate.isSame(dayjs(clase.endDate), "day")
     );
     setSelectedClass(classForDate || null);
   };

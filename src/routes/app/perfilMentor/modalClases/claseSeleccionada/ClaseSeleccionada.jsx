@@ -81,7 +81,7 @@ export const ClaseSeleccionada = ({ clase, onInscripcionExitosa }) => {
           <Typography>
             <strong>Fecha:</strong>{" "}
             {clase.Date
-              ? dayjs(clase.Date)
+              ? dayjs(clase.endDate)
                   .locale("es")
                   .format("dddd, D [de] MMMM [de] YYYY")
               : "Fecha Inválida"}

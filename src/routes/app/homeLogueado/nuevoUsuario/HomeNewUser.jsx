@@ -1,9 +1,9 @@
 import { FacultyModal } from "../../../../components/modal/tablaProximaClases/FacultyModal";
 import React, { useState } from "react";
 import { Box, Typography, Paper, Button } from "@mui/material";
+import { useTheme } from "../../../../contexts/themeContext";
 import { styled, keyframes } from "@mui/material/styles";
 import { motion } from "framer-motion";
-
 
 const pulseAnimation = keyframes`
   0% {
@@ -16,7 +16,6 @@ const pulseAnimation = keyframes`
     box-shadow: 0 0 0 0 rgba(25, 118, 210, 0);
   }
 `;
-
 
 const StyledButton = styled(Button)(({ theme }) => ({
   background: "linear-gradient(to right, #1E88E5, #1976D2)",
@@ -40,16 +39,17 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const MotionButton = motion(StyledButton);
 
 export const HomeNewUser = () => {
+  const { theme, darkMode } = useTheme();
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <Box 
+    <Box
       sx={{
         minHeight: "100%",
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-start",
         padding: "20px",
       }}
     >
@@ -78,7 +78,10 @@ export const HomeNewUser = () => {
           <Typography
             variant="h4"
             sx={{
-              color: "rgba(17, 52, 99, 0.89)",
+              color: darkMode
+                ? theme.palette.text.primary
+                : "rgba(17, 52, 99, 0.89)",
+
               fontWeight: 600,
               textAlign: "center",
               marginBottom: 1,
@@ -90,7 +93,9 @@ export const HomeNewUser = () => {
           <Typography
             variant="body1"
             sx={{
-              color: "rgba(1, 11, 22, 0.93)",
+              color: darkMode
+                ? theme.palette.text.primary
+                : "rgba(1, 11, 22, 0.93)",
               textAlign: "center",
               lineHeight: 1.6,
               marginBottom: 2,

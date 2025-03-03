@@ -33,7 +33,6 @@ export const HomeLogueado = () => {
         display: "flex",
         width: "100dv",
         justifyContent: "center",
-        alignItems: "center", // Centra verticalmente
         padding: "20px", // Evita que toque los bordes
       }}
     >
@@ -48,7 +47,7 @@ export const HomeLogueado = () => {
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
-            justifyContent: "center",
+            justifyContent: "start",
             gap: "20px",
             flexWrap: "wrap",
           }}

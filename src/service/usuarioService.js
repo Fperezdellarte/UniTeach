@@ -13,16 +13,12 @@ export const usuarioService = {
     }
 
     try {
-      const response = await axios.patch(
-        `${API_URL}/users/${userId}`,
-        formDataToSend,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.patch(`${API_URL}/users`, formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.data.user;
     } catch (error) {
       throw new Error(
